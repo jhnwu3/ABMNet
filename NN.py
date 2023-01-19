@@ -1,54 +1,99 @@
 import torch as tc 
 from torch import nn
+from torch.nn import functional as F
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
+from ABM import *
 import torch.optim as optim
 import numpy as np 
 import matplotlib.pyplot as plt
 import time
 import mesa
 
-class LogisticRegression(nn.Module):
-    def __init__(self, input_size, output_size):
-        super(LogisticRegression, self).__init__()
+class NeuralNetwork(nn.Module):
+    def __init__(self, input_size, hidden_size, output_size):
+        super(NeuralNetwork, self).__init__()
         self.input_size = input_size 
         self.output_size = output_size
-        self.linear = nn.Linear(input_size, output_size)
+        self.fc1 = nn.Linear(input_size, hidden_size)
+        self.fc2 = nn.Linear(hidden_size, 32)
+        self.fc3 = nn.Linear(32, output_size)
         # self.softmax = nn.Softmax(dim=0)
         
     def forward(self, input):
-        line = self.linear(input)
+        fc1 = self.fc1(input)
+        fc1 = F.relu(fc1)
+        fc2 = self.fc2(fc1)
+        fc2 = F.relu(fc2)
+        fc3 = self.fc3(fc2)
         # output = self.softmax(line)
-        return line
+        return fc3
 
-def train_nn(input, expected_output, nEpochs):
-    N = input.shape[0]
-    D = input.shape[1]
-    output_dim = 1
-    if expected_output.ndim > 1:
-        output_dim = expected_output.shape[1] # 
-        
-    model = LogisticRegression(D, output_dim)
+def train_nn(dataset : ABMDataset, input_size, hidden_size, output_size, nEpochs, use_gpu = False):
+    
+    
+    
+    model = NeuralNetwork(input_size, hidden_size, output_size).double()
     optimizer = optim.AdamW(model.parameters())
-    loss_fcn = nn.BCEWithLogitsLoss()
+    criterion = nn.MSELoss()
+    
+    if tc.cuda.is_available() and use_gpu:
+        device = tc.device("cuda")
+        model = model.cuda()
+        criterion = criterion.cuda()
+        using_gpu = True
+    else:
+        device = tc.device("cpu")
+        using_gpu = False
+
+    print(f"Using GPU: {using_gpu}")
+    epoch_start = time.time()
     for epoch in range(nEpochs):
-        epoch_start = time.time()
+        
         loss_this_epoch = 0
-        for ex in range(N):
+        for ex in range(len(dataset)):
             optimizer.zero_grad()
             loss = 0
-            
-            tc_input = tc.tensor(input[ex,:])
-            tc_output = tc.tensor(expected_output[ex])
-            
-            # print(tc_input.shape)
-            prediction = model.forward(tc_input.float())
-            loss += loss_fcn(prediction.squeeze(), tc_output.squeeze().float())
+            sample = dataset[ex]
+            input = sample['params']
+            output = sample['moments']
+
+            prediction = model.forward(input.to(device))
+            loss += criterion(prediction.squeeze(), output.squeeze().to(device))
             loss_this_epoch += loss.item() 
             loss.backward()
             optimizer.step()
             
-        print(repr(f"Finished epoch {epoch} with loss {loss_this_epoch} in time {time.time() - epoch_start}"))
+        if epoch % 10 == 0:
+            print(repr(f"Finished epoch {epoch} with loss {loss_this_epoch} in time {time.time() - epoch_start}"))
+            epoch_start = time.time()
             
     return model  
 
+
+# return MSE metric of moments
+def evaluate(model : NeuralNetwork, dataset, use_gpu = False):
+    
+    criterion = nn.MSELoss()
+    
+    if tc.cuda.is_available() and use_gpu:
+        device = tc.device("cuda")
+        model = model.cuda()
+        criterion = criterion.cuda()
+        using_gpu = True
+    else:
+        device = tc.device("cpu")
+        using_gpu = False
+
+    print(f"Using GPU: {using_gpu}")
+    model.eval()
+    loss = 0
+    start_time = time.time()
+    for ex in range(len(dataset)):
+        sample = dataset[ex]
+        input = sample['params']
+        output = sample['moments']
+        prediction = model.forward(input.to(device))
+        loss += criterion(prediction.squeeze(), output.squeeze().to(device))
+        
+    return loss / len(dataset) , time.time() - start_time

@@ -12,15 +12,21 @@ from NN import *
 
 if __name__ == '__main__':
     
-    # Get ABM Data from ABM File
-    ABM_Model = MoneyModel(100)
-    for i in range(10):
-        ABM_Model.step()
-    agent_wealth = np.array([a.wealth for a in ABM_Model.schedule.agents])
-    print(agent_wealth)
+    # Get Data
+    csv_file = "data/linear.csv"
+    abm_dataset = ABMDataset(csv_file, root_dir="data/")
+    train_size = int(0.8 * len(abm_dataset))
+    test_size = len(abm_dataset) - train_size
+    train_dataset, test_dataset = tc.utils.data.random_split(abm_dataset, [train_size, test_size])
     
-    
+    print("Length of Training:",train_size)
+    print("Length of Test", test_size)
+
     # Train Neural Network.
+    ABMNet = train_nn(train_dataset,input_size= 5,hidden_size=100, output_size= 9,nEpochs = 100)
     
+    # Cross Validate Using Training Dataset to Find Best Parameters.
     
-    # Validate
+    # Validate On Test
+    mse, time_to_run = evaluate(ABMNet, test_dataset)
+    print('Final Average MSE On Test Dataset:', mse, ', Time For Inference:', time_to_run)
