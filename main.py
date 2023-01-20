@@ -19,9 +19,16 @@ def get_epochs():
 def get_output(): 
     return sys.argv[sys.argv.index('-o') + 1]
 
+def use_gpu():
+    if '--gpu' in sys.argv:
+        return True 
+    else: 
+        return False
+
 if __name__ == '__main__':
     
     # Get Data
+    using_GPU = use_gpu()
     nEps = get_epochs()
     csv_file = get_data()
     abm_dataset = ABMDataset(csv_file, root_dir="data/")
@@ -38,13 +45,13 @@ if __name__ == '__main__':
     print("Input Dimension:", input_len)
     print("Output Dimension:", output_len)
     # Train Neural Network.
-    ABMNet = train_nn(train_dataset, input_size=input_len, hidden_size=100, output_size=output_len, nEpochs=nEps)
+    ABMNet = train_nn(train_dataset, input_size=input_len, hidden_size=100, output_size=output_len, nEpochs=nEps, use_gpu=using_GPU)
     
     # Cross Validate Using Training Dataset to Find Best Parameters. Will do later just to see how it is.
     
     
     # Validate On Test
-    mse, time_to_run, predictions = evaluate(ABMNet, test_dataset)
+    mse, time_to_run, predictions = evaluate(ABMNet, test_dataset, use_gpu=using_GPU)
     print('Final Average MSE On Test Dataset:', mse, ', Time For Inference:', time_to_run)
     np.savetxt('data/nn_output/' + get_output() + '.csv', predictions, delimiter=',')
     plot_histograms(test_dataset, predictions, output='data/graphs/' + get_output())

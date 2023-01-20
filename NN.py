@@ -18,6 +18,7 @@ class NeuralNetwork(nn.Module):
         self.fc1 = nn.Linear(input_size, hidden_size)
         self.fc2 = nn.Linear(hidden_size, 32)
         self.fc3 = nn.Linear(32, output_size)
+        # self.fc4 = nn.Linear(10,output_size)
         # self.softmax = nn.Softmax(dim=0)
         
     def forward(self, input):
@@ -26,6 +27,8 @@ class NeuralNetwork(nn.Module):
         fc2 = self.fc2(fc1)
         fc2 = F.relu(fc2)
         fc3 = self.fc3(fc2)
+        # fc3 = F.relu(fc3)
+        # fc3 = self.fc4(fc3)
         # output = self.softmax(line)
         return fc3
 
@@ -93,6 +96,6 @@ def evaluate(model : NeuralNetwork, dataset, use_gpu = False):
         output = sample['moments']
         prediction = model.forward(input.to(device))
         loss += criterion(prediction.squeeze(), output.squeeze().to(device))
-        predicted.append(prediction.detach().numpy())
+        predicted.append(prediction.cpu().detach().numpy())
         
-    return loss.detach().numpy() / len(dataset), time.time() - start_time, np.array(predicted)
+    return loss.cpu().detach().numpy() / len(dataset), time.time() - start_time, np.array(predicted)
