@@ -31,8 +31,6 @@ class NeuralNetwork(nn.Module):
 
 def train_nn(dataset : ABMDataset, input_size, hidden_size, output_size, nEpochs, use_gpu = False):
     
-    
-    
     model = NeuralNetwork(input_size, hidden_size, output_size).double()
     optimizer = optim.AdamW(model.parameters())
     criterion = nn.MSELoss()
@@ -75,7 +73,6 @@ def train_nn(dataset : ABMDataset, input_size, hidden_size, output_size, nEpochs
 def evaluate(model : NeuralNetwork, dataset, use_gpu = False):
     
     criterion = nn.MSELoss()
-    
     if tc.cuda.is_available() and use_gpu:
         device = tc.device("cuda")
         model = model.cuda()
@@ -89,11 +86,13 @@ def evaluate(model : NeuralNetwork, dataset, use_gpu = False):
     model.eval()
     loss = 0
     start_time = time.time()
+    predicted = []
     for ex in range(len(dataset)):
         sample = dataset[ex]
         input = sample['params']
         output = sample['moments']
         prediction = model.forward(input.to(device))
         loss += criterion(prediction.squeeze(), output.squeeze().to(device))
+        predicted.append(prediction.detach().numpy())
         
-    return loss / len(dataset) , time.time() - start_time
+    return loss.detach().numpy() / len(dataset), time.time() - start_time, np.array(predicted)
