@@ -16,8 +16,8 @@ class NeuralNetwork(nn.Module):
         self.input_size = input_size 
         self.output_size = output_size
         self.fc1 = nn.Linear(input_size, hidden_size)
-        self.fc2 = nn.Linear(hidden_size, 32)
-        self.fc3 = nn.Linear(32, output_size)
+        self.fc2 = nn.Linear(hidden_size, 1000)
+        self.fc3 = nn.Linear(1000, output_size)
         # self.fc4 = nn.Linear(10,output_size)
         # self.softmax = nn.Softmax(dim=0)
         

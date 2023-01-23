@@ -45,7 +45,7 @@ if __name__ == '__main__':
     print("Input Dimension:", input_len)
     print("Output Dimension:", output_len)
     # Train Neural Network.
-    ABMNet = train_nn(train_dataset, input_size=input_len, hidden_size=100, output_size=output_len, nEpochs=nEps, use_gpu=using_GPU)
+    ABMNet = train_nn(train_dataset, input_size=input_len, hidden_size=1000, output_size=output_len, nEpochs=nEps, use_gpu=using_GPU)
     
     # Cross Validate Using Training Dataset to Find Best Parameters. Will do later just to see how it is.
     

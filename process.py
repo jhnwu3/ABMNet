@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 
-file = "data/gdag_small_data.csv"
+file = "data/gdag_more.csv"
 n=30
 
 # process every 30 rows to produce a new file for NN training.
