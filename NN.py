@@ -10,31 +10,47 @@ import matplotlib.pyplot as plt
 import time
 import mesa
 
+class ReLuBlock(nn.Module):
+    def __init__(self, i, o):
+        super(ReLuBlock, self).__init__()
+
+        self.ff = nn.Sequential(
+            nn.Linear(i, o),
+            nn.ReLU(),
+        )
+
+    def forward(self, x):
+        output = self.ff.forward(x)
+        return output
+
+
 class NeuralNetwork(nn.Module):
-    def __init__(self, input_size, hidden_size, output_size):
+    def __init__(self, input_size, hidden_size, depth, output_size):
         super(NeuralNetwork, self).__init__()
         self.input_size = input_size 
         self.output_size = output_size
-        self.fc1 = nn.Linear(input_size, hidden_size)
-        self.fc2 = nn.Linear(hidden_size, 120)
-        self.fc3 = nn.Linear(120, output_size)
+        print("input", input_size)
+        print("hidden", hidden_size)
+        self.input_ff = nn.Linear(input_size, hidden_size)
+        hidden_layers = []
+        for i in range(depth):
+            hidden_layers.append(ReLuBlock(hidden_size, hidden_size))
+        
+        self.hidden = nn.Sequential(*hidden_layers)
+        self.output = nn.Linear(hidden_size, output_size)
         # self.fc4 = nn.Linear(10,output_size)
         # self.softmax = nn.Softmax(dim=0)
         
     def forward(self, input):
-        fc1 = self.fc1(input)
-        fc1 = F.relu(fc1)
-        fc2 = self.fc2(fc1)
-        fc2 = F.relu(fc2)
-        fc3 = self.fc3(fc2)
-        # fc3 = F.relu(fc3)
-        # fc3 = self.fc4(fc3)
+        out = self.input_ff(input)
+        out = self.hidden(out)
+        out = self.output(out)
         # output = self.softmax(line)
-        return fc3
+        return out 
 
-def train_nn(dataset : ABMDataset, input_size, hidden_size, output_size, nEpochs, use_gpu = False):
+def train_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_size, nEpochs, use_gpu = False):
     
-    model = NeuralNetwork(input_size, hidden_size, output_size).double()
+    model = NeuralNetwork(input_size, hidden_size, depth, output_size).double()
     optimizer = optim.AdamW(model.parameters())
     criterion = nn.MSELoss()
     
