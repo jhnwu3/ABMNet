@@ -16,8 +16,6 @@ class ABMDataset(Dataset):
             if 'k' in column: 
                 self.final_input_idx += 1
         
-        
-        
     def __len__(self):
         return len(self.dframe)
     
