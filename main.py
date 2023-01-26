@@ -43,7 +43,7 @@ if __name__ == '__main__':
     output_name = get_output()
     depth = get_depth()
     abm_dataset = ABMDataset(csv_file, root_dir="data/")
-    train_size = int(0.3 * len(abm_dataset))
+    train_size = int(0.8 * len(abm_dataset))
     test_size = len(abm_dataset) - train_size
     train_dataset, test_dataset = tc.utils.data.random_split(abm_dataset, [train_size, test_size])
 
