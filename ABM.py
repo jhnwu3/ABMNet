@@ -1,12 +1,13 @@
 import mesa
 import torch as tc
 import pandas as pd
+import numpy as np
 from torch.utils.data import Dataset, DataLoader
-
+from GMM import *
 
 
 class ABMDataset(Dataset):
-    def __init__(self, csv_file, root_dir):
+    def __init__(self, csv_file, root_dir, transform=False):
         self.dframe = pd.read_csv(csv_file)
         self.root = root_dir 
         columns = self.dframe.columns 
@@ -15,6 +16,16 @@ class ABMDataset(Dataset):
         for column in columns: 
             if 'k' in column: 
                 self.final_input_idx += 1
+        self.transform_mat = None
+        self.untransformed_outputs = None # if transform 
+        if transform:
+            allData = self.dframe.to_numpy()
+            outputs = allData[:, self.final_input_idx:].copy()
+            self.transform_mat = mahalonobis_matrix_numpy(outputs)
+            transformed = np.matmul(outputs, self.transform_mat)
+            self.untransformed_outputs = outputs
+            allData[:, self.final_input_idx:] = transformed 
+            self.dframe = pd.DataFrame(allData, columns=columns)
         
     def __len__(self):
         return len(self.dframe)

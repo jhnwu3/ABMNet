@@ -31,6 +31,9 @@ def use_gpu():
 
 def save_model():
     return '--save' in sys.argv
+
+def transform_data():
+    return '--transform' in sys.argv
  
 if __name__ == '__main__':
     
@@ -42,7 +45,8 @@ if __name__ == '__main__':
     saving_model = save_model()
     output_name = get_output()
     depth = get_depth()
-    abm_dataset = ABMDataset(csv_file, root_dir="data/")
+    is_transform = transform_data()
+    abm_dataset = ABMDataset(csv_file, root_dir="data/", transform=is_transform)
     train_size = int(0.8 * len(abm_dataset))
     test_size = len(abm_dataset) - train_size
     train_dataset, test_dataset = tc.utils.data.random_split(abm_dataset, [train_size, test_size])
@@ -65,5 +69,8 @@ if __name__ == '__main__':
     # Validate On Test
     mse, time_to_run, predictions = evaluate(ABMNet, test_dataset, use_gpu=using_GPU)
     print('Final Average MSE On Test Dataset:', mse, ', Time For Inference:', time_to_run)
+    if is_transform:
+        print('Final MSE Untransformed:', numpy_mse(np.matmul(predictions, np.linalg.inv(abm_dataset.transform_mat)), np.matmul(convert_dataset_output_to_numpy(test_dataset), np.linalg.inv(abm_dataset.transform_mat))))
+    
     np.savetxt('data/nn_output/' + output_name + '.csv', predictions, delimiter=',')
-    plot_histograms(test_dataset, predictions, output='data/graphs/' + output_name)
+    plot_histograms(test_dataset, predictions, output='data/graphs/' + output_name, transform=is_transform)
