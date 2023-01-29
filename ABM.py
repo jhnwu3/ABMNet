@@ -7,7 +7,7 @@ from GMM import *
 
 
 class ABMDataset(Dataset):
-    def __init__(self, csv_file, root_dir, transform=False):
+    def __init__(self, csv_file, root_dir, transform=False, normalize=False):
         self.dframe = pd.read_csv(csv_file)
         self.root = root_dir 
         columns = self.dframe.columns 
@@ -18,16 +18,31 @@ class ABMDataset(Dataset):
                 self.final_input_idx += 1
         self.transform_mat = None
         self.untransformed_outputs = None # if transform 
+        
+        # just to see what happens in gdags data by normalizing parameters
+        allData = self.dframe.to_numpy()
+        if normalize:
+            inputs = allData[:, :self.final_input_idx].copy()
+            inputs = inputs - inputs.mean(axis=0)
+            inputs = inputs / inputs.std(axis=0)
+            allData[:, :self.final_input_idx] = inputs 
+           
+            print("Normalization to Input Parameters Applied")
+            print('New Average Input Value:',inputs.mean(axis=0))
+            print('New Std Input Value:',inputs.std(axis=0))
+            print('max:', np.max(inputs))
+            
         if transform:
-            allData = self.dframe.to_numpy()
             outputs = allData[:, self.final_input_idx:].copy()
             self.transform_mat = mahalonobis_matrix_numpy(outputs)
             transformed = np.matmul(outputs, self.transform_mat)
             self.untransformed_outputs = outputs
             allData[:, self.final_input_idx:] = transformed 
-            self.dframe = pd.DataFrame(allData, columns=columns)
             print("Transformation Matrix Applied:")
             print(self.transform_mat)
+            np.savetxt('data/transform_matrices/transform_mat' + csv_file[:-3], self.transform_mat)
+            
+        self.dframe = pd.DataFrame(allData, columns=columns)
         
     def __len__(self):
         return len(self.dframe)

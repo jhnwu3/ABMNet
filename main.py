@@ -34,10 +34,13 @@ def save_model():
 
 def transform_data():
     return '--transform' in sys.argv
+
+def normalize_data():
+    return '--normalize' in sys.argv
  
 if __name__ == '__main__':
     
-    # Get Data and Parameters
+    # run params
     using_GPU = use_gpu()
     n_epochs = get_epochs()
     hidden_size = get_hidden()
@@ -46,8 +49,11 @@ if __name__ == '__main__':
     output_name = get_output()
     depth = get_depth()
     is_transform = transform_data()
-    abm_dataset = ABMDataset(csv_file, root_dir="data/", transform=is_transform)
-    train_size = int(0.8 * len(abm_dataset))
+    normalize = normalize_data()
+    
+    # data
+    abm_dataset = ABMDataset(csv_file, root_dir="data/", transform=is_transform, normalize=normalize)
+    train_size = int(0.80 * len(abm_dataset))
     test_size = len(abm_dataset) - train_size
     train_dataset, test_dataset = tc.utils.data.random_split(abm_dataset, [train_size, test_size])
 
