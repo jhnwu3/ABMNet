@@ -1,0 +1,66 @@
+Length of Training: 352
+Length of Test: 89
+Input Dimension: 3
+Output Dimension: 2
+input 3
+hidden 20
+Using GPU: True
+'Finished epoch 0 with loss 5111769012.988346 in time 2.2165980339050293'
+'Finished epoch 10 with loss 2495892466.2441497 in time 23.675792694091797'
+'Finished epoch 20 with loss 2387742407.443943 in time 23.744833946228027'
+'Finished epoch 30 with loss 2060396176.8082514 in time 23.746062994003296'
+'Finished epoch 40 with loss 368561635.16759336 in time 23.737744331359863'
+'Finished epoch 50 with loss 290030562.23764724 in time 23.7436740398407'
+'Finished epoch 60 with loss 249065752.15424523 in time 23.725358963012695'
+'Finished epoch 70 with loss 233481150.31609708 in time 23.736496925354004'
+'Finished epoch 80 with loss 230854171.98595 in time 23.745388984680176'
+'Finished epoch 90 with loss 231088449.3179075 in time 23.74182939529419'
+'Finished epoch 100 with loss 230987302.90724003 in time 23.363226652145386'
+'Finished epoch 110 with loss 231100821.28829807 in time 23.182514429092407'
+'Finished epoch 120 with loss 229441609.3608481 in time 23.186642169952393'
+'Finished epoch 130 with loss 225263268.22065073 in time 23.192901372909546'
+'Finished epoch 140 with loss 225314602.7085966 in time 23.1943781375885'
+'Finished epoch 150 with loss 221618210.57808548 in time 23.200774908065796'
+'Finished epoch 160 with loss 216586709.18604767 in time 23.213053464889526'
+'Finished epoch 170 with loss 212236363.44946977 in time 23.20909309387207'
+'Finished epoch 180 with loss 204387900.01067302 in time 23.21355152130127'
+'Finished epoch 190 with loss 88447809.35920796 in time 23.203150987625122'
+'Finished epoch 200 with loss 86251575.4701819 in time 23.19898557662964'
+'Finished epoch 210 with loss 85855534.34189199 in time 23.198334217071533'
+'Finished epoch 220 with loss 80041448.0066095 in time 23.2000412940979'
+'Finished epoch 230 with loss 79353365.17606083 in time 23.193233489990234'
+'Finished epoch 240 with loss 80761721.75829643 in time 23.191842317581177'
+'Finished epoch 250 with loss 80609286.9126273 in time 23.19546604156494'
+'Finished epoch 260 with loss 80315203.95233783 in time 23.195494174957275'
+'Finished epoch 270 with loss 81283606.97882536 in time 23.19765067100525'
+'Finished epoch 280 with loss 80099541.80345233 in time 23.202007293701172'
+'Finished epoch 290 with loss 82431594.34381104 in time 23.19641613960266'
+'Finished epoch 300 with loss 81342236.49255303 in time 23.198036193847656'
+'Finished epoch 310 with loss 77090517.19556037 in time 23.194979190826416'
+'Finished epoch 320 with loss 74453115.96485864 in time 23.195837259292603'
+'Finished epoch 330 with loss 68016330.5586232 in time 23.191613912582397'
+'Finished epoch 340 with loss 59966387.22016727 in time 23.19103193283081'
+'Finished epoch 350 with loss 52056917.36992862 in time 23.184998035430908'
+'Finished epoch 360 with loss 49280274.34384244 in time 23.18576216697693'
+'Finished epoch 370 with loss 58282629.55733661 in time 23.191213369369507'
+'Finished epoch 380 with loss 49123471.44641602 in time 23.18152117729187'
+'Finished epoch 390 with loss 59683832.45906548 in time 23.18703603744507'
+'Finished epoch 400 with loss 45678797.26875603 in time 23.199774742126465'
+'Finished epoch 410 with loss 55463465.89788707 in time 23.192749977111816'
+'Finished epoch 420 with loss 48761235.24462163 in time 23.186397790908813'
+'Finished epoch 430 with loss 47597968.00262083 in time 23.190435886383057'
+'Finished epoch 440 with loss 44533781.59324719 in time 23.194550275802612'
+'Finished epoch 450 with loss 48317322.14049316 in time 23.480559587478638'
+'Finished epoch 460 with loss 46195983.6200698 in time 23.564552068710327'
+'Finished epoch 470 with loss 48333747.71490918 in time 23.17030692100525'
+'Finished epoch 480 with loss 51363234.143368006 in time 23.156927824020386'
+'Finished epoch 490 with loss 39258576.66336361 in time 23.21372961997986'
+Using GPU: True
+Final Average MSE On Test Dataset: 463744.4501405278 , Time For Inference: 0.15073084831237793
+Job Statistics for 978967:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+          978967   rsjxw007 2023-01-27T14:23:45 2023-01-27T14:43:41   00:19:56             19:41.852  COMPLETED  0:0   r1pl-hpcf-g03 billing=2,cpu=2,gres/gpu=1,mem=15624M,n+ 
+    978967.batch            2023-01-27T14:23:45 2023-01-27T14:43:41   00:19:56   3901.69M  19:41.849  COMPLETED  0:0   r1pl-hpcf-g03                                          
+   978967.extern            2023-01-27T14:23:45 2023-01-27T14:43:41   00:19:56          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g03                                          
+CPU Efficiency: 49.41% of 00:39:52 core-walltime

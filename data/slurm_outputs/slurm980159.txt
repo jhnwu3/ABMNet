@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "main.py", line 1, in <module>
+    import torch as tc 
+ModuleNotFoundError: No module named 'torch'
+Job Statistics for 980159:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+          980159   rsjxw007 2023-01-26T09:16:10 2023-01-26T09:16:10   00:00:00             00:00.051     FAILED  1:0   r1pl-hpcf-g03 billing=2,cpu=2,gres/gpu=1,mem=15624M,n+ 
+    980159.batch            2023-01-26T09:16:10 2023-01-26T09:16:10   00:00:00      0.13M  00:00.048     FAILED  1:0   r1pl-hpcf-g03                                          
+   980159.extern            2023-01-26T09:16:10 2023-01-26T09:16:10   00:00:00          0  00:00.002  COMPLETED  0:0   r1pl-hpcf-g03                                          
+CPU Efficiency: 0.00% of 00:00:00 core-walltime

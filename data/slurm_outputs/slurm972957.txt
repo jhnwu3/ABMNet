@@ -1,0 +1,27 @@
+No handles with labels found to put in legend.
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/GRPH.py:14: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  plt.figure()
+Length of Training: 12500
+Length of Test: 3125
+Input Dimension: 6
+Output Dimension: 27
+Using GPU: True
+'Finished epoch 0 with loss 2738105024817.0215 in time 22.143335580825806'
+'Finished epoch 10 with loss 427568074.0925803 in time 201.03833675384521'
+'Finished epoch 20 with loss 361024867.5836565 in time 198.34933400154114'
+'Finished epoch 30 with loss 344665540.9667785 in time 198.40876388549805'
+'Finished epoch 40 with loss 344461589.8264266 in time 198.42905235290527'
+'Finished epoch 50 with loss 344516987.9454601 in time 198.4871015548706'
+'Finished epoch 60 with loss 344193020.91378963 in time 200.18513226509094'
+'Finished epoch 70 with loss 343032367.54118305 in time 223.02584147453308'
+'Finished epoch 80 with loss 343091281.75175315 in time 215.8627631664276'
+'Finished epoch 90 with loss 343095552.40764356 in time 210.83144569396973'
+Using GPU: True
+Final Average MSE On Test Dataset: 23258.025119259284 , Time For Inference: 1.5911097526550293
+Job Statistics for 972957:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+          972957   rsjxw007 2023-01-23T20:01:43 2023-01-23T20:36:44   00:35:01             34:24.608  COMPLETED  0:0   r1pl-hpcf-g03 billing=30,cpu=30,gres/gpu=1,mem=234360+ 
+    972957.batch            2023-01-23T20:01:43 2023-01-23T20:36:44   00:35:01   3914.59M  34:24.605  COMPLETED  0:0   r1pl-hpcf-g03                                          
+   972957.extern            2023-01-23T20:01:43 2023-01-23T20:36:44   00:35:01          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g03                                          
+CPU Efficiency: 3.28% of 17:30:30 core-walltime

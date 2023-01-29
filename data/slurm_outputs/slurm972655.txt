@@ -1,0 +1,27 @@
+No handles with labels found to put in legend.
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/GRPH.py:14: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  plt.figure()
+Length of Training: 12500
+Length of Test: 3125
+Input Dimension: 6
+Output Dimension: 27
+Using GPU: False
+'Finished epoch 0 with loss 2684967472044.212 in time 412.5636179447174'
+'Finished epoch 10 with loss 488091494.9514714 in time 2420.4996321201324'
+'Finished epoch 20 with loss 492182314.7888645 in time 879.1371567249298'
+'Finished epoch 30 with loss 493600762.80306065 in time 1302.772871017456'
+'Finished epoch 40 with loss 494032310.9202755 in time 881.9602670669556'
+'Finished epoch 50 with loss 494157191.225356 in time 856.2999215126038'
+'Finished epoch 60 with loss 494192705.8818683 in time 862.0002021789551'
+'Finished epoch 70 with loss 494202752.5069647 in time 862.0283465385437'
+'Finished epoch 80 with loss 494205590.4978707 in time 872.1737194061279'
+'Finished epoch 90 with loss 494206391.93744826 in time 904.384955406189'
+Using GPU: False
+Final Average MSE On Test Dataset: 35265.32348627775 , Time For Inference: 0.9759540557861328
+Job Statistics for 972655:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+          972655   rsjxw007 2023-01-23T19:50:27 2023-01-23T23:07:50   03:17:23            3-22:53:07  COMPLETED  0:0   r1pl-hpcf-n21     billing=30,cpu=30,mem=234360M,node=1 
+    972655.batch            2023-01-23T19:50:27 2023-01-23T23:07:50   03:17:23    178.20M 3-22:53:07  COMPLETED  0:0   r1pl-hpcf-n21                                          
+   972655.extern            2023-01-23T19:50:27 2023-01-23T23:07:50   03:17:23          0  00:00.002  COMPLETED  0:0   r1pl-hpcf-n21                                          
+CPU Efficiency: 96.14% of 4-02:41:30 core-walltime
