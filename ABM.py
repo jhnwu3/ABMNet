@@ -26,6 +26,8 @@ class ABMDataset(Dataset):
             self.untransformed_outputs = outputs
             allData[:, self.final_input_idx:] = transformed 
             self.dframe = pd.DataFrame(allData, columns=columns)
+            print("Transformation Matrix Applied:")
+            print(self.transform_mat)
         
     def __len__(self):
         return len(self.dframe)

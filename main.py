@@ -59,6 +59,7 @@ if __name__ == '__main__':
     print("Length of Test:", test_size)
     print("Input Dimension:", input_len)
     print("Output Dimension:", output_len)
+    print("Depth of FFNN (# Hidden):", depth)
     # Train Neural Network.
     ABMNet = train_nn(train_dataset, input_size=input_len, hidden_size=hidden_size, depth=depth, output_size=output_len, nEpochs=n_epochs, use_gpu=using_GPU)
     if saving_model:
