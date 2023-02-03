@@ -48,6 +48,47 @@ class NeuralNetwork(nn.Module):
         # output = self.softmax(line)
         return out 
 
+
+class ResidualReLuBlock(nn.Module):
+    def __init__(self, i, o): # i == o
+        super(ResidualReLuBlock, self).__init__()
+        self.fc1 = nn.Linear(i,o)
+        self.fc2 = nn.Linear(i,o)
+
+    def forward(self, x):
+        output = self.fc1(x)
+        output = F.relu(output)
+        output = self.fc2(output)
+        output = output + x
+        return output
+
+
+class ResidualNN(nn.Module):
+    def __init__(self, input_size, hidden_size, depth, output_size):
+        super(ResidualNN, self).__init__()
+        self.input_size = input_size 
+        self.output_size = output_size
+        print("input", input_size)
+        print("hidden", hidden_size)
+        self.input_ff = nn.Linear(input_size, hidden_size)
+        hidden_layers = []
+        for i in range(depth):
+            hidden_layers.append(ResidualReLuBlock(hidden_size, hidden_size))
+        
+        self.hidden = nn.Sequential(*hidden_layers)
+        self.output = nn.Linear(hidden_size, output_size)
+        # self.fc4 = nn.Linear(10,output_size)
+        # self.softmax = nn.Softmax(dim=0)
+        
+    def forward(self, input):
+        out = self.input_ff(input)
+        out = self.hidden(out)
+        out = self.output(out)
+        # output = self.softmax(line)
+        return out 
+
+
+
 def train_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_size, nEpochs, use_gpu = False):
     
     model = NeuralNetwork(input_size, hidden_size, depth, output_size).double()
@@ -88,8 +129,49 @@ def train_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_size, 
     return model  
 
 
+def train_res_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_size, nEpochs, use_gpu = False):
+    
+    model = ResidualNN(input_size, hidden_size, depth, output_size).double()
+    optimizer = optim.AdamW(model.parameters())
+    criterion = nn.MSELoss()
+    
+    if tc.cuda.is_available() and use_gpu:
+        device = tc.device("cuda")
+        model = model.cuda()
+        criterion = criterion.cuda()
+        using_gpu = True
+    else:
+        device = tc.device("cpu")
+        using_gpu = False
+
+    print(f"Using GPU: {using_gpu}")
+    epoch_start = time.time()
+    for epoch in range(nEpochs):
+        
+        loss_this_epoch = 0
+        for ex in range(len(dataset)):
+            optimizer.zero_grad()
+            loss = 0
+            sample = dataset[ex]
+            input = sample['params']
+            output = sample['moments']
+
+            prediction = model.forward(input.to(device))
+            loss += criterion(prediction.squeeze(), output.squeeze().to(device))
+            loss_this_epoch += loss.item() 
+            loss.backward()
+            optimizer.step()
+            
+        if epoch % 10 == 0:
+            print(repr(f"Finished epoch {epoch} with loss {loss_this_epoch} in time {time.time() - epoch_start}"))
+            epoch_start = time.time()
+            
+    return model  
+
+
+
 # return MSE metric of moments
-def evaluate(model : NeuralNetwork, dataset, use_gpu = False):
+def evaluate(model, dataset, use_gpu = False):
     
     criterion = nn.MSELoss()
     if tc.cuda.is_available() and use_gpu:
@@ -106,12 +188,14 @@ def evaluate(model : NeuralNetwork, dataset, use_gpu = False):
     loss = 0
     start_time = time.time()
     predicted = []
+    tested = []
     for ex in range(len(dataset)):
         sample = dataset[ex]
         input = sample['params']
         output = sample['moments']
         prediction = model.forward(input.to(device))
         loss += criterion(prediction.squeeze(), output.squeeze().to(device))
+        tested.append(output.cpu().detach().numpy())
         predicted.append(prediction.cpu().detach().numpy())
         
-    return loss.cpu().detach().numpy() / len(dataset), time.time() - start_time, np.array(predicted)
+    return loss.cpu().detach().numpy() / len(dataset), time.time() - start_time, np.array(predicted), np.array(tested)

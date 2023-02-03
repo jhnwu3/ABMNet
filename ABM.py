@@ -25,7 +25,7 @@ class ABMDataset(Dataset):
             inputs = allData[:, :self.final_input_idx].copy()
             inputs = inputs - inputs.mean(axis=0)
             inputs = inputs / inputs.std(axis=0)
-            allData[:, :self.final_input_idx] = inputs 
+            allData[:, :self.final_input_idx] = inputs
            
             print("Normalization to Input Parameters Applied")
             print('New Average Input Value:',inputs.mean(axis=0))
@@ -40,7 +40,7 @@ class ABMDataset(Dataset):
             allData[:, self.final_input_idx:] = transformed 
             print("Transformation Matrix Applied:")
             print(self.transform_mat)
-            np.savetxt('data/transform_matrices/transform_mat' + csv_file[:-3], self.transform_mat)
+            np.savetxt('data/transform_matrices/transform_mat.csv', self.transform_mat)
             
         self.dframe = pd.DataFrame(allData, columns=columns)
         

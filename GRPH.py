@@ -74,3 +74,23 @@ def plot_histograms(test_dataset, predictions, output='data/graphs/out', transfo
 #         axes.legend([optimalLine, bestFit], ["Perfect Fit",  "Best Fit of Observed vs. Predicted Line:" + " y= " + "{:.2f}".format(a) + "x + " + "{:.2f}".format(b)])    
     
 #     plt.savefig(file[:-4] + '.png')
+    
+    
+# def plot_histograms(test_dataset, predictions, output='data/graphs/out', transform=False):
+#     true = []
+#     for ex in range(len(test_dataset)):
+#         sample = test_dataset[ex]
+#         true.append(sample['moments'].detach().numpy())
+        
+#     true = np.array(true)
+#     fig, axes = plt.subplots(figsize=(6.5, 6.0))
+#     axes.set_title("Observed vs. Predicted", wrap=True,loc='center', fontdict = {'fontsize' : 20})    
+#     plt.xlabel("Observed Moment", fontdict = {'fontsize' : 12})
+#     plt.ylabel("Predicted Moment", fontdict = {'fontsize' : 12})
+#     x123 = np.arange(np.min(true), np.max(true[:]))
+#     y123 = x123
+#     optimalLine, = axes.plot(np.unique(x123), np.poly1d(np.polyfit(x123, y123, 1))(np.unique(x123)),'--')
+#     # a, b = np.polyfit(moments[:,0], moments[:,1], 1)
+#     # bestFit, = axes.plot(np.unique(x123), np.poly1d(np.polyfit(moments[:,0], moments[:,1], 1))(np.unique(x123)), ':')
+#     for i in range(true.shape[1]):
+        

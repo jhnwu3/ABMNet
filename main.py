@@ -38,6 +38,12 @@ def transform_data():
 def normalize_data():
     return '--normalize' in sys.argv
  
+def get_nn_type():
+    if '--type' in sys.argv:
+        return sys.argv[sys.argv.index('--type') + 1]
+    else: 
+        return -1 
+ 
 if __name__ == '__main__':
     
     # run params
@@ -50,6 +56,7 @@ if __name__ == '__main__':
     depth = get_depth()
     is_transform = transform_data()
     normalize = normalize_data()
+    model_type = get_nn_type()
     
     # data
     abm_dataset = ABMDataset(csv_file, root_dir="data/", transform=is_transform, normalize=normalize)
@@ -65,19 +72,27 @@ if __name__ == '__main__':
     print("Length of Test:", test_size)
     print("Input Dimension:", input_len)
     print("Output Dimension:", output_len)
-    print("Depth of FFNN (# Hidden):", depth)
+    print("Depth of NN:", depth)
+    print("Model Type:", model_type)
+    
     # Train Neural Network.
-    ABMNet = train_nn(train_dataset, input_size=input_len, hidden_size=hidden_size, depth=depth, output_size=output_len, nEpochs=n_epochs, use_gpu=using_GPU)
+    ABMNet = None
+    if model_type == 'res_nn':
+        ABMNet = train_res_nn(train_dataset, input_size=input_len, hidden_size=hidden_size, depth=depth, output_size=output_len, nEpochs=n_epochs, use_gpu=using_GPU)
+    else: 
+        ABMNet = train_nn(train_dataset, input_size=input_len, hidden_size=hidden_size, depth=depth, output_size=output_len, nEpochs=n_epochs, use_gpu=using_GPU)
+        
     if saving_model:
         tc.save(ABMNet, 'model/' + output_name)
     # Cross Validate Using Training Dataset to Find Best Parameters. Will do later just to see how it is.
     
     
     # Validate On Test
-    mse, time_to_run, predictions = evaluate(ABMNet, test_dataset, use_gpu=using_GPU)
+    mse, time_to_run, predictions, tested = evaluate(ABMNet, test_dataset, use_gpu=using_GPU)
     print('Final Average MSE On Test Dataset:', mse, ', Time For Inference:', time_to_run)
     if is_transform:
         print('Final MSE Untransformed:', numpy_mse(np.matmul(predictions, np.linalg.inv(abm_dataset.transform_mat)), np.matmul(convert_dataset_output_to_numpy(test_dataset), np.linalg.inv(abm_dataset.transform_mat))))
     
-    np.savetxt('data/nn_output/' + output_name + '.csv', predictions, delimiter=',')
+    np.savetxt('data/nn_output/' + output_name + '_predicted.csv', predictions, delimiter=',')
+    np.savetxt('data/nn_output/' + output_name + '_test.csv', tested, delimiter=',')
     plot_histograms(test_dataset, predictions, output='data/graphs/' + output_name, transform=is_transform)
