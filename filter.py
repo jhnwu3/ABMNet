@@ -16,14 +16,20 @@ to_save = []
 
 
 
+# For when you want only means.
+nIn = nParams
+nOutputs = 6
+to_save = data[:,:nIn+nOutputs]
+
+
 # For when you want input == output 33 to 27
-nIn = nParams + nOutputs
-for r in range(data.shape[0]):
-    vec = np.zeros(nIn+nOutputs)
-    vec[:nParams] = data[r,:nParams]
-    vec[nParams:nIn] = initial_moments
-    vec[nIn:nIn+nOutputs] = data[r,nParams:]
-    to_save.append(vec)
+# nIn = nParams + nOutputs
+# for r in range(data.shape[0]):
+#     vec = np.zeros(nIn+nOutputs)
+#     vec[:nParams] = data[r,:nParams]
+#     vec[nParams:nIn] = initial_moments
+#     vec[nIn:nIn+nOutputs] = data[r,nParams:]
+#     to_save.append(vec)
 
 # For when you wanna limit the data sizes.
 # for row in range(data.shape[0]):
@@ -46,4 +52,4 @@ for o in range(nOutputs):
     cols.append('o' + str(o+1))
 print(to_save.shape)
 new_df = pd.DataFrame(to_save, columns=cols)
-new_df.to_csv('data/NL6_in.csv')
+new_df.to_csv('data/NL6_means.csv')
