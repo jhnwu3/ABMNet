@@ -1,0 +1,22 @@
+Dataset: data/NL6S.csv
+Length of Training: 100
+Length of Test: 25
+Input Dimension: 6
+Output Dimension: 28
+Depth of NN: 3
+Model Type: -1
+input 6
+hidden 64
+Using GPU: False
+'Finished epoch 0 with loss 8912474736.043423 in time 0.09333968162536621'
+'Finished epoch 10 with loss 3506153606.327957 in time 0.657965898513794'
+'Finished epoch 20 with loss 3308371650.5756884 in time 0.6538910865783691'
+'Finished epoch 30 with loss 2937250155.5560546 in time 0.6842098236083984'
+'Finished epoch 40 with loss 1666637251.2674727 in time 0.6719331741333008'
+'Finished epoch 50 with loss 1385013447.441812 in time 0.710798978805542'
+'Finished epoch 60 with loss 1295232816.789867 in time 0.6688923835754395'
+'Finished epoch 70 with loss 1215603030.019878 in time 0.7613892555236816'
+'Finished epoch 80 with loss 1140484449.3288095 in time 0.7933242321014404'
+'Finished epoch 90 with loss 1070798294.3805518 in time 0.7804007530212402'
+Using GPU: False
+Final Average MSE On Test Dataset: 8384875.635922961 , Time For Inference: 0.004400014877319336

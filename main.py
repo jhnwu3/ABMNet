@@ -67,7 +67,8 @@ if __name__ == '__main__':
     sample = train_dataset[0]
     input_len = sample['params'].detach().numpy().shape[0]
     output_len = sample['moments'].detach().numpy().shape[0]
-        
+    
+    print("Dataset:", csv_file)
     print("Length of Training:",train_size)
     print("Length of Test:", test_size)
     print("Input Dimension:", input_len)
