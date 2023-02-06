@@ -35,8 +35,12 @@ def save_model():
 def transform_data():
     return '--transform' in sys.argv
 
-def normalize_data():
+def normalize_input():
     return '--normalize' in sys.argv
+ 
+def normalize_output():
+    return '--normalize_out' in sys.argv
+ 
  
 def get_nn_type():
     if '--type' in sys.argv:
@@ -55,11 +59,12 @@ if __name__ == '__main__':
     output_name = get_output()
     depth = get_depth()
     is_transform = transform_data()
-    normalize = normalize_data()
+    normalize = normalize_input()
     model_type = get_nn_type()
+    normalize_out = normalize_output()
     
     # data
-    abm_dataset = ABMDataset(csv_file, root_dir="data/", transform=is_transform, normalize=normalize)
+    abm_dataset = ABMDataset(csv_file, root_dir="data/", transform=is_transform, standardize=normalize, norm_out=normalize_out)
     train_size = int(0.8 * len(abm_dataset))
     test_size = len(abm_dataset) - train_size
     train_dataset, test_dataset = tc.utils.data.random_split(abm_dataset, [train_size, test_size])
@@ -74,6 +79,7 @@ if __name__ == '__main__':
     print("Input Dimension:", input_len)
     print("Output Dimension:", output_len)
     print("Depth of NN:", depth)
+    print("Hidden Neurons:", hidden_size)
     print("Model Type:", model_type)
     
     # Train Neural Network.

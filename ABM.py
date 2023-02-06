@@ -7,7 +7,7 @@ from GMM import *
 
 
 class ABMDataset(Dataset):
-    def __init__(self, csv_file, root_dir, transform=False, normalize=False):
+    def __init__(self, csv_file, root_dir, transform=False, standardize=False, norm_out = False):
         self.dframe = pd.read_csv(csv_file)
         self.root = root_dir 
         columns = self.dframe.columns 
@@ -21,17 +21,26 @@ class ABMDataset(Dataset):
         
         # just to see what happens in gdags data by normalizing parameters
         allData = self.dframe.to_numpy()
-        if normalize:
+        if standardize:
             inputs = allData[:, :self.final_input_idx].copy()
             inputs = inputs - inputs.mean(axis=0)
             inputs = inputs / inputs.std(axis=0)
             allData[:, :self.final_input_idx] = inputs
            
-            print("Normalization to Input Parameters Applied")
+            print("Standardization to Input Parameters Applied")
             print('New Average Input Value:',inputs.mean(axis=0))
             print('New Std Input Value:',inputs.std(axis=0))
             print('max:', np.max(inputs))
-            
+        
+        if norm_out:
+            outputs = allData[:, self.final_input_idx:].copy()
+            for c in range(outputs.shape[1]):
+                outputs[:,c] = (outputs[:,c] - outputs[:,c].min()) / (outputs[:,c].max() - outputs[:,c].min())
+            allData[:, self.final_input_idx:] = outputs 
+            print("Normalization of Outputs")
+            print("New Max:", np.max(outputs))
+            print("New Min:", np.min(outputs))
+        
         if transform:
             outputs = allData[:, self.final_input_idx:].copy()
             self.transform_mat = mahalonobis_matrix_numpy(outputs)

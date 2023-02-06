@@ -29,8 +29,6 @@ class NeuralNetwork(nn.Module):
         super(NeuralNetwork, self).__init__()
         self.input_size = input_size 
         self.output_size = output_size
-        print("input", input_size)
-        print("hidden", hidden_size)
         self.input_ff = nn.Linear(input_size, hidden_size)
         hidden_layers = []
         for i in range(depth):

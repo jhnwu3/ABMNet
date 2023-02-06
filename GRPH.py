@@ -22,15 +22,53 @@ def plot_histograms(test_dataset, predictions, output='data/graphs/out', transfo
     true = np.array(true)
     # column wise graphing
     for i in range(true.shape[1]):
+        binwidth = (np.max(true[:,i]) - np.min(true[:,i]) )/ 10.0
+
+        if binwidth == 0:
+            binwidth = 1
         fig = plt.figure()
         ax = fig.add_subplot(111)
-        # print(true.shape)
-        ax.hist(true[:,i],bins=range(int(min(true[:,i])), int(max(true[:,i])) + 2*binwidth, binwidth), label='Ground Truth')
-        ax.hist(predictions[:,i],bins=range(int(min(predictions[:,i])), int(max(predictions[:,i])) + 2*binwidth, binwidth), label='Surrogate Model')
+        # print(true.shape) range(int(min(true[:,i])), int(max(true[:,i])) + 2*binwidth, binwidth)
+        ax.hist(true[:,i],bins=bins_list(true[:,i].min(), true[:,i].max(), binwidth), label='Ground Truth')
+        ax.hist(predictions[:,i],bins=bins_list(true[:,i].min(), true[:,i].max(), binwidth), label='Surrogate Model')
         ax.legend(loc='upper right')
         plt.savefig(output + str(i) +'.png')
+    
+    
+    # for i in range(true.shape[1]):
+    #     binwidth = (np.max(true[:,i]) - np.min(true[:,i]) )/ 10.0
+
+    #     if binwidth == 0:
+    #         binwidth = 1
+    #     fig = plt.figure()
+    #     ax = fig.add_subplot(111)
+    #     # print(true.shape) range(int(min(true[:,i])), int(max(true[:,i])) + 2*binwidth, binwidth)
+    #     ax.hist(true[:,i],bins=bins_list(true[:,i].min(), true[:,i].max(), binwidth), label='Ground Truth')
+    #     ax.legend(loc='upper right')
+    #     plt.savefig(output +'_tru_' + str(i) +'.png')
         
-        
+    # for i in range(true.shape[1]):
+    #     binwidth = (np.max(predictions[:,i]) - np.min(predictions[:,i]) )/ 10.0
+
+    #     if binwidth == 0:
+    #         binwidth = 1
+    #     fig = plt.figure()
+    #     ax = fig.add_subplot(111)
+    #     # print(true.shape) range(int(min(true[:,i])), int(max(true[:,i])) + 2*binwidth, binwidth)
+    #     ax.hist(predictions[:,i],bins=bins_list(predictions[:,i].min(), predictions[:,i].max(), binwidth), label='Surrogate')
+    #     ax.legend(loc='upper right')
+    #     plt.savefig(output +'_sg_' + str(i) +'.png')
+    
+
+def bins_list(min, max, step_size):
+    binss= []
+    current = min
+    binss.append(current)
+    while current < max:
+        current += step_size
+        binss.append(current)
+    return binss
+
 # assume data format n moments X 2 columns (for X and Y) 
 # def plotMoments(file, title="", nSpecies=""): # get list of X, Y 
 #     df = pd.read_csv(file)
