@@ -1,0 +1,33 @@
+Normalization to Input Parameters Applied
+New Average Input Value: [-9.78133130e-17 -6.23137737e-14  6.01708052e-14 -5.63838398e-15
+  4.60434535e-15  7.10514314e-16]
+New Std Input Value: [1. 1. 1. 1. 1. 1.]
+max: 1.7319399598642058
+Length of Training: 12500
+Length of Test: 3125
+Input Dimension: 6
+Output Dimension: 7
+Depth of NN: 32
+Model Type: res_nn
+input 6
+hidden 200
+Using GPU: True
+'Finished epoch 0 with loss 103380.1954253995 in time 448.75473952293396'
+'Finished epoch 10 with loss 77871.6833110861 in time 4478.494373321533'
+'Finished epoch 20 with loss 138185.26409348307 in time 4477.538680791855'
+'Finished epoch 30 with loss 1060847.545768622 in time 4478.242400169373'
+'Finished epoch 40 with loss 76857.04952247468 in time 4478.141891479492'
+'Finished epoch 50 with loss 79107.64327492111 in time 4478.225063085556'
+'Finished epoch 60 with loss 664069.0345450949 in time 4479.331835031509'
+'Finished epoch 70 with loss 88832.14988714391 in time 4478.354618549347'
+'Finished epoch 80 with loss 76592.55977925331 in time 4477.107921123505'
+'Finished epoch 90 with loss 84016.11804569126 in time 4476.328841924667'
+Using GPU: True
+Final Average MSE On Test Dataset: 6.481793361698276 , Time For Inference: 14.731008052825928
+Job Statistics for 1103419:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         1103419   rsjxw007 2023-02-05T17:08:49 2023-02-06T05:35:34   12:26:45              12:22:05  COMPLETED  0:0   r1pl-hpcf-g04 billing=2,cpu=2,gres/gpu=1,mem=15624M,n+ 
+   1103419.batch            2023-02-05T17:08:49 2023-02-06T05:35:34   12:26:45   4105.96M   12:22:05  COMPLETED  0:0   r1pl-hpcf-g04                                          
+  1103419.extern            2023-02-05T17:08:49 2023-02-06T05:35:34   12:26:45          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 49.69% of 1-00:53:30 core-walltime
