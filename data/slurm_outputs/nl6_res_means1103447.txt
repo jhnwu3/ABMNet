@@ -1,0 +1,9 @@
+/var/spool/slurmd/job1103447/slurm_script: line 12: 945143 Killed                  python3 main.py -i 'data/gdag_1300ss_covs.csv' -h 128 --epochs 200 -d 20 -o 'gdag1300ss_large_norm' --gpu --normalize --type res_nn
+slurmstepd: error: Detected 1 oom-kill event(s) in StepId=1103447.batch. Some of your processes may have been killed by the cgroup out-of-memory handler.
+Job Statistics for 1103447:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         1103447   rsjxw007 2023-02-06T09:08:30 2023-02-06T11:07:02   01:58:32              01:57:37 OUT_OF_ME+ 0:1+   r1pl-hpcf-g03 billing=5,cpu=5,gres/gpu=1,mem=39060M,n+ 
+   1103447.batch            2023-02-06T09:08:30 2023-02-06T11:07:02   01:58:32  38962.82M   01:57:37 OUT_OF_ME+ 0:1+   r1pl-hpcf-g03                                          
+  1103447.extern            2023-02-06T09:08:30 2023-02-06T11:07:02   01:58:32          0  00:00.003 OUT_OF_ME+ 0:1+   r1pl-hpcf-g03                                          
+CPU Efficiency: 19.85% of 09:52:40 core-walltime

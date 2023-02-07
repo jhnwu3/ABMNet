@@ -1,0 +1,34 @@
+Normalization to Input Parameters Applied
+New Average Input Value: [-6.23137737e-14  6.01708052e-14 -5.63838398e-15  4.60434535e-15
+  7.10514314e-16  1.77607262e-16]
+New Std Input Value: [1. 1. 1. 1. 1. 1.]
+max: 1.4142135623732077
+Dataset: data/NL6_means.csv
+Length of Training: 12500
+Length of Test: 3125
+Input Dimension: 6
+Output Dimension: 6
+Depth of NN: 10
+Model Type: res_n
+input 6
+hidden 128
+Using GPU: True
+'Finished epoch 0 with loss 30880.775917252733 in time 80.08646440505981'
+'Finished epoch 10 with loss 1127.9328698279578 in time 814.2005140781403'
+'Finished epoch 20 with loss 587.5906845812474 in time 791.0055449008942'
+'Finished epoch 30 with loss 634.9492558156303 in time 789.3030366897583'
+'Finished epoch 40 with loss 655.1042987824009 in time 788.3419764041901'
+'Finished epoch 50 with loss 643.1806039037159 in time 788.7289655208588'
+'Finished epoch 60 with loss 668.8673392072492 in time 788.7179043292999'
+'Finished epoch 70 with loss 787.3727179919249 in time 789.202691078186'
+'Finished epoch 80 with loss 664.4918263165749 in time 789.3709299564362'
+'Finished epoch 90 with loss 714.3692675792918 in time 789.1851420402527'
+Using GPU: True
+Final Average MSE On Test Dataset: 0.033603678244153924 , Time For Inference: 3.1392815113067627
+Job Statistics for 1103462:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         1103462   rsjxw007 2023-02-06T10:44:13 2023-02-06T12:56:24   02:12:11              02:11:30  COMPLETED  0:0   r1pl-hpcf-g04 billing=5,cpu=5,gres/gpu=1,mem=39060M,n+ 
+   1103462.batch            2023-02-06T10:44:13 2023-02-06T12:56:24   02:12:11   3912.56M   02:11:30  COMPLETED  0:0   r1pl-hpcf-g04                                          
+  1103462.extern            2023-02-06T10:44:13 2023-02-06T12:56:24   02:12:11          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 19.90% of 11:00:55 core-walltime
