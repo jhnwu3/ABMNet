@@ -18,6 +18,8 @@ class ABMDataset(Dataset):
                 self.final_input_idx += 1
         self.transform_mat = None
         self.untransformed_outputs = None # if transform 
+        self.output_mins = []
+        self.output_maxes = []
         
         # just to see what happens in gdags data by normalizing parameters
         allData = self.dframe.to_numpy()
@@ -35,11 +37,16 @@ class ABMDataset(Dataset):
         if norm_out:
             outputs = allData[:, self.final_input_idx:].copy()
             for c in range(outputs.shape[1]):
+                self.output_mins.append(outputs[:,c].min())
+                self.output_maxes.append(outputs[:,c].max())
                 outputs[:,c] = (outputs[:,c] - outputs[:,c].min()) / (outputs[:,c].max() - outputs[:,c].min())
+                
             allData[:, self.final_input_idx:] = outputs 
             print("Normalization of Outputs")
             print("New Max:", np.max(outputs))
             print("New Min:", np.min(outputs))
+            self.output_mins = np.array(self.output_mins)
+            self.output_maxes = np.array(self.output_maxes)
         
         if transform:
             outputs = allData[:, self.final_input_idx:].copy()

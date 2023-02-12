@@ -10,16 +10,11 @@ def convert_dataset_output_to_numpy(dataset):
     return np.array(npy)
 
 def numpy_mse(x,y):
-    return np.sum((np.square(x - y)).mean(axis=0))
+    return np.sum((np.square(x - y)).mean(axis=0)) / x.shape[0]
 
 def plot_histograms(test_dataset, predictions, output='data/graphs/out', transform=False):
-    binwidth = 2
-    true = []
-    for ex in range(len(test_dataset)):
-        sample = test_dataset[ex]
-        true.append(sample['moments'].detach().numpy())
-    
-    true = np.array(true)
+    binwidth = 2    
+    true = test_dataset
     # column wise graphing
     for i in range(true.shape[1]):
         binwidth = (np.max(true[:,i]) - np.min(true[:,i]) )/ 10.0
@@ -34,7 +29,7 @@ def plot_histograms(test_dataset, predictions, output='data/graphs/out', transfo
         ax.legend(loc='upper right')
         plt.savefig(output + str(i) +'.png')
     
-    
+
     # for i in range(true.shape[1]):
     #     binwidth = (np.max(true[:,i]) - np.min(true[:,i]) )/ 10.0
 
