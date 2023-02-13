@@ -9,15 +9,25 @@ def convert_dataset_output_to_numpy(dataset):
         npy.append(sample['moments'].detach().numpy())
     return np.array(npy)
 
+
+# errors assume matrices.
 def numpy_mse(x,y):
-    return np.sum((np.square(x - y)).mean(axis=0)) / x.shape[0]
+    return np.sum((np.square(x - y)).mean(axis=0)) / x.shape[0] # get average mse
+
+def avg_percent_error(x,y):
+    diff = x-y
+    for i in range(y.shape[0]):
+        for j in range(y.shape[1]):
+            if y[i,j] != 0:
+                diff[i,j] /= y[i,j]
+    return np.sum(diff) / (y.shape[0] * y.shape[1])
 
 def plot_histograms(test_dataset, predictions, output='data/graphs/out', transform=False):
     binwidth = 2    
     true = test_dataset
     # column wise graphing
     for i in range(true.shape[1]):
-        binwidth = (np.max(true[:,i]) - np.min(true[:,i]) )/ 10.0
+        binwidth = (np.max(true[:,i]) - np.min(true[:,i]) )/ 20.0
 
         if binwidth == 0:
             binwidth = 1

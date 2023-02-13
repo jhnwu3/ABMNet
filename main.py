@@ -101,12 +101,15 @@ if __name__ == '__main__':
         print('Final MSE Untransformed:', numpy_mse(np.matmul(predictions, np.linalg.inv(abm_dataset.transform_mat)), np.matmul(convert_dataset_output_to_numpy(test_dataset), np.linalg.inv(abm_dataset.transform_mat))))
     if normalize_out:
         scale_factor = abm_dataset.output_maxes - abm_dataset.output_mins
-        print(scale_factor)
+        # print(scale_factor)
         unnormalized_predictions = (predictions * scale_factor) + abm_dataset.output_mins
         unnormalized_actual = (tested * scale_factor) + abm_dataset.output_mins
+        # np.savetxt("predictions.csv", unnormalized_predictions, delimiter=',')
+        # np.savetxt("actual.csv", unnormalized_actual, delimiter=',')
         print("Unnormalized Max:", unnormalized_actual.max())
         print("Unnormalized Min:", unnormalized_actual.min())
-        print('Final MSE Unnormalized:', numpy_mse(unnormalized_predictions, unnormalized_actual))
+        print('Final Average Unnormalized MSE:', numpy_mse(unnormalized_predictions, unnormalized_actual))
+        print("Final Average Percent Error:", avg_percent_error(unnormalized_predictions, unnormalized_actual))
         plot_histograms(unnormalized_actual, unnormalized_predictions,output='data/graphs/' + output_name + '_og')
         
     np.savetxt('data/nn_output/' + output_name + '_predicted.csv', predictions, delimiter=',')
