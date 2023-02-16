@@ -68,11 +68,26 @@ class ABMDataset(Dataset):
             idx = idx.tolist()
         
         dfRow = self.dframe.iloc[idx].to_numpy()
-        sample = {'params': tc.tensor(dfRow[:self.final_input_idx]).double(), 'moments': tc.tensor(dfRow[self.final_input_idx:]).double()}
+        #sample = {'params': tc.tensor(dfRow[:self.final_input_idx]).double(), 'moments': tc.tensor(dfRow[self.final_input_idx:]).double()}
         
-        return sample   
+        return tc.tensor(dfRow[:self.final_input_idx]).double(), tc.tensor(dfRow[self.final_input_idx:]).double()
             
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# should a person need to create their own agent based model..
 def compute_gini(model):
     agent_wealths = [agent.wealth for agent in model.schedule.agents]
     x = sorted(agent_wealths)

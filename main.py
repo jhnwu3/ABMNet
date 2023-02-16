@@ -9,22 +9,29 @@ import sys
 from ABM import *
 from NN import *
 from GRPH import *
+from sklearn.model_selection import KFold
 
 
 def get_depth():
-    return int(sys.argv[sys.argv.index('-d') + 1])
+    if '-d' in sys.argv:
+        return int(sys.argv[sys.argv.index('-d') + 1])
+    return -1
 
 def get_data(): 
     return sys.argv[sys.argv.index('-i') + 1]
 
 def get_epochs():
-    return int(sys.argv[sys.argv.index('--epochs') + 1])
+    if '--epochs' in sys.argv:
+        return int(sys.argv[sys.argv.index('--epochs') + 1])
+    return -1
 
 def get_output(): 
     return sys.argv[sys.argv.index('-o') + 1]
 
 def get_hidden():
-    return int(sys.argv[sys.argv.index('-h') + 1])
+    if '-h' in sys.argv:
+        return int(sys.argv[sys.argv.index('-h') + 1])
+    return -1
 
 def use_gpu():
     return '--gpu' in sys.argv
@@ -40,7 +47,9 @@ def normalize_input():
  
 def normalize_output():
     return '--normalize_out' in sys.argv
- 
+
+def cross_validate():
+    return '--cross' in sys.argv
  
 def get_nn_type():
     if '--type' in sys.argv:
@@ -50,7 +59,7 @@ def get_nn_type():
  
 if __name__ == '__main__':
     
-    # run params
+    # run parameters - will convert layer into a class.
     using_GPU = use_gpu()
     n_epochs = get_epochs()
     hidden_size = get_hidden()
@@ -62,36 +71,96 @@ if __name__ == '__main__':
     normalize = normalize_input()
     model_type = get_nn_type()
     normalize_out = normalize_output()
-    
+    cross = cross_validate()
     # data
     abm_dataset = ABMDataset(csv_file, root_dir="data/", transform=is_transform, standardize=normalize, norm_out=normalize_out)
     train_size = int(0.8 * len(abm_dataset))
     test_size = len(abm_dataset) - train_size
+    
+    # split dataset, into training set and test
     train_dataset, test_dataset = tc.utils.data.random_split(abm_dataset, [train_size, test_size])
 
     sample = train_dataset[0]
-    input_len = sample['params'].detach().numpy().shape[0]
-    output_len = sample['moments'].detach().numpy().shape[0]
+    input_len = sample[0].detach().numpy().shape[0]
+    output_len = sample[1].detach().numpy().shape[0]
     
     print("Dataset:", csv_file)
     print("Length of Training:",train_size)
     print("Length of Test:", test_size)
     print("Input Dimension:", input_len)
     print("Output Dimension:", output_len)
-    print("Depth of NN:", depth)
-    print("Hidden Neurons:", hidden_size)
     print("Model Type:", model_type)
     
-    # Train Neural Network.
+    # Train Neural Network. Cross Validation, also maybe, repeat training process 30 times, and save best with least test
+    # 5-fold cross validation so we can tune our parameters effectively. In this case, how many epochs to use in training overall, then full-train using that number.
+    # Find best number out of 100 epochs.
     ABMNet = None
+    best_n_epochs = 0
+    best_hidden_size = 0
+    best_depth = 0
+    if cross:
+        kf = KFold(n_splits=5, shuffle=True,random_state=42) # seed it, shuffle it again, and n splits it.
+        print(kf)
+        depths_to_search = [2,4,6,8,10]
+        hidden_sizes_to_search = [8, 16, 32, 64, 128, 256, 512] # just go up to some reasonable number I guess.
+        epochs_to_search = [10, 20, 50, 100, 120, 150, 175, 200] # number of epochs to search and train for
+        best_val_mse = np.Inf
+        for d_len in depths_to_search:
+            for h_size in hidden_sizes_to_search:
+                for epochs in epochs_to_search:
+                    total_val_mse = 0
+                    print("--Scanning Number of Epochs:", epochs)
+                    for fold, (train_index, test_index) in enumerate(kf.split(train_dataset)):
+                        k_train = tc.utils.data.Subset(train_dataset, train_index)
+                        k_test = tc.utils.data.Subset(train_dataset, test_index)
+                        if model_type == 'res_nn':
+                            ABMNet = train_res_nn(k_train, input_size=input_len, hidden_size=h_size, depth=d_len, output_size=output_len, nEpochs=epochs, use_gpu=using_GPU)
+                        else: 
+                            ABMNet = train_nn(k_train, input_size=input_len, hidden_size=h_size, depth=d_len, output_size=output_len, nEpochs=epochs, use_gpu=using_GPU)
+                        mse, time_to_run, predictions, tested = evaluate(ABMNet, test_dataset, use_gpu=using_GPU)
+                        print(repr(f"Fold {fold}, Val_MSE: {mse}"))
+                        total_val_mse += mse
+                        print(repr(f"{best_depth} {best_hidden_size} {best_n_epochs}"))
+                        
+                    # search for best combo of hyperparams
+                    if total_val_mse < best_val_mse:
+                        best_val_mse = total_val_mse
+                        best_depth = d_len 
+                        best_hidden_size = h_size
+                        best_n_epochs = epochs
+                        print("Found New Best Epochs:", best_n_epochs, "New Best Depth:", best_depth, " New Best Hidden Size:", best_hidden_size, " with mse:", best_val_mse)
+            
+        # print(len(tc.utils.data.Subset(train_dataset, train_index)))
+        
+    # exit(0)
+    # ABMNet = None
+    
+    # in case user specifies the number of epochs, and they feel like it.
+    if n_epochs > 0:
+        best_n_epochs = n_epochs
+    
+    if hidden_size > 0:
+        best_hidden_size = hidden_size
+    
+    if depth > 0:
+        best_depth = depth
+    
+    print("----- Hyperparameters used for final training -----")
+    print("Depth of NN:", best_depth)
+    print("Hidden Neurons:", best_hidden_size)
+    print("# Epochs Used:", best_n_epochs)
+    # now train using whatever cross-validated or user-specified 
     if model_type == 'res_nn':
-        ABMNet = train_res_nn(train_dataset, input_size=input_len, hidden_size=hidden_size, depth=depth, output_size=output_len, nEpochs=n_epochs, use_gpu=using_GPU)
+        ABMNet = train_res_nn(train_dataset, input_size=input_len, hidden_size=best_hidden_size, depth=best_depth, output_size=output_len, nEpochs=best_n_epochs, use_gpu=using_GPU)
     else: 
-        ABMNet = train_nn(train_dataset, input_size=input_len, hidden_size=hidden_size, depth=depth, output_size=output_len, nEpochs=n_epochs, use_gpu=using_GPU)
+        ABMNet = train_nn(train_dataset, input_size=input_len, hidden_size=best_hidden_size, depth=best_depth, output_size=output_len, nEpochs=best_n_epochs, use_gpu=using_GPU)
         
     if saving_model:
         tc.save(ABMNet, 'model/' + output_name)
-    # Cross Validate Using Training Dataset to Find Best Parameters. Will do later just to see how it is.
+   
+    
+    
+    
     
     
     # Validate On Test
@@ -110,8 +179,9 @@ if __name__ == '__main__':
         print("Unnormalized Min:", unnormalized_actual.min())
         print('Final Average Unnormalized MSE:', numpy_mse(unnormalized_predictions, unnormalized_actual))
         print("Final Average Percent Error:", avg_percent_error(unnormalized_predictions, unnormalized_actual))
-        plot_histograms(unnormalized_actual, unnormalized_predictions,output='data/graphs/' + output_name + '_og')
+        plot_histograms(unnormalized_actual, unnormalized_predictions,output='data/graphs/histograms/' + output_name + '_og')
         
     np.savetxt('data/nn_output/' + output_name + '_predicted.csv', predictions, delimiter=',')
     np.savetxt('data/nn_output/' + output_name + '_test.csv', tested, delimiter=',')
-    plot_histograms(tested, predictions, output='data/graphs/' + output_name, transform=is_transform)
+    plot_histograms(tested, predictions, output='data/graphs/histograms/' + output_name, transform=is_transform)
+    plot_scatter(tested, predictions, output='data/graphs/scatter/' + output_name, nSpecies=3)

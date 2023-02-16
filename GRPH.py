@@ -31,12 +31,14 @@ def plot_histograms(test_dataset, predictions, output='data/graphs/out', transfo
 
         if binwidth == 0:
             binwidth = 1
-        fig = plt.figure()
+        fig = plt.figure(figsize=(8.0, 8.0))
         ax = fig.add_subplot(111)
         # print(true.shape) range(int(min(true[:,i])), int(max(true[:,i])) + 2*binwidth, binwidth)
         ax.hist(true[:,i],bins=bins_list(true[:,i].min(), true[:,i].max(), binwidth), label='Ground Truth')
         ax.hist(predictions[:,i],bins=bins_list(true[:,i].min(), true[:,i].max(), binwidth), label='Surrogate Model')
         ax.legend(loc='upper right')
+        ax.set_xlabel("Value of Model Output")
+        ax.set_ylabel("Number of Parameter Sets")
         plt.savefig(output + str(i) +'.png')
     
 
@@ -74,6 +76,30 @@ def bins_list(min, max, step_size):
         binss.append(current)
     return binss
 
+
+
+def plot_scatter(true, predictions, output='data/graphs/out', nSpecies=None):
+    plt.figure()
+    fig, axes = plt.subplots(figsize=(6.5, 6.0))
+    x123 = np.arange(np.min(true), np.max(true))
+    y123 = x123
+    optimal = axes.plot(np.unique(x123), np.poly1d(np.polyfit(x123, y123, 1))(np.unique(x123)),'--')
+    axes.set_xlabel("Original Model Value")
+    axes.set_ylabel("Surrogate Model Prediction")
+    for c in range(true.shape[1]):
+        if nSpecies is not None:
+            if c < nSpecies: # means
+                axes.scatter(true[:,c], predictions[:,c],c='r', label='Means')
+            elif c < 2*nSpecies: # variances
+                axes.scatter(true[:,c], predictions[:,c],c='g', label='Variances')
+            else: # covariances
+                axes.scatter(true[:,c], predictions[:,c],c='b', label='Covariances')
+        else:
+            axes.scatter(true[:,c], predictions[:,c],c='b', label='Model Outputs')
+            
+        axes.legend(optimal, 'Perfect Prediction of Surrogate')
+    
+    plt.savefig(output + '_scatter.png')  
 # assume data format n moments X 2 columns (for X and Y) 
 # def plotMoments(file, title="", nSpecies=""): # get list of X, Y 
 #     df = pd.read_csv(file)

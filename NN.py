@@ -103,17 +103,18 @@ def train_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_size, 
         using_gpu = False
 
     print(f"Using GPU: {using_gpu}")
+    model.train()
     epoch_start = time.time()
+    
+    # enable shuffling so we can 
+    loader = tc.utils.data.DataLoader(dataset, batch_size=None, shuffle=True)  
     for epoch in range(nEpochs):
-        
         loss_this_epoch = 0
-        for ex in range(len(dataset)):
+           
+        for input, output in loader:
             optimizer.zero_grad()
             loss = 0
-            sample = dataset[ex]
-            input = sample['params']
-            output = sample['moments']
-
+          
             prediction = model.forward(input.to(device))
             loss += criterion(prediction.squeeze(), output.squeeze().to(device))
             loss_this_epoch += loss.item() 
@@ -143,17 +144,18 @@ def train_res_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_si
         using_gpu = False
 
     print(f"Using GPU: {using_gpu}")
+    model.train()
     epoch_start = time.time()
+    loader = tc.utils.data.DataLoader(dataset, batch_size=None, shuffle=True)
     for epoch in range(nEpochs):
         
         loss_this_epoch = 0
-        for ex in range(len(dataset)):
+        for input, output in loader:
             optimizer.zero_grad()
             loss = 0
-            sample = dataset[ex]
-            input = sample['params']
-            output = sample['moments']
-
+            # sample = dataset[ex]
+            # input = sample[0] # no more keys, justt values input is first index, output is second
+            # output = sample[1] 
             prediction = model.forward(input.to(device))
             loss += criterion(prediction.squeeze(), output.squeeze().to(device))
             loss_this_epoch += loss.item() 
@@ -189,8 +191,8 @@ def evaluate(model, dataset, use_gpu = False):
     tested = []
     for ex in range(len(dataset)):
         sample = dataset[ex]
-        input = sample['params']
-        output = sample['moments']
+        input = sample[0]
+        output = sample[1]
         prediction = model.forward(input.to(device))
         loss += criterion(prediction.squeeze(), output.squeeze().to(device))
         tested.append(output.cpu().detach().numpy())
