@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --time=0-10:10:00 
+#SBATCH --time=0-80:10:00 
 #SBATCH --job-name=ABMNet_GPU
 #SBATCH --partition=general
 #SBATCH --nodes=1
