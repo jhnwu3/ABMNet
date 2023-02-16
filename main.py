@@ -156,7 +156,7 @@ if __name__ == '__main__':
         ABMNet = train_nn(train_dataset, input_size=input_len, hidden_size=best_hidden_size, depth=best_depth, output_size=output_len, nEpochs=best_n_epochs, use_gpu=using_GPU)
         
     if saving_model:
-        tc.save(ABMNet, 'model/' + output_name)
+        tc.save(ABMNet, 'model/' + output_name + '.pt')
    
     
     
@@ -180,8 +180,9 @@ if __name__ == '__main__':
         print('Final Average Unnormalized MSE:', numpy_mse(unnormalized_predictions, unnormalized_actual))
         print("Final Average Percent Error:", avg_percent_error(unnormalized_predictions, unnormalized_actual))
         plot_histograms(unnormalized_actual, unnormalized_predictions,output='data/graphs/histograms/' + output_name + '_og')
+        plot_scatter(unnormalized_actual, unnormalized_predictions, output='data/graphs/scatter/' + output_name +'_og')
         
     np.savetxt('data/nn_output/' + output_name + '_predicted.csv', predictions, delimiter=',')
     np.savetxt('data/nn_output/' + output_name + '_test.csv', tested, delimiter=',')
     plot_histograms(tested, predictions, output='data/graphs/histograms/' + output_name, transform=is_transform)
-    plot_scatter(tested, predictions, output='data/graphs/scatter/' + output_name, nSpecies=3)
+    plot_scatter(tested, predictions, output='data/graphs/scatter/' + output_name)
