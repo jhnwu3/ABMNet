@@ -1,0 +1,8 @@
+slurmstepd: error: *** JOB 1233117 ON r1pl-hpcf-g03 CANCELLED AT 2023-02-16T15:56:02 DUE TO TIME LIMIT ***
+Job Statistics for 1233117:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         1233117   rsjxw007 2023-02-15T19:45:40 2023-02-16T15:56:02   20:10:22              20:04:39    TIMEOUT  0:0   r1pl-hpcf-g03 billing=5,cpu=5,gres/gpu=1,mem=39060M,n+ 
+   1233117.batch            2023-02-15T19:45:40 2023-02-16T15:56:03   20:10:23   3941.78M   20:04:39  CANCELLED 0:15   r1pl-hpcf-g03                                          
+  1233117.extern            2023-02-15T19:45:40 2023-02-16T15:56:02   20:10:22          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g03                                          
+CPU Efficiency: 19.91% of 4-04:51:50 core-walltime
