@@ -1,0 +1,43 @@
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/GRPH.py:34: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  fig = plt.figure()
+Standardization to Input Parameters Applied
+New Average Input Value: [-6.23137737e-14  6.01708052e-14 -5.63838398e-15  4.60434535e-15
+  7.10514314e-16  1.77607262e-16]
+New Std Input Value: [1. 1. 1. 1. 1. 1.]
+max: 1.4142135623732077
+Normalization of Outputs
+New Max: 1.0
+New Min: 0.0
+Dataset: data/NL6P.csv
+Length of Training: 12500
+Length of Test: 3125
+Input Dimension: 6
+Output Dimension: 27
+Depth of NN: 6
+Hidden Neurons: 128
+Model Type: -1
+Using GPU: True
+'Finished epoch 0 with loss 78.64029964491215 in time 51.835373401641846'
+'Finished epoch 10 with loss 6.478403405198816 in time 515.289452791214'
+'Finished epoch 20 with loss 5.39179965065177 in time 512.6430292129517'
+'Finished epoch 30 with loss 5.952229271956266 in time 513.5188155174255'
+'Finished epoch 40 with loss 6.008708225155612 in time 512.9729788303375'
+'Finished epoch 50 with loss 6.013633514120806 in time 513.516857624054'
+'Finished epoch 60 with loss 5.537178840504211 in time 532.4939208030701'
+'Finished epoch 70 with loss 5.983228246708395 in time 537.6931183338165'
+'Finished epoch 80 with loss 5.461651981833002 in time 537.2369453907013'
+'Finished epoch 90 with loss 6.790843384106633 in time 537.0874757766724'
+'Finished epoch 100 with loss 6.9505220408665895 in time 537.332710981369'
+Using GPU: True
+Final Average MSE On Test Dataset: 0.0003272478073752426 , Time For Inference: 2.418062448501587
+Unnormalized Max: 67918.8
+Unnormalized Min: -10.9997
+Final Average Unnormalized MSE: 53.44575265146078
+Final Average Percent Error: -8.484329549514024
+Job Statistics for 1229282:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         1229282   rsjxw007 2023-02-12T20:33:29 2023-02-12T22:10:20   01:36:51              01:36:09  COMPLETED  0:0   r1pl-hpcf-g03 billing=5,cpu=5,gres/gpu=1,mem=39060M,n+ 
+   1229282.batch            2023-02-12T20:33:29 2023-02-12T22:10:20   01:36:51   3920.89M   01:36:09  COMPLETED  0:0   r1pl-hpcf-g03                                          
+  1229282.extern            2023-02-12T20:33:29 2023-02-12T22:10:20   01:36:51          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g03                                          
+CPU Efficiency: 19.86% of 08:04:15 core-walltime
