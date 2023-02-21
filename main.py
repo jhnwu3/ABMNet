@@ -98,12 +98,14 @@ if __name__ == '__main__':
     best_n_epochs = 0
     best_hidden_size = 0
     best_depth = 0
+    
+    # we do small cross validation to reduce time for nonlinear 6 protein system.
     if cross:
         kf = KFold(n_splits=5, shuffle=True,random_state=42) # seed it, shuffle it again, and n splits it.
         print(kf)
-        depths_to_search = [4,6,8,10]
-        hidden_sizes_to_search = [32,64,128,267] # just go up to some reasonable number I guess.
-        epochs_to_search = [25, 50, 100, 150] # number of epochs to search and train for
+        depths_to_search = [2,4,6,8]
+        hidden_sizes_to_search = [32,64,128] # just go up to some reasonable number I guess.
+        epochs_to_search = [50, 100, 150] # number of epochs to search and train for
         best_val_mse = np.Inf
         for d_len in depths_to_search:
             for h_size in hidden_sizes_to_search:
@@ -120,7 +122,7 @@ if __name__ == '__main__':
                         mse, time_to_run, predictions, tested = evaluate(ABMNet, test_dataset, use_gpu=using_GPU)
                         print(repr(f"Fold {fold}, Val_MSE: {mse}"))
                         total_val_mse += mse
-                        print(repr(f"{best_depth} {best_hidden_size} {best_n_epochs}"))
+                        print(repr(f"{d_len} {h_size} {epochs}"))
                         
                     # search for best combo of hyperparams
                     if total_val_mse < best_val_mse:
@@ -178,7 +180,7 @@ if __name__ == '__main__':
         print("Unnormalized Max:", unnormalized_actual.max())
         print("Unnormalized Min:", unnormalized_actual.min())
         print('Final Average Unnormalized MSE:', numpy_mse(unnormalized_predictions, unnormalized_actual))
-        print("Final Average Percent Error:", avg_percent_error(unnormalized_predictions, unnormalized_actual))
+        # print("Final Average Percent Error:", avg_percent_error(unnormalized_predictions, unnormalized_actual)) This computation is incorrect and doesn't make any sense at the moment.
         plot_histograms(unnormalized_actual, unnormalized_predictions,output='graphs/histograms/' + output_name + '_og')
         plot_scatter(unnormalized_actual, unnormalized_predictions, output='graphs/scatter/' + output_name +'_og')
         np.savetxt('data/nn_output/' + output_name + '_predicted_og.csv', unnormalized_predictions, delimiter=',')

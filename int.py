@@ -64,9 +64,9 @@ class DumbInterpreter:
 
 
 if __name__ == "__main__":
-    nl6Int= DumbInterpreter(modelPath="model/nl6_poster.pt") 
+    nl6Int= DumbInterpreter(modelPath="model/nl6_poster_2nd_try.pt") 
     for i in range(nl6Int.model.input_size):
-        nl6Int.plot(path="graphs/interpretability/nl6", thetaStar=i, thetaFixed=0.2, nCols=6, nSteps=10)
+        nl6Int.plot(path="graphs/interpretability/nl6_repeat", thetaStar=i, thetaFixed=0.2, nCols=6, nSteps=10)
     
     l3Int = DumbInterpreter(modelPath="model/l3p_poster.pt") 
     l3Int.plot(path="graphs/interpretability/l3", thetaStar=0, thetaFixed=0.2, nCols=3, nSteps=10)
@@ -75,7 +75,7 @@ if __name__ == "__main__":
     
     gdag = DumbInterpreter(modelPath="model/gdag_poster.pt")
     for i in range(gdag.model.input_size):
-        gdag.plot(path="graphs/interpretability/gdag", thetaStar=i, thetaFixed=0.2, nCols=3, nSteps=10)
+        gdag.plot(path="graphs/interpretability/gdag1300ss_val_norm", thetaStar=i, thetaFixed=0.2, nCols=3, nSteps=10)
 
 
 
