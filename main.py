@@ -184,5 +184,5 @@ if __name__ == '__main__':
         
     np.savetxt('data/nn_output/' + output_name + '_predicted.csv', predictions, delimiter=',')
     np.savetxt('data/nn_output/' + output_name + '_test.csv', tested, delimiter=',')
-    plot_histograms(tested, predictions, output='data/graphs/histograms/' + output_name, transform=is_transform)
-    plot_scatter(tested, predictions, output='data/graphs/scatter/' + output_name)
+    plot_histograms(tested, predictions, output='graphs/histograms/' + output_name, transform=is_transform)
+    plot_scatter(tested, predictions, output='graphs/scatter/' + output_name)

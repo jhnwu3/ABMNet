@@ -7,7 +7,7 @@
 #SBATCH --cpus-per-task=5
 #SBATCH --gres=gpu:a100
 
-python3 main.py -i 'data/linear.csv' -d 2 -h 64 --epochs 50 -o 'l3p_poster' --save
+python3 main.py -i 'data/l3p.csv' -d 2 -h 64 --epochs 50 -o 'l3p_poster' --save
 #python3 main.py -i 'data/NL6_means.csv' -h 128 -d 5 -o 'nl6means_h128_d5.csv' --epochs 100 --normalize --type res_n --gpu
 
 #python3 main.py -i 'data/gdag_1300ss_covs.csv' -h 128 --epochs 200 -d 20 -o 'gdag1300ss_large_norm' --gpu --normalize --type res_nn
