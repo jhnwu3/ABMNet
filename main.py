@@ -179,8 +179,10 @@ if __name__ == '__main__':
         print("Unnormalized Min:", unnormalized_actual.min())
         print('Final Average Unnormalized MSE:', numpy_mse(unnormalized_predictions, unnormalized_actual))
         print("Final Average Percent Error:", avg_percent_error(unnormalized_predictions, unnormalized_actual))
-        plot_histograms(unnormalized_actual, unnormalized_predictions,output='data/graphs/histograms/' + output_name + '_og')
-        plot_scatter(unnormalized_actual, unnormalized_predictions, output='data/graphs/scatter/' + output_name +'_og')
+        plot_histograms(unnormalized_actual, unnormalized_predictions,output='graphs/histograms/' + output_name + '_og')
+        plot_scatter(unnormalized_actual, unnormalized_predictions, output='graphs/scatter/' + output_name +'_og')
+        np.savetxt('data/nn_output/' + output_name + '_predicted_og.csv', unnormalized_predictions, delimiter=',')
+        np.savetxt('data/nn_output/' + output_name + '_test_og.csv', unnormalized_actual, delimiter=',')
         
     np.savetxt('data/nn_output/' + output_name + '_predicted.csv', predictions, delimiter=',')
     np.savetxt('data/nn_output/' + output_name + '_test.csv', tested, delimiter=',')
