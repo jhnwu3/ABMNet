@@ -39,8 +39,8 @@ def use_gpu():
 def save_model():
     return '--save' in sys.argv
 
-def transform_data():
-    return '--transform' in sys.argv
+# def transform_data():
+#     return '--transform' in sys.argv
 
 def normalize_input():
     return '--normalize' in sys.argv
@@ -67,13 +67,13 @@ if __name__ == '__main__':
     saving_model = save_model()
     output_name = get_output()
     depth = get_depth()
-    is_transform = transform_data()
+    # is_transform = transform_data()
     normalize = normalize_input()
     model_type = get_nn_type()
     normalize_out = normalize_output()
     cross = cross_validate()
     # data
-    abm_dataset = ABMDataset(csv_file, root_dir="data/", transform=is_transform, standardize=normalize, norm_out=normalize_out)
+    abm_dataset = ABMDataset(csv_file, root_dir="data/", standardize=normalize, norm_out=normalize_out)
     train_size = int(0.8 * len(abm_dataset))
     test_size = len(abm_dataset) - train_size
     
@@ -134,8 +134,6 @@ if __name__ == '__main__':
             
         # print(len(tc.utils.data.Subset(train_dataset, train_index)))
         
-    # exit(0)
-    # ABMNet = None
     
     # in case user specifies the number of epochs, and they feel like it.
     if n_epochs > 0:
@@ -160,16 +158,10 @@ if __name__ == '__main__':
     if saving_model:
         tc.save(ABMNet, 'model/' + output_name + '.pt')
    
-    
-    
-    
-    
-    
+
     # Validate On Test
     mse, time_to_run, predictions, tested = evaluate(ABMNet, test_dataset, use_gpu=using_GPU)
     print('Final Average MSE On Test Dataset:', mse, ', Time For Inference:', time_to_run)
-    if is_transform:
-        print('Final MSE Untransformed:', numpy_mse(np.matmul(predictions, np.linalg.inv(abm_dataset.transform_mat)), np.matmul(convert_dataset_output_to_numpy(test_dataset), np.linalg.inv(abm_dataset.transform_mat))))
     if normalize_out:
         scale_factor = abm_dataset.output_maxes - abm_dataset.output_mins
         # print(scale_factor)
@@ -188,5 +180,5 @@ if __name__ == '__main__':
         
     np.savetxt('data/nn_output/' + output_name + '_predicted.csv', predictions, delimiter=',')
     np.savetxt('data/nn_output/' + output_name + '_test.csv', tested, delimiter=',')
-    plot_histograms(tested, predictions, output='graphs/histograms/' + output_name, transform=is_transform)
+    plot_histograms(tested, predictions, output='graphs/histograms/' + output_name)
     plot_scatter(tested, predictions, output='graphs/scatter/' + output_name)

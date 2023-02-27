@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-
+import scipy 
 
 def convert_dataset_output_to_numpy(dataset):
     npy = []
@@ -89,16 +89,17 @@ def plot_scatter(true, predictions, output='data/graphs/out', nSpecies=None):
     optimal = axes.plot(np.unique(x123), np.poly1d(np.polyfit(x123, y123, 1))(np.unique(x123)),'--', c='k', label='Perfect Prediction')
     axes.set_xlabel("Original Model Value")
     axes.set_ylabel("Surrogate Model Prediction")
-    for c in range(true.shape[1]):
-        if nSpecies is not None:
+    
+    if nSpecies is not None:
+        for c in range(true.shape[1]):
             if c < nSpecies: # means
                 axes.scatter(true[:,c], predictions[:,c],c='r', label='Means')
             elif c < 2*nSpecies: # variances
                 axes.scatter(true[:,c], predictions[:,c],c='g', label='Variances')
             else: # covariances
                 axes.scatter(true[:,c], predictions[:,c],c='b', label='Covariances')
-        else:
-            axes.scatter(true[:,c], predictions[:,c],c='c')
+    else:
+        axes.scatter(true.flatten(), predictions.flatten(), c='c')
             
         # axes.legend(optimal, 'Perfect Prediction')
     axes.legend(loc='upper right')

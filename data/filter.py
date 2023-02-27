@@ -2,15 +2,15 @@ import pandas as pd
 import numpy as np
 
 
-file = 'data/NL6P.csv'
-nParams = 6
-nOutputs = 27
+file = 'data/l3p.csv'
+nParams = 5
+nOutputs = 9
 df = pd.read_csv(file)
 data = df.to_numpy()
-indices_changing = np.array([0,2])
-const_val = 0.4
-initial_moments = np.loadtxt('data/time_series/initial_6pro_moments.txt',delimiter=',') 
-print(initial_moments)
+indices_changing = np.array([0])
+const_val = 0.2
+# initial_moments = np.loadtxt('data/time_series/initial_6pro_moments.txt',delimiter=',') 
+# print(initial_moments)
 # exit(0)
 to_save = []
 
@@ -39,6 +39,7 @@ for row in range(data.shape[0]):
         if c not in indices_changing:
             # print(c)
             save_row = save_row and data[row,c] == const_val 
+            
     if save_row:
         to_save.append(data[row,:])
 
@@ -53,4 +54,4 @@ for o in range(nOutputs):
     cols.append('o' + str(o+1))
 print(to_save.shape)
 new_df = pd.DataFrame(to_save, columns=cols)
-new_df.to_csv('data/NL6_2k.csv')
+new_df.to_csv('data/l3p_k1.csv')

@@ -86,7 +86,18 @@ class ResidualNN(nn.Module):
         return out 
 
 
-
+class RecurrentNN(nn.Module):
+    def __init__(self, input_size, hidden_size, depth, output_size):
+        super(RecurrentNN, self).__init__()
+        self.lstm = nn.LSTM(input_size, hidden_size, num_layers=depth)
+        self.linear = nn.Linear(hidden_size, output_size)
+        
+    def forward(self, input):
+        out, (h, c) = self.lstm(input)
+        out = self.linear(out.squeeze())
+        return (output, (h,c))
+    
+    
 def train_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_size, nEpochs, use_gpu = False):
     
     model = NeuralNetwork(input_size, hidden_size, depth, output_size).double()
@@ -169,6 +180,46 @@ def train_res_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_si
     return model  
 
 
+def train_rnn(dataset : ABMDataset, input_size, hidden_size, depth, output_size, nEpochs, use_gpu = False):
+    model = RecurrentNN(input_size, hidden_size, depth, output_size).double()
+    optimizer = optim.AdamW(model.parameters())
+    criterion = nn.MSELoss()
+    
+    if tc.cuda.is_available() and use_gpu:
+        device = tc.device("cuda")
+        model = model.cuda()
+        criterion = criterion.cuda()
+        using_gpu = True
+    else:
+        device = tc.device("cpu")
+        using_gpu = False
+
+    print(f"Using GPU: {using_gpu}")
+    model.train()
+    epoch_start = time.time()
+    for epoch in range(nEpochs):
+        
+        loss_this_epoch = 0
+        for s in range(len(dataset)):
+            optimizer.zero_grad()
+            loss = 0
+            
+            # start with first sample and then iterate through each time step. 
+            
+            # sample = dataset[ex]
+            # input = sample[0] # no more keys, justt values input is first index, output is second
+            # output = sample[1] 
+            prediction = model.forward(input.to(device))
+            loss += criterion(prediction.squeeze(), output.squeeze().to(device))
+            loss_this_epoch += loss.item() 
+            loss.backward()
+            optimizer.step()
+            
+        if epoch % 10 == 0:
+            print(repr(f"Finished epoch {epoch} with loss {loss_this_epoch} in time {time.time() - epoch_start}"))
+            epoch_start = time.time()
+            
+    return model  
 
 # return MSE metric of moments
 def evaluate(model, dataset, use_gpu = False):

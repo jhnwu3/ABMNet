@@ -1,3 +1,5 @@
 # ABMNet
 
-Training a neural network to act as a surrogate model for Agent Based Models for parameter estimation to better understand immunotherapy and cell signaling for cancer treatment. 
+Training a neural network to act as a surrogate model for Agent Based Models to speed up parameter estimation in cancer and immune cell models.
+
+For a more complex model that includes a temporal component see [here]().

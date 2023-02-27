@@ -11,7 +11,7 @@
 
 #python3 main.py -i 'data/NL6_means.csv' -h 128 -d 5 -o 'nl6means_h128_d5.csv' --epochs 100 --normalize --type res_n --gpu
 
-python3 main.py -i 'data/gdag_1300ss_covs.csv' --cross -o 'gdag1300ss_val_norm' --gpu --normalize --normalize_out --save
+python3 main.py -i 'data/static/gdag_1300ss_covs.csv' --cross -o 'gdag1300ss_val_norm' --gpu --normalize --normalize_out --save
 
 #python3 main.py -i 'data/NL6_in.csv' -h 64 -d 10 -o 'nl6in' --epochs 200 --gpu
 
