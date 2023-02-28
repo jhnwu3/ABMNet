@@ -2,11 +2,26 @@ import pandas as pd
 import numpy as np
 
 
-file = 'data/l3p.csv'
+file = 'data/time_series/l3pt_i.csv'
 nParams = 5
 nOutputs = 9
 df = pd.read_csv(file)
 data = df.to_numpy()
+# for converting l3pt_i into separate time_series with columns 
+times = np.unique(data[:,0]) # pick index of time
+cols = []
+for i in range(nParams):
+    cols.append('k' + str(i + 1))
+
+for o in range(nOutputs):
+    cols.append('o' + str(o+1))
+
+for t in range(len(np.unique(data[:,0]))):
+    toSave = data[np.where(data[:,0]==times[t]), 1:].copy()  
+    new_df = pd.DataFrame(toSave.squeeze(), columns=cols)
+    new_df.to_csv('data/static/l3p_t' + str(int(times[t])) +'.csv', index=False)
+exit(0)
+#
 indices_changing = np.array([0])
 const_val = 0.2
 # initial_moments = np.loadtxt('data/time_series/initial_6pro_moments.txt',delimiter=',') 

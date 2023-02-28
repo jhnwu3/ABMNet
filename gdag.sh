@@ -7,5 +7,5 @@
 #SBATCH --cpus-per-task=5
 #SBATCH --gres=gpu:a100
 
-python3 main.py -i 'data/gdag_1300ss_covs.csv' -h 64 --epochs 50 -d 6 -o 'gdag_default_input' --gpu --normalize_out --save
+python3 main.py -i 'data/gdag_1300ss_covs.csv' -h 32 --epochs 50 -d 6 -o 'gdag_default_input' --gpu --normalize_out --save --type res_nn
 
