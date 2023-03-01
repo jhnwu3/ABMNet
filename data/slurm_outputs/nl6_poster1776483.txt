@@ -1,0 +1,35 @@
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/GRPH.py:34: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  fig = plt.figure(figsize=(8.0, 8.0))
+Normalization of Outputs
+New Max: 1.0
+New Min: 0.0
+Dataset: data/static/NL6P.csv
+Length of Training: 12500
+Length of Test: 3125
+Input Dimension: 6
+Output Dimension: 27
+Model Type: res_nn
+----- Hyperparameters used for final training -----
+Depth of NN: 7
+Hidden Neurons: 128
+# Epochs Used: 50
+input 6
+hidden 128
+Using GPU: True
+'Finished epoch 0 with loss 41.02432663918719 in time 63.51046681404114'
+'Finished epoch 10 with loss 21.15591034113352 in time 610.2770590782166'
+'Finished epoch 20 with loss 20.650719695485165 in time 610.9438636302948'
+'Finished epoch 30 with loss 20.518897764807416 in time 711.8712763786316'
+'Finished epoch 40 with loss 20.385072070209375 in time 607.4184350967407'
+Using GPU: True
+Final Average MSE On Test Dataset: 0.0018001725239342491 , Time For Inference: 3.7094838619232178
+Unnormalized Max: 258430.0
+Unnormalized Min: -6560.6
+Final Average Unnormalized MSE: 74.69639711173184
+Job Statistics for 1776483:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         1776483   rsjxw007 2023-02-28T17:29:39 2023-02-28T18:24:28   00:54:49             54:29.698  COMPLETED  0:0   r1pl-hpcf-g04 billing=5,cpu=5,gres/gpu=1,mem=37275M,n+ 
+   1776483.batch            2023-02-28T17:29:39 2023-02-28T18:24:28   00:54:49   3931.96M  54:29.695  COMPLETED  0:0   r1pl-hpcf-g04                                          
+  1776483.extern            2023-02-28T17:29:39 2023-02-28T18:24:28   00:54:49          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 19.88% of 04:34:05 core-walltime
