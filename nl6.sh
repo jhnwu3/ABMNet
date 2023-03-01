@@ -3,11 +3,11 @@
 #SBATCH --job-name=ABMNet_GPU
 #SBATCH --partition=general
 #SBATCH --nodes=1
-#SBATCH --output=./data/slurm_outputs/nl6_poster%j.txt
+#SBATCH --output=./data/slurm_outputs/nl6%j.txt
 #SBATCH --cpus-per-task=5
 #SBATCH --gres=gpu:a100
 
-python3 main.py -i 'data/static/NL6P.csv' --epochs 50 -h 128 -d 7 -o 'nl6_poster_default_res_inputs' --gpu --normalize_out --save --type res_nn
+python3 main.py -i 'data/static/NL6P_t05.csv' --epochs 50 -h 128 -d 7 -o 'nl6_poster_default_res_inputs' --gpu --normalize_out --save --type res_nn
 
 #python3 main.py -i 'data/NL6_means.csv' -h 128 -d 5 -o 'nl6means_h128_d5.csv' --epochs 100 --normalize --type res_n --gpu
 
