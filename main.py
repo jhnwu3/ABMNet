@@ -101,7 +101,7 @@ if __name__ == '__main__':
     
     # we do small cross validation to reduce time for nonlinear 6 protein system.
     if cross:
-        kf = KFold(n_splits=5, shuffle=True,random_state=42) # seed it, shuffle it again, and n splits it.
+        kf = KFold(n_splits=3, shuffle=True, random_state=42) # seed it, shuffle it again, and n splits it.
         print(kf)
         depths_to_search = [2,4,6,8]
         hidden_sizes_to_search = [32,64,128] # just go up to some reasonable number I guess.
