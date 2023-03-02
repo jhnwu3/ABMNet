@@ -32,7 +32,7 @@ def gmm_cost(x, surrogate, y, wt):
 
 
 if __name__ == "__main__":
-    sgModel = tc.load("model/l3p_poster.pt")
+    sgModel = tc.load("model/l3p_t3_10k.pt")
     wt = np.loadtxt("pso/gmm_weight/l3p_t3.txt")
     # print(wt)
     x = np.zeros(sgModel.input_size)
@@ -42,5 +42,5 @@ if __name__ == "__main__":
     
     bounds = (np.zeros(sgModel.input_size), np.ones(sgModel.input_size))
     options = {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
-    optimizer = GlobalBestPSO(n_particles=1000, dimensions=sgModel.input_size, options=options, bounds=bounds)
-    cost, pos = optimizer.optimize(gmm_cost, 1000, surrogate=sgModel, y = y, wt = wt)
+    optimizer = GlobalBestPSO(n_particles=400, dimensions=sgModel.input_size, options=options, bounds=bounds)
+    cost, pos = optimizer.optimize(gmm_cost, 100, surrogate=sgModel, y = y, wt = wt)
