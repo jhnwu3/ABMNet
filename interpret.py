@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt 
 import pandas as pd
 from ABM import *
+from GRPH import *
 # 
 class DumbInterpreter:
     def __init__(self, modelPath, dataset=None, normalize_out=False):
@@ -54,8 +55,6 @@ class DumbInterpreter:
                     axs[r,c].set_ylim([0,1.5*np.max(trueOutputs[:,moment])])
                     
                     moment+=1
-                    
-                    
                     axs[r,c].legend(loc='upper right')
         
         plt.xlabel("Theta" + str(thetaStar + 1))
@@ -118,29 +117,91 @@ class DumbInterpreter:
         plt.savefig(path +"_theta" + str(thetaStar + 1) + '.png')
 
 
+    def plot_contour(self, path, nCols, resolution, groundTruthTheta, y):
+        pairedInput = 1
+        # heldThetas = 0.5 * np.ones(self.model.input_size)
+        # math for nRows 
+        nCombos = self.model.input_size
+        nRows = int(nCombos/nCols)
+        if nCombos % nCols > 0: 
+            nRows = int(nCombos / nCols) + 1
+              
+        fig, ax = plt.subplots(nRows, nCols, constrained_layout=True, figsize=(20,20))
+        
+        plotRow = 0
+        plotCol = 0
+        for inputIdx in range(self.model.input_size):
+            theta = groundTruthTheta.copy()
+            theta[inputIdx] = 0
+            xCoords = np.zeros((resolution, resolution))
+            yCoords = np.zeros((resolution, resolution))
+            heatMap = np.zeros((resolution, resolution))
+            for i in range(resolution):
+                theta[inputIdx] += 1.0 / resolution
+                theta[pairedInput] = 0
+                for j in range(resolution):
+                    theta[pairedInput] += 1.0 / resolution 
+                    xCoords[i,j] = theta[inputIdx] 
+                    yCoords[i,j] = theta[pairedInput]
+                    input = tc.from_numpy(theta)
+                    if next(self.model.parameters()).is_cuda:
+                        input = input.to(tc.device("cuda"))
+                    output = self.model(input).cpu().detach().numpy()
+                    if self.norm_out:
+                        scale_factor = self.dataset.output_maxes - self.dataset.output_mins
+                        output = (output * scale_factor) + self.dataset.output_mins
+                    heatMap[i,j] = (numpy_mse(output, y)) # mse cost
+            
+            # print(xCoords,ax)  
+            print(plotRow,",", plotCol)
+            print("pairedInput:", pairedInput)
+            cont = ax[plotRow, plotCol].contourf(xCoords, yCoords, heatMap, cmap="plasma", levels=20)
+            ax[plotRow, plotCol].set_xlabel("Theta " + str(inputIdx + 1))
+            ax[plotRow, plotCol].set_ylabel("Theta " + str(pairedInput + 1))
+            ax[plotRow, plotCol].scatter(groundTruthTheta[inputIdx], groundTruthTheta[pairedInput], s=100, c='g',marker="x", label="True Theta")
+            plt.colorbar(cont, ax=ax[plotRow, plotCol])     
+            # plt.imshow(heatMap)
+           
+            # exit(0) 
+            if plotCol < nCols - 1: # iterate columnwise first, then rowWise
+                plotCol+=1
+            elif plotRow < nRows: 
+                plotCol = 0
+                plotRow+=1 
+                
+            if pairedInput < self.model.input_size - 1:
+                pairedInput+=1
+            else: 
+                pairedInput =0
+        
+        plt.savefig(path) 
+                
+                
 
 
 
 
 
 if __name__ == "__main__":
-    
-    nl6dataset = ABMDataset("data/NL6P.csv", root_dir="data/", transform=False, standardize=False, norm_out=True)
+    nl6dataset = ABMDataset("data/static/NL6P_t05.csv", root_dir="data/", standardize=False, norm_out=True)
     nl6Int= DumbInterpreter(modelPath="model/nl6_poster_default_inputs.pt", dataset=nl6dataset, normalize_out=True) 
-    nl6Int.plot_with_ground_truth(plotPath="graphs/interpretability/nl6_default_in", groundTruthPath="data/NL6_1k.csv",thetaStar=0, nCols=6)
-    nl6Int.plot(path="graphs/interpretability/nl6", thetaStar=0, thetaFixed=0.2, nCols=6, nSteps=10)
+    nl6Int.plot_contour(path="graphs/contour/nl6.png",nCols=3, groundTruthTheta = np.array([0.1, 0.1, 0.95, 0.17, 0.05, 0.18]), resolution=50, y=np.array([1.40012,1757.38,209.96,14.0588,121.369,90.9622,0.728361,273328,6695.53,201.283,6369.12,859.989,-258.233,53.35,7.06668,-18.5846,17.0746,-4524.28,-958.283,5467.64,-992.478,790.754,-1962.44,2254.3,-690.745,162.181,-220.746]))
+    # nl6Int.plot_with_ground_truth(plotPath="graphs/interpretability/nl6_default_in", groundTruthPath="data/NL6_1k.csv",thetaStar=0, nCols=6)
+    # nl6Int.plot(path="graphs/interpretability/nl6", thetaStar=0, thetaFixed=0.2, nCols=6, nSteps=10)
     
-    l3Int = DumbInterpreter(modelPath="model/l3p_poster.pt") 
-    l3Int.plot_with_ground_truth(plotPath="graphs/interpretability/l3p_default_in", groundTruthPath="data/l3p_k1.csv",thetaStar=0, nCols=3)
-    l3Int.plot(path="graphs/interpretability/l3", thetaStar=0, thetaFixed=0.2, nCols=3, nSteps=10)
-    l3Int.plot(path="graphs/interpretability/l3", thetaStar=1, thetaFixed=0.2, nCols=3, nSteps=10)
-    l3Int.plot(path="graphs/interpretability/l3", thetaStar=2, thetaFixed=0.2, nCols=3, nSteps=10)
+    l3Int = DumbInterpreter(modelPath="model/l3p_t3.pt") 
+    l3Int.plot_contour(path="graphs/contour/l3.png",nCols=3, groundTruthTheta = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]), resolution=50, y=np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049]))
+    
+    # l3Int.plot_with_ground_truth(plotPath="graphs/interpretability/l3p_default_in", groundTruthPath="data/l3p_k1.csv",thetaStar=0, nCols=3)
+    # l3Int.plot(path="graphs/interpretability/l3", thetaStar=0, thetaFixed=0.2, nCols=3, nSteps=10)
+    # l3Int.plot(path="graphs/interpretability/l3", thetaStar=1, thetaFixed=0.2, nCols=3, nSteps=10)
+    # l3Int.plot(path="graphs/interpretability/l3", thetaStar=2, thetaFixed=0.2, nCols=3, nSteps=10)
     # gdagdataset = ABMDataset("data/gdag1300sss_covs.csv", root_dir="data/", transform=False, standardize=False, norm_out=True)
-    gdag = DumbInterpreter(modelPath="model/gdag_default_input.pt")
+    # gdag = DumbInterpreter(modelPath="model/gdag_default_input.pt")
     
     # gdag.plot(path="graphs/interpretability/gdag1300ss_default_in", thetaStar=0, thetaFixed=0.1, nCols=3, nSteps=20)
-    for i in range(gdag.model.input_size):
-        gdag.plot(path="graphs/interpretability/gdag1300ss_default_in", thetaStar=i, thetaFixed=0.1, nCols=3, nSteps=10)
+    # for i in range(gdag.model.input_size):
+    #     gdag.plot(path="graphs/interpretability/gdag1300ss_default_in", thetaStar=i, thetaFixed=0.1, nCols=3, nSteps=10)
 
 
 
