@@ -1,5 +1,5 @@
-python3 main.py -i 'data/static/linear.csv' -h 100 --epochs 100 -d 2 -o 'linear3protein'
-python3 main.py -i 'data/static/linear.csv' -h 100 --epochs 10 -d 2 -o 'l3p_norm_out' --normalize --normalize_out
+python3 main.py -i 'data/static/l3p.csv' -h 100 --epochs 100 -d 2 -o 'linear3protein'
+python3 main.py -i 'data/static/l3p.csv' -h 100 --epochs 10 -d 2 -o 'l3p_norm_out' --normalize --normalize_out
 python3 main.py -i 'data/static/gdag_400ss.csv' -h 1000 --epochs 1000 -d 3 -o 'gdagABM_more_avg'
 python3 main.py -i 'data/static/NL6P.csv' -h 1000 --epochs 1000 -d 5 -o 'nl6'
 python3 main.py -i 'data/static/NL6S.csv' -h 64 --epochs 100 -d 5 -o 'nl6s'
