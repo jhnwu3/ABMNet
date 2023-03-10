@@ -156,12 +156,13 @@ class TimeDataset(Dataset):
 
 # for testing purposes
 if __name__ == "__main__":
-    tdata = TimeDataset(csv_file="data/time_series/3pro.csv",root_dir="data/time_series" ,standardize=True, norm_out=True)
+    tdata = TimeDataset(csv_file="data/time_series/l3p.csv",root_dir="data/time_series" ,standardize=False, norm_out=True)
     
     input, output = tdata[0]
     print(input.size())
     print(output.size())
     print(len(tdata))
+    print(input)
 
 
 

@@ -26,6 +26,7 @@ def gmm_cost(x, surrogate, y, wt):
             output = surrogate(input).cpu().detach().numpy()
             costs.append(np.matmul(output-y, np.matmul((output - y).transpose(), wt)))
     
+    print(costs)
     # print("output:",output.shape)
     # print("wt:", wt.shape)
     # print("y:", y.shape)
@@ -34,8 +35,8 @@ def gmm_cost(x, surrogate, y, wt):
 
 if __name__ == "__main__":
     sgModel = tc.load("model/l3p_t3_10k.pt")
-    wt = np.loadtxt("pso/gmm_weight/l3p_t3.txt")
-    wt = np.identity(sgModel.output_size)
+    wt = np.loadtxt("pso/gmm_weight/l3p_t3inv.txt")
+    # wt = np.identity(sgModel.output_size)
     # print(wt)
     x = np.zeros(sgModel.input_size)
     y = np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049])
