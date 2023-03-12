@@ -32,8 +32,50 @@ def gmm_cost(x, surrogate, y, wt):
     # print("y:", y.shape)
     return np.array(costs)
 
+def multi_gmm_cost(x, surrogates, y, wts):
+    costs = []
+   
+    if len(x.shape) < 2:
+        cost = 0
+        w = 0
+        for surrogate in surrogates:
+            wt = wts[w]
+            input = tc.from_numpy(x)
+            if next(surrogate.parameters()).is_cuda:
+                input = input.to(tc.device("cuda"))
+            output = surrogate(input).cpu().detach().numpy()
+            cost += np.matmul(output-y, np.matmul((output - y).transpose(), wt))
+        costs.append(cost)
+    else:
+        for i in range(x.shape[0]):
+            cost = 0
+            w = 0
+            for surrogate in surrogates:
+                wt = wts[w]
+                input = tc.from_numpy(x[i])
+                if next(surrogate.parameters()).is_cuda:
+                    input = input.to(tc.device("cuda"))
+                output = surrogate(input).cpu().detach().numpy()
+                cost+= np.matmul(output-y, np.matmul((output - y).transpose(), wt))
+                
+            costs.append(cost)
+    
+    print(costs)
+    # print("output:",output.shape)
+    # print("wt:", wt.shape)
+    # print("y:", y.shape)
+    return np.array(costs)
 
 if __name__ == "__main__":
+    baseName = "l3p_t"
+    models = []
+    wts = []
+    y = []
+    # magic number 3 for 3 tpts
+    for i in range(3):
+        wts.append(np.loadtxt("pso/gmm_weight/" + baseName + str(i + 1) + ".txt"))
+        models.append(tc.load("model/" + baseName + str(i+1) + ".pt"))
+    
     sgModel = tc.load("model/l3p_t3_10k.pt")
     wt = np.loadtxt("pso/gmm_weight/l3p_t3inv.txt")
     # wt = np.identity(sgModel.output_size)

@@ -95,7 +95,7 @@ class RecurrentNN(nn.Module):
     def forward(self, input):
         out, (h, c) = self.lstm(input)
         out = self.linear(out.squeeze())
-        return (output, (h,c))
+        return (out, (h,c))
     
     
 def train_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_size, nEpochs, use_gpu = False):
