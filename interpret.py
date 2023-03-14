@@ -233,7 +233,67 @@ class DumbInterpreter:
             else: 
                 pairedInput =0
         
-        plt.savefig(path)       
+        plt.savefig(path)
+    
+    def plot_mgmm_contour(self, path, nCols, resolution, groundTruthTheta, y, wt):
+        pairedInput = 1
+        # heldThetas = 0.5 * np.ones(self.model.input_size)
+        # math for nRows 
+        nCombos = self.model.input_size
+        nRows = int(nCombos/nCols)
+        if nCombos % nCols > 0: 
+            nRows = int(nCombos / nCols) + 1
+              
+        fig, ax = plt.subplots(nRows, nCols, constrained_layout=True, figsize=(20,20))
+        
+        plotRow = 0
+        plotCol = 0
+        for inputIdx in range(self.model.input_size):
+            theta = groundTruthTheta.copy()
+            theta[inputIdx] = 0
+            xCoords = np.zeros((resolution, resolution))
+            yCoords = np.zeros((resolution, resolution))
+            heatMap = np.zeros((resolution, resolution))
+            for i in range(resolution):
+                theta[inputIdx] += 1.0 / resolution
+                theta[pairedInput] = 0
+                for j in range(resolution):
+                    theta[pairedInput] += 1.0 / resolution 
+                    xCoords[i,j] = theta[inputIdx] 
+                    yCoords[i,j] = theta[pairedInput]
+                    input = tc.from_numpy(theta)
+                    if next(self.model.parameters()).is_cuda:
+                        input = input.to(tc.device("cuda"))
+                    output = self.model(input).cpu().detach().numpy()
+                    if self.norm_out:
+                        scale_factor = self.dataset.output_maxes - self.dataset.output_mins
+                        output = (output * scale_factor) + self.dataset.output_mins
+                    heatMap[i,j] = np.matmul(output-y, np.matmul((output - y).transpose(), wt)) # mse cost
+            
+            # print(xCoords,ax)  
+            print(plotRow,",", plotCol)
+            print("pairedInput:", pairedInput)
+            cont = ax[plotRow, plotCol].contourf(xCoords, yCoords, heatMap, cmap="plasma", levels=20)
+            ax[plotRow, plotCol].set_xlabel("Theta " + str(inputIdx + 1))
+            ax[plotRow, plotCol].set_ylabel("Theta " + str(pairedInput + 1))
+            ax[plotRow, plotCol].scatter(groundTruthTheta[inputIdx], groundTruthTheta[pairedInput], s=100, c='g',marker="x", label="True Theta")
+            plt.colorbar(cont, ax=ax[plotRow, plotCol])     
+            # plt.imshow(heatMap)
+           
+            # exit(0) 
+            if plotCol < nCols - 1: # iterate columnwise first, then rowWise
+                plotCol+=1
+            elif plotRow < nRows: 
+                plotCol = 0
+                plotRow+=1 
+                
+            if pairedInput < self.model.input_size - 1:
+                pairedInput+=1
+            else: 
+                pairedInput =0
+        
+        plt.savefig(path)
+         
                 
 
 
