@@ -135,3 +135,5 @@ ValueError: shape mismatch: objects cannot be broadcast to a single shape.  Mism
 2023-03-14 11:46:50,848 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 0.3234829460506249, best pos: [0.0113484  0.33877561 0.63454892 0.77425132 0.62773386]
 2023-03-14 11:47:05,256 - pyswarms.single.global_best - INFO - Optimize for 30 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
 2023-03-14 11:47:06,176 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 0.2553082624360474, best pos: [0.48710449 0.70998003 0.825617   0.50444411 0.93290812]
+2023-03-14 18:26:49,909 - pyswarms.single.global_best - INFO - Optimize for 30 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2023-03-14 18:27:13,078 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 127827.89648060949, best pos: [0.2702002  0.60328072 0.95945936 0.04264049 0.96155974]

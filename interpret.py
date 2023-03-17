@@ -8,7 +8,7 @@ from GRPH import *
 class DumbInterpreter:
     def __init__(self, modelPath, dataset=None, normalize_out=False):
         self.modelPath = modelPath
-        self.model = tc.load(modelPath)
+        self.model = tc.load(modelPath)        
         self.dataset = dataset
         self.norm_out = normalize_out
     
@@ -234,12 +234,39 @@ class DumbInterpreter:
                 pairedInput =0
         
         plt.savefig(path)
+                
+class MultiInterpreter:
+    def __init__(self, models, dataset=None, normalize_out=False, standard_in = False):
+        self.models = models      
+        self.dataset = dataset
+        self.norm_out = normalize_out
+        self.standardize_in = standard_in
+        
+    def multi_gmm_cost(self, x, y, wts):
+        costs = []
+        cost = 0
+        w = 0
+        for surrogate in self.models:
+            wt = wts[w]
+            input = tc.from_numpy(x)
+            if next(surrogate.parameters()).is_cuda:
+                input = input.to(tc.device("cuda"))
+            output = surrogate(input).cpu().detach().numpy()
+            cost += np.matmul(output-y[w], np.matmul((output - y[w]).transpose(), wt))
+            w+=1
+        costs = cost
+        
+        # print(costs)
+        # print("output:",output.shape)
+        # print("wt:", wt.shape)
+        # print("y:", y.shape)
+        return costs
     
-    def plot_mgmm_contour(self, path, nCols, resolution, groundTruthTheta, y, wt):
+    def plot_mgmm_contour(self, path, nCols, resolution, groundTruthTheta, y, wts, levels=20):
         pairedInput = 1
         # heldThetas = 0.5 * np.ones(self.model.input_size)
         # math for nRows 
-        nCombos = self.model.input_size
+        nCombos = self.models[0].input_size
         nRows = int(nCombos/nCols)
         if nCombos % nCols > 0: 
             nRows = int(nCombos / nCols) + 1
@@ -248,7 +275,7 @@ class DumbInterpreter:
         
         plotRow = 0
         plotCol = 0
-        for inputIdx in range(self.model.input_size):
+        for inputIdx in range(self.models[0].input_size):
             theta = groundTruthTheta.copy()
             theta[inputIdx] = 0
             xCoords = np.zeros((resolution, resolution))
@@ -261,19 +288,18 @@ class DumbInterpreter:
                     theta[pairedInput] += 1.0 / resolution 
                     xCoords[i,j] = theta[inputIdx] 
                     yCoords[i,j] = theta[pairedInput]
-                    input = tc.from_numpy(theta)
-                    if next(self.model.parameters()).is_cuda:
-                        input = input.to(tc.device("cuda"))
-                    output = self.model(input).cpu().detach().numpy()
-                    if self.norm_out:
-                        scale_factor = self.dataset.output_maxes - self.dataset.output_mins
-                        output = (output * scale_factor) + self.dataset.output_mins
-                    heatMap[i,j] = np.matmul(output-y, np.matmul((output - y).transpose(), wt)) # mse cost
+                    # input = tc.from_numpy(theta)
+                    # if next(self.models[0].parameters()).is_cuda:
+                    #     input = input.to(tc.device("cuda"))
+                    # if self.norm_out:
+                    #     scale_factor = self.dataset.output_maxes - self.dataset.output_mins
+                    #     output = (output * scale_factor) + self.dataset.output_mins
+                    heatMap[i,j] = self.multi_gmm_cost(theta,y=y,wts=wts) # gmm cost
             
             # print(xCoords,ax)  
             print(plotRow,",", plotCol)
             print("pairedInput:", pairedInput)
-            cont = ax[plotRow, plotCol].contourf(xCoords, yCoords, heatMap, cmap="plasma", levels=20)
+            cont = ax[plotRow, plotCol].contourf(xCoords, yCoords, heatMap, cmap="plasma", levels=levels)
             ax[plotRow, plotCol].set_xlabel("Theta " + str(inputIdx + 1))
             ax[plotRow, plotCol].set_ylabel("Theta " + str(pairedInput + 1))
             ax[plotRow, plotCol].scatter(groundTruthTheta[inputIdx], groundTruthTheta[pairedInput], s=100, c='g',marker="x", label="True Theta")
@@ -287,17 +313,12 @@ class DumbInterpreter:
                 plotCol = 0
                 plotRow+=1 
                 
-            if pairedInput < self.model.input_size - 1:
+            if pairedInput < self.models[0].input_size - 1:
                 pairedInput+=1
             else: 
                 pairedInput =0
         
         plt.savefig(path)
-         
-                
-
-
-
 
 
 if __name__ == "__main__":
@@ -309,10 +330,21 @@ if __name__ == "__main__":
     # nl6Int.plot_with_ground_truth(plotPath="graphs/interpretability/nl6_default_in", groundTruthPath="data/NL6_1k.csv",thetaStar=0, nCols=6)
     # nl6Int.plot(path="graphs/interpretability/nl6", thetaStar=0, thetaFixed=0.2, nCols=6, nSteps=10)
     
-    l3Int = DumbInterpreter(modelPath="model/l3p_t3.pt")
-    wt = np.loadtxt("pso/gmm_weight/l3p_t3.txt")
-    l3Int.plot_contour(path="graphs/contour/l3.png",nCols=3, groundTruthTheta = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]), resolution=50, y=np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049]))
-    l3Int.plot_gmm_contour(path="graphs/contour/l3gmm.png",nCols=3, groundTruthTheta = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]), resolution=50, y=np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049]), wt=wt)
+    baseName = "l3p_t"
+    models = []
+    wts = []
+    y = np.loadtxt("pso/truth/l3p_t123_mom.txt")
+    # magic number 3 for 3 tpts
+    for i in range(3):
+        wts.append(np.loadtxt("pso/gmm_weight/" + baseName + str(i + 1) + ".txt"))
+        models.append(tc.load("model/" + baseName + str(i+1) + ".pt"))
+    
+    # l3Int = DumbInterpreter(modelPath="model/l3p_t3.pt")
+    l3IntMulti = MultiInterpreter(models=models)
+    l3IntMulti.plot_mgmm_contour("graphs/contour/l3mgmm.png", nCols=3, groundTruthTheta = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]), resolution=100, y=y, wts=wts, levels=40)
+    # wt = np.loadtxt("pso/gmm_weight/l3p_t3.txt")
+    # l3Int.plot_contour(path="graphs/contour/l3.png",nCols=3, groundTruthTheta = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]), resolution=50, y=np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049]))
+    # l3Int.plot_gmm_contour(path="graphs/contour/l3gmm.png",nCols=3, groundTruthTheta = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]), resolution=50, y=np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049]), wt=wt)
     # l3Int.plot_with_ground_truth(plotPath="graphs/interpretability/l3p_default_in", groundTruthPath="data/l3p_k1.csv",thetaStar=0, nCols=3)
     # l3Int.plot(path="graphs/interpretability/l3", thetaStar=0, thetaFixed=0.2, nCols=3, nSteps=10)
     # l3Int.plot(path="graphs/interpretability/l3", thetaStar=1, thetaFixed=0.2, nCols=3, nSteps=10)
