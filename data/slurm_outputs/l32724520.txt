@@ -1,0 +1,8 @@
+slurmstepd: error: *** JOB 2724520 ON r1pl-hpcf-g04 CANCELLED AT 2023-03-15T09:30:55 DUE TO TIME LIMIT ***
+Job Statistics for 2724520:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         2724520   rsjxw007 2023-03-14T13:20:29 2023-03-15T09:30:55   20:10:26              20:05:45    TIMEOUT  0:0   r1pl-hpcf-g04 billing=5,cpu=5,gres/gpu=1,mem=37275M,n+ 
+   2724520.batch            2023-03-14T13:20:29 2023-03-15T09:30:56   20:10:27   3952.83M   20:05:45  CANCELLED 0:15   r1pl-hpcf-g04                                          
+  2724520.extern            2023-03-14T13:20:29 2023-03-15T09:30:55   20:10:26          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 19.92% of 4-04:52:10 core-walltime
