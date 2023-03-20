@@ -137,3 +137,20 @@ ValueError: shape mismatch: objects cannot be broadcast to a single shape.  Mism
 2023-03-14 11:47:06,176 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 0.2553082624360474, best pos: [0.48710449 0.70998003 0.825617   0.50444411 0.93290812]
 2023-03-14 18:26:49,909 - pyswarms.single.global_best - INFO - Optimize for 30 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
 2023-03-14 18:27:13,078 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 127827.89648060949, best pos: [0.2702002  0.60328072 0.95945936 0.04264049 0.96155974]
+2023-03-18 14:35:59,984 - pyswarms.single.global_best - INFO - Optimize for 30 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2023-03-18 14:36:59,114 - pyswarms.single.global_best - INFO - Optimize for 30 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2023-03-18 14:39:17,854 - pyswarms.backend.generators - ERROR - Bounds and/or init_pos should be of size (5,)
+Traceback (most recent call last):
+  File "/home/jhnwu3/.local/lib/python3.8/site-packages/pyswarms/backend/generators.py", line 65, in generate_swarm
+    np.all(bounds[0] <= init_pos) and np.all(init_pos <= bounds[1])
+ValueError: operands could not be broadcast together with shapes (5,) (5,1500) 
+2023-03-18 14:39:50,613 - pyswarms.backend.generators - ERROR - Bounds and/or init_pos should be of size (5,)
+Traceback (most recent call last):
+  File "/home/jhnwu3/.local/lib/python3.8/site-packages/pyswarms/backend/generators.py", line 65, in generate_swarm
+    np.all(bounds[0] <= init_pos) and np.all(init_pos <= bounds[1])
+ValueError: operands could not be broadcast together with shapes (5,) (5,1500) 
+2023-03-18 14:53:28,554 - pyswarms.single.global_best - INFO - Optimize for 30 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2023-03-18 14:53:38,197 - pyswarms.single.global_best - INFO - Optimize for 30 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2023-03-19 12:19:28,608 - pyswarms.single.global_best - INFO - Optimize for 30 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2023-03-19 12:20:26,766 - pyswarms.single.global_best - INFO - Optimize for 30 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2023-03-19 12:21:00,516 - pyswarms.single.global_best - INFO - Optimize for 30 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}

@@ -34,8 +34,10 @@ class ABMDataset(Dataset):
             allData[:, :self.final_input_idx] = ret_inputs
            
             print("Standardization to Input Parameters Applied")
-            print('New Average Input Value:',inputs.mean(axis=0))
-            print('New Std Input Value:',inputs.std(axis=0))
+            print("Original Mean Inputs:", self.input_means)
+            print("Original Stds:", self.input_stds)
+            print('New Average Input Value:', allData[:,:self.final_input_idx].mean(axis=0))
+            print('New Std Input Value:', allData[:,:self.final_input_idx].std(axis=0))
             print('max:', np.max(inputs))
         
         if norm_out:

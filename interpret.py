@@ -1,4 +1,6 @@
-import torch as tc
+import torch as tc 
+import time
+from torch import nn
 import numpy as np
 import matplotlib.pyplot as plt 
 import pandas as pd
@@ -6,11 +8,12 @@ from ABM import *
 from GRPH import *
 # 
 class DumbInterpreter:
-    def __init__(self, modelPath, dataset=None, normalize_out=False):
+    def __init__(self, modelPath, dataset=None, normalize_out=False, standardize_in=False):
         self.modelPath = modelPath
         self.model = tc.load(modelPath)        
         self.dataset = dataset
         self.norm_out = normalize_out
+        self.standardize = standardize_in
     
     def plot_with_ground_truth(self, plotPath, groundTruthPath, thetaStar, nCols):
         # load input data
@@ -19,7 +22,13 @@ class DumbInterpreter:
         groundTruth = groundTruth.to_numpy()
         inputs = groundTruth[:,:self.model.input_size].copy()
         trueOutputs = groundTruth[:,self.model.input_size:].copy()
-        
+        if self.standardize:
+            stds = self.dataset.input_stds
+            means = self.dataset.means
+            inputs = (inputs - means) / stds
+            print("Standardized Inputs:")
+            print(inputs)
+
         # go through all inputs and outputs
         outputs = []
         for i in range(inputs.shape[0]):
@@ -79,14 +88,18 @@ class DumbInterpreter:
         changing_inputs = []
         outputs = []
         for i in range(nSteps):
-            changing_inputs.append(thetas[thetaStar])
             thetas[thetaStar] += (1.0 / nSteps)
-
-            input = tc.from_numpy(thetas)
+            changing_inputs.append(thetas[thetaStar])
+            thetas_cp = thetas
+            if self.standardize: 
+                thetas_cp = (thetas - self.dataset.input_means) / self.dataset.input_stds 
+                
+            input = tc.from_numpy(thetas_cp)
             if next(self.model.parameters()).is_cuda:
                 input = input.to(tc.device("cuda"))
             output = self.model(input).cpu().detach().numpy()
             outputs.append(output)
+            
 
         changing_inputs = np.array(changing_inputs)
         outputs = np.array(outputs)
@@ -117,7 +130,7 @@ class DumbInterpreter:
         plt.savefig(path +"_theta" + str(thetaStar + 1) + '.png')
 
 
-    def plot_contour(self, path, nCols, resolution, groundTruthTheta, y):
+    def plot_contour(self, path, nCols, resolution, groundTruthTheta, y, levels=20):
         pairedInput = 1
         # heldThetas = 0.5 * np.ones(self.model.input_size)
         # math for nRows 
@@ -143,7 +156,11 @@ class DumbInterpreter:
                     theta[pairedInput] += 1.0 / resolution 
                     xCoords[i,j] = theta[inputIdx] 
                     yCoords[i,j] = theta[pairedInput]
-                    input = tc.from_numpy(theta)
+                    thetaCopy = theta
+                    if self.standardize:
+                        thetaCopy = (theta - self.dataset.input_means) / self.dataset.input_stds
+                        # print(theta_copy)
+                    input = tc.from_numpy(thetaCopy)
                     if next(self.model.parameters()).is_cuda:
                         input = input.to(tc.device("cuda"))
                     output = self.model(input).cpu().detach().numpy()
@@ -155,7 +172,7 @@ class DumbInterpreter:
             # print(xCoords,ax)  
             print(plotRow,",", plotCol)
             print("pairedInput:", pairedInput)
-            cont = ax[plotRow, plotCol].contourf(xCoords, yCoords, heatMap, cmap="plasma", levels=20)
+            cont = ax[plotRow, plotCol].contourf(xCoords, yCoords, heatMap, cmap="plasma", levels=levels)
             ax[plotRow, plotCol].set_xlabel("Theta " + str(inputIdx + 1))
             ax[plotRow, plotCol].set_ylabel("Theta " + str(pairedInput + 1))
             ax[plotRow, plotCol].scatter(groundTruthTheta[inputIdx], groundTruthTheta[pairedInput], s=100, c='g',marker="x", label="True Theta")
@@ -176,7 +193,7 @@ class DumbInterpreter:
         
         plt.savefig(path) 
         
-    def plot_gmm_contour(self, path, nCols, resolution, groundTruthTheta, y, wt):
+    def plot_gmm_contour(self, path, nCols, resolution, groundTruthTheta, y, wt, levels=20):
         pairedInput = 1
         # heldThetas = 0.5 * np.ones(self.model.input_size)
         # math for nRows 
@@ -202,7 +219,11 @@ class DumbInterpreter:
                     theta[pairedInput] += 1.0 / resolution 
                     xCoords[i,j] = theta[inputIdx] 
                     yCoords[i,j] = theta[pairedInput]
-                    input = tc.from_numpy(theta)
+                    thetaCopy = theta
+                    if self.standardize:
+                        thetaCopy = (theta - self.dataset.input_means) / self.dataset.input_stds
+                   
+                    input = tc.from_numpy(thetaCopy)
                     if next(self.model.parameters()).is_cuda:
                         input = input.to(tc.device("cuda"))
                     output = self.model(input).cpu().detach().numpy()
@@ -214,7 +235,7 @@ class DumbInterpreter:
             # print(xCoords,ax)  
             print(plotRow,",", plotCol)
             print("pairedInput:", pairedInput)
-            cont = ax[plotRow, plotCol].contourf(xCoords, yCoords, heatMap, cmap="plasma", levels=20)
+            cont = ax[plotRow, plotCol].contourf(xCoords, yCoords, heatMap, cmap="plasma", levels=levels)
             ax[plotRow, plotCol].set_xlabel("Theta " + str(inputIdx + 1))
             ax[plotRow, plotCol].set_ylabel("Theta " + str(pairedInput + 1))
             ax[plotRow, plotCol].scatter(groundTruthTheta[inputIdx], groundTruthTheta[pairedInput], s=100, c='g',marker="x", label="True Theta")
@@ -234,7 +255,68 @@ class DumbInterpreter:
                 pairedInput =0
         
         plt.savefig(path)
+        
+        
+    # return MSE metric of moments
+    def evaluate(self, dataset, use_gpu = False):
+        
+        criterion = nn.MSELoss()
+        if tc.cuda.is_available() and use_gpu:
+            device = tc.device("cuda")
+            self.model = self.model.cuda()
+            criterion = criterion.cuda()
+            using_gpu = True
+        else:
+            device = tc.device("cpu")
+            using_gpu = False
+
+        print(f"Using GPU: {using_gpu}")
+        self.model.eval()
+        loss = 0
+        start_time = time.time()
+        predicted = []
+        tested = []
+        for ex in range(len(dataset)):
+            sample = dataset[ex]
+            input = sample[0]
+            output = sample[1]
+            prediction = self.model.forward(input.to(device))
+            loss += criterion(prediction.squeeze(), output.squeeze().to(device))
+            tested.append(output.cpu().detach().numpy())
+            predicted.append(prediction.cpu().detach().numpy())
+            
+        return loss.cpu().detach().numpy() / len(dataset), time.time() - start_time, np.array(predicted), np.array(tested)
+    
+    def plot_scatter(self, true, predictions, output='data/graphs/out', nSpecies=None):
+        plt.figure()
+        fig, axes = plt.subplots(figsize=(8, 8))
+        x123 = np.arange(np.min(true), np.max(true))
+        
+        if x123[0] == 0:
+            x123 = np.append(x123,[1])
+        y123 = x123
+        optimal = axes.plot(np.unique(x123), np.poly1d(np.polyfit(x123, y123, 1))(np.unique(x123)),'--', c='k', label='Perfect Prediction')
+        axes.set_xlabel("Original Model Value")
+        axes.set_ylabel("Surrogate Model Prediction")
+        
+        if nSpecies is not None:
+            for c in range(true.shape[1]):
+                if c < nSpecies: # means
+                    axes.scatter(true[:,c], predictions[:,c],c='r', label='Means')
+                elif c < 2*nSpecies: # variances
+                    axes.scatter(true[:,c], predictions[:,c],c='g', label='Variances')
+                else: # covariances
+                    axes.scatter(true[:,c], predictions[:,c],c='b', label='Covariances')
+        else:
+            axes.scatter(true.flatten(), predictions.flatten(), c='c')
                 
+            # axes.legend(optimal, 'Perfect Prediction')
+        axes.legend(loc='upper right')
+        plt.savefig(output + '_scatter.png')  
+        
+        
+        
+        
 class MultiInterpreter:
     def __init__(self, models, dataset=None, normalize_out=False, standard_in = False):
         self.models = models      
@@ -286,6 +368,9 @@ class MultiInterpreter:
                 theta[pairedInput] = 0
                 for j in range(resolution):
                     theta[pairedInput] += 1.0 / resolution 
+                    thetaCp = theta
+                    if self.standardize_in:
+                        thetaCp = (theta - self.dataset.input_means) / self.dataset.input_stds
                     xCoords[i,j] = theta[inputIdx] 
                     yCoords[i,j] = theta[pairedInput]
                     # input = tc.from_numpy(theta)
@@ -294,7 +379,7 @@ class MultiInterpreter:
                     # if self.norm_out:
                     #     scale_factor = self.dataset.output_maxes - self.dataset.output_mins
                     #     output = (output * scale_factor) + self.dataset.output_mins
-                    heatMap[i,j] = self.multi_gmm_cost(theta,y=y,wts=wts) # gmm cost
+                    heatMap[i,j] = self.multi_gmm_cost(thetaCp,y=y,wts=wts) # gmm cost
             
             # print(xCoords,ax)  
             print(plotRow,",", plotCol)
@@ -331,20 +416,31 @@ if __name__ == "__main__":
     # nl6Int.plot(path="graphs/interpretability/nl6", thetaStar=0, thetaFixed=0.2, nCols=6, nSteps=10)
     
     baseName = "l3p_t"
-    models = []
-    wts = []
-    y = np.loadtxt("pso/truth/l3p_t123_mom.txt")
-    # magic number 3 for 3 tpts
-    for i in range(3):
-        wts.append(np.loadtxt("pso/gmm_weight/" + baseName + str(i + 1) + ".txt"))
-        models.append(tc.load("model/" + baseName + str(i+1) + ".pt"))
+    # models = []
+    # wts = []
+    # y = np.loadtxt("pso/truth/l3p_t123_mom.txt")
+    # # magic number 3 for 3 tpts
+    # for i in range(3):
+    #     wts.append(np.loadtxt("pso/gmm_weight/" + baseName + str(i + 1) + ".txt"))
+    #     models.append(tc.load("model/" + baseName + str(i+1) + ".pt"))
+
+    # l3IntMulti = MultiInterpreter(models=models)
+    # l3IntMulti.plot_mgmm_contour("graphs/contour/l3mgmm.png", nCols=3, groundTruthTheta = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]), resolution=100, y=y, wts=wts, levels=40)
     
-    # l3Int = DumbInterpreter(modelPath="model/l3p_t3.pt")
-    l3IntMulti = MultiInterpreter(models=models)
-    l3IntMulti.plot_mgmm_contour("graphs/contour/l3mgmm.png", nCols=3, groundTruthTheta = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]), resolution=100, y=y, wts=wts, levels=40)
+    
+    # l3NormDataset = ABMDataset("data/static/l3p_10k_t3_5kss.csv", root_dir="data/", standardize=True, norm_out=True)
+    # l3Int = DumbInterpreter(modelPath="model/l3p_10k_small_res_t3.pt", dataset=l3NormDataset, normalize_out=True, standardize_in=True)
     # wt = np.loadtxt("pso/gmm_weight/l3p_t3.txt")
-    # l3Int.plot_contour(path="graphs/contour/l3.png",nCols=3, groundTruthTheta = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]), resolution=50, y=np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049]))
-    # l3Int.plot_gmm_contour(path="graphs/contour/l3gmm.png",nCols=3, groundTruthTheta = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]), resolution=50, y=np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049]), wt=wt)
+    # l3Int.plot_contour(path="graphs/contour/l3_norm_t3.png",nCols=3, groundTruthTheta = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]), resolution=100, y=np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049]), levels=40)
+    # l3Int.plot_gmm_contour(path="graphs/contour/l3_norm_gmm_t3.png",nCols=3, groundTruthTheta = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]), resolution=100, y=np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049]), wt=wt, levels = 40)
+    
+    
+    l3tTestDataset = ABMDataset("data/time_series/l3p_unseen_data.csv", root_dir="data/time_series/")
+    l3tTrainDataset = ABMDataset("data/time_series/l3pt_i.csv", root_dir="data/")
+    l3T = DumbInterpreter(modelPath="model/l3p_i.pt", dataset=l3tTrainDataset)
+    mse, t, predicted, tested = l3T.evaluate(l3tTestDataset, use_gpu=True)
+    l3T.plot_scatter(tested, predicted, output='graphs/scatter/l3_t_test')
+    
     # l3Int.plot_with_ground_truth(plotPath="graphs/interpretability/l3p_default_in", groundTruthPath="data/l3p_k1.csv",thetaStar=0, nCols=3)
     # l3Int.plot(path="graphs/interpretability/l3", thetaStar=0, thetaFixed=0.2, nCols=3, nSteps=10)
     # l3Int.plot(path="graphs/interpretability/l3", thetaStar=1, thetaFixed=0.2, nCols=3, nSteps=10)

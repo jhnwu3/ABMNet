@@ -88,7 +88,9 @@ def multi_gmm_cost(x, t, surrogates, y, wts):
             cost = 0
             w = 0
             for surrogate in surrogates:
+                print(x[i].shape)
                 input = tc.from_numpy(x[i])
+               
                 if next(surrogate.parameters()).is_cuda:
                     input = input.to(tc.device("cuda"))
                 output = surrogate(input).cpu().detach().numpy()
@@ -148,30 +150,34 @@ if __name__ == "__main__":
     
     # # pso for hard trained model
     
-    # sgModel = tc.load("model/l3p_100k_small.pt")
-    # wt = np.loadtxt("pso/gmm_weight/l3p_t3inv.txt")
+    sgModel = tc.load("model/l3p_100k_small.pt")
+    wt = np.loadtxt("pso/gmm_weight/l3p_t3inv.txt")
     # # wt = np.identity(sgModel.output_size)
     # # print(wt)
-    # x = np.zeros(sgModel.input_size)
-    # y = np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049])
-    # print(gmm_cost(x, sgModel, y, wt ))
-    # # print(sgModel.parameters)
+    x = np.zeros(sgModel.input_size)
+    y = np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049])
+    print(gmm_cost(x, sgModel, y, wt ))
+    # print(sgModel.parameters)
+    gTruth = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502])
+    # initialPos = np.zeros((5, 1500))
+    # for i in range(gTruth.shape[0]):
+    #     initialPos[i,:] = gTruth[i]
+    # print(initialPos.shape)
+    bounds = (np.zeros(sgModel.input_size), np.ones(sgModel.input_size))
+    options = {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+    optimizer = GlobalBestPSO(n_particles=1500, dimensions=sgModel.input_size, options=options, bounds=bounds, init_pos=gTruth.reshape((5,1)))
+    cost, pos = optimizer.optimize(gmm_cost, iters=30, surrogate=sgModel, y = y, wt = wt)
+    print("GMM:", cost)
+    print("MSE of estimate:",numpy_mse(y, sgModel(tc.from_numpy(np.array(pos))).cpu().detach().numpy()) )
     
-    # bounds = (np.zeros(sgModel.input_size), np.ones(sgModel.input_size))
-    # options = {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
-    # optimizer = GlobalBestPSO(n_particles=1500, dimensions=sgModel.input_size, options=options, bounds=bounds)
-    # cost, pos = optimizer.optimize(gmm_cost, iters=30, surrogate=sgModel, y = y, wt = wt)
-    # print("GMM:", cost)
-    # print("MSE of estimate:",numpy_mse(y, sgModel(tc.from_numpy(np.array(pos))).cpu().detach().numpy()) )
-    
-    # output = sgModel(tc.from_numpy(np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]))).cpu().detach().numpy()
-    # print("GMM Cost of ground truth l3p:", np.matmul(output - y, np.matmul((output - y).transpose(), wt)))
-    # print("MSE of ground truth l3p:", numpy_mse(y, sgModel(tc.from_numpy(np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]))).cpu().detach().numpy()))
+    output = sgModel(tc.from_numpy(gTruth)).cpu().detach().numpy()
+    print("GMM Cost of ground truth l3p:", np.matmul(output - y, np.matmul((output - y).transpose(), wt)))
+    print("MSE of ground truth l3p:", numpy_mse(y, sgModel(tc.from_numpy(np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]))).cpu().detach().numpy()))
     
     
     
     # # PSO for time as a feature model
     
-    model = tc.load("model/l3p_i.pt")
-    print(model.parameters)
+    # model = tc.load("model/l3p_i.pt")
+    # print(model.parameters)
     
