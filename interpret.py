@@ -428,18 +428,21 @@ if __name__ == "__main__":
     # l3IntMulti.plot_mgmm_contour("graphs/contour/l3mgmm.png", nCols=3, groundTruthTheta = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]), resolution=100, y=y, wts=wts, levels=40)
     
     
-    # l3NormDataset = ABMDataset("data/static/l3p_10k_t3_5kss.csv", root_dir="data/", standardize=True, norm_out=True)
+    l3NormDataset = ABMDataset("data/static/l3p_10k_t3_5kss.csv", root_dir="data/", standardize=True, norm_out=True)
+    l3Dataset100k = ABMDataset("data/static/l3p_100k.csv", root_dir="data/", standardize=True, norm_out=True)
     # l3Int = DumbInterpreter(modelPath="model/l3p_10k_small_res_t3.pt", dataset=l3NormDataset, normalize_out=True, standardize_in=True)
-    # wt = np.loadtxt("pso/gmm_weight/l3p_t3.txt")
+    l3Int100k = DumbInterpreter(modelPath="model/l3p_100k_small_t3.pt", dataset=l3Dataset100k, normalize_out=True, standardize_in=True)
+    wt = np.loadtxt("pso/gmm_weight/l3p_t3.txt")
     # l3Int.plot_contour(path="graphs/contour/l3_norm_t3.png",nCols=3, groundTruthTheta = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]), resolution=100, y=np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049]), levels=40)
     # l3Int.plot_gmm_contour(path="graphs/contour/l3_norm_gmm_t3.png",nCols=3, groundTruthTheta = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]), resolution=100, y=np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049]), wt=wt, levels = 40)
+    l3Int100k.plot_contour(path="graphs/contour/l3_norm_100k_t3.png",nCols=3, groundTruthTheta = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]), resolution=100, y=np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049]), levels=40)
+    l3Int100k.plot_gmm_contour(path="graphs/contour/l3_norm_gmm_100k_t3.png",nCols=3, groundTruthTheta = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]), resolution=100, y=np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049]), wt=wt, levels = 40)
     
-    
-    l3tTestDataset = ABMDataset("data/time_series/l3p_unseen_data.csv", root_dir="data/time_series/")
-    l3tTrainDataset = ABMDataset("data/time_series/l3pt_i.csv", root_dir="data/")
-    l3T = DumbInterpreter(modelPath="model/l3p_i.pt", dataset=l3tTrainDataset)
-    mse, t, predicted, tested = l3T.evaluate(l3tTestDataset, use_gpu=True)
-    l3T.plot_scatter(tested, predicted, output='graphs/scatter/l3_t_test')
+    # l3tTestDataset = ABMDataset("data/time_series/l3p_unseen_data.csv", root_dir="data/time_series/")
+    # l3tTrainDataset = ABMDataset("data/time_series/l3pt_i.csv", root_dir="data/")
+    # l3T = DumbInterpreter(modelPath="model/l3p_i.pt", dataset=l3tTrainDataset)
+    # mse, t, predicted, tested = l3T.evaluate(l3tTestDataset, use_gpu=True)
+    # l3T.plot_scatter(tested, predicted, output='graphs/scatter/l3_t_test')
     
     # l3Int.plot_with_ground_truth(plotPath="graphs/interpretability/l3p_default_in", groundTruthPath="data/l3p_k1.csv",thetaStar=0, nCols=3)
     # l3Int.plot(path="graphs/interpretability/l3", thetaStar=0, thetaFixed=0.2, nCols=3, nSteps=10)
@@ -452,68 +455,3 @@ if __name__ == "__main__":
     # for i in range(gdag.model.input_size):
     #     gdag.plot(path="graphs/interpretability/gdag1300ss_default_in", thetaStar=i, thetaFixed=0.1, nCols=3, nSteps=10)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# # load model that was saved.
-# model = tc.load("model/nl6_poster.pt")
-# model.eval()
-# n_inputs = model.input_size
-# n_outputs = model.output_size
-
-# # create some data
-# theta_star = 0 # what index we care about
-# n_steps = 10
-# thetas = (2*np.ones(n_inputs)) / 10.0 # convert to a set of 0.2's
-# thetas[theta_star] = 0
-# print("Interpreting Input:", theta_star + 1)
-# # pick a rate constant to interpret
-# # run model on step sizes of rate constants
-# changing_inputs = []
-# outputs = []
-# for i in range(n_steps):
-#     changing_inputs.append(thetas[theta_star])
-#     thetas[theta_star] += (1.0 / n_steps)
-
-#     input = tc.from_numpy(thetas)
-#     if next(model.parameters()).is_cuda:
-#         input = input.to(tc.device("cuda"))
-#     output = model(input).cpu().detach().numpy()
-#     outputs.append(output)
-
-# changing_inputs = np.array(changing_inputs)
-# outputs = np.array(outputs)
-
-# # plot change in outputs of mean counts (because that's easier to interpret)
-# # subplotting 
-# n_cols = 6 # Use Four Columns For Width purposes
-# n_rows = int(n_outputs / n_cols)
-# if n_outputs % n_cols != 0:
-#     n_rows+=1
-
-
-# f, axs = plt.subplots(nrows=n_rows, ncols=n_cols, figsize=(20,20))
-
-# moment = 0
-
-# for r in range(n_rows):
-#     for c in range(n_cols):
-#         if moment < n_outputs:
-#             axs[r,c].plot(changing_inputs, outputs[:,moment], label='o' + 'moment')
-#             moment+=1
-
-# plt.xlabel("Theta" + str(theta_star + 1))
-# plt.ylabel("Output Value")
-# filename = "int_theta" + str(theta_star + 1) + "_nl6"
-# plt.savefig(filename + '.png')

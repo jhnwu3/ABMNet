@@ -84,6 +84,7 @@ if __name__ == '__main__':
     input_len = sample[0].detach().numpy().shape[0]
     output_len = sample[1].detach().numpy().shape[0]
     
+    print("Outputting:", output_name)
     print("Dataset:", csv_file)
     print("Length of Training:",train_size)
     print("Length of Test:", test_size)

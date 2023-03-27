@@ -3,8 +3,9 @@ import torch as tc
 import pyswarms as ps
 from pyswarms.single.global_best import GlobalBestPSO
 from GRPH import *
+from ABM import *
 
-def gmm_cost(x, surrogate, y, wt):
+def gmm_cost(x, surrogate, y, wt, dataset=None, standardize=False, normalize=False):
     # print("x:",x.shape)
     # print(x)
     # print(len(x.shape))
@@ -17,16 +18,22 @@ def gmm_cost(x, surrogate, y, wt):
             input = input.to(tc.device("cuda"))
         output = surrogate(input).cpu().detach().numpy()
         costs.append(np.matmul(output-y, np.matmul((output - y).transpose(), wt)))
-        
     else:
         for i in range(x.shape[0]):
-            input = tc.from_numpy(x[i])
+            thetaCopy = x[i]
+            if standardize:
+                thetaCopy = (thetaCopy - dataset.input_means) / dataset.input_stds
+            input = tc.from_numpy(thetaCopy)
             if next(surrogate.parameters()).is_cuda:
                 input = input.to(tc.device("cuda"))
             output = surrogate(input).cpu().detach().numpy()
+            if normalize: 
+                scale_factor = dataset.output_maxes - dataset.output_mins
+                output = (output * scale_factor) + dataset.output_mins
+            # print(wt)
             costs.append(np.matmul(output-y, np.matmul((output - y).transpose(), wt)))
     
-    print(costs)
+    # print(costs)
     # print("output:",output.shape)
     # print("wt:", wt.shape)
     # print("y:", y.shape)
@@ -68,7 +75,7 @@ def multi_gmm_cost(x, surrogates, y, wts):
     return np.array(costs)
 
 # let t be the length of the time points
-def multi_gmm_cost(x, t, surrogates, y, wts):
+def multi_gmm_cost(x, t, surrogates, y, wts ):
     costs = []
    
     if len(x.shape) < 2:
@@ -149,9 +156,9 @@ if __name__ == "__main__":
     # print("MSE of ground truth l3p:", mse_truth)
     
     # # pso for hard trained model
-    
-    sgModel = tc.load("model/l3p_100k_small.pt")
-    wt = np.loadtxt("pso/gmm_weight/l3p_t3inv.txt")
+    l3Dataset100k = ABMDataset("data/static/l3p_100k.csv", root_dir="data/", standardize=True, norm_out=True)
+    sgModel = tc.load("model/l3p_100k_small_t3.pt")
+    wt = np.loadtxt("pso/gmm_weight/l3p_t3.txt")
     # # wt = np.identity(sgModel.output_size)
     # # print(wt)
     x = np.zeros(sgModel.input_size)
@@ -159,20 +166,22 @@ if __name__ == "__main__":
     print(gmm_cost(x, sgModel, y, wt ))
     # print(sgModel.parameters)
     gTruth = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502])
-    # initialPos = np.zeros((5, 1500))
-    # for i in range(gTruth.shape[0]):
-    #     initialPos[i,:] = gTruth[i]
-    # print(initialPos.shape)
+
     bounds = (np.zeros(sgModel.input_size), np.ones(sgModel.input_size))
     options = {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
-    optimizer = GlobalBestPSO(n_particles=1500, dimensions=sgModel.input_size, options=options, bounds=bounds, init_pos=gTruth.reshape((5,1)))
-    cost, pos = optimizer.optimize(gmm_cost, iters=30, surrogate=sgModel, y = y, wt = wt)
+    optimizer = GlobalBestPSO(n_particles=1500, dimensions=sgModel.input_size, options=options, bounds=bounds)
+    cost, pos = optimizer.optimize(gmm_cost, iters=30, surrogate=sgModel, y = y, wt = wt, dataset=l3Dataset100k, standardize = True, normalize=True)
     print("GMM:", cost)
-    print("MSE of estimate:",numpy_mse(y, sgModel(tc.from_numpy(np.array(pos))).cpu().detach().numpy()) )
-    
-    output = sgModel(tc.from_numpy(gTruth)).cpu().detach().numpy()
+    pos = tc.from_numpy(np.array(pos))
+    gTruth = tc.from_numpy(gTruth)
+    if next(sgModel.parameters()).is_cuda:
+        pos = pos.to(tc.device("cuda"))
+        gTruth = gTruth.to(tc.device("cuda"))
+        
+    print("MSE of estimate:",numpy_mse(y, sgModel(pos).cpu().detach().numpy()) )
+    output = sgModel(gTruth).cpu().detach().numpy()
     print("GMM Cost of ground truth l3p:", np.matmul(output - y, np.matmul((output - y).transpose(), wt)))
-    print("MSE of ground truth l3p:", numpy_mse(y, sgModel(tc.from_numpy(np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]))).cpu().detach().numpy()))
+    print("MSE of ground truth l3p:", numpy_mse(y, output))
     
     
     

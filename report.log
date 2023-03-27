@@ -154,3 +154,13 @@ ValueError: operands could not be broadcast together with shapes (5,) (5,1500)
 2023-03-19 12:19:28,608 - pyswarms.single.global_best - INFO - Optimize for 30 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
 2023-03-19 12:20:26,766 - pyswarms.single.global_best - INFO - Optimize for 30 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
 2023-03-19 12:21:00,516 - pyswarms.single.global_best - INFO - Optimize for 30 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2023-03-20 10:05:12,827 - pyswarms.single.global_best - INFO - Optimize for 30 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2023-03-20 10:05:47,415 - pyswarms.single.global_best - INFO - Optimize for 30 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2023-03-20 10:07:38,403 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 130889.2616308885, best pos: [0.69013933 0.80656442 0.33767018 0.09813579 0.59588452]
+2023-03-20 10:12:21,799 - pyswarms.single.global_best - INFO - Optimize for 3 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2023-03-20 10:12:22,068 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 189851.74797449177, best pos: [0.01171647 0.08488199 0.53586859 0.9898621  0.92883857]
+2023-03-20 10:13:58,898 - pyswarms.single.global_best - INFO - Optimize for 30 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2023-03-20 10:15:49,599 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 131255.67715326397, best pos: [0.99198704 0.48046221 0.22998134 0.2114003  0.98437153]
+2023-03-20 10:22:55,509 - pyswarms.single.global_best - INFO - Optimize for 30 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2023-03-20 10:23:15,781 - pyswarms.single.global_best - INFO - Optimize for 30 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2023-03-20 10:25:02,231 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 0.014914624542252264, best pos: [0.12897243 0.89149743 0.57485261 0.11732928 0.15249263]
