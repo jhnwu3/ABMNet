@@ -1,0 +1,45 @@
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/GRPH.py:82: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  plt.figure()
+Standardization to Input Parameters Applied
+Original Mean Inputs: [0.50034145 0.50008009 0.49933786 0.50002038 0.5005286 ]
+Original Stds: [0.28864059 0.28848874 0.288921   0.28860286 0.28850536]
+New Average Input Value: [ 2.02334200e-14  2.67824379e-14  1.46831467e-14 -4.02156805e-15
+ -1.42299372e-14]
+New Std Input Value: [1. 1. 1. 1. 1.]
+max: 0.9999969999999999
+Normalization of Outputs
+New Max: 1.0
+New Min: 0.0
+Dataset: data/static/l3p_100k.csv
+Length of Training: 81024
+Length of Test: 20256
+Input Dimension: 5
+Output Dimension: 9
+Model Type: -1
+----- Hyperparameters used for final training -----
+Depth of NN: 7
+Hidden Neurons: 96
+# Epochs Used: 100
+Using GPU: True
+'Finished epoch 0 with loss 97.7917269397207 in time 356.71212553977966'
+'Finished epoch 10 with loss 41.94186344163675 in time 3351.27166390419'
+'Finished epoch 20 with loss 41.3435582154408 in time 3630.0074791908264'
+'Finished epoch 30 with loss 40.81001476168792 in time 3632.730892896652'
+'Finished epoch 40 with loss 41.101428154598764 in time 3630.860165834427'
+'Finished epoch 50 with loss 40.89098426258803 in time 3636.1686704158783'
+'Finished epoch 60 with loss 39.81581110651814 in time 3635.328117609024'
+'Finished epoch 70 with loss 39.97489790554827 in time 3627.829083442688'
+'Finished epoch 80 with loss 40.132091797508885 in time 3639.2769474983215'
+'Finished epoch 90 with loss 39.241756614799755 in time 3632.038011789322'
+Using GPU: True
+Final Average MSE On Test Dataset: 0.0008244105250008277 , Time For Inference: 18.402450561523438
+Unnormalized Max: 529.726
+Unnormalized Min: 0.05500000000000001
+Final Average Unnormalized MSE: 0.02747450430501232
+Job Statistics for 2880306:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         2880306   rsjxw007 2023-03-20T09:18:07 2023-03-20T19:19:27   10:01:20              09:58:47  COMPLETED  0:0   r1pl-hpcf-g03 billing=5,cpu=5,gres/gpu=1,mem=37275M,n+ 
+   2880306.batch            2023-03-20T09:18:07 2023-03-20T19:19:27   10:01:20   4475.79M   09:58:47  COMPLETED  0:0   r1pl-hpcf-g03                                          
+  2880306.extern            2023-03-20T09:18:07 2023-03-20T19:19:27   10:01:20          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g03                                          
+CPU Efficiency: 19.92% of 2-02:06:40 core-walltime
