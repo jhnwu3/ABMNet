@@ -1,0 +1,45 @@
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/GRPH.py:82: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  plt.figure()
+Standardization to Input Parameters Applied
+Original Mean Inputs: [0.50034145 0.50008009 0.49933786 0.50002038 0.5005286 ]
+Original Stds: [0.28864059 0.28848874 0.288921   0.28860286 0.28850536]
+New Average Input Value: [ 2.02334200e-14  2.67824379e-14  1.46831467e-14 -4.02156805e-15
+ -1.42299372e-14]
+New Std Input Value: [1. 1. 1. 1. 1.]
+max: 0.9999969999999999
+Normalization of Outputs
+New Max: 1.0
+New Min: 0.0
+Outputting: l3p_100k_small_res
+Dataset: data/static/l3p_100k.csv
+Length of Training: 81024
+Length of Test: 20256
+Input Dimension: 5
+Output Dimension: 9
+Model Type: res_nn
+----- Hyperparameters used for final training -----
+Depth of NN: 6
+Hidden Neurons: 64
+# Epochs Used: 70
+input 5
+hidden 64
+Using GPU: True
+'Finished epoch 0 with loss 59.231951772507145 in time 602.0705199241638'
+'Finished epoch 10 with loss 21.749484434341678 in time 6046.931215047836'
+'Finished epoch 20 with loss 21.06543672512195 in time 6096.399780750275'
+'Finished epoch 30 with loss 20.93624345251379 in time 6126.593909740448'
+'Finished epoch 40 with loss 21.251719085626586 in time 6114.965031385422'
+'Finished epoch 50 with loss 21.030637295277447 in time 6122.100788593292'
+'Finished epoch 60 with loss 21.303144448583183 in time 5924.959646224976'
+Using GPU: True
+Final Average MSE On Test Dataset: 0.00033491161609574464 , Time For Inference: 23.52103018760681
+Unnormalized Max: 533.711
+Unnormalized Min: 0.0628
+Final Average Unnormalized MSE: 0.010664225003563019
+Job Statistics for 3249089:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3249089   rsjxw007 2023-03-31T10:05:14 2023-03-31T21:55:13   11:49:59              11:43:00  COMPLETED  0:0   r1pl-hpcf-g04 billing=5,cpu=5,gres/gpu=1,mem=37275M,n+ 
+   3249089.batch            2023-03-31T10:05:14 2023-03-31T21:55:13   11:49:59   4539.61M   11:43:00  COMPLETED  0:0   r1pl-hpcf-g04                                          
+  3249089.extern            2023-03-31T10:05:14 2023-03-31T21:55:13   11:49:59          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 19.80% of 2-11:09:55 core-walltime
