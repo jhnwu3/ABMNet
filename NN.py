@@ -96,7 +96,10 @@ class RecurrentNN(nn.Module):
         out, (h, c) = self.lstm(input)
         out = self.linear(out.squeeze())
         return (out, (h,c))
-    
+
+
+class GCNLayer(nn.Module):
+
     
 def train_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_size, nEpochs, use_gpu = False):
     
