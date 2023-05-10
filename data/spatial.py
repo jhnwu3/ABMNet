@@ -69,7 +69,7 @@ class SpatialObj():
         organized = np.zeros((width, width, features))
         for i in range(matrix.shape[0]):
             column = (i+1) % width
-            row = int((i+1) / width)
+            row = int((i) / width)
             organized[row,column] = matrix[i,1:]
         
         return organized
