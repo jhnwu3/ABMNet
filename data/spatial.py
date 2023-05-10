@@ -63,7 +63,7 @@ class SpatialObj():
         
     #Pixel, Cytotoxic CD8+ T Cells, Cancer, Exhausted CD8+ T Cells, Dead Cancer Cells, Ignore, Ignore, TAMs, Ignore
     #  x,y,class
-    def translate_to_x_y(matrix, width=100, features=8):
+    def translate_to_x_y(matrix, width=100, features=9):
         # convert indices in far left column to 
         # get some tensor feature
         organized = np.zeros((width, width, features))
@@ -93,7 +93,7 @@ class GiuseppeSpatialDataLoader():
         spatialObjs = []
         for dir in parameter_dirs:
             print(dir)
-            if dir != path:
+            if dir != path and "parameter" in dir:
                 obj = SpatialObj(dir)
                 spatialObjs.append(obj)
         return spatialObjs    
