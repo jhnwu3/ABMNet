@@ -3,7 +3,7 @@
 #SBATCH --job-name=ABMNet_GPU
 #SBATCH --partition=general
 #SBATCH --nodes=1
-#SBATCH --output=./data/slurm_outputs/nl6_res_means%j.txt
+#SBATCH --output=./data/slurm_outputs/spatial_data%j.txt
 #SBATCH --cpus-per-task=32
 #SBATCH --gres=gpu:a100
 

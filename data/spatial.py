@@ -9,7 +9,7 @@ import sys
 import os
 import pickle
 import torch as tc
-
+from scipy import spatial
 
 # each spatial object has 3 specific components
 # 1 set of rate constants that generated the data
@@ -35,9 +35,9 @@ class SpatialObj():
         sample_dirs = [os.path.join(dirname, x) for x in os.listdir(dirname)]
         data = []
         for dir in sample_dirs:
-            if dirname != dir:
-                file_i = os.path.join(dir, "dump.2D_model.0")
-                file_t = os.path.join(dir, "dump.2D_model.1")
+            file_i = os.path.join(dir, "dump.2D_model.0")
+            file_t = os.path.join(dir, "dump.2D_model.1")
+            if dirname != dir and os.path.isfile(file_t) and os.path.isfile(file_i):
                 # dump 
                 dump_i = SpatialObj.process_dump_file(file_i)
                 dump_t = SpatialObj.process_dump_file(file_t)
@@ -131,7 +131,12 @@ class GiuseppeSurrogateGraphData():
                     i+=1
             
             # now get the edges from delaunay triangulation that will be reused across all things
-            
+            tri = spatial.Delaunay(coords)
+            edges = []
+            for i in range(tri.simplices.shape[0]):
+                # basically now need to go through each of simplices rows and convert them into 
+                
+                edges.append()
             # 
             for sample in dictionary[key]: 
                 print(sample)        
