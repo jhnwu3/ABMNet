@@ -8,7 +8,8 @@ from textwrap import wrap
 import sys
 import os
 import pickle
-import torch as tc
+import torch 
+from torch_geometric.data import Data 
 from scipy import spatial
 
 # each spatial object has 3 specific components
@@ -115,16 +116,27 @@ class GiuseppeSurrogateGraphData():
         self.rates = []# list of rates we care about in torch
         self.single_init = single_initial_cond
     
+    # lattice is a WxHxF tensor where F is the feature dimension size
+    # return a python list of nodes
+    def convert_lattice_to_node(lattice):
+        nodes = [] # torch.zeros((lattice.shape[0] * lattice.shape[1], lattice.shape[2]))
+        i = 0
+        for r in range(lattice.shape[0]):
+            for c in range(lattice.shape[1]):
+                nodes.append(lattice[r,c])
+        # bad code inbound
+        nodes = np.array(nodes)
+        return torch.from_numpy(nodes)
+    
     def delaunay_edges_and_data(self, dictionary):
         for key in dictionary.keys():
             rates = np.frombuffer(key)
-            self.rates.append(tc.from_numpy(rates))
             lattice_shape = dictionary[key][0][0].shape
             
             coords = np.zeros((lattice_shape[0] * lattice_shape[1], 2))
             i = 0
-            for r in range(sample[0].shape[0]):
-                for c in range(sample[1].shape[1]):
+            for r in range(lattice_shape[0]):
+                for c in range(lattice_shape[1]):
                     # create array of 2D coordinates for triangulation
                     coords[i,0] = r
                     coords[i,1] = c
@@ -133,28 +145,44 @@ class GiuseppeSurrogateGraphData():
             # now get the edges from delaunay triangulation that will be reused across all things
             tri = spatial.Delaunay(coords)
             edges = []
-            for i in range(tri.simplices.shape[0]):
+            for triangle in range(tri.simplices.shape[0]):
                 # basically now need to go through each of simplices rows and convert them into 
-                
-                edges.append()
-            # 
+                # edges are two-way, so have to re-iterate twice through.
+                for coordinateIndex in range (tri.simplices.shape[1]):
+                    for secondCoordinateIndex in range(coordinateIndex + 1, tri.simplices.shape[1]):
+                        if coordinateIndex != secondCoordinateIndex:
+                            edges.append([tri.simplices[triangle, coordinateIndex], tri.simplices[triangle, secondCoordinateIndex]]) # use same set of edges each time
+            
+            self.edges = torch.FloatTensor(edges)      
+            # now append all of the graphs in order with respect to the input and output data
             for sample in dictionary[key]: 
-                print(sample)        
+                initial_lattice = sample[0]
+                final_lattice = sample[1]
+                self.rates.append(torch.from_numpy(rates)) # yes there will be duplicate rates, but we need to stay consistent with indexing.
+                self.input_graphs.append(GiuseppeSurrogateGraphData.convert_lattice_to_node(initial_lattice))
+                self.output_graphs.append(GiuseppeSurrogateGraphData.convert_lattice_to_node(final_lattice))
+                        
         if self.single_init: # what if we only need one of the initial conditions
-            self.input_data = self.input_data[0]
+            self.input_graphs = self.input_graphs[0]
 
-    # save to pickle
-    def save(self,path):
+    # create a pickle data structure for all the Y stuff
+    # since we are not memory constrained just yet, we can simply load it on the cluster no need 
+    # to do fileIO for now. 
+    def save(self, path):
         print("Saving Graph Data to PKL")
 
 parent_data_dir = "../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/"
 # parent_data_dir = "data/spatial/"
 
-test = GiuseppeSpatialDataProcessor(parent_data_dir)
-print(test.spatialData[0].rates)
-print(test.spatialData[1].rates)
-print(test.spatialData[0].data[0][0])
-test.convert_to_pickle("../gdag_test.pickle")
+# test = GiuseppeSpatialDataProcessor(parent_data_dir)
+# print(test.spatialData[0].rates)
+# print(test.spatialData[1].rates)
+# print(test.spatialData[0].data[0][0])
+# test.convert_to_pickle("../gdag_test.pickle")
+loadedDict = pickle.load(open("../gdag_test.pickle","rb"))
+testDataConverted = GiuseppeSurrogateGraphData()
+testDataConverted.delaunay_edges_and_data(loadedDict)
+
 # loadedDict = pickle.load(open("data/spatial/test.pickle","rb"))
 # for keys in loadedDict.keys():
 #     print(np.frombuffer(keys))
