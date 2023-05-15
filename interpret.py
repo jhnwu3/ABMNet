@@ -4,8 +4,8 @@ from torch import nn
 import numpy as np
 import matplotlib.pyplot as plt 
 import pandas as pd
-from ABM import *
-from GRPH import *
+from abm import *
+from graph import *
 # 
 class DumbInterpreter:
     def __init__(self, modelPath, dataset=None, normalize_out=False, standardize_in=False):

@@ -2,8 +2,8 @@ import numpy as np
 import torch as tc 
 import pyswarms as ps
 from pyswarms.single.global_best import GlobalBestPSO
-from GRPH import *
-from ABM import *
+from graph import *
+from abm import *
 
 def gmm_cost(x, surrogate, y, wt, dataset=None, standardize=False, normalize=False):
     # print("x:",x.shape)

@@ -6,9 +6,9 @@ import torch.optim as optim
 import numpy as np 
 import matplotlib.pyplot as plt
 import sys
-from ABM import *
-from NN import *
-from GRPH import *
+from abm import *
+from model import *
+from graph import *
 from sklearn.model_selection import KFold
 
 

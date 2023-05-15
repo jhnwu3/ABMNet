@@ -1,11 +1,11 @@
 #!/bin/bash
-#SBATCH --time=0-40:10:00 
+#SBATCH --time=0-2:10:00 
 #SBATCH --job-name=ABMNet_GPU
 #SBATCH --partition=general
 #SBATCH --nodes=1
 #SBATCH --output=./data/slurm_outputs/spatial_data%j.txt
-#SBATCH --cpus-per-task=32
-#SBATCH --gres=gpu:a100
+#SBATCH --cpus-per-task=5
+#SBATCH --gres=gpu
 
 # python3 main.py -i 'data/static/NL6P.csv' --epochs 110 -h 128 -d 6 -o 'nl6_normalize_large' --gpu --normalize --normalize_out
 python3 data/spatial.py
