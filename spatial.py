@@ -290,12 +290,12 @@ def train_gnn(data_obj : GiuseppeSurrogateGraphData, nEpochs = 30, single_init_c
 parent_data_dir = "../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/"
 parent_data_dir = "data/spatial/"
 
-test = GiuseppeSpatialDataProcessor(parent_data_dir)
-# print(test.spatialData[0].rates)
-# print(test.spatialData[1].rates)
-# print(test.spatialData[0].data[0][0])
-test.convert_to_pickle("../gdag_test.pickle")
-test.print_data_statistics()
+# test = GiuseppeSpatialDataProcessor(parent_data_dir)
+# # print(test.spatialData[0].rates)
+# # print(test.spatialData[1].rates)
+# # print(test.spatialData[0].data[0][0])
+# test.convert_to_pickle("../gdag_test.pickle")
+# test.print_data_statistics()
 loadedDict = pickle.load(open("../gdag_test.pickle","rb"))
 testDataConverted = GiuseppeSurrogateGraphData()
 testDataConverted.delaunay_edges_and_data(loadedDict)
