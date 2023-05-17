@@ -10,8 +10,9 @@ import os
 import pickle
 import torch 
 import torch.nn.functional as F
+import torch.nn as nn
 from torch_geometric.nn import GCNConv
-from torch_geometric.data import Data
+from torch_geometric.data import Data, Dataset
 from scipy import spatial
 
 # each spatial object has 3 specific components
@@ -126,6 +127,7 @@ class GiuseppeSurrogateGraphData():
         self.n_features = 0 # feature dimension for node
         self.n_output = 0 # feature dimension for ouput node 
         self.length = 0
+        self.n_rates = 0
     # lattice is a WxHxF tensor where F is the feature dimension size
     # return a python list of nodes
     def convert_lattice_to_node(lattice):
@@ -176,6 +178,7 @@ class GiuseppeSurrogateGraphData():
             self.n_features = self.input_graphs[0].size()[1]
             self.n_output = self.output_graphs[0].size()[1]
             self.length = len(self.input_graphs) 
+            self.n_rates = self.rates[0].size()[0]
             
         if self.single_init: # what if we only need one of the initial conditions
             self.input_graphs = self.input_graphs[0]
@@ -199,7 +202,66 @@ class GCN(torch.nn.Module):
         x = F.dropout(x, p=0.5, training=self.training)
         x = self.conv2(x, edge_index)
         return x
+    
+    
+class EncoderLayer(nn.Module):
+    def __init__(self, input_dim, hidden_dim, output_dim):
+        super(EncoderLayer, self).__init__()
+        self.linear1 = nn.Linear(input_dim, hidden_dim)
+        self.relu = nn.ReLU()
+        self.linear2 = nn.Linear(hidden_dim, output_dim)
 
+    def forward(self, x):
+        x = self.linear1(x)
+        x = self.relu(x)
+        x = self.linear2(x)
+        return x
+
+
+class GCNComplex(torch.nn.Module):
+    # default embedding size maybe, 64?
+    def __init__(self, n_features, n_classes, hidden_channels, n_rates, embedding_size=64):
+        super().__init__()
+        torch.manual_seed(1234567)
+        self.conv1 = GCNConv(n_features, hidden_channels)
+        self.conv2 = GCNConv(hidden_channels + hidden_channels, n_classes)
+        self.rates_encoder = EncoderLayer(n_rates, embedding_size, hidden_channels)
+
+    def forward(self, graph, edge_index, rates):
+        graph = self.conv1(graph, edge_index)
+        graph = graph.relu()
+        graph = F.dropout(graph, p=0.5, training=self.training)
+        rates_rep = self.rates_encoder(rates)
+        # concatenate both the graph and rates_representation and produce next
+        rates_rep = rates_rep.repeat(graph.size()[0]).reshape((graph.size()[0], rates_rep.size()[0]))
+        x = torch.cat((graph, rates_rep), dim=1)
+        
+        # convolve again and get the output u care about
+        x = self.conv2(x, edge_index)
+        return x
+
+def train_giuseppe_surrogate(data_obj : GiuseppeSurrogateGraphData, nEpochs = 30, single_init_cond = True):
+    model = GCNComplex(n_features=data_obj.n_features, n_classes=data_obj.n_output, hidden_channels=32, n_rates=data_obj.n_rates)
+    model.train()
+    model = model.double()
+    optimizer = torch.optim.AdamW(model.parameters())
+    criterion = torch.nn.MSELoss()
+    for epoch in range(nEpochs):
+        loss_per_epoch = 0
+        for graph in range(data_obj.length):
+            
+            input_graph = data_obj.input_graphs
+            if not single_init_cond:
+                input_graph = data_obj.input_graphs[graph]
+            out = model(input_graph, data_obj.edges, data_obj.rates[graph])
+            loss = criterion(out, data_obj.output_graphs[graph])
+            loss.backward()
+            loss_per_epoch+=loss
+            optimizer.step()
+            
+        if epoch % 10 == 0:
+            print("Epoch:", epoch, " Loss:", loss_per_epoch)   
+    return model     
 
 def train_gnn(data_obj : GiuseppeSurrogateGraphData, nEpochs = 30, single_init_cond = True):
     model = GCN(n_features=data_obj.n_features, n_classes=data_obj.n_output, hidden_channels=32)
@@ -220,12 +282,13 @@ def train_gnn(data_obj : GiuseppeSurrogateGraphData, nEpochs = 30, single_init_c
             loss_per_epoch+=loss
             optimizer.step()
             
-        print("Epoch:", epoch, " Loss:", loss_per_epoch)   
+        if epoch % 10 == 0:
+            print("Epoch:", epoch, " Loss:", loss_per_epoch)   
     return model     
         
 
 parent_data_dir = "../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/"
-# parent_data_dir = "data/spatial/"
+parent_data_dir = "data/spatial/"
 
 test = GiuseppeSpatialDataProcessor(parent_data_dir)
 # print(test.spatialData[0].rates)
@@ -236,8 +299,8 @@ test.print_data_statistics()
 loadedDict = pickle.load(open("../gdag_test.pickle","rb"))
 testDataConverted = GiuseppeSurrogateGraphData()
 testDataConverted.delaunay_edges_and_data(loadedDict)
-model = train_gnn(testDataConverted)
-
+# model = train_gnn(testDataConverted)
+model1 = train_giuseppe_surrogate(testDataConverted, nEpochs=50)
 
 
 
