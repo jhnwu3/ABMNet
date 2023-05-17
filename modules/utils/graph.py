@@ -1,7 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy 
-
+import networkx as nx
+from torch_geometric.data import Data, Dataset
+from torch_geometric.utils import to_networkx
 def convert_dataset_output_to_numpy(dataset):
     npy = []
     for ex in range(len(dataset)):
@@ -105,4 +107,20 @@ def plot_scatter(true, predictions, output='data/graphs/out', nSpecies=None):
     axes.legend(loc='upper right')
     plt.savefig(output + '_scatter.png')  
 
-        
+def visualize_graph(G, color, path="data/spatial/graph.png"):
+    plt.figure(figsize=(7,7))
+    plt.xticks([])
+    plt.yticks([])
+    nx.draw_networkx(G, pos=nx.spring_layout(G, seed=42), with_labels=False,
+                    node_color=color, cmap="Set2")
+    plt.savefig("data/spatial/test.png")
+    # plt.show()
+
+# graph is a tensor array of where each row are nodes
+# edges
+#Pixel, Cytotoxic CD8+ T Cells, Cancer, Exhausted CD8+ T Cells, Dead Cancer Cells, Ignore, Ignore, TAMs, Ignore
+def plot_giuseppe_graph(graph, edges, path=""):
+    data = Data(x=graph, edge_index=edges)
+    networkG = to_networkx(data, to_undirected=True) 
+    print(data.x.size())
+    visualize_graph(networkG, color = data.x[:,1], path=path) # get the cancer cells.  

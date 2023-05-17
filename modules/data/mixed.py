@@ -3,7 +3,7 @@ import torch as tc
 import pandas as pd
 import numpy as np
 from torch.utils.data import Dataset, DataLoader
-from gmm import *
+from modules.utils.gmm import *
 
 
 class ABMDataset(Dataset):

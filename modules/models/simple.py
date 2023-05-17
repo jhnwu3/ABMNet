@@ -3,7 +3,7 @@ from torch import nn
 from torch.nn import functional as F
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
-from abm import *
+from modules.data.mixed import *
 import torch.optim as optim
 import numpy as np 
 import matplotlib.pyplot as plt
