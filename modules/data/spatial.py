@@ -167,7 +167,7 @@ class GiuseppeSurrogateGraphData():
                 self.output_graphs.append(GiuseppeSurrogateGraphData.convert_lattice_to_node(final_lattice))
             self.n_features = self.input_graphs[0].size()[1]
             self.n_output = self.output_graphs[0].size()[1]
-            self.length = len(self.input_graphs) 
+            self.length = len(self.output_graphs) 
             self.n_rates = self.rates[0].size()[0]
             
         if self.single_init: # what if we only need one of the initial conditions
@@ -183,5 +183,9 @@ class GiuseppeSurrogateGraphData():
         dictionary["input_graphs"] = self.input_graphs # for now every graph looks the same
         dictionary["output_graphs"] = self.output_graphs
         dictionary["edges"] = self.edges
+        dictionary["n_features"] = self.n_features
+        dictionary["n_outputs"] = self.n_output
+        dictionary["n_rates"] = self.n_rates
+        dictionary["n"] = self.length
         with open(path, 'wb') as handle:
             pickle.dump(dictionary, handle, protocol=pickle.HIGHEST_PROTOCOL)
