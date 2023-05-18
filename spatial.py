@@ -25,7 +25,7 @@ testDataConverted.delaunay_edges_and_data(loadedDict)
 # model = train_gnn(testDataConverted)
 model1 = train_giuseppe_surrogate(testDataConverted, nEpochs=50)
 #
-plot_giuseppe_graph(testDataConverted.input_graphs, testDataConverted.edges,path="data/spatial/input_graph.png")
+plot_giuseppe_graph(testDataConverted.input_graphs, testDataConverted.edges, path="data/spatial/input_graph.png")
 # TODO: Look at the actual graph plot of the input data you've read in
 # Sanity Check #1: Write code to look at the data representation, and cross check with Giuseppe if they look right.
 # Sanity Check #2: look at graph

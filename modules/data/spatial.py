@@ -178,3 +178,10 @@ class GiuseppeSurrogateGraphData():
     # to do fileIO for now. 
     def save(self, path):
         print("Saving Graph Data to PKL")
+        dictionary = {} # every key will be the set of rate constants and every value is a list of 30 tuples of (in, out)
+        dictionary["rates"] = self.rates
+        dictionary["input_graphs"] = self.input_graphs # for now every graph looks the same
+        dictionary["output_graphs"] = self.output_graphs
+        dictionary["edges"] = self.edges
+        with open(path, 'wb') as handle:
+            pickle.dump(dictionary, handle, protocol=pickle.HIGHEST_PROTOCOL)
