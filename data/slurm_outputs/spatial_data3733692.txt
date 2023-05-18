@@ -1,0 +1,8 @@
+Saving Graph Data to PKL
+Job Statistics for 3733692:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3733692   rsjxw007 2023-05-18T12:39:16 2023-05-18T12:54:22   00:15:06             20:39.080  COMPLETED  0:0   r1pl-hpcf-n21     billing=20,cpu=20,mem=204800M,node=1 
+   3733692.batch            2023-05-18T12:39:16 2023-05-18T12:54:22   00:15:06 132205.50M  20:39.077  COMPLETED  0:0   r1pl-hpcf-n21                                          
+  3733692.extern            2023-05-18T12:39:16 2023-05-18T12:54:22   00:15:06          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-n21                                          
+CPU Efficiency: 6.84% of 05:02:00 core-walltime
