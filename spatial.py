@@ -18,7 +18,7 @@ from modules.data.spatial import *
 from modules.models.spatial import *
 
 loaded_data = pickle.load(open("../gdag_data/gdag_graph_data.pickle", "rb"))
-
+model = train_giuseppe_surrogate_pkl(loaded_data, nEpochs=20)
 
 
 
