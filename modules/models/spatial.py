@@ -111,3 +111,28 @@ def train_gnn(data_obj : GiuseppeSurrogateGraphData, nEpochs = 30, single_init_c
             print("Epoch:", epoch, " Loss:", loss_per_epoch)   
             
     return model     
+
+
+def train_giuseppe_surrogate_pkl(data : dict, nEpochs = 30, single_init_cond = True):
+    model = GCN(n_features=data["n_features"], n_classes=data["n_outputs"], hidden_channels=32)
+    model.train()
+    model = model.double()
+    optimizer = torch.optim.AdamW(model.parameters())
+    criterion = torch.nn.MSELoss()
+    for epoch in range(nEpochs):
+        loss_per_epoch = 0
+        for graph in range(data["n"]):
+            
+            input_graph = data["input_graphs"]
+            if not single_init_cond:
+                input_graph = data["input_graphs"][graph]
+            out = model(input_graph, data["edges"])
+            loss = criterion(out, data["output_graphs"][graph])
+            loss.backward()
+            loss_per_epoch+=loss
+            optimizer.step()
+            
+        if epoch % 10 == 0:
+            print("Epoch:", epoch, " Loss:", loss_per_epoch)   
+            
+    return model     
