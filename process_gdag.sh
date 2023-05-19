@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --time=0-2:10:00 
 #SBATCH --job-name=ABMNet_GPU
-#SBATCH --partition=general
+#SBATCH --partition=general,das,himem
 #SBATCH --nodes=1
 #SBATCH --output=./data/slurm_outputs/spatial_data%j.txt
 #SBATCH --cpus-per-task=30
