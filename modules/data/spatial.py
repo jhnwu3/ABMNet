@@ -2,6 +2,7 @@ import os
 import pickle
 import torch 
 import numpy as np
+from torch.utils.data import DataLoader, IterableDataset
 from scipy import spatial
 
 
@@ -189,5 +190,47 @@ class GiuseppeSurrogateGraphData():
         dictionary["n"] = self.length
         with open(path, 'wb') as handle:
             pickle.dump(dictionary, handle, protocol=pickle.HIGHEST_PROTOCOL)
-            
     
+    def create_directory(directory):
+        if not os.path.exists(directory):
+            os.makedirs(directory)        
+            
+    def chunk_pkl(pkl_dict, parent_directory):
+        # create directory structure 
+        GiuseppeSurrogateGraphData.create_directory(parent_directory)
+        
+        # create subdirectories that categorize input, outputs, and rates, etc.
+        rates_dir = os.path.join(parent_directory, "rates")
+        input_graphs_dir = os.path.join(parent_directory, "input_graphs")
+        output_graphs_dir = os.path.join(parent_directory, "output_graphs")
+        edges_file = os.path.join(parent_directory, "edges.pt")
+        metadata_file = os.path.join(parent_directory, "metadata.pickle")
+        
+        GiuseppeSurrogateGraphData.create_directory(rates_dir)
+        GiuseppeSurrogateGraphData.create_directory(input_graphs_dir)
+        GiuseppeSurrogateGraphData.create_directory(output_graphs_dir)
+        torch.save(pkl_dict["edges"], edges_file)
+        
+        metadata = {}
+        metadata["n_features"] = pkl_dict["n_features"]
+        metadata["n_outputs"] = pkl_dict["n_outputs"]
+        metadata["n_rates"] = pkl_dict["n_rates"]
+        metadata["n"] = pkl_dict["n"]
+        
+        with open(metadata_file, 'wb') as handle:
+            pickle.dump(metadata, handle, protocol=pickle.HIGHEST_PROTOCOL)
+            
+        # now put each rate and graph with its respective name into its respective directory location, all indexed 
+        for i in range(len(pkl_dict["rates"])):
+            file = os.path.join(rates_dir, "rates" + str(i) + ".pt")
+            torch.save(pkl_dict["rates"][i], file)
+        
+        for i in range(len(pkl_dict["input_graphs"])):
+            file = os.path.join(input_graphs_dir, "graph" + str(i) + ".pt")
+            torch.save(pkl_dict["input_graphs"][i], file)
+            
+        for i in range(len(pkl_dict["output_graphs"])):
+            file = os.path.join(output_graphs_dir, "graph" + str(i) + ".pt") 
+            torch.save(pkl_dict["output_graphs"][i], file)  
+        
+

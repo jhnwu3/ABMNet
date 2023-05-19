@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --time=0-2:10:00 
-#SBATCH --job-name=ABMNet_GPU
+#SBATCH --job-name=SpatialABMNet
 #SBATCH --partition=general,das,himem
 #SBATCH --nodes=1
 #SBATCH --output=./data/slurm_outputs/spatial_data%j.txt
