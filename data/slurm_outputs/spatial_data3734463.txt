@@ -1,0 +1,7 @@
+Job Statistics for 3734463:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3734463   rsjxw007 2023-05-19T10:42:47 2023-05-19T10:43:49   00:01:02             00:50.166  COMPLETED  0:0   r1pl-hpcf-n21     billing=20,cpu=20,mem=204800M,node=1 
+   3734463.batch            2023-05-19T10:42:47 2023-05-19T10:43:49   00:01:02  56973.61M  00:50.163  COMPLETED  0:0   r1pl-hpcf-n21                                          
+  3734463.extern            2023-05-19T10:42:47 2023-05-19T10:43:49   00:01:02          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-n21                                          
+CPU Efficiency: 4.03% of 00:20:40 core-walltime
