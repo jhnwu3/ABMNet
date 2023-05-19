@@ -126,6 +126,4 @@ def train_giuseppe_surrogate_pkl(data : dict, nEpochs = 30, single_init_cond = T
             
         if epoch % 1 == 0:
             print("Epoch:", epoch, " Loss:", loss_per_epoch)   
-            process = psutil.Process()
-            print(process.memory_info().rss)  # in bytes 
     return model     
