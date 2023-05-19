@@ -17,10 +17,16 @@ from modules.utils.graph import *
 from modules.data.spatial import *
 from modules.models.spatial import *
 
-loadedDict = pickle.load(open("../gdag_test_full.pickle","rb"))
-testDataConverted = GiuseppeSurrogateGraphData()
-testDataConverted.delaunay_edges_and_data(loadedDict)
-testDataConverted.save("../gdag_graph_data.pickle")
+loaded_data = pickle.load(open("../gdag_data/gdag_graph_data.pickle", "rb"))
+
+
+
+
+
+# loadedDict = pickle.load(open("../gdag_test_full.pickle","rb"))
+# testDataConverted = GiuseppeSurrogateGraphData()
+# testDataConverted.delaunay_edges_and_data(loadedDict)
+# testDataConverted.save("../gdag_graph_data.pickle")
 # plot_giuseppe_graph(testDataConverted.input_graphs, testDataConverted.edges)
 
 # model = train_gnn(testDataConverted)
