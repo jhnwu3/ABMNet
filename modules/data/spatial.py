@@ -57,14 +57,14 @@ class SpatialObj():
         
     #Pixel, Cytotoxic CD8+ T Cells, Cancer, Exhausted CD8+ T Cells, Dead Cancer Cells, Ignore, Ignore, TAMs, Ignore
     #  matrix[x,y,feature]
-    def translate_to_img(matrix, width=100, features=9):
+    def translate_to_img(matrix, width=100, features=9, offset=1):
         # convert indices in far left column to 
         # get some tensor feature
         organized = np.zeros((width, width, features))
         for i in range(matrix.shape[0]):
             column = (i+1) % width
             row = int((i) / width)
-            organized[row,column] = matrix[i,1:]
+            organized[row,column] = matrix[i,offset:]
         
         return organized
         

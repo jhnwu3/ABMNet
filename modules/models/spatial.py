@@ -1,12 +1,4 @@
-import matplotlib.pyplot as plt
-import matplotlib as mpl
-import numpy as np
-import pandas as pd
-from pathlib import Path
-from textwrap import wrap
-import sys
-import os
-import pickle
+import os, psutil
 import torch 
 import torch.nn.functional as F
 import torch.nn as nn
@@ -132,7 +124,8 @@ def train_giuseppe_surrogate_pkl(data : dict, nEpochs = 30, single_init_cond = T
             loss_per_epoch+=loss
             optimizer.step()
             
-        if epoch % 10 == 0:
+        if epoch % 1 == 0:
             print("Epoch:", epoch, " Loss:", loss_per_epoch)   
-            
+            process = psutil.Process()
+            print(process.memory_info().rss)  # in bytes 
     return model     

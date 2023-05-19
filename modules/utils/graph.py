@@ -4,6 +4,7 @@ import scipy
 import networkx as nx
 from torch_geometric.data import Data, Dataset
 from torch_geometric.utils import to_networkx
+from modules.data.spatial import SpatialObj
 def convert_dataset_output_to_numpy(dataset):
     npy = []
     for ex in range(len(dataset)):
@@ -113,14 +114,39 @@ def visualize_graph(G, color, path="data/spatial/graph.png"):
     plt.yticks([])
     nx.draw_networkx(G, pos=nx.spring_layout(G, seed=42), with_labels=False,
                     node_color=color, cmap="Set2")
-    plt.savefig("data/spatial/test.png")
+    plt.savefig(path)
     # plt.show()
 
 # graph is a tensor array of where each row are nodes
 # edges
 #Pixel, Cytotoxic CD8+ T Cells, Cancer, Exhausted CD8+ T Cells, Dead Cancer Cells, Ignore, Ignore, TAMs, Ignore
-def plot_giuseppe_graph(graph, edges, path=""):
+def plot_giuseppe_graphs(graph, edges, path=""):
     data = Data(x=graph, edge_index=edges)
     networkG = to_networkx(data, to_undirected=True) 
     print(data.x.size())
-    visualize_graph(networkG, color = data.x[:,1], path=path) # get the cancer cells.  
+    for i in range(data.x.size()[1]):
+        visualize_graph(networkG, color = data.x[:,i], path=path + str(i) + ".png") # get the cancer cells.  
+    
+    
+
+def plot_graph_to_img(graph, path =""):
+    data = graph.numpy()
+    img = SpatialObj.translate_to_img(data, width=np.sqrt(data.shape[0]), offset=0)
+    plt.figure()
+    
+    nCols = 4
+    nOut = img.shape[2]
+    nRows = int(nOut / nCols)
+    if nOut % nCols != 0:
+        nRows+=1
+
+    f, axs = plt.subplots(nrows=nRows, ncols=nCols, figsize=(20,20))
+    channel = 0
+    
+    for r in range(nRows):
+        for c in range(nCols):
+            axs[r,c].imshow(img[:,:,channel])
+            channel+=1
+            
+    plt.savefig(path)        
+    
