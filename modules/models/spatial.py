@@ -106,7 +106,7 @@ def train_gnn(data_obj : GiuseppeSurrogateGraphData, nEpochs = 30, single_init_c
 
 
 def train_giuseppe_surrogate_pkl(data : dict, nEpochs = 30, single_init_cond = True):
-    model = GCN(n_features=data["n_features"], n_classes=data["n_outputs"], hidden_channels=32)
+    model = GCNComplex(n_features=data["n_features"], n_classes=data["n_outputs"], n_rates=data["n_rates"],hidden_channels=32)
     model.train()
     model = model.double()
     optimizer = torch.optim.AdamW(model.parameters())
@@ -118,7 +118,7 @@ def train_giuseppe_surrogate_pkl(data : dict, nEpochs = 30, single_init_cond = T
             input_graph = data["input_graphs"]
             if not single_init_cond:
                 input_graph = data["input_graphs"][graph]
-            out = model(input_graph, data["edges"])
+            out = model(input_graph, data["edges"], data["rates"][graph])
             loss = criterion(out, data["output_graphs"][graph])
             loss.backward()
             loss_per_epoch+=loss

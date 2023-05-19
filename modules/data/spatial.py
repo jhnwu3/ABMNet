@@ -189,3 +189,5 @@ class GiuseppeSurrogateGraphData():
         dictionary["n"] = self.length
         with open(path, 'wb') as handle:
             pickle.dump(dictionary, handle, protocol=pickle.HIGHEST_PROTOCOL)
+            
+    
