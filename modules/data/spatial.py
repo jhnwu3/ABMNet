@@ -225,29 +225,31 @@ class GiuseppeSurrogateGraphData():
         chunk_indices = [i for i in range(0, metadata["n"], int(metadata["n"]/3))]
         for i in range(len(chunk_indices)):
             file = os.path.join(rates_dir, "rates" + str(chunk_indices[i]) + ".pt")
-            if i < len(chunk_indices) - 1:
-                torch.save(pkl_dict["rates"][chunk_indices[i]:chunk_indices[i+1]], file)
-            else: 
-                torch.save(pkl_dict["rates"][chunk_indices[i]:], file)
+            with open(file, 'wb') as handle:
+                if i < len(chunk_indices) - 1:
+                    pickle.dump(pkl_dict["rates"][chunk_indices[i]:chunk_indices[i+1]], handle, protocol=pickle.HIGHEST_PROTOCOL)
+                else: 
+                    pickle.dump(pkl_dict["rates"][chunk_indices[i]:], handle, protocol=pickle.HIGHEST_PROTOCOL)
         
         # check if just one graph in there or many to create the big chonkers
         if isinstance(pkl_dict["input_graphs"], list):
             for i in range(len(chunk_indices)):
                 file = os.path.join(input_graphs_dir, "graph" + str(chunk_indices[i]) + ".pt")
-                if i < len(chunk_indices) - 1:
-                    torch.save(pkl_dict["input_graphs"][chunk_indices[i]:chunk_indices[i+1]], file)
-                else: 
-                    torch.save(pkl_dict["input_graphs"][chunk_indices[i]:], file)
+                with open(file, 'wb') as handle:
+                    if i < len(chunk_indices) - 1:
+                        pickle.dump(pkl_dict["input_graphs"][chunk_indices[i]:chunk_indices[i+1]], handle, protocol=pickle.HIGHEST_PROTOCOL)
+                    else: 
+                        pickle.dump(pkl_dict["input_graphs"][chunk_indices[i]:], handle, protocol=pickle.HIGHEST_PROTOCOL)
         else:
             file = os.path.join(input_graphs_dir, "graph.pt")
             torch.save(pkl_dict["input_graphs"], file)
             
-            
         for i in range(len(chunk_indices)):
             file = os.path.join(output_graphs_dir, "graph" + str(chunk_indices[i]) + ".pt")
-            if i < len(chunk_indices) - 1:
-                torch.save(pkl_dict["output_graphs"][chunk_indices[i]:chunk_indices[i+1]], file)
-            else: 
-                torch.save(pkl_dict["output_graphs"][chunk_indices[i]:], file) 
+            with open(file, 'wb') as handle:
+                if i < len(chunk_indices) - 1:
+                    pickle.dump(pkl_dict["output_graphs"][chunk_indices[i]:chunk_indices[i+1]], handle, protocol=pickle.HIGHEST_PROTOCOL)
+                else: 
+                    pickle.dump(pkl_dict["output_graphs"][chunk_indices[i]:], handle, protocol=pickle.HIGHEST_PROTOCOL)
         
 
