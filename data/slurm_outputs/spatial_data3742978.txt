@@ -1,0 +1,8 @@
+slurmstepd: error: *** JOB 3742978 ON r1pl-hpcf-n21 CANCELLED AT 2023-05-22T13:29:01 DUE TO TIME LIMIT ***
+Job Statistics for 3742978:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3742978   rsjxw007 2023-05-22T11:18:40 2023-05-22T13:29:01   02:10:21            2-20:05:11    TIMEOUT  0:0   r1pl-hpcf-n21     billing=32,cpu=32,mem=238560M,node=1 
+   3742978.batch            2023-05-22T11:18:40 2023-05-22T13:29:02   02:10:22  19455.61M 2-20:05:11  CANCELLED 0:15   r1pl-hpcf-n21                                          
+  3742978.extern            2023-05-22T11:18:40 2023-05-22T13:29:01   02:10:21          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-n21                                          
+CPU Efficiency: 97.94% of 2-21:31:12 core-walltime
