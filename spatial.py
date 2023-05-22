@@ -44,7 +44,7 @@ model = model.double()
 optimizer = torch.optim.AdamW(model.parameters())
 criterion = torch.nn.MSELoss()
 plot_graph_to_img(input_graph, path="test.png")
-plot_graph_to_img(input_graph, path="test_first_output.png")
+plot_graph_to_img(output_graphs_chunk[0], path="test_first_output.png")
 
 device = ""
 if torch.cuda.is_available():
