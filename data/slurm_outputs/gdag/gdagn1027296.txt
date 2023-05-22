@@ -1,0 +1,33 @@
+Normalization to Input Parameters Applied
+New Average Input Value: [-2.84321151e-14  5.61505994e-15  9.40777648e-15 -6.70749254e-15]
+New Std Input Value: [1. 1. 1. 1.]
+max: 1.5493142544695466
+Length of Training: 1058
+Length of Test: 265
+Input Dimension: 4
+Output Dimension: 3
+Depth of FFNN (# Hidden): 6
+input 4
+hidden 128
+Using GPU: True
+'Finished epoch 0 with loss 1940445813.7163632 in time 3.6591122150421143'
+'Finished epoch 10 with loss 115551266.93141314 in time 49.63909316062927'
+'Finished epoch 20 with loss 87794221.36008832 in time 49.71739602088928'
+'Finished epoch 30 with loss 73695068.14030193 in time 49.6981201171875'
+'Finished epoch 40 with loss 67148038.50709423 in time 49.69425320625305'
+'Finished epoch 50 with loss 61142580.128873706 in time 49.720916509628296'
+'Finished epoch 60 with loss 54549639.06112586 in time 49.71249341964722'
+'Finished epoch 70 with loss 55429262.75826317 in time 49.694671392440796'
+'Finished epoch 80 with loss 51223518.08178374 in time 49.716541051864624'
+'Finished epoch 90 with loss 50021419.17658948 in time 49.7146692276001'
+'Finished epoch 100 with loss 48463717.72070491 in time 49.7202684879303'
+'Finished epoch 110 with loss 49114130.744947314 in time 49.70000386238098'
+Using GPU: True
+Final Average MSE On Test Dataset: 64724.099363334055 , Time For Inference: 0.3016166687011719
+Job Statistics for 1027296:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         1027296   rsjxw007 2023-01-29T19:05:52 2023-01-29T19:16:10   00:10:18             10:14.240  COMPLETED  0:0   r1pl-hpcf-g03 billing=2,cpu=2,gres/gpu=1,mem=15624M,n+ 
+   1027296.batch            2023-01-29T19:05:52 2023-01-29T19:16:10   00:10:18   3904.33M  10:14.237  COMPLETED  0:0   r1pl-hpcf-g03                                          
+  1027296.extern            2023-01-29T19:05:52 2023-01-29T19:16:10   00:10:18          0  00:00.002  COMPLETED  0:0   r1pl-hpcf-g03                                          
+CPU Efficiency: 49.68% of 00:20:36 core-walltime

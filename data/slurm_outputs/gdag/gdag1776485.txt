@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "main.py", line 76, in <module>
+    abm_dataset = ABMDataset(csv_file, root_dir="data/", standardize=normalize, norm_out=normalize_out)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/ABM.py", line 11, in __init__
+    self.dframe = pd.read_csv(csv_file)
+  File "/home/gddaslab/rsjxw007/software/virtual_envs/python-3.6.8/lib64/python3.6/site-packages/pandas/io/parsers.py", line 688, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/gddaslab/rsjxw007/software/virtual_envs/python-3.6.8/lib64/python3.6/site-packages/pandas/io/parsers.py", line 454, in _read
+    parser = TextFileReader(fp_or_buf, **kwds)
+  File "/home/gddaslab/rsjxw007/software/virtual_envs/python-3.6.8/lib64/python3.6/site-packages/pandas/io/parsers.py", line 948, in __init__
+    self._make_engine(self.engine)
+  File "/home/gddaslab/rsjxw007/software/virtual_envs/python-3.6.8/lib64/python3.6/site-packages/pandas/io/parsers.py", line 1180, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/home/gddaslab/rsjxw007/software/virtual_envs/python-3.6.8/lib64/python3.6/site-packages/pandas/io/parsers.py", line 2010, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas/_libs/parsers.pyx", line 382, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 674, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: [Errno 2] No such file or directory: 'data/gdag_1300ss_covs.csv'
+Job Statistics for 1776485:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         1776485   rsjxw007 2023-02-28T18:24:34 2023-02-28T18:24:37   00:00:03             00:03.667     FAILED  1:0   r1pl-hpcf-g04 billing=5,cpu=5,gres/gpu=1,mem=37275M,n+ 
+   1776485.batch            2023-02-28T18:24:34 2023-02-28T18:24:37   00:00:03          0  00:03.664     FAILED  1:0   r1pl-hpcf-g04                                          
+  1776485.extern            2023-02-28T18:24:34 2023-02-28T18:24:37   00:00:03          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 26.67% of 00:00:15 core-walltime

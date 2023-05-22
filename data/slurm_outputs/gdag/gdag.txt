@@ -1,0 +1,31 @@
+Normalization of Outputs
+New Max: 1.0
+New Min: 0.0
+Dataset: data/gdag_1300ss_covs.csv
+Length of Training: 1058
+Length of Test: 265
+Input Dimension: 4
+Output Dimension: 6
+Model Type: -1
+----- Hyperparameters used for final training -----
+Depth of NN: 6
+Hidden Neurons: 64
+# Epochs Used: 50
+Using GPU: True
+'Finished epoch 0 with loss 97.90880569578738 in time 3.831652879714966'
+'Finished epoch 10 with loss 85.39356613442521 in time 45.562774896621704'
+'Finished epoch 20 with loss 16.01690619350434 in time 45.6516752243042'
+'Finished epoch 30 with loss 13.519073553715772 in time 45.672425508499146'
+'Finished epoch 40 with loss 12.55882901615957 in time 45.54058051109314'
+Using GPU: True
+Final Average MSE On Test Dataset: 0.020433560545339954 , Time For Inference: 0.27733755111694336
+Unnormalized Max: 308425.6368
+Unnormalized Min: -3061420.225
+Final Average Unnormalized MSE: 1081899525.0984871
+Job Statistics for 1593598:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         1593598   rsjxw007 2023-02-21T12:01:50 2023-02-21T12:05:50   00:04:00             03:58.178  COMPLETED  0:0   r1pl-hpcf-g03 billing=5,cpu=5,gres/gpu=1,mem=39060M,n+ 
+   1593598.batch            2023-02-21T12:01:50 2023-02-21T12:05:50   00:04:00   3920.91M  03:58.174  COMPLETED  0:0   r1pl-hpcf-g03                                          
+  1593598.extern            2023-02-21T12:01:50 2023-02-21T12:05:50   00:04:00          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g03                                          
+CPU Efficiency: 19.83% of 00:20:00 core-walltime

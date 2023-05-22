@@ -1,0 +1,61 @@
+Dataset: data/static/l3p_t1.csv
+Length of Training: 2500
+Length of Test: 625
+Input Dimension: 5
+Output Dimension: 9
+Model Type: -1
+----- Hyperparameters used for final training -----
+Depth of NN: 4
+Hidden Neurons: 64
+# Epochs Used: 50
+Using GPU: True
+'Finished epoch 0 with loss 810585.4178420114 in time 9.150039911270142'
+'Finished epoch 10 with loss 19609.487565615902 in time 80.4618706703186'
+'Finished epoch 20 with loss 14681.387654600285 in time 81.47842311859131'
+'Finished epoch 30 with loss 13706.887267053431 in time 81.50554656982422'
+'Finished epoch 40 with loss 13017.69475360069 in time 81.47657060623169'
+Using GPU: True
+Final Average MSE On Test Dataset: 5.365783000573709 , Time For Inference: 0.6094658374786377
+Dataset: data/static/l3p_t2.csv
+Length of Training: 2500
+Length of Test: 625
+Input Dimension: 5
+Output Dimension: 9
+Model Type: -1
+----- Hyperparameters used for final training -----
+Depth of NN: 4
+Hidden Neurons: 64
+# Epochs Used: 50
+Using GPU: True
+'Finished epoch 0 with loss 1036504.8979851715 in time 7.277756214141846'
+'Finished epoch 10 with loss 23143.39108677134 in time 79.39518308639526'
+'Finished epoch 20 with loss 20504.377670794107 in time 79.34528112411499'
+'Finished epoch 30 with loss 15835.366919514545 in time 79.30090475082397'
+'Finished epoch 40 with loss 16606.302317776444 in time 79.32254099845886'
+Using GPU: True
+Final Average MSE On Test Dataset: 5.963094244206804 , Time For Inference: 0.6089797019958496
+Dataset: data/static/l3p_t3.csv
+Length of Training: 2500
+Length of Test: 625
+Input Dimension: 5
+Output Dimension: 9
+Model Type: -1
+----- Hyperparameters used for final training -----
+Depth of NN: 4
+Hidden Neurons: 64
+# Epochs Used: 50
+Using GPU: True
+'Finished epoch 0 with loss 1114769.9625646414 in time 7.198697090148926'
+'Finished epoch 10 with loss 26023.81645248333 in time 77.42746233940125'
+'Finished epoch 20 with loss 20981.264474685733 in time 77.57209825515747'
+'Finished epoch 30 with loss 19266.817702408665 in time 77.29095482826233'
+'Finished epoch 40 with loss 18051.42120064473 in time 77.3826036453247'
+Using GPU: True
+Final Average MSE On Test Dataset: 7.464447553789418 , Time For Inference: 0.5751988887786865
+Job Statistics for 1776481:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         1776481   rsjxw007 2023-02-28T17:09:03 2023-02-28T17:29:34   00:20:31             20:16.792  COMPLETED  0:0   r1pl-hpcf-g04 billing=5,cpu=5,gres/gpu=1,mem=37275M,n+ 
+   1776481.batch            2023-02-28T17:09:03 2023-02-28T17:29:34   00:20:31   3972.04M  20:16.789  COMPLETED  0:0   r1pl-hpcf-g04                                          
+  1776481.extern            2023-02-28T17:09:03 2023-02-28T17:29:34   00:20:31          0  00:00.002  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 19.77% of 01:42:35 core-walltime

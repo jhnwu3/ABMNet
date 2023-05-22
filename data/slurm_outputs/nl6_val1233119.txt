@@ -1,8 +1,0 @@
-slurmstepd: error: *** JOB 1233119 ON r1pl-hpcf-g04 CANCELLED AT 2023-02-18T07:56:02 DUE TO TIME LIMIT ***
-Job Statistics for 1233119:
-           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
----------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
-         1233119   rsjxw007 2023-02-15T19:45:40 2023-02-18T07:56:02 2-12:10:22            2-11:52:25    TIMEOUT  0:0   r1pl-hpcf-g04 billing=5,cpu=5,gres/gpu=1,mem=39060M,n+ 
-   1233119.batch            2023-02-15T19:45:40 2023-02-18T07:56:03 2-12:10:23   4010.96M 2-11:52:25  CANCELLED 0:15   r1pl-hpcf-g04                                          
-  1233119.extern            2023-02-15T19:45:40 2023-02-18T07:56:02 2-12:10:22          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
-CPU Efficiency: 19.90% of 12-12:51:50 core-walltime

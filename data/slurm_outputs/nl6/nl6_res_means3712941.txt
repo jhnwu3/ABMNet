@@ -1,0 +1,154 @@
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.04_0.04_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.03_0.03_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.04_0.05_0.06_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.035_0.035_0.045_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.045_0.05_0.045_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.03_0.045_0.035_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.045_0.055_0.03_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.035_0.035_0.05_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.05_0.03_0.06_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.06_0.045_0.055_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.03_0.05_0.03_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.03_0.025_0.05_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.06_0.06_0.05_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.035_0.035_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.03_0.05_0.05_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.06_0.06_0.06_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.045_0.03_0.055_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.03_0.05_0.055_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.06_0.025_0.03_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.06_0.03_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.03_0.025_0.045_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.045_0.025_0.05_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.04_0.035_0.055_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.04_0.03_0.055_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.045_0.045_0.035_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.05_0.06_0.055_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.04_0.03_0.04_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.055_0.03_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.025_0.055_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.03_0.055_0.04_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.035_0.035_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.045_0.035_0.045_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.055_0.055_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.05_0.045_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.045_0.035_0.03_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.05_0.05_0.06_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.03_0.025_0.04_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.035_0.05_0.03_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.06_0.03_0.045_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.04_0.055_0.055_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.06_0.04_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.05_0.05_0.03_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.06_0.06_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.06_0.045_0.035_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.03_0.06_0.05_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.03_0.03_0.035_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.05_0.02_0.035_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.035_0.06_0.045_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.045_0.035_0.06_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.035_0.06_0.05_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.05_0.02_0.04_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.05_0.035_0.03_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.06_0.045_0.055_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.05_0.025_0.035_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.05_0.045_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.045_0.02_0.035_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.03_0.05_0.04_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.03_0.02_0.055_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.05_0.04_0.035_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.055_0.06_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.035_0.04_0.05_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.04_0.05_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.045_0.02_0.045_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.06_0.035_0.045_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.03_0.06_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.04_0.055_0.04_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.045_0.03_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.03_0.04_0.035_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.035_0.025_0.045_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.02_0.055_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.04_0.04_0.05_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.05_0.05_0.035_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.05_0.055_0.06_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.06_0.05_0.045_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.04_0.04_0.055_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.045_0.025_0.055_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.06_0.045_0.05_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.04_0.02_0.045_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.02_0.05_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.045_0.06_0.05_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.06_0.06_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.03_0.045_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.035_0.05_0.04_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.03_0.025_0.03_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.05_0.03_0.03_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.045_0.04_0.045_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.045_0.06_0.055_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.02_0.055_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.035_0.055_0.04_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.05_0.025_0.05_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.06_0.025_0.035_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.045_0.035_0.055_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.03_0.04_0.03_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.06_0.03_0.035_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.035_0.055_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.045_0.025_0.035_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.055_0.045_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.05_0.05_0.035_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.03_0.055_0.03_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.055_0.04_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.035_0.035_0.04_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.035_0.06_0.035_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.05_0.035_0.05_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.03_0.03_0.055_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.04_0.04_0.04_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.04_0.045_0.045_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.06_0.04_0.035_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.045_0.06_0.03_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.035_0.06_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.06_0.06_0.045_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.05_0.025_0.04_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.025_0.035_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.04_0.045_0.05_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.04_0.035_0.045_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.05_0.045_0.035_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.03_0.05_0.035_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.06_0.045_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.03_0.045_0.04_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.04_0.04_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.04_0.055_0.05_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.03_0.05_0.035_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.045_0.04_0.06_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.05_0.03_0.3
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/in.dump
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.055_0.035_0.055_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.03_0.055_0.03_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.03_0.03_0.05_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.04_0.025_0.03_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.06_0.06_0.055_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.035_0.035_0.055_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.035_0.05_0.04_0.1
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.04_0.02_0.05_0.03
+../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.05_0.02_0.055_0.1
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/spatial.py", line 148, in <module>
+    test = GiuseppeSpatialDataProcessor(parent_data_dir)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/spatial.py", line 88, in __init__
+    self.spatialData = GiuseppeSpatialDataProcessor.get_spatial_objs(path)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/spatial.py", line 96, in get_spatial_objs
+    obj = SpatialObj(dir)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/spatial.py", line 80, in __init__
+    self.data = SpatialObj.get_time_data(os.path.join(dirname,"06RD_responder/")) 
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/spatial.py", line 43, in get_time_data
+    dump_t = SpatialObj.process_dump_file(file_t)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/spatial.py", line 55, in process_dump_file
+    f = open(file, "r")
+FileNotFoundError: [Errno 2] No such file or directory: '../../share/Giuseppe_John/training_data_with_dump_files_ParamSweep_11-03-2023_30_samples/parameters_0.05_0.02_0.055_0.1/06RD_responder/sample19/dump.2D_model.1'
+Job Statistics for 3712941:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3712941   rsjxw007 2023-05-10T19:13:07 2023-05-10T19:18:19   00:05:12             04:45.327     FAILED  1:0   r1pl-hpcf-g04 billing=32,cpu=32,gres/gpu=1,mem=238560+ 
+   3712941.batch            2023-05-10T19:13:07 2023-05-10T19:18:19   00:05:12   5531.92M  04:45.323     FAILED  1:0   r1pl-hpcf-g04                                          
+  3712941.extern            2023-05-10T19:13:07 2023-05-10T19:18:19   00:05:12          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 2.85% of 02:46:24 core-walltime
