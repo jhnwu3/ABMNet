@@ -44,11 +44,11 @@ def train_profiled(input_graph, output_graphs_chunk, rates_chunk, edges, nEpochs
        
         for graph in range(len(output_graphs_chunk)):
             optimizer.zero_grad()
-            # out = model(input_graph, edges, rates_chunk[graph])
-            # loss = criterion(out, output_graphs_chunk[graph])
-            # loss.backward()
-            # loss_per_epoch+=loss
-            print(output_graphs_chunk[graph].size())
+            out = model(input_graph, edges, rates_chunk[graph])
+            loss = criterion(out, output_graphs_chunk[graph])
+            loss.backward()
+            loss_per_epoch+=loss
+            # print(output_graphs_chunk[graph].size())
             optimizer.step()
             # del loss
             # del out
