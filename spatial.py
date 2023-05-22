@@ -43,7 +43,7 @@ def train_profiled(input_graph, output_graphs_chunk, rates_chunk, nEpochs=2):
         loss_per_epoch = 0
        
         for graph in range(len(output_graphs_chunk)):
-            
+            optimizer.zero_grad()
             out = model(input_graph.to(device), edges.to(device), rates_chunk[graph].to(device))
             loss = criterion(out, output_graphs_chunk[graph].to(device))
             loss.backward()
