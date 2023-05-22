@@ -44,13 +44,13 @@ def train_profiled(input_graph, output_graphs_chunk, rates_chunk, edges, nEpochs
        
         for graph in range(len(output_graphs_chunk)):
             optimizer.zero_grad()
-            out = model(input_graph, edges, rates_chunk[graph])
-            loss = criterion(out, output_graphs_chunk[graph])
-            loss.backward()
-            loss_per_epoch+=loss
+            # out = model(input_graph, edges, rates_chunk[graph])
+            # loss = criterion(out, output_graphs_chunk[graph])
+            # loss.backward()
+            # loss_per_epoch+=loss
             optimizer.step()
-            del loss
-            del out
+            # del loss
+            # del out
             print("graph:", graph)
             print('Memory usage: %s (kb)', resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
         if epoch % 1 == 0:
