@@ -20,7 +20,7 @@ from modules.models.spatial import *
 
 # loaded_data = pickle.load(open("../gdag_data/gdag_graph_data.pickle", "rb"))
 # GiuseppeSurrogateGraphData.chunk_pkl(loaded_data, "../gdag_data/gdag_chunked")
-@profile
+# @profile
 def train_profiled(input_graph, output_graphs_chunk, rates_chunk, nEpochs=2):
     # for manual testing, load everything at once, and train
     model = GCNComplex(n_features=input_graph.size()[1], n_classes= output_graphs_chunk[0].size()[1], n_rates=rates_chunk[0].size()[0],hidden_channels=32)
@@ -41,7 +41,7 @@ def train_profiled(input_graph, output_graphs_chunk, rates_chunk, nEpochs=2):
         
     for epoch in range(nEpochs):
         loss_per_epoch = 0
-        print('Memory usage: %s (kb)', resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
+       
         for graph in range(len(output_graphs_chunk)):
             
             out = model(input_graph.to(device), edges.to(device), rates_chunk[graph].to(device))
@@ -49,7 +49,7 @@ def train_profiled(input_graph, output_graphs_chunk, rates_chunk, nEpochs=2):
             loss.backward()
             loss_per_epoch+=loss
             optimizer.step()
-            
+            print('Memory usage: %s (kb)', resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
         if epoch % 1 == 0:
             print("Epoch:", epoch, " Loss:", loss_per_epoch)   
 
@@ -70,7 +70,7 @@ rates_chunk = pickle.load(open(rates_chunk, "rb"))
 print(type(output_graphs_chunk))
 print(type(rates_chunk))
 print(len(rates_chunk))
-
+print(edges)
 plot_graph_to_img(input_graph, path="test.png")
 plot_graph_to_img(output_graphs_chunk[0], path="test_first_output.png")
 
