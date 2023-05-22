@@ -22,7 +22,7 @@ from modules.models.spatial import *
 
 data_directory = os.path.join("../gdag_data", "gdag_chunked")
 
-nEpochs = 50
+nEpochs = 2
 single_init_cond = True 
 input_graph = os.path.join(data_directory, "input_graphs", "graph.pt")
 output_graphs_chunk = os.path.join(data_directory, "output_graphs", "graph0.pickle")
