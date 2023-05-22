@@ -51,11 +51,11 @@ class GCNComplex(torch.nn.Module):
         rates_rep = self.rates_encoder(rates)
         # concatenate both the graph and rates_representation and produce next
         rates_rep = rates_rep.repeat(graph.size()[0]).reshape((graph.size()[0], rates_rep.size()[0]))
-        x = torch.cat((graph, rates_rep), dim=1)
+        graph = torch.cat((graph, rates_rep), dim=1)
         
         # convolve again and get the output u care about
-        x = self.conv2(x, edge_index)
-        return x
+        graph = self.conv2(graph, edge_index)
+        return graph
 
 def train_giuseppe_surrogate(data_obj : GiuseppeSurrogateGraphData, nEpochs = 30, single_init_cond = True):
     model = GCNComplex(n_features=data_obj.n_features, n_classes=data_obj.n_output, hidden_channels=32, n_rates=data_obj.n_rates)
