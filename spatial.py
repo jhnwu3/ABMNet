@@ -35,25 +35,26 @@ edges = torch.load(edges)
 rates_chunk = pickle.load(open(rates_chunk, "rb"))
 print(type(output_graphs_chunk))
 print(type(rates_chunk))
-exit(0)
-# # for manual testing, load everything at once, and train
-# model = GCNComplex(n_features=input_graph.size()[1], n_classes=, n_rates=data["n_rates"],hidden_channels=32)
-#     model.train()
-#     model = model.double()
-#     optimizer = torch.optim.AdamW(model.parameters())
-#     criterion = torch.nn.MSELoss()
-#     for epoch in range(nEpochs):
-#         loss_per_epoch = 0
-#         for graph in range(data["n"]):
-            
-#             out = model(input_graph, data["edges"], data["rates"][graph])
-#             loss = criterion(out, data["output_graphs"][graph])
-#             loss.backward()
-#             loss_per_epoch+=loss
-#             optimizer.step()
-            
-#         if epoch % 1 == 0:
-#             print("Epoch:", epoch, " Loss:", loss_per_epoch)   
+print(len(rates_chunk))
+# exit(0)
+# for manual testing, load everything at once, and train
+model = GCNComplex(n_features=input_graph.size()[1], n_classes= output_graphs_chunk[0].size()[1], n_rates=rates_chunk[0].size()[1],hidden_channels=32)
+model.train()
+model = model.double()
+optimizer = torch.optim.AdamW(model.parameters())
+criterion = torch.nn.MSELoss()
+for epoch in range(nEpochs):
+    loss_per_epoch = 0
+    for graph in range(len(output_graphs_chunk)):
+        
+        out = model(input_graph, edges, rates_chunk[graph])
+        loss = criterion(out, output_graphs_chunk[graph])
+        loss.backward()
+        loss_per_epoch+=loss
+        optimizer.step()
+        
+    if epoch % 1 == 0:
+        print("Epoch:", epoch, " Loss:", loss_per_epoch)   
 
 
 
