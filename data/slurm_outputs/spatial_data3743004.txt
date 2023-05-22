@@ -1,0 +1,16 @@
+<class 'list'>
+<class 'list'>
+13228
+Epoch: 0  Loss: tensor(88238.9266, dtype=torch.float64, grad_fn=<AddBackward0>)
+Epoch: 1  Loss: tensor(392025.0119, dtype=torch.float64, grad_fn=<AddBackward0>)
+mprof: Sampling memory every 0.1s
+running new process
+running as a Python program...
+Using last profile data.
+Job Statistics for 3743004:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3743004   rsjxw007 2023-05-22T11:36:14 2023-05-22T12:02:08   00:25:54              13:11:59  COMPLETED  0:0   r1pl-hpcf-n22     billing=32,cpu=32,mem=238560M,node=1 
+   3743004.batch            2023-05-22T11:36:14 2023-05-22T12:02:08   00:25:54  19398.28M   13:11:59  COMPLETED  0:0   r1pl-hpcf-n22                                          
+  3743004.extern            2023-05-22T11:36:14 2023-05-22T12:02:08   00:25:54          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-n22                                          
+CPU Efficiency: 95.56% of 13:48:48 core-walltime
