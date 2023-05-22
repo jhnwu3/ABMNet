@@ -131,7 +131,7 @@ def plot_giuseppe_graphs(graph, edges, path=""):
 
 def plot_graph_to_img(graph, path =""):
     data = graph.numpy()
-    img = SpatialObj.translate_to_img(data, width=int(np.sqrt(data.shape[0])), offset=0)
+    img = SpatialObj.translate_to_img(data, width=int(np.sqrt(data.shape[0])),features=int((data.shape[1])) , offset=0)
     plt.figure()
     
     nCols = 4
