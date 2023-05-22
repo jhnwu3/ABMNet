@@ -17,8 +17,46 @@ from modules.utils.graph import *
 from modules.data.spatial import *
 from modules.models.spatial import *
 
-loaded_data = pickle.load(open("../gdag_data/gdag_graph_data.pickle", "rb"))
-GiuseppeSurrogateGraphData.chunk_pkl(loaded_data, "../gdag_data/gdag_chunked")
+# loaded_data = pickle.load(open("../gdag_data/gdag_graph_data.pickle", "rb"))
+# GiuseppeSurrogateGraphData.chunk_pkl(loaded_data, "../gdag_data/gdag_chunked")
+
+data_directory = os.path.join("../gdag_data", "gdag_chunked")
+
+nEpochs = 50
+single_init_cond = True 
+input_graph = os.path.join(data_directory, "input_graphs", "graph.pt")
+output_graphs_chunk = os.path.join(data_directory, "output_graphs", "graph0.pickle")
+edges = os.path.join(data_directory, "edges.pt")
+rates_chunk = os.path.join(data_directory, "rates", "rates0.pickle")
+
+input_graph = torch.load(input_graph)
+output_graphs_chunk = pickle.load(open(output_graphs_chunk, "rb"))
+edges = torch.load(edges)
+rates_chunk = pickle.load(open(rates_chunk, "rb"))
+print(type(output_graphs_chunk))
+print(type(rates_chunk))
+exit(0)
+# for manual testing, load everything at once, and train
+model = GCNComplex(n_features=input_graph.size()[1], n_classes=, n_rates=data["n_rates"],hidden_channels=32)
+    model.train()
+    model = model.double()
+    optimizer = torch.optim.AdamW(model.parameters())
+    criterion = torch.nn.MSELoss()
+    for epoch in range(nEpochs):
+        loss_per_epoch = 0
+        for graph in range(data["n"]):
+            
+            out = model(input_graph, data["edges"], data["rates"][graph])
+            loss = criterion(out, data["output_graphs"][graph])
+            loss.backward()
+            loss_per_epoch+=loss
+            optimizer.step()
+            
+        if epoch % 1 == 0:
+            print("Epoch:", epoch, " Loss:", loss_per_epoch)   
+
+
+
 # model = train_giuseppe_surrogate_pkl(loaded_data, nEpochs=20)
 
 
