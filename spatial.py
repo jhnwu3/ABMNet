@@ -79,9 +79,47 @@ plot_graph_to_img(input_graph, path="test.png")
 plot_graph_to_img(output_graphs_chunk[0], path="test_first_output.png")
 
 
+
+
+# for manual testing, load everything at once, and train
+model = GCNComplex(n_features=input_graph.size()[1], n_classes= output_graphs_chunk[0].size()[1], n_rates=rates_chunk[0].size()[0],hidden_channels=32)
+model.train()
+model = model.double()
+optimizer = torch.optim.AdamW(model.parameters())
+criterion = torch.nn.MSELoss()
+
+# device = ""
+# if torch.cuda.is_available():
+#     device = torch.device("cuda")
+#     model = model.cuda()
+#     criterion = criterion.cuda()
+#     using_gpu = True
+# else:
+#     device = torch.device("cpu")
+#     using_gpu = False
+    
+for epoch in range(nEpochs):
+    loss_per_epoch = 0
+    
+    for graph in range(len(output_graphs_chunk)):
+        optimizer.zero_grad()
+        out = model(input_graph, edges, rates_chunk[graph])
+        loss = criterion(out, output_graphs_chunk[graph])
+        loss.backward()
+        loss_per_epoch+=loss
+        # print(output_graphs_chunk[graph].size())
+        optimizer.step()
+        # del loss
+        # del out
+        print("graph:", graph)
+        print('Memory usage: %s (kb)', resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
+    if epoch % 1 == 0:
+        print("Epoch:", epoch, " Loss:", loss_per_epoch)   
+
+
 # for i in range(len(output_graphs_chunk)):
 #     print(output_graphs_chunk[i].size())
-train_profiled(input_graph, output_graphs_chunk, rates_chunk, edges)
+# train_profiled(input_graph, output_graphs_chunk, rates_chunk, edges)
 
 
 
