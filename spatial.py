@@ -43,6 +43,7 @@ model.train()
 model = model.double()
 optimizer = torch.optim.AdamW(model.parameters())
 criterion = torch.nn.MSELoss()
+
 for epoch in range(nEpochs):
     loss_per_epoch = 0
     for graph in range(len(output_graphs_chunk)):
