@@ -1,0 +1,28 @@
+Traceback (most recent call last):
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/memory_profiler.py", line 1351, in <module>
+    exec_with_profiler(script_filename, prof, args.backend, script_args)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/memory_profiler.py", line 1252, in exec_with_profiler
+    exec(compile(f.read(), filename, 'exec'), ns, ns)
+  File "spatial.py", line 46, in <module>
+    plot_graph_to_img(input_graph, path="test.png")
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/graph.py", line 148, in plot_graph_to_img
+    axs[r,c].imshow(img[:,:,channel])
+IndexError: index 9 is out of bounds for axis 2 with size 9
+<class 'list'>
+<class 'list'>
+13228
+mprof: Sampling memory every 0.1s
+running new process
+running as a Python program...
+Using last profile data.
+Job Statistics for 3743057:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3743057   rsjxw007 2023-05-22T11:57:44 2023-05-22T11:58:11   00:00:27             00:27.364  COMPLETED  0:0   r1pl-hpcf-n23     billing=32,cpu=32,mem=238560M,node=1 
+   3743057.batch            2023-05-22T11:57:44 2023-05-22T11:58:11   00:00:27          0  00:27.361  COMPLETED  0:0   r1pl-hpcf-n23                                          
+  3743057.extern            2023-05-22T11:57:44 2023-05-22T11:58:11   00:00:27          0  00:00.002  COMPLETED  0:0   r1pl-hpcf-n23                                          
+CPU Efficiency: 3.12% of 00:14:24 core-walltime
