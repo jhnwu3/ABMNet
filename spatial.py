@@ -75,9 +75,9 @@ plot_graph_to_img(input_graph, path="test.png")
 plot_graph_to_img(output_graphs_chunk[0], path="test_first_output.png")
 
 
-for i in range(len(output_graphs_chunk)):
-    print(output_graphs_chunk[i].size())
-# train_profiled(input_graph, output_graphs_chunk, rates_chunk)
+# for i in range(len(output_graphs_chunk)):
+#     print(output_graphs_chunk[i].size())
+train_profiled(input_graph, output_graphs_chunk, rates_chunk)
 
 
 
