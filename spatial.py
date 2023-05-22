@@ -19,6 +19,32 @@ from modules.models.spatial import *
 
 # loaded_data = pickle.load(open("../gdag_data/gdag_graph_data.pickle", "rb"))
 # GiuseppeSurrogateGraphData.chunk_pkl(loaded_data, "../gdag_data/gdag_chunked")
+@profile
+def train_profiled(input_graph, output_graphs_chunk, rates_chunk, nEpochs=2):
+    device = ""
+    if torch.cuda.is_available():
+        device = torch.device("cuda")
+        model = model.cuda()
+        criterion = criterion.cuda()
+        using_gpu = True
+    else:
+        device = torch.device("cpu")
+        using_gpu = False
+        
+    for epoch in range(nEpochs):
+        loss_per_epoch = 0
+        
+        for graph in range(len(output_graphs_chunk)):
+            
+            out = model(input_graph.to(device), edges.to(device), rates_chunk[graph].to(device))
+            loss = criterion(out, output_graphs_chunk[graph].to(device))
+            loss.backward()
+            loss_per_epoch+=loss
+            optimizer.step()
+            
+        if epoch % 1 == 0:
+            print("Epoch:", epoch, " Loss:", loss_per_epoch)   
+
 
 data_directory = os.path.join("../gdag_data", "gdag_chunked")
 
@@ -45,30 +71,8 @@ optimizer = torch.optim.AdamW(model.parameters())
 criterion = torch.nn.MSELoss()
 plot_graph_to_img(input_graph, path="test.png")
 plot_graph_to_img(output_graphs_chunk[0], path="test_first_output.png")
+train_profiled(input_graph, output_graphs_chunk, rates_chunk)
 
-device = ""
-if torch.cuda.is_available():
-    device = torch.device("cuda")
-    model = model.cuda()
-    criterion = criterion.cuda()
-    using_gpu = True
-else:
-    device = torch.device("cpu")
-    using_gpu = False
-
-
-for epoch in range(nEpochs):
-    loss_per_epoch = 0
-    for graph in range(len(output_graphs_chunk)):
-        
-        out = model(input_graph.to(device), edges.to(device), rates_chunk[graph].to(device))
-        loss = criterion(out, output_graphs_chunk[graph].to(device))
-        loss.backward()
-        loss_per_epoch+=loss
-        optimizer.step()
-        
-    if epoch % 1 == 0:
-        print("Epoch:", epoch, " Loss:", loss_per_epoch)   
 
 
 
