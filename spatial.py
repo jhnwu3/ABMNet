@@ -11,6 +11,7 @@ import pickle
 import torch 
 import torch.nn.functional as F
 import torch.nn as nn
+import resource
 from torch_geometric.nn import GCNConv
 from scipy import spatial
 from modules.utils.graph import *
@@ -40,7 +41,7 @@ def train_profiled(input_graph, output_graphs_chunk, rates_chunk, nEpochs=2):
         
     for epoch in range(nEpochs):
         loss_per_epoch = 0
-        
+        print('Memory usage: %s (kb)', resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
         for graph in range(len(output_graphs_chunk)):
             
             out = model(input_graph.to(device), edges.to(device), rates_chunk[graph].to(device))
