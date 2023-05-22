@@ -21,6 +21,13 @@ from modules.models.spatial import *
 # GiuseppeSurrogateGraphData.chunk_pkl(loaded_data, "../gdag_data/gdag_chunked")
 @profile
 def train_profiled(input_graph, output_graphs_chunk, rates_chunk, nEpochs=2):
+    # for manual testing, load everything at once, and train
+    model = GCNComplex(n_features=input_graph.size()[1], n_classes= output_graphs_chunk[0].size()[1], n_rates=rates_chunk[0].size()[0],hidden_channels=32)
+    model.train()
+    model = model.double()
+    optimizer = torch.optim.AdamW(model.parameters())
+    criterion = torch.nn.MSELoss()
+    
     device = ""
     if torch.cuda.is_available():
         device = torch.device("cuda")
@@ -62,13 +69,7 @@ rates_chunk = pickle.load(open(rates_chunk, "rb"))
 print(type(output_graphs_chunk))
 print(type(rates_chunk))
 print(len(rates_chunk))
-# exit(0)
-# for manual testing, load everything at once, and train
-model = GCNComplex(n_features=input_graph.size()[1], n_classes= output_graphs_chunk[0].size()[1], n_rates=rates_chunk[0].size()[0],hidden_channels=32)
-model.train()
-model = model.double()
-optimizer = torch.optim.AdamW(model.parameters())
-criterion = torch.nn.MSELoss()
+
 plot_graph_to_img(input_graph, path="test.png")
 plot_graph_to_img(output_graphs_chunk[0], path="test_first_output.png")
 train_profiled(input_graph, output_graphs_chunk, rates_chunk)
