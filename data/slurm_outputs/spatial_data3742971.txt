@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/memory_profiler.py", line 1351, in <module>
+    exec_with_profiler(script_filename, prof, args.backend, script_args)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/memory_profiler.py", line 1252, in exec_with_profiler
+    exec(compile(f.read(), filename, 'exec'), ns, ns)
+  File "spatial.py", line 40
+    model = GCNComplex(n_features=input_graph.size()[1], n_classes=, n_rates=data["n_rates"],hidden_channels=32)
+                                                                   ^
+SyntaxError: invalid syntax
+Job Statistics for 3742971:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3742971   rsjxw007 2023-05-22T11:04:47 2023-05-22T11:04:48   00:00:01             00:00.667     FAILED  1:0   r1pl-hpcf-n21     billing=32,cpu=32,mem=238560M,node=1 
+   3742971.batch            2023-05-22T11:04:47 2023-05-22T11:04:48   00:00:01          0  00:00.663     FAILED  1:0   r1pl-hpcf-n21                                          
+  3742971.extern            2023-05-22T11:04:47 2023-05-22T11:04:48   00:00:01          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-n21                                          
+CPU Efficiency: 3.12% of 00:00:32 core-walltime
