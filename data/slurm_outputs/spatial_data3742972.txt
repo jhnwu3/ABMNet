@@ -1,0 +1,9 @@
+<class 'list'>
+<class 'list'>
+Job Statistics for 3742972:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3742972   rsjxw007 2023-05-22T11:05:41 2023-05-22T11:06:00   00:00:19             00:21.672  COMPLETED  0:0   r1pl-hpcf-n21     billing=32,cpu=32,mem=238560M,node=1 
+   3742972.batch            2023-05-22T11:05:41 2023-05-22T11:06:00   00:00:19      0.11M  00:21.668  COMPLETED  0:0   r1pl-hpcf-n21                                          
+  3742972.extern            2023-05-22T11:05:41 2023-05-22T11:06:00   00:00:19          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-n21                                          
+CPU Efficiency: 3.62% of 00:10:08 core-walltime
