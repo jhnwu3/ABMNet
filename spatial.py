@@ -43,19 +43,19 @@ model.train()
 model = model.double()
 optimizer = torch.optim.AdamW(model.parameters())
 criterion = torch.nn.MSELoss()
-
-for epoch in range(nEpochs):
-    loss_per_epoch = 0
-    for graph in range(len(output_graphs_chunk)):
+plot_graph_to_img(input_graph, path="test.png")
+# for epoch in range(nEpochs):
+#     loss_per_epoch = 0
+#     for graph in range(len(output_graphs_chunk)):
         
-        out = model(input_graph, edges, rates_chunk[graph])
-        loss = criterion(out, output_graphs_chunk[graph])
-        loss.backward()
-        loss_per_epoch+=loss
-        optimizer.step()
+#         out = model(input_graph, edges, rates_chunk[graph])
+#         loss = criterion(out, output_graphs_chunk[graph])
+#         loss.backward()
+#         loss_per_epoch+=loss
+#         optimizer.step()
         
-    if epoch % 1 == 0:
-        print("Epoch:", epoch, " Loss:", loss_per_epoch)   
+#     if epoch % 1 == 0:
+#         print("Epoch:", epoch, " Loss:", loss_per_epoch)   
 
 
 
