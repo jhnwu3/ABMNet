@@ -1,0 +1,12 @@
+mprof: Sampling memory every 0.1s
+running new process
+running as a Python program...
+Using last profile data.
+slurmstepd: error: Detected 1 oom_kill event in StepId=3743059.batch. Some of the step tasks have been OOM Killed.
+Job Statistics for 3743059:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3743059   rsjxw007 2023-05-22T12:25:04 2023-05-22T12:32:24   00:07:20              02:01:51 OUT_OF_ME+ 0:1+   r1pl-hpcf-n22     billing=20,cpu=20,mem=149100M,node=1 
+   3743059.batch            2023-05-22T12:25:04 2023-05-22T12:32:24   00:07:20 148768.34M   02:01:51 OUT_OF_ME+ 0:1+   r1pl-hpcf-n22                                          
+  3743059.extern            2023-05-22T12:25:04 2023-05-22T12:32:24   00:07:20          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-n22                                          
+CPU Efficiency: 83.08% of 02:26:40 core-walltime
