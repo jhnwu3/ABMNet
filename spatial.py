@@ -21,7 +21,7 @@ from modules.models.spatial import *
 # loaded_data = pickle.load(open("../gdag_data/gdag_graph_data.pickle", "rb"))
 # GiuseppeSurrogateGraphData.chunk_pkl(loaded_data, "../gdag_data/gdag_chunked")
 # @profile
-def train_profiled(input_graph, output_graphs_chunk, rates_chunk, nEpochs=2):
+def train_profiled(input_graph, output_graphs_chunk, rates_chunk, edges, nEpochs=2):
     # for manual testing, load everything at once, and train
     model = GCNComplex(n_features=input_graph.size()[1], n_classes= output_graphs_chunk[0].size()[1], n_rates=rates_chunk[0].size()[0],hidden_channels=32)
     model.train()
@@ -79,7 +79,7 @@ plot_graph_to_img(output_graphs_chunk[0], path="test_first_output.png")
 
 # for i in range(len(output_graphs_chunk)):
 #     print(output_graphs_chunk[i].size())
-train_profiled(input_graph, output_graphs_chunk, rates_chunk)
+train_profiled(input_graph, output_graphs_chunk, rates_chunk, edges)
 
 
 
