@@ -1,0 +1,22 @@
+Traceback (most recent call last):
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/memory_profiler.py", line 1351, in <module>
+    exec_with_profiler(script_filename, prof, args.backend, script_args)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/memory_profiler.py", line 1252, in exec_with_profiler
+    exec(compile(f.read(), filename, 'exec'), ns, ns)
+  File "spatial.py", line 41, in <module>
+    model = GCNComplex(n_features=input_graph.size()[1], n_classes= output_graphs_chunk[0].size()[1], n_rates=rates_chunk[0].size()[1],hidden_channels=32)
+IndexError: tuple index out of range
+<class 'list'>
+<class 'list'>
+13228
+Job Statistics for 3742974:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3742974   rsjxw007 2023-05-22T11:12:34 2023-05-22T11:12:54   00:00:20             00:23.977     FAILED  1:0   r1pl-hpcf-n21     billing=32,cpu=32,mem=238560M,node=1 
+   3742974.batch            2023-05-22T11:12:34 2023-05-22T11:12:54   00:00:20          0  00:23.974     FAILED  1:0   r1pl-hpcf-n21                                          
+  3742974.extern            2023-05-22T11:12:34 2023-05-22T11:12:54   00:00:20          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-n21                                          
+CPU Efficiency: 3.75% of 00:10:40 core-walltime
