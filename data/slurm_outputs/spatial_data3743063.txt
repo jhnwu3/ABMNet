@@ -1,0 +1,57 @@
+Traceback (most recent call last):
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/memory_profiler.py", line 1351, in <module>
+    exec_with_profiler(script_filename, prof, args.backend, script_args)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/memory_profiler.py", line 1252, in exec_with_profiler
+    exec(compile(f.read(), filename, 'exec'), ns, ns)
+  File "spatial.py", line 74, in <module>
+    train_profiled(input_graph, output_graphs_chunk, rates_chunk)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/memory_profiler.py", line 761, in f
+    return func(*args, **kwds)
+  File "spatial.py", line 39, in train_profiled
+    out = model(input_graph.to(device), edges.to(device), rates_chunk[graph].to(device))
+UnboundLocalError: local variable 'model' referenced before assignment
+<class 'list'>
+<class 'list'>
+13228
+Filename: spatial.py
+
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    22 19269.836 MiB 19269.836 MiB           1   @profile
+    23                                         def train_profiled(input_graph, output_graphs_chunk, rates_chunk, nEpochs=2):
+    24 19269.836 MiB    0.000 MiB           1       device = ""
+    25 19269.836 MiB    0.000 MiB           1       if torch.cuda.is_available():
+    26                                                 device = torch.device("cuda")
+    27                                                 model = model.cuda()
+    28                                                 criterion = criterion.cuda()
+    29                                                 using_gpu = True
+    30                                             else:
+    31 19270.059 MiB    0.223 MiB           1           device = torch.device("cpu")
+    32 19270.059 MiB    0.000 MiB           1           using_gpu = False
+    33                                                 
+    34 19270.059 MiB    0.000 MiB           1       for epoch in range(nEpochs):
+    35 19270.059 MiB    0.000 MiB           1           loss_per_epoch = 0
+    36                                                 
+    37 19270.059 MiB    0.000 MiB           1           for graph in range(len(output_graphs_chunk)):
+    38                                                     
+    39 19270.059 MiB    0.000 MiB           1               out = model(input_graph.to(device), edges.to(device), rates_chunk[graph].to(device))
+    40                                                     loss = criterion(out, output_graphs_chunk[graph].to(device))
+    41                                                     loss.backward()
+    42                                                     loss_per_epoch+=loss
+    43                                                     optimizer.step()
+    44                                                     
+    45                                                 if epoch % 1 == 0:
+    46                                                     print("Epoch:", epoch, " Loss:", loss_per_epoch)   
+
+
+Job Statistics for 3743063:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3743063   rsjxw007 2023-05-22T13:12:10 2023-05-22T13:12:33   00:00:23             00:21.579     FAILED  1:0   r1pl-hpcf-n22     billing=20,cpu=20,mem=149100M,node=1 
+   3743063.batch            2023-05-22T13:12:10 2023-05-22T13:12:33   00:00:23          0  00:21.576     FAILED  1:0   r1pl-hpcf-n22                                          
+  3743063.extern            2023-05-22T13:12:10 2023-05-22T13:12:33   00:00:23          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-n22                                          
+CPU Efficiency: 4.78% of 00:07:40 core-walltime
