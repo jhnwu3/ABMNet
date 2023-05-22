@@ -49,6 +49,8 @@ def train_profiled(input_graph, output_graphs_chunk, rates_chunk, nEpochs=2):
             loss.backward()
             loss_per_epoch+=loss
             optimizer.step()
+            del loss
+            del out
             print('Memory usage: %s (kb)', resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
         if epoch % 1 == 0:
             print("Epoch:", epoch, " Loss:", loss_per_epoch)   

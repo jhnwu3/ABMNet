@@ -66,7 +66,7 @@ def train_giuseppe_surrogate(data_obj : GiuseppeSurrogateGraphData, nEpochs = 30
     for epoch in range(nEpochs):
         loss_per_epoch = 0
         for graph in range(data_obj.length):
-            
+            optimizer.zero_grad()
             input_graph = data_obj.input_graphs
             if not single_init_cond:
                 input_graph = data_obj.input_graphs[graph]
@@ -89,7 +89,7 @@ def train_gnn(data_obj : GiuseppeSurrogateGraphData, nEpochs = 30, single_init_c
     for epoch in range(nEpochs):
         loss_per_epoch = 0
         for graph in range(data_obj.length):
-            
+            optimizer.zero_grad()
             input_graph = data_obj.input_graphs
             if not single_init_cond:
                 input_graph = data_obj.input_graphs[graph]
@@ -114,7 +114,7 @@ def train_giuseppe_surrogate_pkl(data : dict, nEpochs = 30, single_init_cond = T
     for epoch in range(nEpochs):
         loss_per_epoch = 0
         for graph in range(data["n"]):
-            
+            optimizer.zero_grad()
             input_graph = data["input_graphs"]
             if not single_init_cond:
                 input_graph = data["input_graphs"][graph]
