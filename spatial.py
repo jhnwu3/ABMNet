@@ -29,23 +29,23 @@ def train_profiled(input_graph, output_graphs_chunk, rates_chunk, nEpochs=2):
     optimizer = torch.optim.AdamW(model.parameters())
     criterion = torch.nn.MSELoss()
     
-    device = ""
-    if torch.cuda.is_available():
-        device = torch.device("cuda")
-        model = model.cuda()
-        criterion = criterion.cuda()
-        using_gpu = True
-    else:
-        device = torch.device("cpu")
-        using_gpu = False
+    # device = ""
+    # if torch.cuda.is_available():
+    #     device = torch.device("cuda")
+    #     model = model.cuda()
+    #     criterion = criterion.cuda()
+    #     using_gpu = True
+    # else:
+    #     device = torch.device("cpu")
+    #     using_gpu = False
         
     for epoch in range(nEpochs):
         loss_per_epoch = 0
        
         for graph in range(len(output_graphs_chunk)):
             optimizer.zero_grad()
-            out = model(input_graph.to(device), edges.to(device), rates_chunk[graph].to(device))
-            loss = criterion(out, output_graphs_chunk[graph].to(device))
+            out = model(input_graph.to, edges, rates_chunk[graph])
+            loss = criterion(out, output_graphs_chunk[graph])
             loss.backward()
             loss_per_epoch+=loss
             optimizer.step()
