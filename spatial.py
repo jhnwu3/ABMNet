@@ -103,7 +103,8 @@ for epoch in range(nEpochs):
     
     for graph in range(len(output_graphs_chunk)):
         optimizer.zero_grad()
-        out = model(input_graph, edges, rates_chunk[graph])
+        out = model(input_graph, edges)
+        # out = model(input_graph, edges, rates_chunk[graph])
         # loss = criterion(out, output_graphs_chunk[graph])
         # loss.backward()
         # loss_per_epoch+=loss
