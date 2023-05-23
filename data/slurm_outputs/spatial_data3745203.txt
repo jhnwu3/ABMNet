@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/spatial.py", line 17, in <module>
+    from modules.utils.graph import *
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/graph.py", line 7, in <module>
+    from modules.data.spatial import SpatialObj
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/data/spatial.py", line 261
+    class MyIterableDataset(IterableDataset):
+    ^
+IndentationError: expected an indented block after class definition on line 258
+Job Statistics for 3745203:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3745203   rsjxw007 2023-05-23T13:42:20 2023-05-23T13:42:25   00:00:05             00:05.900     FAILED  1:0   r1pl-hpcf-g02 billing=30,cpu=30,gres/gpu=1,mem=223650+ 
+   3745203.batch            2023-05-23T13:42:20 2023-05-23T13:42:25   00:00:05          0  00:05.897     FAILED  1:0   r1pl-hpcf-g02                                          
+  3745203.extern            2023-05-23T13:42:20 2023-05-23T13:42:25   00:00:05          0  00:00.002  COMPLETED  0:0   r1pl-hpcf-g02                                          
+CPU Efficiency: 4.00% of 00:02:30 core-walltime
