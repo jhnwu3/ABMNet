@@ -82,7 +82,7 @@ plot_graph_to_img(output_graphs_chunk[0], path="test_first_output.png")
 
 
 # for manual testing, load everything at once, and train
-model = GCNComplex(n_features=input_graph.size()[1], n_classes= output_graphs_chunk[0].size()[1], n_rates=rates_chunk[0].size()[0],hidden_channels=32)
+model = GCN(n_features=input_graph.size[1], n_classes=output_graphs_chunk[0].size()[1])#GCNComplex(n_features=input_graph.size()[1], n_classes= output_graphs_chunk[0].size()[1], n_rates=rates_chunk[0].size()[0],hidden_channels=32)
 model.train()
 model = model.double()
 optimizer = torch.optim.AdamW(model.parameters())

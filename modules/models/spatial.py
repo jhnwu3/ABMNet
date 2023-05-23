@@ -7,7 +7,7 @@ from scipy import spatial
 from modules.utils.graph import *
 from modules.data.spatial import *
 class GCN(torch.nn.Module):
-    def __init__(self, n_features, n_classes, hidden_channels):
+    def __init__(self, n_features, n_classes, hidden_channels=8):
         super().__init__()
         torch.manual_seed(1234567)
         self.conv1 = GCNConv(n_features, hidden_channels)
