@@ -1,0 +1,12 @@
+Epoch: 0  Loss: 4066.9710633324057
+Epoch: 1  Loss: 3970.05965564742
+Epoch: 2  Loss: 3965.294663372369
+Epoch: 3  Loss: 3964.06458391466
+Epoch: 4  Loss: 3964.098572843279
+Job Statistics for 3745208:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3745208   rsjxw007 2023-05-23T14:32:04 2023-05-23T14:43:55   00:11:51             11:52.177  COMPLETED  0:0   r1pl-hpcf-g02 billing=30,cpu=30,gres/gpu=1,mem=223650+ 
+   3745208.batch            2023-05-23T14:32:04 2023-05-23T14:43:55   00:11:51  57905.12M  11:52.175  COMPLETED  0:0   r1pl-hpcf-g02                                          
+  3745208.extern            2023-05-23T14:32:04 2023-05-23T14:43:55   00:11:51          0  00:00.002  COMPLETED  0:0   r1pl-hpcf-g02                                          
+CPU Efficiency: 3.34% of 05:55:30 core-walltime
