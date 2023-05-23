@@ -60,7 +60,7 @@ def train_profiled(input_graph, output_graphs_chunk, rates_chunk, edges, nEpochs
 
 data_directory = os.path.join("../gdag_data", "gdag_chunked")
 
-nEpochs = 20
+nEpochs = 5
 single_init_cond = True 
 input_graph = os.path.join(data_directory, "input_graphs", "graph.pt")
 output_graphs_chunk = os.path.join(data_directory, "output_graphs", "graph0.pickle")
