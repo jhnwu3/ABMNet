@@ -1,0 +1,9 @@
+/var/spool/slurmd/job3731109/slurm_script: line 10: 1655441 Killed                  python3 spatial.py
+slurmstepd: error: Detected 1 oom_kill event in StepId=3731109.batch. Some of the step tasks have been OOM Killed.
+Job Statistics for 3731109:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3731109   rsjxw007 2023-05-17T18:06:55 2023-05-17T18:13:25   00:06:30             07:15.370 OUT_OF_ME+ 0:1+   r1pl-hpcf-n21      billing=10,cpu=10,mem=74550M,node=1 
+   3731109.batch            2023-05-17T18:06:55 2023-05-17T18:13:25   00:06:30  74394.28M  07:15.367 OUT_OF_ME+ 0:1+   r1pl-hpcf-n21                                          
+  3731109.extern            2023-05-17T18:06:55 2023-05-17T18:13:25   00:06:30          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-n21                                          
+CPU Efficiency: 11.15% of 01:05:00 core-walltime

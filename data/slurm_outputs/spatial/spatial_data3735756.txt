@@ -1,4 +1,5 @@
 Job Statistics for 3735756:
+
            JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
 ---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
          3735756   rsjxw007 2023-05-19T16:08:03 2023-05-19T16:09:15   00:01:12             01:13.368  COMPLETED  0:0   r1pl-hpcf-n21     billing=32,cpu=32,mem=238560M,node=1 

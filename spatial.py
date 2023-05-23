@@ -109,10 +109,9 @@ for epoch in range(nEpochs):
         loss_per_epoch+=loss
         # print(output_graphs_chunk[graph].size())
         optimizer.step()
-        # del loss
-        # del out
         print("graph:", graph)
         print('Memory usage: %s (kb)', resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
+        print("Epoch:", epoch, " Loss:", loss_per_epoch) 
     if epoch % 1 == 0:
         print("Epoch:", epoch, " Loss:", loss_per_epoch)   
 

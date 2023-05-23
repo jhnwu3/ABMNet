@@ -1,8 +1,0 @@
-python3: can't open file '/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/spatial.py': [Errno 2] No such file or directory
-Job Statistics for 3717596:
-           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
----------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
-         3717596   rsjxw007 2023-05-17T13:42:38 2023-05-17T13:42:38   00:00:00             00:00.065     FAILED  2:0   r1pl-hpcf-g05 billing=32,cpu=32,gres/gpu=1,mem=238560+ 
-   3717596.batch            2023-05-17T13:42:38 2023-05-17T13:42:38   00:00:00      0.13M  00:00.061     FAILED  2:0   r1pl-hpcf-g05                                          
-  3717596.extern            2023-05-17T13:42:38 2023-05-17T13:42:38   00:00:00          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g05                                          
-CPU Efficiency: 0.00% of 00:00:00 core-walltime

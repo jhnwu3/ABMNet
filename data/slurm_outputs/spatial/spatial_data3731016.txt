@@ -1,0 +1,22 @@
+data/spatial/gdag_test.pickle
+data/spatial/parameters_0.045_0.04_0.045_0.2
+data/spatial/test.pickle
+data/spatial/parameters_0.045_0.04_0.045_0.1
+-----------------------------------
+Rates: [0.045 0.04  0.045 0.2  ]
+Number of Samples: 2
+-----------------------------------
+Rates: [0.045 0.04  0.045 0.1  ]
+Number of Samples: 2
+Epoch: 0  Loss: tensor(0.0694, dtype=torch.float64, grad_fn=<AddBackward0>)
+Epoch: 10  Loss: tensor(0.0984, dtype=torch.float64, grad_fn=<AddBackward0>)
+Epoch: 20  Loss: tensor(0.0987, dtype=torch.float64, grad_fn=<AddBackward0>)
+Epoch: 30  Loss: tensor(0.1723, dtype=torch.float64, grad_fn=<AddBackward0>)
+Epoch: 40  Loss: tensor(0.1711, dtype=torch.float64, grad_fn=<AddBackward0>)
+Job Statistics for 3731016:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3731016   rsjxw007 2023-05-17T15:01:54 2023-05-17T15:02:08   00:00:14             01:15.736  COMPLETED  0:0   r1pl-hpcf-n21      billing=10,cpu=10,mem=74550M,node=1 
+   3731016.batch            2023-05-17T15:01:54 2023-05-17T15:02:08   00:00:14      0.20M  01:15.733  COMPLETED  0:0   r1pl-hpcf-n21                                          
+  3731016.extern            2023-05-17T15:01:54 2023-05-17T15:02:08   00:00:14          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-n21                                          
+CPU Efficiency: 54.29% of 00:02:20 core-walltime
