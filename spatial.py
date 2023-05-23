@@ -7,8 +7,9 @@ import torch
 from modules.utils.graph import *
 from modules.data.spatial import *
 from modules.models.spatial import *
-
-data = SingleInitialConditionDataset("../gdag_data/gdag_graph_data.pickle")
+# Cytotoxic CD8+ T Cells, Cancer, Exhausted CD8+ T Cells, Dead Cancer Cells, Ignore, Ignore, TAMs, Ignore, Ignore
+# 0,1,2,3,6
+data = SingleInitialConditionDataset("../gdag_data/gdag_graph_data.pickle", channels=[0,1,2,3,6])
 train_size = int(0.8 * len(data))
 test_size = len(data) - train_size
 

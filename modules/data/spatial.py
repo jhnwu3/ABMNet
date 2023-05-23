@@ -272,8 +272,9 @@ class SingleInitialConditionDataset(Dataset):
         if len(channels) > 0:
             self.n_outputs = len(channels)
             self.n_inputs = len(channels)
+            self.initial_graph = self.initial_graph[:,channels]
             for i in range(len(self.output_graphs)):
-                self.output_graphs[i] = self.output_graphs[i, channels] # this should work I believe lol.
+                self.output_graphs[i] = self.output_graphs[i][:,channels] # this should work I believe lol.
             
         
     def __len__(self):
