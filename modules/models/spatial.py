@@ -50,8 +50,7 @@ class GCNComplex(torch.nn.Module):
         graph = F.dropout(graph, p=0.5, training=self.training)
         rates_rep = self.rates_encoder(rates)
         # concatenate both the graph and rates_representation and produce next
-        rates_rep = rates_rep.repeat(graph.size()[0]).reshape((graph.size()[0], rates_rep.size()[0]))
-        graph = torch.cat((graph, rates_rep), dim=1)
+        graph = torch.cat((graph, self.rates_encoder(rates).repeat(graph.size()[0]).reshape((graph.size()[0], rates_rep.size()[0]))), dim=1)
         
         # convolve again and get the output u care about
         graph = self.conv2(graph, edge_index)
@@ -73,7 +72,7 @@ def train_giuseppe_surrogate(data_obj : GiuseppeSurrogateGraphData, nEpochs = 30
             out = model(input_graph, data_obj.edges, data_obj.rates[graph])
             loss = criterion(out, data_obj.output_graphs[graph])
             loss.backward()
-            loss_per_epoch+=loss
+            loss_per_epoch+= float(loss)
             optimizer.step()
             
         if epoch % 10 == 0:
