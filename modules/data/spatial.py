@@ -256,13 +256,18 @@ class GiuseppeSurrogateGraphData():
 
 
 class SingleInitialConditionDataset(Dataset):
-    def __init__(self, initial_graph, output_graphs, edges, rates):
+    # path to a pickle file that contains a dictionary of the following variables shown below
+    def __init__(self, path):
         # Initialize your dataset here
         # Store the necessary data or file paths
-        self.output_graphs = output_graphs
-        self.initial_condition = initial_graph
-        self.edges = edges 
-        self.rates = rates
+        data = pickle.load(open(path, "rb"))
+        self.output_graphs = data["output_graphs"]
+        self.initial_graph = data["input_graphs"]
+        self.edges = data["edges"]
+        self.rates = data["rates"]
+        self.n_outputs = data["n_outputs"] 
+        self.n_inputs = data["n_features"]
+        self.n_rates = data["n_rates"]
         
         
     def __len__(self):
