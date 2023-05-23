@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/spatial.py", line 44, in <module>
+    for rates, output_graph in range(dataloader):
+TypeError: 'DataLoader' object cannot be interpreted as an integer
+Job Statistics for 3745206:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3745206   rsjxw007 2023-05-23T14:19:34 2023-05-23T14:20:14   00:00:40             00:42.752     FAILED  1:0   r1pl-hpcf-g02 billing=30,cpu=30,gres/gpu=1,mem=223650+ 
+   3745206.batch            2023-05-23T14:19:34 2023-05-23T14:20:14   00:00:40  51891.48M  00:42.749     FAILED  1:0   r1pl-hpcf-g02                                          
+  3745206.extern            2023-05-23T14:19:34 2023-05-23T14:20:14   00:00:40          0  00:00.002  COMPLETED  0:0   r1pl-hpcf-g02                                          
+CPU Efficiency: 3.58% of 00:20:00 core-walltime
