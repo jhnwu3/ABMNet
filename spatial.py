@@ -41,7 +41,7 @@ else:
 dataloader = torch.utils.data.DataLoader(data, batch_size=None, shuffle=True) 
 for epoch in range(nEpochs):
     loss_per_epoch = 0
-    for rates, output_graph in range(dataloader):
+    for rates, output_graph in dataloader:
         optimizer.zero_grad()
         out = model(data.initial_graph.to(device), data.edges.to(device), rates.to(device))
         loss = criterion(out, output_graph.to(device))
