@@ -7,7 +7,7 @@
 #SBATCH --cpus-per-task=20
 
 # python3 main.py -i 'data/static/NL6P.csv' --epochs 110 -h 128 -d 6 -o 'nl6_normalize_large' --gpu --normalize --normalize_out
-mprof run spatial.py
+python3 spatial.py
 # mprof plot
 # python3 -m memory_profiler spatial.py
 
