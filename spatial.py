@@ -60,7 +60,7 @@ def train_profiled(input_graph, output_graphs_chunk, rates_chunk, edges, nEpochs
 
 data_directory = os.path.join("../gdag_data", "gdag_chunked")
 
-nEpochs = 2
+nEpochs = 20
 single_init_cond = True 
 input_graph = os.path.join(data_directory, "input_graphs", "graph.pt")
 output_graphs_chunk = os.path.join(data_directory, "output_graphs", "graph0.pickle")
@@ -89,15 +89,15 @@ model = model.double()
 optimizer = torch.optim.AdamW(model.parameters())
 criterion = torch.nn.MSELoss()
 
-# device = ""
-# if torch.cuda.is_available():
-#     device = torch.device("cuda")
-#     model = model.cuda()
-#     criterion = criterion.cuda()
-#     using_gpu = True
-# else:
-#     device = torch.device("cpu")
-#     using_gpu = False
+device = ""
+if torch.cuda.is_available():
+    device = torch.device("cuda")
+    model = model.cuda()
+    criterion = criterion.cuda()
+    using_gpu = True
+else:
+    device = torch.device("cpu")
+    using_gpu = False
     
 for epoch in range(nEpochs):
     loss_per_epoch = 0
@@ -105,15 +105,15 @@ for epoch in range(nEpochs):
     for graph in range(len(output_graphs_chunk)):
         optimizer.zero_grad()
         # out = model(input_graph, edges)
-        out = model(input_graph, edges, rates_chunk[graph])
-        loss = criterion(out, output_graphs_chunk[graph])
+        out = model(input_graph.to(device), edges.to(device), rates_chunk[graph].to(device))
+        loss = criterion(out, output_graphs_chunk[graph].to(device))
         loss.backward()
         loss_per_epoch+= float(loss)
         # print(output_graphs_chunk[graph].size())
         optimizer.step()
-        print("graph:", graph)
-        print('Memory usage: %s (kb)', resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
-        print("Epoch:", epoch, " Loss:", loss_per_epoch) 
+        # print("graph:", graph)
+        # print('Memory usage: %s (kb)', resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
+        # print("Epoch:", epoch, " Loss:", loss_per_epoch) 
     if epoch % 1 == 0:
         print("Epoch:", epoch, " Loss:", loss_per_epoch)   
 
