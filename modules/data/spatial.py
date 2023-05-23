@@ -254,10 +254,11 @@ class GiuseppeSurrogateGraphData():
         
 
 
-
+# Cytotoxic CD8+ T Cells, Cancer, Exhausted CD8+ T Cells, Dead Cancer Cells, Ignore, Ignore, TAMs, Ignore, Ignore
 class SingleInitialConditionDataset(Dataset):
     # path to a pickle file that contains a dictionary of the following variables shown below
-    def __init__(self, path):
+    # [] is a list of indices of features to keep in the input and output graphs
+    def __init__(self, path, channels = []):
         # Initialize your dataset here
         # Store the necessary data or file paths
         data = pickle.load(open(path, "rb"))
@@ -268,7 +269,12 @@ class SingleInitialConditionDataset(Dataset):
         self.n_outputs = data["n_outputs"] 
         self.n_inputs = data["n_features"]
         self.n_rates = data["n_rates"]
-        
+        if len(channels) > 0:
+            self.n_outputs = len(channels)
+            self.n_inputs = len(channels)
+            for i in range(len(self.output_graphs)):
+                self.output_graphs[i] = self.output_graphs[i, channels] # this should work I believe lol.
+            
         
     def __len__(self):
         # Return the total number of samples in your dataset
