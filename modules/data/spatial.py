@@ -2,9 +2,9 @@ import os
 import pickle
 import torch 
 import numpy as np
-from torch.utils.data import DataLoader, IterableDataset
+from torch.utils.data import DataLoader, IterableDataset, Dataset
 from scipy import spatial
-
+import math
 
 # each spatial object has 3 specific components
 # 1 set of rate constants that generated the data
@@ -253,3 +253,26 @@ class GiuseppeSurrogateGraphData():
                     pickle.dump(pkl_dict["output_graphs"][chunk_indices[i]:], handle, protocol=pickle.HIGHEST_PROTOCOL)
         
 
+
+
+class SingleInitalConditionDataset(Dataset):
+
+# come back to modify this if we find out it takes too long to train and we need to leverage more power
+class MyIterableDataset(IterableDataset):
+    def __init__(self, start, end):
+        super(MyIterableDataset).__init__()
+        assert end > start, "this example code only works with end >= start"
+        self.start = start
+        self.end = end
+    def __iter__(self):
+        worker_info = torch.utils.data.get_worker_info()
+        if worker_info is None:  # single-process data loading, return the full iterator
+            iter_start = self.start
+            iter_end = self.end
+        else:  # in a worker process
+            # split workload
+            per_worker = int(math.ceil((self.end - self.start) / float(worker_info.num_workers)))
+            worker_id = worker_info.id
+            iter_start = self.start + worker_id * per_worker
+            iter_end = min(iter_start + per_worker, self.end)
+        return iter(range(iter_start, iter_end))
