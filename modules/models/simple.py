@@ -8,8 +8,7 @@ import torch.optim as optim
 import numpy as np 
 import matplotlib.pyplot as plt
 import time
-import mesa
-
+import resource
 class ReLuBlock(nn.Module):
     def __init__(self, i, o):
         super(ReLuBlock, self).__init__()
@@ -130,7 +129,7 @@ def train_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_size, 
             loss_this_epoch += loss.item() 
             loss.backward()
             optimizer.step()
-            
+            print('Memory usage: %s (kb)', resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
         if epoch % 10 == 0:
             print(repr(f"Finished epoch {epoch} with loss {loss_this_epoch} in time {time.time() - epoch_start}"))
             epoch_start = time.time()
