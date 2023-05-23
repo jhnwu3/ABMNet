@@ -255,7 +255,26 @@ class GiuseppeSurrogateGraphData():
 
 
 
-class SingleInitalConditionDataset(Dataset):
+class SingleInitialConditionDataset(Dataset):
+    def __init__(self, initial_graph, output_graphs, edges, rates):
+        # Initialize your dataset here
+        # Store the necessary data or file paths
+        self.output_graphs = output_graphs
+        self.initial_condition = initial_graph
+        self.edges = edges 
+        self.rates = rates
+        
+        
+    def __len__(self):
+        # Return the total number of samples in your dataset
+        return len(self.rates) # len(rates) == len(output_graphs)
+    
+    def __getitem__(self, index):
+        # Retrieve a single item from the dataset based on the given index
+        # Return a tuple (input, target) or dictionary {'input': input, 'target': target}
+        # The input and target can be tensors, NumPy arrays, or other data types
+        return self.rates[index], self.output_graphs[index]
+
 
 # come back to modify this if we find out it takes too long to train and we need to leverage more power
 class MyIterableDataset(IterableDataset):
