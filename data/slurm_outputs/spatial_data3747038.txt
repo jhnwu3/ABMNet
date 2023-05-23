@@ -1,0 +1,8 @@
+slurmstepd: error: *** JOB 3747038 ON r1pl-hpcf-g02 CANCELLED AT 2023-05-23T16:14:09 ***
+Job Statistics for 3747038:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3747038   rsjxw007 2023-05-23T16:10:25 2023-05-23T16:14:09   00:03:44             09:54.017 CANCELLED+  0:0   r1pl-hpcf-g02 billing=30,cpu=30,gres/gpu=1,mem=223650+ 
+   3747038.batch            2023-05-23T16:10:25 2023-05-23T16:14:12   00:03:47  57113.44M  09:54.014  CANCELLED 0:15   r1pl-hpcf-g02                                          
+  3747038.extern            2023-05-23T16:10:25 2023-05-23T16:14:09   00:03:44          0  00:00.002  COMPLETED  0:0   r1pl-hpcf-g02                                          
+CPU Efficiency: 8.84% of 01:52:00 core-walltime
