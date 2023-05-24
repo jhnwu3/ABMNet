@@ -4,6 +4,7 @@ import matplotlib as mpl
 import numpy as np
 import pandas as pd
 import torch 
+from torch.cuda.amp import autocast
 from modules.utils.graph import *
 from modules.data.spatial import *
 from modules.models.spatial import *
@@ -26,26 +27,45 @@ optimizer = torch.optim.AdamW(model.parameters())
 criterion = torch.nn.MSELoss()
 
 device = ""
+scaler = ""
 if torch.cuda.is_available():
     device = torch.device("cuda")
     model = model.cuda()
     criterion = criterion.cuda()
     using_gpu = True
+    scaler = torch.cuda.amp.GradScaler()
 else:
     device = torch.device("cpu")
     using_gpu = False
     
+
+
 dataloader = torch.utils.data.DataLoader(train_data, batch_size=None, shuffle=True) 
 for epoch in range(nEpochs):
     loss_per_epoch = 0
     for rates, output_graph in dataloader:
         optimizer.zero_grad()
-        out = model(data.initial_graph.to(device), data.edges.to(device), rates.to(device))
-        loss = criterion(out, output_graph.to(device))
-        loss.backward()
-        loss_per_epoch+= float(loss)
-        optimizer.step()
-      
+        
+        if using_gpu:
+            loss = 0
+            with autocast():
+                out = model(data.initial_graph.to(device), data.edges.to(device), rates.to(device))
+                loss = criterion(out, output_graph.to(device))
+            scaler.scale(loss).backward()
+            scaler.step(optimizer)
+            scaler.update()
+        else: 
+            loss.backward()
+            loss_per_epoch += loss.item()
+            optimizer.step()
+            
+        loss_per_epoch += loss.item()
+        if using_gpu:
+            loss = None 
+            
+    if using_gpu and epoch  % 5 == 0:
+        torch.cuda.empty_cache()
+    
     if epoch % 1 == 0:
         print("Epoch:", epoch, " Loss:", loss_per_epoch)   
 
