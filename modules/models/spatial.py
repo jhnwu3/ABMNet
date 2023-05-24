@@ -34,6 +34,9 @@ class EncoderLayer(nn.Module):
         x = self.linear2(x)
         return x
 
+class GCNComplexSpatialCorrelation(nn.Module):
+    def __init__(self, n_features, n_classes, hidden_channels, n_rates, embedding_size=64):
+
 
 class GCNComplex(torch.nn.Module):
     # default embedding size maybe, 64?

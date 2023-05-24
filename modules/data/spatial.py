@@ -174,6 +174,9 @@ class GiuseppeSurrogateGraphData():
         if self.single_init: # what if we only need one of the initial conditions
             self.input_graphs = self.input_graphs[0]
 
+    def delaunay_edges_and_spatial_correlation(self, dictionary):
+        
+        
     # create a pickle data structure for all the Y stuff
     # since we are not memory constrained just yet, we can simply load it on the cluster no need 
     # to do fileIO for now. 
