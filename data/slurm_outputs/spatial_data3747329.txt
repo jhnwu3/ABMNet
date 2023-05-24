@@ -1,0 +1,53 @@
+Epoch: 0  Loss: 5788.056819838874
+Epoch: 1  Loss: 5646.488100111409
+Epoch: 2  Loss: 5631.041756265598
+Epoch: 3  Loss: 5629.332860213461
+Epoch: 4  Loss: 5628.448977691571
+Epoch: 5  Loss: 5628.681638182054
+Epoch: 6  Loss: 5628.923544778355
+Epoch: 7  Loss: 5630.0063158656
+Epoch: 8  Loss: 5630.574747162454
+Epoch: 9  Loss: 5631.0926429127585
+Epoch: 10  Loss: 5630.628400424161
+Epoch: 11  Loss: 5629.929631106273
+Epoch: 12  Loss: 5631.1088442812525
+Epoch: 13  Loss: 5630.5041626223465
+Epoch: 14  Loss: 5630.896640349668
+Epoch: 15  Loss: 5631.3044615848185
+Epoch: 16  Loss: 5632.19486298708
+Epoch: 17  Loss: 5628.54937600948
+Epoch: 18  Loss: 5630.635481424109
+Epoch: 19  Loss: 5631.431792904923
+Epoch: 20  Loss: 5631.229089925141
+Epoch: 21  Loss: 5629.046717797887
+Epoch: 22  Loss: 5629.8487342823855
+Epoch: 23  Loss: 5630.414306590624
+Epoch: 24  Loss: 5631.808775690924
+Epoch: 25  Loss: 5633.58056626986
+Epoch: 26  Loss: 5631.696939624818
+Epoch: 27  Loss: 5633.179577595616
+Epoch: 28  Loss: 5628.837960649672
+Epoch: 29  Loss: 5629.4224054253045
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/spatial.py", line 57, in <module>
+    out = model(data.initial_graph.to(device), data.edges.to(device), rates.to(device))
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1130, in _call_impl
+    raise TypeError('nn.Module.to only accepts floating point or complex '
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/models/spatial.py", line 48, in forward
+    graph = self.conv1(graph, edge_index)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1130, in _call_impl
+    raise TypeError('nn.Module.to only accepts floating point or complex '
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch_geometric/nn/conv/gcn_conv.py", line 232, in forward
+    out = self.propagate(edge_index, x=x, edge_weight=edge_weight,
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch_geometric/nn/conv/message_passing.py", line 467, in propagate
+    out = self.message(**msg_kwargs)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch_geometric/nn/conv/gcn_conv.py", line 241, in message
+    return x_j if edge_weight is None else edge_weight.view(-1, 1) * x_j
+RuntimeError: CUDA out of memory. Tried to allocate 18.00 MiB (GPU 0; 15.78 GiB total capacity; 14.24 GiB already allocated; 9.69 MiB free; 14.62 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+Job Statistics for 3747329:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3747329   rsjxw007 2023-05-23T16:21:06 2023-05-23T17:11:24   00:50:18             56:00.140     FAILED  1:0   r1pl-hpcf-g02 billing=30,cpu=30,gres/gpu=1,mem=223650+ 
+   3747329.batch            2023-05-23T16:21:06 2023-05-23T17:11:24   00:50:18  57120.34M  56:00.137     FAILED  1:0   r1pl-hpcf-g02                                          
+  3747329.extern            2023-05-23T16:21:06 2023-05-23T17:11:24   00:50:18          0  00:00.002  COMPLETED  0:0   r1pl-hpcf-g02                                          
+CPU Efficiency: 3.71% of 1-01:09:00 core-walltime
