@@ -5,6 +5,28 @@ import numpy as np
 from torch.utils.data import DataLoader, IterableDataset, Dataset
 from scipy import spatial
 import math
+import numpy as np
+
+def compute_spatial_correlation(image, center_row, center_col, radius):
+    # Get the image shape
+    height, width, channels = image.shape
+    
+    # Define the bounding box coordinates
+    min_row = max(center_row - radius, 0)
+    max_row = min(center_row + radius + 1, height)
+    min_col = max(center_col - radius, 0)
+    max_col = min(center_col + radius + 1, width)
+    
+    # Extract the neighborhood region
+    neighborhood = image[min_row:max_row, min_col:max_col, :]
+    
+    # Reshape the neighborhood to a 2D array
+    neighborhood = np.reshape(neighborhood, (-1, channels))
+    
+    # Compute the spatial correlation
+    correlation = np.corrcoef(neighborhood.T, image[center_row, center_col])[0, 1:]
+    
+    return correlation
 
 # each spatial object has 3 specific components
 # 1 set of rate constants that generated the data
@@ -175,7 +197,7 @@ class GiuseppeSurrogateGraphData():
             self.input_graphs = self.input_graphs[0]
 
     def delaunay_edges_and_spatial_correlation(self, dictionary):
-        
+        return ""
         
     # create a pickle data structure for all the Y stuff
     # since we are not memory constrained just yet, we can simply load it on the cluster no need 

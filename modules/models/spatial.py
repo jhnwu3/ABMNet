@@ -35,9 +35,28 @@ class EncoderLayer(nn.Module):
         return x
 
 class GCNComplexSpatialCorrelation(nn.Module):
-    def __init__(self, n_features, n_classes, hidden_channels, n_rates, embedding_size=64):
-
-
+    def __init__(self, n_inputs, hidden_channels, n_rates, embedding_size=64, n_outputs=2):
+        super().__init__()
+        torch.manual_seed(1234567)
+        self.conv1 = GCNConv(n_inputs, hidden_channels)
+        self.rates_encoder = EncoderLayer(n_rates, embedding_size, hidden_channels)
+        self.hidden = nn.Linear(hidden_channels + hidden_channels, hidden_channels)
+        self.final = nn.Linear(hidden_channels, n_outputs)
+        
+    def forward(self, graph, edge_index, rates):
+        graph = self.conv1(graph, edge_index)
+        graph = graph.relu()
+        graph = F.dropout(graph, p=0.5, training=self.training)
+        rates_rep = self.rates_encoder(rates)
+        # concatenate both the graph and rates_representation and produce next
+        graph = torch.cat((graph, self.rates_encoder(rates).repeat(graph.size()[0]).reshape((graph.size()[0], rates_rep.size()[0]))), dim=1)
+        
+        # convolve again and get the output u care about
+        graph = self.hidden(graph)
+        graph = F.relu(graph)
+        graph = self.final(graph)
+        return graph
+        
 class GCNComplex(torch.nn.Module):
     # default embedding size maybe, 64?
     def __init__(self, n_features, n_classes, hidden_channels, n_rates, embedding_size=64):
