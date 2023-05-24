@@ -1,0 +1,65 @@
+Epoch: 0  Loss: 5778.9854393186215
+Epoch: 1  Loss: 5644.402422000115
+Epoch: 2  Loss: 5625.473562096789
+Epoch: 3  Loss: 5626.515401306267
+Epoch: 4  Loss: 5627.656605464775
+Epoch: 5  Loss: 5628.113084290813
+Epoch: 6  Loss: 5629.397117992078
+Epoch: 7  Loss: 5628.649167484356
+Epoch: 8  Loss: 5628.7498990215545
+Epoch: 9  Loss: 5627.4859487244685
+Epoch: 10  Loss: 5629.292518313476
+Epoch: 11  Loss: 5630.2875525128675
+Epoch: 12  Loss: 5629.462292869524
+Epoch: 13  Loss: 5629.616315850246
+Epoch: 14  Loss: 5628.038625189104
+Epoch: 15  Loss: 5628.409372828515
+Epoch: 16  Loss: 5628.865459812733
+Epoch: 17  Loss: 5627.438966886617
+Epoch: 18  Loss: 5627.561641239947
+Epoch: 19  Loss: 5629.341695510914
+Epoch: 20  Loss: 5628.215007637596
+Epoch: 21  Loss: 5628.326819708905
+Epoch: 22  Loss: 5626.6860258847055
+Epoch: 23  Loss: 5629.893048896556
+Epoch: 24  Loss: 5629.25477257402
+Epoch: 25  Loss: 5630.324825541845
+Epoch: 26  Loss: 5631.252455192213
+Epoch: 27  Loss: 5626.311990664904
+Epoch: 28  Loss: 5628.56545706629
+Epoch: 29  Loss: 5628.095705359604
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/spatial.py", line 77, in <module>
+    out = model(data.initial_graph.to(device), data.edges.to(device), rates.to(device))
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/models/spatial.py", line 48, in forward
+    graph = self.conv1(graph, edge_index)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch_geometric/nn/conv/gcn_conv.py", line 232, in forward
+    out = self.propagate(edge_index, x=x, edge_weight=edge_weight,
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch_geometric/nn/conv/message_passing.py", line 484, in propagate
+    out = self.aggregate(out, **aggr_kwargs)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch_geometric/nn/conv/message_passing.py", line 608, in aggregate
+    return self.aggr_module(inputs, index, ptr=ptr, dim_size=dim_size,
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch_geometric/nn/aggr/base.py", line 116, in __call__
+    raise e
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch_geometric/nn/aggr/base.py", line 109, in __call__
+    return super().__call__(x, index, ptr, dim_size, dim, **kwargs)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch_geometric/nn/aggr/basic.py", line 21, in forward
+    return self.reduce(x, index, ptr, dim_size, dim, reduce='sum')
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch_geometric/nn/aggr/base.py", line 155, in reduce
+    return scatter(x, index, dim, dim_size, reduce)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch_geometric/utils/scatter.py", line 74, in scatter
+    return src.new_zeros(size).scatter_add_(dim, index, src)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB (GPU 0; 39.41 GiB total capacity; 37.29 GiB already allocated; 4.50 MiB free; 38.22 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+Job Statistics for 3748268:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3748268   rsjxw007 2023-05-24T10:37:25 2023-05-24T11:34:59   00:57:34             58:34.267     FAILED  1:0   r1pl-hpcf-g05 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3748268.batch            2023-05-24T10:37:25 2023-05-24T11:34:59   00:57:34  57190.04M  58:34.262     FAILED  1:0   r1pl-hpcf-g05                                          
+  3748268.extern            2023-05-24T10:37:25 2023-05-24T11:34:59   00:57:34          0  00:00.004  COMPLETED  0:0   r1pl-hpcf-g05                                          
+CPU Efficiency: 6.36% of 15:21:04 core-walltime
