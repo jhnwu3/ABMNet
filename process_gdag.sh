@@ -7,6 +7,6 @@
 #SBATCH --cpus-per-task=16
 #SBATCH --gres=gpu:a100
 
-python3 spatial.py
+python3 spatial_process_data.py
 # mprof plot
 # python3 -m memory_profiler spatial.py

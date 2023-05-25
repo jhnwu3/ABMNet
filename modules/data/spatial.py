@@ -18,17 +18,24 @@ def extract_covariances(covariance_matrix):
 
     return covariances
 
-def moment_vector(lattice):
+def moment_vector(lattice, channels=[]):
     means = np.mean(lattice, axis=(0,1))
     variances = np.var(lattice, axis=(0,1))
     nodes = [] # torch.zeros((lattice.shape[0] * lattice.shape[1], lattice.shape[2]))
-    i = 0
     for r in range(lattice.shape[0]):
         for c in range(lattice.shape[1]):
-            nodes.append(lattice[r,c])
-    # bad code inbound
+            if len(channels) > 0:
+                nodes.append(lattice[r,c, channels])
+            else:
+                nodes.append(lattice[r,c])
+            
     nodes = np.array(nodes)
     covariances = extract_covariances(np.cov(nodes,rowvar=False))
+    
+    # BAD CODE HAHAHAHA
+    if len(channels) > 0:
+        means = means[channels]
+        variances = variances[channels]
     return np.concatenate((means, variances, covariances))
 
 
@@ -288,7 +295,7 @@ class GiuseppeSurrogateGraphData():
             self.n_rates = self.rates[0].size()[0]
     
     
-    def delaunay_autocorrelation(self, dictionary):
+    def delaunay_autocorrelation(self, dictionary, channels=[]):
         for key in dictionary.keys():
             rates = np.frombuffer(key)
             lattice_shape = dictionary[key][0][0].shape
@@ -328,7 +335,7 @@ class GiuseppeSurrogateGraphData():
             self.length = len(self.output_graphs) 
             self.n_rates = self.rates[0].size()[0]
     
-    def delaunay_moments(self, dictionary):
+    def delaunay_moments(self, dictionary, channels = []):
         for key in dictionary.keys():
             rates = np.frombuffer(key)
             lattice_shape = dictionary[key][0][0].shape
@@ -362,7 +369,7 @@ class GiuseppeSurrogateGraphData():
                 final_lattice = sample[1]
                 self.rates.append(torch.from_numpy(rates.copy())) # yes there will be duplicate rates, but we need to stay consistent with indexing.
                 self.input_graphs.append(GiuseppeSurrogateGraphData.convert_lattice_to_node(initial_lattice))
-                self.output_graphs.append(torch.from_numpy(moment_vector(final_lattice)))
+                self.output_graphs.append(torch.from_numpy(moment_vector(final_lattice, channels)))
             self.n_features = self.input_graphs[0].size()[1]
             self.n_output = self.output_graphs[0].size()[1]
             self.length = len(self.output_graphs) 
