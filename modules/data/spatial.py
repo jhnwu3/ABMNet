@@ -371,7 +371,7 @@ class GiuseppeSurrogateGraphData():
                 self.input_graphs.append(GiuseppeSurrogateGraphData.convert_lattice_to_node(initial_lattice))
                 self.output_graphs.append(torch.from_numpy(moment_vector(final_lattice, channels)))
             self.n_features = self.input_graphs[0].size()[1]
-            self.n_output = self.output_graphs[0].size()[1]
+            self.n_output = self.output_graphs[0].size()[0]
             self.length = len(self.output_graphs) 
             self.n_rates = self.rates[0].size()[0]
     
