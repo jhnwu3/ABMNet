@@ -43,3 +43,4 @@ def get_nn_type():
         return sys.argv[sys.argv.index('--type') + 1]
     else: 
         return -1 
+    

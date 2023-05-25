@@ -7,26 +7,71 @@ from scipy import spatial
 import math
 import numpy as np
 
-def compute_spatial_correlation(image, center_row, center_col, radius):
-    # Get the image shape
+def extract_covariances(covariance_matrix):
+    num_variables = covariance_matrix.shape[0]
+    covariances = []
+
+    for i in range(num_variables):
+        for j in range(i+1, num_variables):
+            covariance = covariance_matrix[i, j]
+            covariances.append(covariance)
+
+    return covariances
+
+def moment_vector(lattice):
+    means = np.mean(lattice, axis=(0,1))
+    variances = np.var(lattice, axis=(0,1))
+    nodes = [] # torch.zeros((lattice.shape[0] * lattice.shape[1], lattice.shape[2]))
+    i = 0
+    for r in range(lattice.shape[0]):
+        for c in range(lattice.shape[1]):
+            nodes.append(lattice[r,c])
+    # bad code inbound
+    nodes = np.array(nodes)
+    covariances = extract_covariances(np.cov(nodes,rowvar=False))
+    return np.concatenate((means, variances, covariances))
+
+
+def spatial_correlation(image, radius):
+    # Calculate image dimensions
     height, width, channels = image.shape
-    
-    # Define the bounding box coordinates
-    min_row = max(center_row - radius, 0)
-    max_row = min(center_row + radius + 1, height)
-    min_col = max(center_col - radius, 0)
-    max_col = min(center_col + radius + 1, width)
-    
-    # Extract the neighborhood region
-    neighborhood = image[min_row:max_row, min_col:max_col, :]
-    
-    # Reshape the neighborhood to a 2D array
-    neighborhood = np.reshape(neighborhood, (-1, channels))
-    
-    # Compute the spatial correlation
-    correlation = np.corrcoef(neighborhood.T, image[center_row, center_col])[0, 1:]
-    
+
+    # Initialize correlation matrix
+    correlation = np.zeros((height, width, channels))
+
+    # Calculate mean of the image
+    image_mean = np.mean(image, axis=(0, 1))
+
+    # Calculate autocorrelation within the given radius
+    for i in range(height):
+        for j in range(width):
+            for m in range(-radius, radius+1):
+                for n in range(-radius, radius+1):
+                    shifted_i = (i + m) % height
+                    shifted_j = (j + n) % width
+                    correlation[i, j] += (image[i, j] - image_mean) * (image[shifted_i, shifted_j] - image_mean)
+
+    # Normalize the correlation matrix
+    correlation /= ((2*radius + 1)**2)
+
     return correlation
+
+
+def autocorrelation_coefficient(image, shift_direction=1):
+    # Normalize the image
+    normalized_image = (image - np.mean(image, axis=(0, 1))) / np.std(image, axis=(0, 1))
+
+    # Shift the normalized image
+    shifted_image = np.roll(normalized_image, shift_direction, axis=(0, 1))
+
+    # Calculate the normalized cross-correlation
+    cross_correlation = np.sum(normalized_image * shifted_image, axis=(0, 1)) / np.prod(image.shape[:2])
+
+    # Normalize the cross-correlation
+    autocorrelation_coefficient = cross_correlation / np.max(np.abs(cross_correlation))
+
+    return autocorrelation_coefficient
+
 
 # each spatial object has 3 specific components
 # 1 set of rate constants that generated the data
@@ -153,6 +198,12 @@ class GiuseppeSurrogateGraphData():
         nodes = np.array(nodes)
         return torch.from_numpy(nodes)
     
+    def clear(self):
+        self.input_graphs.clear()
+        self.output_graphs.clear()
+        self.rates.clear()
+        self.edges.clear()
+        
     def delaunay_edges_and_data(self, dictionary):
         for key in dictionary.keys():
             rates = np.frombuffer(key)
@@ -196,8 +247,127 @@ class GiuseppeSurrogateGraphData():
         if self.single_init: # what if we only need one of the initial conditions
             self.input_graphs = self.input_graphs[0]
 
-    def delaunay_edges_and_spatial_correlation(self, dictionary):
-        return ""
+    def delaunay_autocorrelation_coefficient(self, dictionary):
+        for key in dictionary.keys():
+            rates = np.frombuffer(key)
+            lattice_shape = dictionary[key][0][0].shape
+            
+            coords = np.zeros((lattice_shape[0] * lattice_shape[1], 2))
+            i = 0
+            for r in range(lattice_shape[0]):
+                for c in range(lattice_shape[1]):
+                    # create array of 2D coordinates for triangulation
+                    coords[i,0] = r
+                    coords[i,1] = c
+                    i+=1
+            
+            # now get the edges from delaunay triangulation that will be reused across all things
+            tri = spatial.Delaunay(coords)
+            edges = []
+            for triangle in range(tri.simplices.shape[0]):
+                # basically now need to go through each of simplices rows and convert them into 
+                # edges are two-way, so have to re-iterate twice through.
+                for coordinateIndex in range (tri.simplices.shape[1]):
+                    for secondCoordinateIndex in range(coordinateIndex + 1, tri.simplices.shape[1]):
+                        if coordinateIndex != secondCoordinateIndex:
+                            edges.append([tri.simplices[triangle, coordinateIndex], tri.simplices[triangle, secondCoordinateIndex]]) # use same set of edges each time
+            
+            self.edges = torch.Tensor(edges)
+            self.edges = self.edges.long()   
+            self.edges = self.edges.transpose(0,1)   
+            # now append all of the graphs in order with respect to the input and output data
+            for sample in dictionary[key]: 
+                initial_lattice = sample[0]
+                final_lattice = sample[1]
+                self.rates.append(torch.from_numpy(rates.copy())) # yes there will be duplicate rates, but we need to stay consistent with indexing.
+                self.input_graphs.append(GiuseppeSurrogateGraphData.convert_lattice_to_node(initial_lattice))
+                self.output_graphs.append(torch.from_numpy(autocorrelation_coefficient(final_lattice)))
+            self.n_features = self.input_graphs[0].size()[1]
+            self.n_output = self.output_graphs[0].size()[1]
+            self.length = len(self.output_graphs) 
+            self.n_rates = self.rates[0].size()[0]
+    
+    
+    def delaunay_autocorrelation(self, dictionary):
+        for key in dictionary.keys():
+            rates = np.frombuffer(key)
+            lattice_shape = dictionary[key][0][0].shape
+            
+            coords = np.zeros((lattice_shape[0] * lattice_shape[1], 2))
+            i = 0
+            for r in range(lattice_shape[0]):
+                for c in range(lattice_shape[1]):
+                    # create array of 2D coordinates for triangulation
+                    coords[i,0] = r
+                    coords[i,1] = c
+                    i+=1
+            
+            # now get the edges from delaunay triangulation that will be reused across all things
+            tri = spatial.Delaunay(coords)
+            edges = []
+            for triangle in range(tri.simplices.shape[0]):
+                # basically now need to go through each of simplices rows and convert them into 
+                # edges are two-way, so have to re-iterate twice through.
+                for coordinateIndex in range (tri.simplices.shape[1]):
+                    for secondCoordinateIndex in range(coordinateIndex + 1, tri.simplices.shape[1]):
+                        if coordinateIndex != secondCoordinateIndex:
+                            edges.append([tri.simplices[triangle, coordinateIndex], tri.simplices[triangle, secondCoordinateIndex]]) # use same set of edges each time
+            
+            self.edges = torch.Tensor(edges)
+            self.edges = self.edges.long()   
+            self.edges = self.edges.transpose(0,1)   
+            # now append all of the graphs in order with respect to the input and output data
+            for sample in dictionary[key]: 
+                initial_lattice = sample[0]
+                final_lattice = sample[1]
+                self.rates.append(torch.from_numpy(rates.copy())) # yes there will be duplicate rates, but we need to stay consistent with indexing.
+                self.input_graphs.append(GiuseppeSurrogateGraphData.convert_lattice_to_node(initial_lattice))
+                self.output_graphs.append(torch.from_numpy(spatial_correlation(final_lattice, 5)))
+            self.n_features = self.input_graphs[0].size()[1]
+            self.n_output = self.output_graphs[0].size()[1]
+            self.length = len(self.output_graphs) 
+            self.n_rates = self.rates[0].size()[0]
+    
+    def delaunay_moments(self, dictionary):
+        for key in dictionary.keys():
+            rates = np.frombuffer(key)
+            lattice_shape = dictionary[key][0][0].shape
+            
+            coords = np.zeros((lattice_shape[0] * lattice_shape[1], 2))
+            i = 0
+            for r in range(lattice_shape[0]):
+                for c in range(lattice_shape[1]):
+                    # create array of 2D coordinates for triangulation
+                    coords[i,0] = r
+                    coords[i,1] = c
+                    i+=1
+            
+            # now get the edges from delaunay triangulation that will be reused across all things
+            tri = spatial.Delaunay(coords)
+            edges = []
+            for triangle in range(tri.simplices.shape[0]):
+                # basically now need to go through each of simplices rows and convert them into 
+                # edges are two-way, so have to re-iterate twice through.
+                for coordinateIndex in range (tri.simplices.shape[1]):
+                    for secondCoordinateIndex in range(coordinateIndex + 1, tri.simplices.shape[1]):
+                        if coordinateIndex != secondCoordinateIndex:
+                            edges.append([tri.simplices[triangle, coordinateIndex], tri.simplices[triangle, secondCoordinateIndex]]) # use same set of edges each time
+            
+            self.edges = torch.Tensor(edges)
+            self.edges = self.edges.long()   
+            self.edges = self.edges.transpose(0,1)   
+            # now append all of the graphs in order with respect to the input and output data
+            for sample in dictionary[key]: 
+                initial_lattice = sample[0]
+                final_lattice = sample[1]
+                self.rates.append(torch.from_numpy(rates.copy())) # yes there will be duplicate rates, but we need to stay consistent with indexing.
+                self.input_graphs.append(GiuseppeSurrogateGraphData.convert_lattice_to_node(initial_lattice))
+                self.output_graphs.append(torch.from_numpy(moment_vector(final_lattice)))
+            self.n_features = self.input_graphs[0].size()[1]
+            self.n_output = self.output_graphs[0].size()[1]
+            self.length = len(self.output_graphs) 
+            self.n_rates = self.rates[0].size()[0]
+    
         
     # create a pickle data structure for all the Y stuff
     # since we are not memory constrained just yet, we can simply load it on the cluster no need 
