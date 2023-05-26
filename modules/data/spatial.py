@@ -316,11 +316,15 @@ class GiuseppeSurrogateGraphData():
             self.edges = self.edges.transpose(0,1)   
             # now append all of the graphs in order with respect to the input and output data
             for sample in dictionary[key]: 
+                corr = []
                 initial_lattice = sample[0]
                 final_lattice = sample[1]
                 self.rates.append(torch.from_numpy(rates.copy())) # yes there will be duplicate rates, but we need to stay consistent with indexing.
                 self.input_graphs.append(GiuseppeSurrogateGraphData.convert_lattice_to_node(initial_lattice))
-                self.output_graphs.append(torch.from_numpy(spatial_correlation(final_lattice, 5)))
+                for r in range(5,16,5):
+                    corr.append((np.mean(spatial_correlation(final_lattice, r), axis=(0,1))))
+                corr = np.array(corr)
+                self.output_graphs.append(torch.from_numpy(corr))
             self.n_features = self.input_graphs[0].size()[1]
             self.n_output = self.output_graphs[0].size()[1]
             self.length = len(self.output_graphs) 
