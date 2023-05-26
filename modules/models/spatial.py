@@ -2,7 +2,7 @@ import os, psutil
 import torch 
 import torch.nn.functional as F
 import torch.nn as nn
-from torch_geometric.nn import GCNConv
+from torch_geometric.nn import GCNConv, global_mean_pool
 from scipy import spatial
 from modules.utils.graph import *
 from modules.data.spatial import *
@@ -40,8 +40,12 @@ class GCNComplexMoments(nn.Module):
         torch.manual_seed(1234567)
         self.conv1 = GCNConv(n_inputs, hidden_channels)
         self.rates_encoder = EncoderLayer(n_rates, embedding_size, hidden_channels)
-        self.hidden = nn.Linear(hidden_channels + hidden_channels, hidden_channels)
+        self.conv2 = GCNConv(hidden_channels + hidden_channels, hidden_channels)
+        self.conv3 = GCNConv(hidden_channels, hidden_channels)
+        self.hidden = nn.Linear(hidden_channels, hidden_channels)
+        self.hidden2 = nn.Linear(hidden_channels, hidden_channels)
         self.final = nn.Linear(hidden_channels, n_outputs)
+        
         
     def forward(self, graph, edge_index, rates):
         graph = self.conv1(graph, edge_index)
@@ -50,9 +54,14 @@ class GCNComplexMoments(nn.Module):
         rates_rep = self.rates_encoder(rates)
         # concatenate both the graph and rates_representation and produce next
         graph = torch.cat((graph, self.rates_encoder(rates).repeat(graph.size()[0]).reshape((graph.size()[0], rates_rep.size()[0]))), dim=1)
-        
+        graph = self.conv2(graph)
+        graph = self.conv3(graph)
+        # get the average for final prediction.
+        graph = global_mean_pool(graph)
         # convolve again and get the output u care about
         graph = self.hidden(graph)
+        graph = F.relu(graph)
+        graph = self.hidden2(graph)
         graph = F.relu(graph)
         graph = self.final(graph)
         return graph

@@ -284,7 +284,8 @@ class GiuseppeSurrogateGraphData():
             self.n_output = self.output_graphs[0].size()[1]
             self.length = len(self.output_graphs) 
             self.n_rates = self.rates[0].size()[0]
-    
+            if self.single_init: # what if we only need one of the initial conditions
+                self.input_graphs = self.input_graphs[0]
     
     def delaunay_autocorrelation(self, dictionary, channels=[]):
         for key in dictionary.keys():
@@ -329,7 +330,11 @@ class GiuseppeSurrogateGraphData():
             self.n_output = self.output_graphs[0].size()[1]
             self.length = len(self.output_graphs) 
             self.n_rates = self.rates[0].size()[0]
-    
+            
+            if self.single_init: # what if we only need one of the initial conditions
+                self.input_graphs = self.input_graphs[0]
+            
+            
     def delaunay_moments(self, dictionary, channels = []):
         for key in dictionary.keys():
             rates = np.frombuffer(key)
@@ -372,7 +377,8 @@ class GiuseppeSurrogateGraphData():
             self.n_output = self.output_graphs[0].size()[0]
             self.length = len(self.output_graphs) 
             self.n_rates = self.rates[0].size()[0]
-    
+            if self.single_init: # what if we only need one of the initial conditions
+                self.input_graphs = self.input_graphs[0]
         
     # create a pickle data structure for all the Y stuff
     # since we are not memory constrained just yet, we can simply load it on the cluster no need 
@@ -475,6 +481,34 @@ class SingleInitialConditionDataset(Dataset):
             self.initial_graph = self.initial_graph[:,channels]
             for i in range(len(self.output_graphs)):
                 self.output_graphs[i] = self.output_graphs[i][:,channels] # this should work I believe lol.
+            
+        
+    def __len__(self):
+        # Return the total number of samples in your dataset
+        return len(self.rates) # len(rates) == len(output_graphs)
+    
+    def __getitem__(self, index):
+        # Retrieve a single item from the dataset based on the given index
+        # Return a tuple (input, target) or dictionary {'input': input, 'target': target}
+        # The input and target can be tensors, NumPy arrays, or other data types
+        return self.rates[index], self.output_graphs[index]
+
+
+# Cytotoxic CD8+ T Cells, Cancer, Exhausted CD8+ T Cells, Dead Cancer Cells, Ignore, Ignore, TAMs, Ignore, Ignore
+class SingleInitialMomentsDataset(Dataset):
+    # path to a pickle file that contains a dictionary of the following variables shown below
+    # [] is a list of indices of features to keep in the input and output graphs
+    def __init__(self, path):
+        # Initialize your dataset here
+        # Store the necessary data or file paths
+        data = pickle.load(open(path, "rb"))
+        self.output_graphs = data["output_graphs"]
+        self.initial_graph = data["input_graphs"]
+        self.edges = data["edges"]
+        self.rates = data["rates"]
+        self.n_outputs = data["n_outputs"] 
+        self.n_inputs = data["n_features"]
+        self.n_rates = data["n_rates"]
             
         
     def __len__(self):
