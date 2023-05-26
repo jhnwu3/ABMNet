@@ -357,7 +357,7 @@ class GiuseppeSurrogateGraphData():
             self.edges = self.edges.transpose(0,1)   
             
             self.rates.append(torch.from_numpy(rates.copy())) # one rate for all 30 samples
-            self.input_graphs.append(GiuseppeSurrogateGraphData.convert_lattice_to_node(dictionary[key][0])) # one input graph that we care about per 30 samples
+            self.input_graphs.append(GiuseppeSurrogateGraphData.convert_lattice_to_node(dictionary[key][0][0])) # one input graph that we care about per 30 samples
             # now append all of the graphs in order with respect to the input and output data
             sample_counts = []
             for sample in dictionary[key]: 

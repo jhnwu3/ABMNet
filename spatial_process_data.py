@@ -14,6 +14,9 @@ lattice_data = pickle.load(open(path, "rb"))
 data_processed = GiuseppeSurrogateGraphData()
 data_processed.delaunay_moments(lattice_data, channels=[0,1,2,3,6])
 print(data_processed.output_graphs[0].size())
+print(len(data_processed.input_graphs))
+print(len(data_processed.output_graphs))
+print(len(data_processed.rates))
 data_processed.save("../gdag_data/gdag_full_moments.pickle")
 
 
