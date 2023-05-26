@@ -322,7 +322,7 @@ class GiuseppeSurrogateGraphData():
                 self.rates.append(torch.from_numpy(rates.copy())) # yes there will be duplicate rates, but we need to stay consistent with indexing.
                 self.input_graphs.append(GiuseppeSurrogateGraphData.convert_lattice_to_node(initial_lattice))
                 for r in range(5,16,5):
-                    corr.append((np.mean(spatial_correlation(final_lattice, r), axis=(0,1))))
+                    corr.append((np.mean(spatial_correlation(final_lattice, r)[:,:,channels], axis=(0,1))))
                 corr = np.array(corr)
                 self.output_graphs.append(torch.from_numpy(corr))
             self.n_features = self.input_graphs[0].size()[1]
