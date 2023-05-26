@@ -19,8 +19,8 @@ def extract_covariances(covariance_matrix):
     return covariances
 
 def moment_vector(lattice, channels=[]):
-    means = np.mean(lattice, axis=(0,1))
-    variances = np.var(lattice, axis=(0,1))
+    means = np.mean(lattice, axis=0)
+    variances = np.var(lattice, axis=0)
     nodes = [] # torch.zeros((lattice.shape[0] * lattice.shape[1], lattice.shape[2]))
     for r in range(lattice.shape[0]):
         for c in range(lattice.shape[1]):

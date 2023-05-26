@@ -34,7 +34,7 @@ class EncoderLayer(nn.Module):
         x = self.linear2(x)
         return x
 
-class GCNComplexSpatialCorrelation(nn.Module):
+class GCNComplexMoments(nn.Module):
     def __init__(self, n_inputs, hidden_channels, n_rates, embedding_size=64, n_outputs=2):
         super().__init__()
         torch.manual_seed(1234567)

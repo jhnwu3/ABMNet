@@ -1,8 +1,4 @@
 # problem with the code is that the spatial data can only be run on the cluster, because it's so massive, which means we can't run anything locally
-import matplotlib.pyplot as plt
-import matplotlib as mpl
-import numpy as np
-import pandas as pd
 import torch 
 import gc
 from torch.cuda.amp import autocast
@@ -19,6 +15,7 @@ test_size = len(data) - train_size
 train_data, test_data = torch.utils.data.random_split(data, [train_size, test_size])
 
 nEpochs = 2
+print("nEpochs:", nEpochs)
 # for manual testing, load everything at once, and train
 # model = GCN(n_features=input_graph.size()[1], n_classes=output_graphs_chunk[0].size()[1])
 model = GCNComplex(n_features=data.n_inputs, n_classes= data.n_outputs, n_rates=data.n_rates, hidden_channels=32)
@@ -31,15 +28,14 @@ device = ""
 scaler = ""
 if torch.cuda.is_available():
     device = torch.device("cuda")
-    model = model.cuda()
-    criterion = criterion.cuda()
     using_gpu = True
     scaler = torch.cuda.amp.GradScaler()
 else:
     device = torch.device("cpu")
     using_gpu = False
     
-
+model = model.to(device)
+criterion = criterion.to(device)
 
 dataloader = torch.utils.data.DataLoader(train_data, batch_size=None, shuffle=True) 
 for epoch in range(nEpochs):
@@ -60,25 +56,26 @@ for epoch in range(nEpochs):
             loss_per_epoch += loss.item()
             optimizer.step()
             
-        loss_per_epoch += loss.item()
+        loss_per_epoch += loss.cpu().item()
         if using_gpu:
             loss = None 
-            del loss
             
     if using_gpu and epoch  % 5 == 0:
         torch.cuda.empty_cache()
         gc.collect()
     
     if epoch % 1 == 0:
+        print("mem:", torch.cuda.memory_allocated(), " cached:", torch.cuda.memory_cached())
         print("Epoch:", epoch, " Loss:", loss_per_epoch)   
 
-
+print("DONE!") 
 test_dataloader = torch.utils.data.DataLoader(test_data, batch_size=None, shuffle=True)
 model.eval()
 test_loss = 0
-for rates, output_graph in test_dataloader:
-    out = model(data.initial_graph.to(device), data.edges.to(device), rates.to(device))
-    test_loss += criterion(out, output_graph.to(device))
+with torch.no_grad():
+    for rates, output_graph in test_dataloader:
+        out = model(data.initial_graph.to(device), data.edges.to(device), rates.to(device))
+        test_loss += criterion(out.detach(), output_graph.to(device))
 
 print("Test Average MSE:", test_loss / len(test_data))
 
