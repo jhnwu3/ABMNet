@@ -1,0 +1,14 @@
+Reading From: ../gdag_data/gdag_test_full.pickle
+Computing Delaunay Moments
+torch.Size([20])
+1323
+1323
+1323
+Saving Graph Data to PKL
+Job Statistics for 3757571:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3757571   rsjxw007 2023-05-26T12:46:07 2023-05-26T12:50:54   00:04:47             08:02.770  COMPLETED  0:0   r1pl-hpcf-g05 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3757571.batch            2023-05-26T12:46:07 2023-05-26T12:50:54   00:04:47  58107.46M  08:02.767  COMPLETED  0:0   r1pl-hpcf-g05                                          
+  3757571.extern            2023-05-26T12:46:07 2023-05-26T12:50:54   00:04:47      0.10M  00:00.003  COMPLETED  0:0   r1pl-hpcf-g05                                          
+CPU Efficiency: 10.52% of 01:16:32 core-walltime
