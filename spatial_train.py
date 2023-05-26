@@ -18,7 +18,7 @@ test_size = len(data) - train_size
 # split dataset, into training set and test
 train_data, test_data = torch.utils.data.random_split(data, [train_size, test_size])
 
-nEpochs = 20
+nEpochs = 2
 # for manual testing, load everything at once, and train
 # model = GCN(n_features=input_graph.size()[1], n_classes=output_graphs_chunk[0].size()[1])
 model = GCNComplex(n_features=data.n_inputs, n_classes= data.n_outputs, n_rates=data.n_rates, hidden_channels=32)
