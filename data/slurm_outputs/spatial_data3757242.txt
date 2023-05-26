@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/spatial_process_data.py", line 15, in <module>
+    data_processed.delaunay_moments(lattice_data, channels=[0,1,2,3,6])
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/data/spatial.py", line 360, in delaunay_moments
+    self.input_graphs.append(GiuseppeSurrogateGraphData.convert_lattice_to_node(dictionary[key][0])) # one input graph that we care about per 30 samples
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/data/spatial.py", line 192, in convert_lattice_to_node
+    for r in range(lattice.shape[0]):
+AttributeError: 'tuple' object has no attribute 'shape'
+Job Statistics for 3757242:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3757242   rsjxw007 2023-05-26T11:29:45 2023-05-26T11:30:39   00:00:54             00:46.409     FAILED  1:0   r1pl-hpcf-g04 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3757242.batch            2023-05-26T11:29:45 2023-05-26T11:30:39   00:00:54  24757.46M  00:46.405     FAILED  1:0   r1pl-hpcf-g04                                          
+  3757242.extern            2023-05-26T11:29:45 2023-05-26T11:30:39   00:00:54      0.09M  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 5.32% of 00:14:24 core-walltime
