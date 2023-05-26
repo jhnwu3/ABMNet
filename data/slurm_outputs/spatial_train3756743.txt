@@ -1,2 +1,32 @@
 /home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/cuda/memory.py:416: FutureWarning: torch.cuda.memory_cached has been renamed to torch.cuda.memory_reserved
   warnings.warn(
+nEpochs: 10
+mem: 17809920  cached: 25165824
+Epoch: 0  Loss: 5782.567923634785
+mem: 17809920  cached: 85983232
+Epoch: 1  Loss: 5642.551683262547
+mem: 17809920  cached: 85983232
+Epoch: 2  Loss: 5626.9598889621975
+mem: 17809920  cached: 85983232
+Epoch: 3  Loss: 5627.402218044422
+mem: 17809920  cached: 85983232
+Epoch: 4  Loss: 5628.80043181389
+mem: 17809920  cached: 25165824
+Epoch: 5  Loss: 5628.325967855103
+mem: 17809920  cached: 85983232
+Epoch: 6  Loss: 5629.403097813226
+mem: 17809920  cached: 85983232
+Epoch: 7  Loss: 5629.959406208923
+mem: 17809920  cached: 85983232
+Epoch: 8  Loss: 5629.625727708651
+mem: 17809920  cached: 85983232
+Epoch: 9  Loss: 5628.807530000237
+DONE!
+Test Average MSE: tensor(0.1749, device='cuda:0', dtype=torch.float64)
+Job Statistics for 3756743:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3756743   rsjxw007 2023-05-26T11:08:57 2023-05-26T11:32:20   00:23:23             24:21.426  COMPLETED  0:0   r1pl-hpcf-g03 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3756743.batch            2023-05-26T11:08:57 2023-05-26T11:32:20   00:23:23  57183.81M  24:21.422  COMPLETED  0:0   r1pl-hpcf-g03                                          
+  3756743.extern            2023-05-26T11:08:57 2023-05-26T11:32:20   00:23:23      0.09M  00:00.003  COMPLETED  0:0   r1pl-hpcf-g03                                          
+CPU Efficiency: 6.51% of 06:14:08 core-walltime
