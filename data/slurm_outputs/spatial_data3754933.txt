@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/spatial_process_data.py", line 15, in <module>
+    data_processed.delaunay_moments(lattice_data, channels=[0,1,2,3,6])
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/data/spatial.py", line 374, in delaunay_moments
+    self.n_output = self.output_graphs[0].size()[1]
+IndexError: tuple index out of range
+Job Statistics for 3754933:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3754933   rsjxw007 2023-05-25T15:41:49 2023-05-25T15:42:45   00:00:56             00:57.221     FAILED  1:0   r1pl-hpcf-g03 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3754933.batch            2023-05-25T15:41:49 2023-05-25T15:42:45   00:00:56  32479.08M  00:57.217     FAILED  1:0   r1pl-hpcf-g03                                          
+  3754933.extern            2023-05-25T15:41:49 2023-05-25T15:42:45   00:00:56          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g03                                          
+CPU Efficiency: 6.36% of 00:14:56 core-walltime

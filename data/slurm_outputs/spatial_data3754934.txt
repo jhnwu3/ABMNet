@@ -1,0 +1,9 @@
+torch.Size([20])
+Saving Graph Data to PKL
+Job Statistics for 3754934:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3754934   rsjxw007 2023-05-25T15:42:50 2023-05-25T16:14:39   00:31:49             35:22.737  COMPLETED  0:0   r1pl-hpcf-g04 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3754934.batch            2023-05-25T15:42:50 2023-05-25T16:14:39   00:31:49 101889.67M  35:22.733  COMPLETED  0:0   r1pl-hpcf-g04                                          
+  3754934.extern            2023-05-25T15:42:50 2023-05-25T16:14:39   00:31:49          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 6.95% of 08:29:04 core-walltime
