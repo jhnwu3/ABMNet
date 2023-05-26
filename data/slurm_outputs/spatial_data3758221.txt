@@ -1,0 +1,14 @@
+Reading From: ../gdag_data/gdag_test_full.pickle
+Computing Delaunay Moments
+input graphs: <class 'list'>
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/spatial_process_data.py", line 23, in <module>
+    print(data_processed.output_graphs.size())
+AttributeError: 'list' object has no attribute 'size'
+Job Statistics for 3758221:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3758221   rsjxw007 2023-05-26T16:13:38 2023-05-26T16:20:34   00:06:56             10:40.706     FAILED  1:0   r1pl-hpcf-g04 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3758221.batch            2023-05-26T16:13:38 2023-05-26T16:20:34   00:06:56  58098.49M  10:40.701     FAILED  1:0   r1pl-hpcf-g04                                          
+  3758221.extern            2023-05-26T16:13:38 2023-05-26T16:20:34   00:06:56      0.10M  00:00.004  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 9.63% of 01:50:56 core-walltime
