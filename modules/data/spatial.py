@@ -55,7 +55,6 @@ def spatial_correlation(image, radius):
 
     return correlation
 
-
 def autocorrelation_coefficient(image, shift_direction=1):
     # Normalize the image
     normalized_image = (image - np.mean(image, axis=(0, 1))) / np.std(image, axis=(0, 1))
@@ -238,6 +237,7 @@ class GiuseppeSurrogateGraphData():
                 self.rates.append(torch.from_numpy(rates.copy())) # yes there will be duplicate rates, but we need to stay consistent with indexing.
                 self.input_graphs.append(GiuseppeSurrogateGraphData.convert_lattice_to_node(initial_lattice))
                 self.output_graphs.append(GiuseppeSurrogateGraphData.convert_lattice_to_node(final_lattice))
+                
             self.n_features = self.input_graphs[0].size()[1]
             self.n_output = self.output_graphs[0].size()[1]
             self.length = len(self.output_graphs) 
@@ -355,13 +355,16 @@ class GiuseppeSurrogateGraphData():
             self.edges = torch.Tensor(edges)
             self.edges = self.edges.long()   
             self.edges = self.edges.transpose(0,1)   
+            
+            self.rates.append(torch.from_numpy(rates.copy())) # one rate for all 30 samples
+            self.input_graphs.append(GiuseppeSurrogateGraphData.convert_lattice_to_node(dictionary[key][0])) # one input graph that we care about per 30 samples
             # now append all of the graphs in order with respect to the input and output data
+            sample_counts = []
             for sample in dictionary[key]: 
-                initial_lattice = sample[0]
                 final_lattice = sample[1]
-                self.rates.append(torch.from_numpy(rates.copy())) # yes there will be duplicate rates, but we need to stay consistent with indexing.
-                self.input_graphs.append(GiuseppeSurrogateGraphData.convert_lattice_to_node(initial_lattice))
-                self.output_graphs.append(torch.from_numpy(moment_vector(final_lattice, channels)))
+                sample_counts.append(np.sum(final_lattice, axis=(0,1)))
+            sample_counts = np.array(sample_counts)
+            self.output_graphs.append(torch.from_numpy(moment_vector(sample_counts, channels)))
             self.n_features = self.input_graphs[0].size()[1]
             self.n_output = self.output_graphs[0].size()[0]
             self.length = len(self.output_graphs) 

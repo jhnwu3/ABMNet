@@ -77,7 +77,7 @@ with torch.no_grad():
         out = model(data.initial_graph.to(device), data.edges.to(device), rates.to(device))
         test_loss += criterion(out.detach(), output_graph.to(device))
 
-print("Test Average MSE:", test_loss / len(test_data))
+print("Test Average MSE:", test_loss.item() / len(test_data))
 
 
 # for i in range(len(output_graphs_chunk)):
