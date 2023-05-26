@@ -500,7 +500,7 @@ class SingleInitialConditionDataset(Dataset):
 class SingleInitialMomentsDataset(Dataset):
     # path to a pickle file that contains a dictionary of the following variables shown below
     # [] is a list of indices of features to keep in the input and output graphs
-    def __init__(self, path):
+    def __init__(self, path, min_max_scale = True):
         # Initialize your dataset here
         # Store the necessary data or file paths
         data = pickle.load(open(path, "rb"))
@@ -511,8 +511,20 @@ class SingleInitialMomentsDataset(Dataset):
         self.n_outputs = data["n_outputs"] 
         self.n_inputs = data["n_features"]
         self.n_rates = data["n_rates"]
+        if min_max_scale:
+            # mins and maxes in the most roundabout way possible, haha ;(
+            # convert back to numpy to get them mins and maxes 
+            arr = []
+            for output in self.output_graphs:
+                arr.append(output.numpy())
+            arr = np.array(arr)
+            arr = torch.from_numpy(arr)
+            # now to do the ugly min maxing, Don't DO THIS KIDS
+            for i in range(len(self.output_graphs)):
+                self.output_graphs[i] -= torch.min(arr, dim=0).values
+                self.output_graphs[i] /= (torch.max(arr,dim=0) - torch.min(arr, dim=0))
             
-        
+            
     def __len__(self):
         # Return the total number of samples in your dataset
         return len(self.rates) # len(rates) == len(output_graphs)
