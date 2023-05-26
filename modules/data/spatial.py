@@ -21,7 +21,6 @@ def extract_covariances(covariance_matrix):
 def moment_vector(lattice, channels=[]):
     means = np.mean(lattice, axis=0)
     variances = np.var(lattice, axis=0)
-    nodes = np.array(nodes)
     covariances = extract_covariances(np.cov(lattice[:,channels],rowvar=False))
     
     # BAD CODE HAHAHAHA
