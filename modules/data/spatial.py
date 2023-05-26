@@ -17,20 +17,12 @@ def extract_covariances(covariance_matrix):
             covariances.append(covariance)
 
     return covariances
-
+# note that lattice is just some n x f matrix where n is the total number of examples and f is the feature dimension.
 def moment_vector(lattice, channels=[]):
     means = np.mean(lattice, axis=0)
     variances = np.var(lattice, axis=0)
-    nodes = [] # torch.zeros((lattice.shape[0] * lattice.shape[1], lattice.shape[2]))
-    for r in range(lattice.shape[0]):
-        for c in range(lattice.shape[1]):
-            if len(channels) > 0:
-                nodes.append(lattice[r,c, channels])
-            else:
-                nodes.append(lattice[r,c])
-            
     nodes = np.array(nodes)
-    covariances = extract_covariances(np.cov(nodes,rowvar=False))
+    covariances = extract_covariances(np.cov(lattice[:,channels],rowvar=False))
     
     # BAD CODE HAHAHAHA
     if len(channels) > 0:
