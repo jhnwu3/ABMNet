@@ -336,6 +336,7 @@ class GiuseppeSurrogateGraphData():
             
             
     def delaunay_moments(self, dictionary, channels = []):
+        print("input graphs:", type(self.input_graphs))
         for key in dictionary.keys():
             rates = np.frombuffer(key)
             lattice_shape = dictionary[key][0][0].shape
@@ -377,6 +378,7 @@ class GiuseppeSurrogateGraphData():
             self.n_output = self.output_graphs[0].size()[0]
             self.length = len(self.output_graphs) 
             self.n_rates = self.rates[0].size()[0]
+            
             if self.single_init: # what if we only need one of the initial conditions
                 self.input_graphs = self.input_graphs[0]
         
