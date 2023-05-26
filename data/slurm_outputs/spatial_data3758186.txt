@@ -1,0 +1,16 @@
+Reading From: ../gdag_data/gdag_test_full.pickle
+Computing Delaunay Moments
+input graphs: <class 'list'>
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/spatial_process_data.py", line 22, in <module>
+    data_processed.delaunay_moments(lattice_data, channels=[0,1,2,3,6])
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/data/spatial.py", line 369, in delaunay_moments
+    self.input_graphs.append(GiuseppeSurrogateGraphData.convert_lattice_to_node(dictionary[key][0][0])) # one input graph that we care about per 30 samples
+AttributeError: 'Tensor' object has no attribute 'append'
+Job Statistics for 3758186:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3758186   rsjxw007 2023-05-26T16:10:00 2023-05-26T16:10:44   00:00:44             00:46.077     FAILED  1:0   r1pl-hpcf-g04 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3758186.batch            2023-05-26T16:10:00 2023-05-26T16:10:44   00:00:44  41937.12M  00:46.072     FAILED  1:0   r1pl-hpcf-g04                                          
+  3758186.extern            2023-05-26T16:10:00 2023-05-26T16:10:44   00:00:44      0.10M  00:00.004  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 6.53% of 00:11:44 core-walltime
