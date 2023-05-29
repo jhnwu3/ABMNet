@@ -1,0 +1,8 @@
+slurmstepd: error: *** JOB 3758315 ON r1pl-hpcf-g04 CANCELLED AT 2023-05-26T16:43:12 ***
+Job Statistics for 3758315:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3758315   rsjxw007 2023-05-26T16:41:41 2023-05-26T16:43:12   00:01:31             02:01.030 CANCELLED+  0:0   r1pl-hpcf-g04 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3758315.batch            2023-05-26T16:41:41 2023-05-26T16:43:15   00:01:34  57358.89M  02:01.026  CANCELLED 0:15   r1pl-hpcf-g04                                          
+  3758315.extern            2023-05-26T16:41:41 2023-05-26T16:43:12   00:01:31      0.09M  00:00.004  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 8.31% of 00:24:16 core-walltime
