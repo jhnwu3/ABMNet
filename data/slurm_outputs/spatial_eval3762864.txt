@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/spatial_evaluate.py", line 32, in <module>
+    out = model(data.initial_graph.to(device).float(), data.edges.to(device).float(), rates.to(device).float())
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/models/spatial.py", line 51, in forward
+    graph = self.conv1(graph, edge_index)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch_geometric/nn/conv/gcn_conv.py", line 210, in forward
+    edge_index, edge_weight = gcn_norm(  # yapf: disable
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch_geometric/nn/conv/gcn_conv.py", line 100, in gcn_norm
+    deg = scatter(edge_weight, idx, dim=0, dim_size=num_nodes, reduce='sum')
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch_geometric/utils/scatter.py", line 74, in scatter
+    return src.new_zeros(size).scatter_add_(dim, index, src)
+RuntimeError: scatter(): Expected dtype int64 for index
+Job Statistics for 3762864:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3762864   rsjxw007 2023-05-30T10:14:28 2023-05-30T10:14:35   00:00:07             00:12.388     FAILED  1:0   r1pl-hpcf-g04 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3762864.batch            2023-05-30T10:14:28 2023-05-30T10:14:35   00:00:07          0  00:12.385     FAILED  1:0   r1pl-hpcf-g04                                          
+  3762864.extern            2023-05-30T10:14:28 2023-05-30T10:14:35   00:00:07          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 10.71% of 00:01:52 core-walltime
