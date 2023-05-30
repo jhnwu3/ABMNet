@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/spatial_train_moments.py", line 20, in <module>
+    SpatialModel.train_moments(train_data, 5,n_inputs=data.n_inputs,n_outputs=data.n_outputs,n_rates=data.n_rates, path="model/gdag_gnn.pt")
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/train.py", line 14, in train_moments
+    model = GCNComplexMoments(n_inputs=n_inputs, n_classes=n_outputs, n_rates=n_rates, hidden_channels=32)
+TypeError: GCNComplexMoments.__init__() got an unexpected keyword argument 'n_classes'
+Job Statistics for 3762243:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3762243   rsjxw007 2023-05-29T21:18:16 2023-05-29T21:18:21   00:00:05             00:08.248     FAILED  1:0   r1pl-hpcf-g05 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3762243.batch            2023-05-29T21:18:16 2023-05-29T21:18:21   00:00:05          0  00:08.245     FAILED  1:0   r1pl-hpcf-g05                                          
+  3762243.extern            2023-05-29T21:18:16 2023-05-29T21:18:21   00:00:05          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g05                                          
+CPU Efficiency: 10.00% of 00:01:20 core-walltime
