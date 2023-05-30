@@ -60,8 +60,8 @@ def main():
     
     
     #**************John you can change these
-    x_points=5 # number of x points
-    y_points=5 #number of y points
+    x_points=50 # number of x points
+    y_points=50 #number of y points
     
  
     xrange=(10**(-1)-10**(-3)) #(ymax - ymin)

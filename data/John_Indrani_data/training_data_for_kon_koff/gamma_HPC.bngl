@@ -7,9 +7,9 @@ begin parameters
   f 602.3
   kon 3.9E-2/Ve
   koff 0.01
-  Kab 0.0792
+  Kab 0.00594
   KB Kab/A
-  KU 0.8
+  KU 0.9
   kp 0.015/A
   kd 0.001
   ksbPP 4.15E-4/Vc
@@ -74,13 +74,13 @@ begin reaction rules
   PZAP_binding_ITAM1: gamma(receptor!+,ITAM1~PP) + A(ITAM~PZAP) <-> gamma(receptor!+,ITAM1~PP!1).A(ITAM~PZAP!1) kzb,kzu 
   PZAP_binding_ITAM2: gamma(receptor!+,ITAM2~PP) + A(ITAM~PZAP) <-> gamma(receptor!+,ITAM2~PP!1).A(ITAM~PZAP!1) kzb,kzu 
   ZAP_phosphorylation: LCK() + gamma(receptor!+).A(ITAM~UZAP!+) -> LCK() + gamma(receptor!+).A(ITAM~PZAP!+) kzp 
-  ZAP_dephosphorylation_SHP_1: A(ITAM~PZAP)%2 + gamma(receptor!+).A(ITAM~SHP!+)%1 -> A(ITAM~UZAP)%2 + gamma(receptor!+).A(ITAM~SHP!+)%1 kzd 
-  ZAP_dephosphorylation_SHP_2: gamma(receptor!+)%1.A(ITAM~PZAP!+)%3 + gamma(receptor!+)%2.A(ITAM~SHP!+)%4 -> gamma(receptor!+)%2.A(ITAM~UZAP!+)%4 + gamma(receptor!+)%1.A(ITAM~SHP!+)%3 kzd 
+  ZAP_dephosphorylation_SHP_1: A%2(ITAM~PZAP) + gamma(receptor!+).A%1(ITAM~SHP!+) -> A%2(ITAM~UZAP) + gamma(receptor!+).A%1(ITAM~SHP!+) kzd 
+  ZAP_dephosphorylation_SHP_2: gamma%1(receptor!+).A%3(ITAM~PZAP!+) + gamma%2(receptor!+).A%4(ITAM~SHP!+) -> gamma%2(receptor!+).A%4(ITAM~UZAP!+) + gamma%1(receptor!+).A%3(ITAM~SHP!+) kzd 
   KP: Ligand(Site!1).CD16(lig!1,receptor!2).gamma(receptor!2) -> Ligand(Site) + CD16(lig,receptor) + gamma(receptor) KPR 
   gamma_adaptor_dephosph_1: gamma(receptor).A(ITAM~PZAP!+) -> gamma(receptor).A(ITAM~UZAP!+) kh 
   KP_ITAM1: gamma(receptor,ITAM1!1,ITAM2).A(ITAM!1) -> gamma(receptor,ITAM1,ITAM2) + A(ITAM) kh 
   KP_ITAM2: gamma(receptor,ITAM1,ITAM2!1).A(ITAM!1) -> gamma(receptor,ITAM1,ITAM2) + A(ITAM) kh 
-  KP_all: gamma(receptor,ITAM1!1,ITAM2!2).A(ITAM!1)%1.A(ITAM!2)%2 -> gamma(receptor,ITAM1,ITAM2) + A(ITAM)%1 + A(ITAM)%2 kh 
+  KP_all: gamma(receptor,ITAM1!1,ITAM2!2).A%1(ITAM!1).A%2(ITAM!2) -> gamma(receptor,ITAM1,ITAM2) + A%1(ITAM) + A%2(ITAM) kh 
   gamma_conv1: gamma(receptor,ITAM1~PP,ITAM2) -> gamma(receptor,ITAM1~U,ITAM2) kh 
   gamma_conv2: gamma(receptor,ITAM1,ITAM2~PP) -> gamma(receptor,ITAM1,ITAM2~U) kh 
 end reaction rules
