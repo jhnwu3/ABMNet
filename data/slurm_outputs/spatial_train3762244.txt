@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/spatial_train_moments.py", line 20, in <module>
+    SpatialModel.train_moments(train_data, 5,n_inputs=data.n_inputs,n_outputs=data.n_outputs,n_rates=data.n_rates, path="model/gdag_gnn.pt")
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/train.py", line 42, in train_moments
+    out = model(data.initial_graph.to(device), data.edges.to(device), rates.to(device))
+AttributeError: 'Subset' object has no attribute 'initial_graph'
+Job Statistics for 3762244:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3762244   rsjxw007 2023-05-29T21:20:52 2023-05-29T21:20:59   00:00:07             00:10.502     FAILED  1:0   r1pl-hpcf-g05 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3762244.batch            2023-05-29T21:20:52 2023-05-29T21:20:59   00:00:07          0  00:10.499     FAILED  1:0   r1pl-hpcf-g05                                          
+  3762244.extern            2023-05-29T21:20:52 2023-05-29T21:20:59   00:00:07          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g05                                          
+CPU Efficiency: 9.82% of 00:01:52 core-walltime
