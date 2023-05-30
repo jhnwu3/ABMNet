@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/spatial_evaluate.py", line 27, in <module>
+    model.load_state_dict(torch.load("model/gdag_gnn.pt"))  # Replace "path_to_model.pth" with the path to your model file
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 2041, in load_state_dict
+    raise RuntimeError('Error(s) in loading state_dict for {}:\n\t{}'.format(
+RuntimeError: Error(s) in loading state_dict for GCNComplex:
+	Unexpected key(s) in state_dict: "conv3.bias", "conv3.lin.weight", "hidden.weight", "hidden.bias", "hidden2.weight", "hidden2.bias", "final.weight", "final.bias". 
+	size mismatch for conv2.bias: copying a param with shape torch.Size([32]) from checkpoint, the shape in current model is torch.Size([20]).
+	size mismatch for conv2.lin.weight: copying a param with shape torch.Size([32, 64]) from checkpoint, the shape in current model is torch.Size([20, 64]).
+Job Statistics for 3762849:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3762849   rsjxw007 2023-05-30T09:53:41 2023-05-30T09:53:50   00:00:09             00:12.288     FAILED  1:0   r1pl-hpcf-g04 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3762849.batch            2023-05-30T09:53:41 2023-05-30T09:53:50   00:00:09          0  00:12.284     FAILED  1:0   r1pl-hpcf-g04                                          
+  3762849.extern            2023-05-30T09:53:41 2023-05-30T09:53:50   00:00:09          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 8.33% of 00:02:24 core-walltime
