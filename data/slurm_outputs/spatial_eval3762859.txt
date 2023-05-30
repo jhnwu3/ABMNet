@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/spatial_evaluate.py", line 26, in <module>
+    model = GCNComplexMoments(n_features=data.n_inputs, n_classes= data.n_outputs, n_rates=data.n_rates, hidden_channels=32)
+TypeError: GCNComplexMoments.__init__() got an unexpected keyword argument 'n_features'
+Job Statistics for 3762859:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3762859   rsjxw007 2023-05-30T10:05:15 2023-05-30T10:05:23   00:00:08             00:10.301     FAILED  1:0   r1pl-hpcf-g04 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3762859.batch            2023-05-30T10:05:15 2023-05-30T10:05:23   00:00:08          0  00:10.298     FAILED  1:0   r1pl-hpcf-g04                                          
+  3762859.extern            2023-05-30T10:05:15 2023-05-30T10:05:23   00:00:08          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 7.81% of 00:02:08 core-walltime
