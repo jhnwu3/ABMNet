@@ -30,8 +30,8 @@ print(rates.shape)
 print(output.shape)
 
 # for simplicity, we'll just do counts for now, and save into a specific dataset
-output_file = "static/indrani.csv"
-time_point = 2
+output_file = "data/static/indrani.csv"
+time_point = 300
 # matrix with inputs and outputs
 labels = []
 for i in range(1, rates.shape[1] + 1):
@@ -43,4 +43,4 @@ output_data[:,:2] = rates
 output_data[:,2] = output[:,time_point]   
 
 
-write_array_to_csv() 
+write_array_to_csv(output_data, labels, output_file) 

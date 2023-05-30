@@ -11,3 +11,4 @@ python3 main.py -i 'data/static/NL6_means.csv' -h 200 --epochs 60 -d 32 -o 'nl6_
 python3 main.py -i 'data/static/NL6_in.csv' -h 64 --epochs 100 -d 5 -o 'nl6in' 
 python3 main.py -i 'data/static/NL6_2k.csv' -h 64 --epochs 100 -d 3 -o 'nl6s_now' --type res_nn
 python3 main.py -i 'data/static/gdag_1300ss_covs.csv' -h 64 --epochs 100 -d 5 -o 'gdag1300_covs' --normalize --normalize_out
+python3 main.py -i 'data/static/indrani.csv' -d 2 -h 32 --epochs 70 -o 'indrani' --save --gpu --normalize --normalize_out

@@ -129,7 +129,7 @@ def train_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_size, 
             loss_this_epoch += loss.item() 
             loss.backward()
             optimizer.step()
-            print('Memory usage: %s (kb)', resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
+            # print('Memory usage: %s (kb)', resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
         if epoch % 10 == 0:
             print(repr(f"Finished epoch {epoch} with loss {loss_this_epoch} in time {time.time() - epoch_start}"))
             epoch_start = time.time()
