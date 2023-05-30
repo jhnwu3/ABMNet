@@ -522,7 +522,7 @@ class SingleInitialMomentsDataset(Dataset):
             # now to do the ugly min maxing, Don't DO THIS KIDS
             for i in range(len(self.output_graphs)):
                 self.output_graphs[i] -= torch.min(arr, dim=0).values
-                self.output_graphs[i] /= (torch.max(arr,dim=0) - torch.min(arr, dim=0))
+                self.output_graphs[i] /= (torch.max(arr,dim=0).values - torch.min(arr, dim=0).values)
             
             
     def __len__(self):
