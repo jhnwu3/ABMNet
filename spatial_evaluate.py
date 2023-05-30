@@ -13,7 +13,7 @@ from modules.utils.train import *
 
 # load the model in
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model = GCNComplexMoments()  # Replace "YourModel" with your own model class
+# model = GCNComplexMoments()  # Replace "YourModel" with your own model class
 model.load_state_dict(torch.load("model/gdag_gnn.pt"))  # Replace "path_to_model.pth" with the path to your model file
 model.to(device)
 
