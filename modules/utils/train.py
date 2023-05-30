@@ -58,12 +58,13 @@ class SpatialModel():
                 gc.collect()
             
             if epoch % 1 == 0:
-                print("mem:", torch.cuda.memory_allocated(), " cached:", torch.cuda.memory_cached())
+                print("mem:", torch.cuda.memory_allocated(), " cached:", torch.cuda.memory_reserved())
                 print("Epoch:", epoch, " Loss:", loss_per_epoch)   
         if len(path) > 0:
             torch.save(model.state_dict(), path)
             
-        return model
+        # return both a model and the device used to train it.
+        return model, device
 
 
     
