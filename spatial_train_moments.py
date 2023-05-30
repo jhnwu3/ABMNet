@@ -17,4 +17,4 @@ train_size = int(0.8 * len(data))
 test_size = len(data) - train_size
 train_data, test_data = torch.utils.data.random_split(data, [train_size, test_size])
 
-SpatialModel.train_moments( train_data, 5, path="model/gdag_gnn.pt")
+SpatialModel.train_moments(train_data, 5,n_inputs=data.n_inputs,n_outputs=data.n_outputs,n_rates=data.n_rates, path="model/gdag_gnn.pt")
