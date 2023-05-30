@@ -67,4 +67,6 @@ class SpatialModel():
         return model, device
 
 
+
+
     
