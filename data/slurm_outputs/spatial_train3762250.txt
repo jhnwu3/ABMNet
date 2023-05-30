@@ -1,0 +1,21 @@
+/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/loss.py:536: UserWarning: Using a target size (torch.Size([20])) that is different to the input size (torch.Size([1, 20])). This will likely lead to incorrect results due to broadcasting. Please ensure they have the same size.
+  return F.mse_loss(input, target, reduction=self.reduction)
+/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/cuda/memory.py:416: FutureWarning: torch.cuda.memory_cached has been renamed to torch.cuda.memory_reserved
+  warnings.warn(
+mem: 17440256  cached: 41943040
+Epoch: 0  Loss: 71.91895953858851
+mem: 17440256  cached: 83886080
+Epoch: 1  Loss: 59.35052551340015
+mem: 17440256  cached: 83886080
+Epoch: 2  Loss: 58.768469770393345
+mem: 17440256  cached: 83886080
+Epoch: 3  Loss: 54.62462490008071
+mem: 17440256  cached: 83886080
+Epoch: 4  Loss: 35.09079026240179
+Job Statistics for 3762250:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3762250   rsjxw007 2023-05-29T21:29:52 2023-05-29T21:30:27   00:00:35             00:38.223  COMPLETED  0:0   r1pl-hpcf-g05 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3762250.batch            2023-05-29T21:29:52 2023-05-29T21:30:27   00:00:35   1913.87M  00:38.219  COMPLETED  0:0   r1pl-hpcf-g05                                          
+  3762250.extern            2023-05-29T21:29:52 2023-05-29T21:30:27   00:00:35      0.09M  00:00.003  COMPLETED  0:0   r1pl-hpcf-g05                                          
+CPU Efficiency: 6.79% of 00:09:20 core-walltime
