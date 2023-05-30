@@ -11,7 +11,7 @@
       <Parameter id="koff" type="Constant" value="0.01" expr="0.01"/>
       <Parameter id="Kab" type="Constant" value="0.09702" expr="0.09702"/>
       <Parameter id="KB" type="Constant" value="0.0038808" expr="Kab/A"/>
-      <Parameter id="KU" type="Constant" value="0.66" expr="0.66"/>
+      <Parameter id="KU" type="Constant" value="0.98" expr="0.98"/>
       <Parameter id="kp" type="Constant" value="0.0006" expr="0.015/A"/>
       <Parameter id="kd" type="Constant" value="0.001" expr="0.001"/>
       <Parameter id="ksbPP" type="Constant" value="1.66e-5" expr="4.15E-4/Vc"/>

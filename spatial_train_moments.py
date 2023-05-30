@@ -24,7 +24,7 @@ model, device = SpatialModel.train_moments(train_data, 45, n_inputs=data.n_input
 
 
 test_dataloader = torch.utils.data.DataLoader(test_data, batch_size=None, shuffle=True)
-
+print("Edge Length:", data.edges.size())
 criterion = torch.nn.MSELoss()
 model.eval()
 test_loss = 0

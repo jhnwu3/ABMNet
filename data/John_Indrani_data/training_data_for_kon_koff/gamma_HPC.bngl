@@ -9,7 +9,7 @@ begin parameters
   koff 0.01
   Kab 0.09702
   KB Kab/A
-  KU 0.66
+  KU 0.98
   kp 0.015/A
   kd 0.001
   ksbPP 4.15E-4/Vc
