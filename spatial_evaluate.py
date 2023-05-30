@@ -29,7 +29,7 @@ model.to(device)
 model = model.float()
 with torch.no_grad():
     for rates, output in dataloader:
-        out = model(data.initial_graph.to(device).float(), data.edges.to(device).float(), rates.to(device).float())
+        out = model(data.initial_graph.to(device).float(), data.edges.to(device), rates.to(device).float())
         overall_loss += criterion(out.detach(), output.to(device))
         predictions.append(out.cpu().numpy())
         ground_truth.append(output.cpu().numpy())
