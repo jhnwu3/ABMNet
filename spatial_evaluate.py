@@ -37,6 +37,8 @@ with torch.no_grad():
 predictions = np.array(predictions)
 ground_truth = np.array(ground_truth)
 # plot histograms and plot scatter plots
+print(predictions.shape)
+print(ground_truth.shape)
 plot_histograms(test_dataset=ground_truth,predictions=predictions, output="graphs/gnn/out")
 plot_scatter(true=ground_truth, predictions=predictions, output="graphs/gnn/out")
 
