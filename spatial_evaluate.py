@@ -19,6 +19,11 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 data = SingleInitialMomentsDataset("../gdag_data/gdag_spatial_moments.pickle")
 dataloader = torch.utils.data.DataLoader(data, batch_size=None, shuffle=True)
 criterion = torch.nn.MSELoss()
+train_size = int(0.8 * len(data))
+test_size = len(data) - train_size
+print("Training Dataset Size:", train_size)
+print("Test Dataset Size:",test_size)
+train_data, test_data = torch.utils.data.random_split(data, [train_size, test_size])
 predictions = []
 ground_truth = []
 overall_loss = 0

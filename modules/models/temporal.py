@@ -67,7 +67,7 @@ def train_temporal_model():
         test_input.append(torch.from_numpy(row1).float())
         test_output.append(torch.from_numpy(row2).float())
 
-    model = Model(input_size=input_size, output_size=output_size, hidden_dim=hidden_size, n_layers=layer_size)
+    model = TemporalModel(input_size=input_size, output_size=output_size, hidden_dim=hidden_size, n_layers=layer_size)
     model = model.float()
 
     criterion = nn.MSELoss()
