@@ -57,7 +57,7 @@ class GCNComplexMoments(nn.Module):
         graph = self.conv2(graph, edge_index)
         graph = self.conv3(graph, edge_index)
         # get the average for final prediction.
-        graph = global_mean_pool(graph)
+        graph = global_mean_pool(graph, batch=None)
         # convolve again and get the output u care about
         graph = self.hidden(graph)
         graph = F.relu(graph)
