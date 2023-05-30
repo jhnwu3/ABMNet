@@ -35,7 +35,7 @@ class EncoderLayer(nn.Module):
         return x
 
 class GCNComplexMoments(nn.Module):
-    def __init__(self, n_inputs, hidden_channels, n_rates, embedding_size=64, n_outputs=2):
+    def __init__(self, n_inputs, hidden_channels, n_rates, embedding_size=8, n_outputs=2):
         super().__init__()
         torch.manual_seed(1234567)
         self.conv1 = GCNConv(n_inputs, hidden_channels)
