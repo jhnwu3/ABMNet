@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/spatial_train_moments.py", line 20, in <module>
+    SpatialModel.train_moments(train_data, 5,n_inputs=data.n_inputs,n_outputs=data.n_outputs,n_rates=data.n_rates,
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/train.py", line 42, in train_moments
+    out = model(initial_graph.to(device), edges.to(device), rates.to(device))
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/models/spatial.py", line 57, in forward
+    graph = self.conv2(graph)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+TypeError: GCNConv.forward() missing 1 required positional argument: 'edge_index'
+Job Statistics for 3762248:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3762248   rsjxw007 2023-05-29T21:24:59 2023-05-29T21:25:06   00:00:07             00:10.263     FAILED  1:0   r1pl-hpcf-g05 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3762248.batch            2023-05-29T21:24:59 2023-05-29T21:25:06   00:00:07          0  00:10.260     FAILED  1:0   r1pl-hpcf-g05                                          
+  3762248.extern            2023-05-29T21:24:59 2023-05-29T21:25:06   00:00:07          0  00:00.002  COMPLETED  0:0   r1pl-hpcf-g05                                          
+CPU Efficiency: 8.93% of 00:01:52 core-walltime
