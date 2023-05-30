@@ -1,0 +1,90 @@
+begin model
+
+begin parameters
+  Ve 0.05
+  Vc 25
+  A 25
+  f 602.3
+  kon 3.9E-2/Ve
+  koff 0.01
+  Kab 0.0
+  KB Kab/A
+  KU 0.0
+  kp 0.015/A
+  kd 0.001
+  ksbPP 4.15E-4/Vc
+  ksuPP 1.7
+  ksbU 4.15E-4/Vc
+  ksuU 1.7
+  kzb 1.41E-4/Vc
+  kzu 0.001
+  kzp 4.98E-5/Vc
+  kzd 5.64E-5/Vc
+  KPR 0.01
+  kh 10000
+  L0 20000*Ve
+  R0 29*A
+  A0 80*A
+  LCK0 390*A
+  ZAP0 602*Vc
+  S0 180*Vc
+end parameters
+
+begin molecule types
+  A(ITAM~SHP~UZAP~PZAP)
+  CD16(lig,receptor)
+  LCK()
+  Ligand(Site)
+  gamma(receptor,ITAM1~U~PP,ITAM2~U~PP)
+end molecule types
+
+begin species
+  gamma(ITAM1~U,ITAM2~U,receptor) A0
+  LCK() LCK0
+  Ligand(Site) L0
+  CD16(lig,receptor) R0
+  A(ITAM~UZAP) ZAP0
+  A(ITAM~SHP) S0
+end species
+
+begin observables
+  Molecules PZAP_total A(ITAM~PZAP!?)
+  Molecules PZAP_answer A(ITAM~PZAP!+).gamma(receptor!+),A(ITAM~PZAP)
+  Molecules PZAP_complex_warning A(ITAM~PZAP!+).gamma(receptor!+)
+  Molecules O0 gamma(receptor).A(ITAM~PZAP!+)
+  Molecules O1 gamma(receptor,ITAM1!+,ITAM2),gamma(receptor,ITAM1,ITAM2!+),gamma(receptor,ITAM1!+,ITAM2!+)
+  Molecules free_PZAP A(ITAM~PZAP)
+  Molecules Bound_PZAP A(ITAM~PZAP!+)
+  Molecules Adaptor_receptor_complex Ligand(Site!1).CD16(lig!1)
+end observables
+
+begin reaction rules
+  ligand_binding: Ligand(Site) + CD16(lig,receptor) <-> CD16(lig!1,receptor).Ligand(Site!1) kon,koff 
+  Adaptor_binding: CD16(lig!1,receptor).Ligand(Site!1) + gamma(receptor,ITAM1~U,ITAM2~U) <-> gamma(receptor!1,ITAM1~U,ITAM2~U).CD16(lig!2,receptor!1).Ligand(Site!2) KB,KU 
+  ITAM1_phosphorylation: LCK() + gamma(receptor!+,ITAM1~U) -> LCK() + gamma(receptor!+,ITAM1~PP) kp 
+  ITAM2_phosphorylation: LCK() + gamma(receptor!+,ITAM2~U) -> LCK() + gamma(receptor!+,ITAM2~PP) kp 
+  ITAM1_dephosphorylation: gamma(receptor!+,ITAM1~PP) -> gamma(receptor!+,ITAM1~U) kd 
+  ITAM2_dephosphorylation: gamma(receptor!+,ITAM2~PP) -> gamma(receptor!+,ITAM2~U) kd 
+  ITAM1_PP_SHP_bind: gamma(receptor!+,ITAM1~PP) + A(ITAM~SHP) <-> gamma(receptor!+,ITAM1~PP!1).A(ITAM~SHP!1) ksbPP,ksuPP 
+  ITAM2_PP_SHP_bind: gamma(receptor!+,ITAM2~PP) + A(ITAM~SHP) <-> gamma(receptor!+,ITAM2~PP!1).A(ITAM~SHP!1) ksbPP,ksuPP 
+  ITAM1_U_SHP_bind: gamma(receptor!+,ITAM1~U) + A(ITAM~SHP) <-> gamma(receptor!+,ITAM1~U!1).A(ITAM~SHP!1) ksbU,ksuU 
+  ITAM2_U_SHP_bind: gamma(receptor!+,ITAM2~U) + A(ITAM~SHP) <-> gamma(receptor!+,ITAM2~U!1).A(ITAM~SHP!1) ksbU,ksuU 
+  UZAP_binding_ITAM1: gamma(receptor!+,ITAM1~PP) + A(ITAM~UZAP) <-> gamma(receptor!+,ITAM1~PP!1).A(ITAM~UZAP!1) kzb,kzu 
+  UZAP_binding_ITAM2: gamma(receptor!+,ITAM2~PP) + A(ITAM~UZAP) <-> gamma(receptor!+,ITAM2~PP!1).A(ITAM~UZAP!1) kzb,kzu 
+  PZAP_binding_ITAM1: gamma(receptor!+,ITAM1~PP) + A(ITAM~PZAP) <-> gamma(receptor!+,ITAM1~PP!1).A(ITAM~PZAP!1) kzb,kzu 
+  PZAP_binding_ITAM2: gamma(receptor!+,ITAM2~PP) + A(ITAM~PZAP) <-> gamma(receptor!+,ITAM2~PP!1).A(ITAM~PZAP!1) kzb,kzu 
+  ZAP_phosphorylation: LCK() + gamma(receptor!+).A(ITAM~UZAP!+) -> LCK() + gamma(receptor!+).A(ITAM~PZAP!+) kzp 
+  ZAP_dephosphorylation_SHP_1: A(ITAM~PZAP)%2 + gamma(receptor!+).A(ITAM~SHP!+)%1 -> A(ITAM~UZAP)%2 + gamma(receptor!+).A(ITAM~SHP!+)%1 kzd 
+  ZAP_dephosphorylation_SHP_2: gamma(receptor!+)%1.A(ITAM~PZAP!+)%3 + gamma(receptor!+)%2.A(ITAM~SHP!+)%4 -> gamma(receptor!+)%2.A(ITAM~UZAP!+)%4 + gamma(receptor!+)%1.A(ITAM~SHP!+)%3 kzd 
+  KP: Ligand(Site!1).CD16(lig!1,receptor!2).gamma(receptor!2) -> Ligand(Site) + CD16(lig,receptor) + gamma(receptor) KPR 
+  gamma_adaptor_dephosph_1: gamma(receptor).A(ITAM~PZAP!+) -> gamma(receptor).A(ITAM~UZAP!+) kh 
+  KP_ITAM1: gamma(receptor,ITAM1!1,ITAM2).A(ITAM!1) -> gamma(receptor,ITAM1,ITAM2) + A(ITAM) kh 
+  KP_ITAM2: gamma(receptor,ITAM1,ITAM2!1).A(ITAM!1) -> gamma(receptor,ITAM1,ITAM2) + A(ITAM) kh 
+  KP_all: gamma(receptor,ITAM1!1,ITAM2!2).A(ITAM!1)%1.A(ITAM!2)%2 -> gamma(receptor,ITAM1,ITAM2) + A(ITAM)%1 + A(ITAM)%2 kh 
+  gamma_conv1: gamma(receptor,ITAM1~PP,ITAM2) -> gamma(receptor,ITAM1~U,ITAM2) kh 
+  gamma_conv2: gamma(receptor,ITAM1,ITAM2~PP) -> gamma(receptor,ITAM1,ITAM2~U) kh 
+end reaction rules
+
+end model
+
+simulate_nf({t_end=>300.0,n_steps=>600})

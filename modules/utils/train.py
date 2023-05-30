@@ -9,8 +9,8 @@ from modules.models.spatial import *
 from torch.cuda.amp import autocast
 
 
-class SpatialModelTrain():
-    def moments(data, nEpochs, path = ""):
+class SpatialModel():
+    def train_moments(data, nEpochs, path = ""):
         model = GCNComplexMoments(n_features=data.n_inputs, n_classes= data.n_outputs, n_rates=data.n_rates, hidden_channels=32)
         model.train()
         model = model.double()

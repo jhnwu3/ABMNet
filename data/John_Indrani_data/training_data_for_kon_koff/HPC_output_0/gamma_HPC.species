@@ -1,0 +1,26 @@
+# nfsim generated species list for system: 'gamma_HPC'
+# warning! this feature is not yet fully tested! 
+A(ITAM~PZAP!1).gamma(receptor!2,ITAM1~PP!1,ITAM2~PP!3).CD16(lig!4,receptor!2).A(ITAM~PZAP!3).Ligand(Site!4)  155
+A(ITAM~PZAP!1).gamma(receptor!2,ITAM1~PP!1,ITAM2~PP!3).CD16(lig!4,receptor!2).A(ITAM~UZAP!3).Ligand(Site!4)  51
+A(ITAM~PZAP!1).gamma(receptor!2,ITAM1~PP!1,ITAM2~PP).CD16(lig!3,receptor!2).Ligand(Site!3)  14
+A(ITAM~PZAP!1).gamma(receptor!2,ITAM1~PP!3,ITAM2~PP!1).CD16(lig!4,receptor!2).A(ITAM~PZAP!3).Ligand(Site!4)  157
+A(ITAM~PZAP!1).gamma(receptor!2,ITAM1~PP!3,ITAM2~PP!1).CD16(lig!4,receptor!2).A(ITAM~UZAP!3).Ligand(Site!4)  48
+A(ITAM~PZAP!1).gamma(receptor!2,ITAM1~PP,ITAM2~PP!1).CD16(lig!3,receptor!2).Ligand(Site!3)  21
+A(ITAM~PZAP)  2056
+A(ITAM~SHP!1).gamma(receptor!2,ITAM1~PP!1,ITAM2~PP).CD16(lig!3,receptor!2).Ligand(Site!3)  2
+A(ITAM~SHP!1).gamma(receptor!2,ITAM1~PP,ITAM2~PP!1).CD16(lig!3,receptor!2).Ligand(Site!3)  2
+A(ITAM~SHP!1).gamma(receptor!2,ITAM1~PP,ITAM2~U!1).CD16(lig!3,receptor!2).Ligand(Site!3)  1
+A(ITAM~SHP)  4495
+A(ITAM~UZAP!1).gamma(receptor!2,ITAM1~PP!1,ITAM2~PP!3).CD16(lig!4,receptor!2).A(ITAM~PZAP!3).Ligand(Site!4)  49
+A(ITAM~UZAP!1).gamma(receptor!2,ITAM1~PP!1,ITAM2~PP!3).CD16(lig!4,receptor!2).A(ITAM~UZAP!3).Ligand(Site!4)  34
+A(ITAM~UZAP!1).gamma(receptor!2,ITAM1~PP!1,ITAM2~PP).CD16(lig!3,receptor!2).Ligand(Site!3)  36
+A(ITAM~UZAP!1).gamma(receptor!2,ITAM1~PP!3,ITAM2~PP!1).CD16(lig!4,receptor!2).A(ITAM~PZAP!3).Ligand(Site!4)  52
+A(ITAM~UZAP!1).gamma(receptor!2,ITAM1~PP!3,ITAM2~PP!1).CD16(lig!4,receptor!2).A(ITAM~UZAP!3).Ligand(Site!4)  27
+A(ITAM~UZAP!1).gamma(receptor!2,ITAM1~PP,ITAM2~PP!1).CD16(lig!3,receptor!2).Ligand(Site!3)  32
+A(ITAM~UZAP)  11745
+CD16(lig!1,receptor!2).Ligand(Site!1).gamma(receptor!2,ITAM1~PP,ITAM2~PP)  42
+CD16(lig!1,receptor!2).Ligand(Site!1).gamma(receptor!2,ITAM1~PP,ITAM2~U)  1
+CD16(lig!1,receptor!2).Ligand(Site!1).gamma(receptor!2,ITAM1~U,ITAM2~PP)  1
+LCK()  9750
+Ligand(Site)  275
+gamma(receptor,ITAM1~U,ITAM2~U)  1275

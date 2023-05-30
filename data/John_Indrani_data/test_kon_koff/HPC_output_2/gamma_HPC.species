@@ -1,0 +1,29 @@
+# nfsim generated species list for system: 'gamma_HPC'
+# warning! this feature is not yet fully tested! 
+A(ITAM~PZAP!1).gamma(receptor!2,ITAM1~PP!1,ITAM2~PP!3).CD16(lig!4,receptor!2).A(ITAM~PZAP!3).Ligand(Site!4)  141
+A(ITAM~PZAP!1).gamma(receptor!2,ITAM1~PP!1,ITAM2~PP!3).CD16(lig!4,receptor!2).A(ITAM~SHP!3).Ligand(Site!4)  3
+A(ITAM~PZAP!1).gamma(receptor!2,ITAM1~PP!1,ITAM2~PP!3).CD16(lig!4,receptor!2).A(ITAM~UZAP!3).Ligand(Site!4)  42
+A(ITAM~PZAP!1).gamma(receptor!2,ITAM1~PP!1,ITAM2~PP).CD16(lig!3,receptor!2).Ligand(Site!3)  12
+A(ITAM~PZAP!1).gamma(receptor!2,ITAM1~PP!3,ITAM2~PP!1).CD16(lig!4,receptor!2).A(ITAM~PZAP!3).Ligand(Site!4)  120
+A(ITAM~PZAP!1).gamma(receptor!2,ITAM1~PP!3,ITAM2~PP!1).CD16(lig!4,receptor!2).A(ITAM~SHP!3).Ligand(Site!4)  1
+A(ITAM~PZAP!1).gamma(receptor!2,ITAM1~PP!3,ITAM2~PP!1).CD16(lig!4,receptor!2).A(ITAM~UZAP!3).Ligand(Site!4)  42
+A(ITAM~PZAP!1).gamma(receptor!2,ITAM1~PP,ITAM2~PP!1).CD16(lig!3,receptor!2).Ligand(Site!3)  14
+A(ITAM~PZAP)  1701
+A(ITAM~SHP!1).gamma(receptor!2,ITAM1~PP!1,ITAM2~PP).CD16(lig!3,receptor!2).Ligand(Site!3)  2
+A(ITAM~SHP!1).gamma(receptor!2,ITAM1~PP,ITAM2~PP!1).CD16(lig!3,receptor!2).Ligand(Site!3)  2
+A(ITAM~SHP)  4490
+A(ITAM~UZAP!1).gamma(receptor!2,ITAM1~PP!1,ITAM2~PP!3).CD16(lig!4,receptor!2).A(ITAM~PZAP!3).Ligand(Site!4)  33
+A(ITAM~UZAP!1).gamma(receptor!2,ITAM1~PP!1,ITAM2~PP!3).CD16(lig!4,receptor!2).A(ITAM~SHP!3).Ligand(Site!4)  1
+A(ITAM~UZAP!1).gamma(receptor!2,ITAM1~PP!1,ITAM2~PP!3).CD16(lig!4,receptor!2).A(ITAM~UZAP!3).Ligand(Site!4)  27
+A(ITAM~UZAP!1).gamma(receptor!2,ITAM1~PP!1,ITAM2~PP).CD16(lig!3,receptor!2).Ligand(Site!3)  14
+A(ITAM~UZAP!1).gamma(receptor!2,ITAM1~PP!3,ITAM2~PP!1).CD16(lig!4,receptor!2).A(ITAM~PZAP!3).Ligand(Site!4)  41
+A(ITAM~UZAP!1).gamma(receptor!2,ITAM1~PP!3,ITAM2~PP!1).CD16(lig!4,receptor!2).A(ITAM~SHP!3).Ligand(Site!4)  1
+A(ITAM~UZAP!1).gamma(receptor!2,ITAM1~PP!3,ITAM2~PP!1).CD16(lig!4,receptor!2).A(ITAM~UZAP!3).Ligand(Site!4)  45
+A(ITAM~UZAP!1).gamma(receptor!2,ITAM1~PP,ITAM2~PP!1).CD16(lig!3,receptor!2).Ligand(Site!3)  21
+A(ITAM~UZAP)  12300
+CD16(lig!1,receptor!2).Ligand(Site!1).gamma(receptor!2,ITAM1~PP,ITAM2~PP)  41
+CD16(lig!1,receptor!2).Ligand(Site!1).gamma(receptor!2,ITAM1~U,ITAM2~U)  1
+CD16(lig!1,receptor).Ligand(Site!1)  121
+LCK()  9750
+Ligand(Site)  275
+gamma(receptor,ITAM1~U,ITAM2~U)  1396

@@ -87,73 +87,73 @@ class GCNComplex(torch.nn.Module):
         graph = self.conv2(graph, edge_index)
         return graph
 
-def train_giuseppe_surrogate(data_obj : GiuseppeSurrogateGraphData, nEpochs = 30, single_init_cond = True):
-    model = GCNComplex(n_features=data_obj.n_features, n_classes=data_obj.n_output, hidden_channels=32, n_rates=data_obj.n_rates)
-    model.train()
-    model = model.double()
-    optimizer = torch.optim.AdamW(model.parameters())
-    criterion = torch.nn.MSELoss()
-    for epoch in range(nEpochs):
-        loss_per_epoch = 0
-        for graph in range(data_obj.length):
-            optimizer.zero_grad()
-            input_graph = data_obj.input_graphs
-            if not single_init_cond:
-                input_graph = data_obj.input_graphs[graph]
-            out = model(input_graph, data_obj.edges, data_obj.rates[graph])
-            loss = criterion(out, data_obj.output_graphs[graph])
-            loss.backward()
-            loss_per_epoch+= float(loss)
-            optimizer.step()
+# def train_giuseppe_surrogate(data_obj : GiuseppeSurrogateGraphData, nEpochs = 30, single_init_cond = True):
+#     model = GCNComplex(n_features=data_obj.n_features, n_classes=data_obj.n_output, hidden_channels=32, n_rates=data_obj.n_rates)
+#     model.train()
+#     model = model.double()
+#     optimizer = torch.optim.AdamW(model.parameters())
+#     criterion = torch.nn.MSELoss()
+#     for epoch in range(nEpochs):
+#         loss_per_epoch = 0
+#         for graph in range(data_obj.length):
+#             optimizer.zero_grad()
+#             input_graph = data_obj.input_graphs
+#             if not single_init_cond:
+#                 input_graph = data_obj.input_graphs[graph]
+#             out = model(input_graph, data_obj.edges, data_obj.rates[graph])
+#             loss = criterion(out, data_obj.output_graphs[graph])
+#             loss.backward()
+#             loss_per_epoch+= float(loss)
+#             optimizer.step()
             
-        if epoch % 10 == 0:
-            print("Epoch:", epoch, " Loss:", loss_per_epoch)   
-    return model     
+#         if epoch % 10 == 0:
+#             print("Epoch:", epoch, " Loss:", loss_per_epoch)   
+#     return model     
 
-def train_gnn(data_obj : GiuseppeSurrogateGraphData, nEpochs = 30, single_init_cond = True):
-    model = GCN(n_features=data_obj.n_features, n_classes=data_obj.n_output, hidden_channels=32)
-    model.train()
-    model = model.double()
-    optimizer = torch.optim.AdamW(model.parameters())
-    criterion = torch.nn.MSELoss()
-    for epoch in range(nEpochs):
-        loss_per_epoch = 0
-        for graph in range(data_obj.length):
-            optimizer.zero_grad()
-            input_graph = data_obj.input_graphs
-            if not single_init_cond:
-                input_graph = data_obj.input_graphs[graph]
-            out = model(input_graph, data_obj.edges)
-            loss = criterion(out, data_obj.output_graphs[graph])
-            loss.backward()
-            loss_per_epoch+=loss
-            optimizer.step()
+# def train_gnn(data_obj : GiuseppeSurrogateGraphData, nEpochs = 30, single_init_cond = True):
+#     model = GCN(n_features=data_obj.n_features, n_classes=data_obj.n_output, hidden_channels=32)
+#     model.train()
+#     model = model.double()
+#     optimizer = torch.optim.AdamW(model.parameters())
+#     criterion = torch.nn.MSELoss()
+#     for epoch in range(nEpochs):
+#         loss_per_epoch = 0
+#         for graph in range(data_obj.length):
+#             optimizer.zero_grad()
+#             input_graph = data_obj.input_graphs
+#             if not single_init_cond:
+#                 input_graph = data_obj.input_graphs[graph]
+#             out = model(input_graph, data_obj.edges)
+#             loss = criterion(out, data_obj.output_graphs[graph])
+#             loss.backward()
+#             loss_per_epoch+=loss
+#             optimizer.step()
             
-        if epoch % 10 == 0:
-            print("Epoch:", epoch, " Loss:", loss_per_epoch)   
+#         if epoch % 10 == 0:
+#             print("Epoch:", epoch, " Loss:", loss_per_epoch)   
             
-    return model     
+#     return model     
 
 
-def train_giuseppe_surrogate_pkl(data : dict, nEpochs = 30, single_init_cond = True):
-    model = GCNComplex(n_features=data["n_features"], n_classes=data["n_outputs"], n_rates=data["n_rates"],hidden_channels=32)
-    model.train()
-    model = model.double()
-    optimizer = torch.optim.AdamW(model.parameters())
-    criterion = torch.nn.MSELoss()
-    for epoch in range(nEpochs):
-        loss_per_epoch = 0
-        for graph in range(data["n"]):
-            optimizer.zero_grad()
-            input_graph = data["input_graphs"]
-            if not single_init_cond:
-                input_graph = data["input_graphs"][graph]
-            out = model(input_graph, data["edges"], data["rates"][graph])
-            loss = criterion(out, data["output_graphs"][graph])
-            loss.backward()
-            loss_per_epoch+=loss
-            optimizer.step()
+# def train_giuseppe_surrogate_pkl(data : dict, nEpochs = 30, single_init_cond = True):
+#     model = GCNComplex(n_features=data["n_features"], n_classes=data["n_outputs"], n_rates=data["n_rates"],hidden_channels=32)
+#     model.train()
+#     model = model.double()
+#     optimizer = torch.optim.AdamW(model.parameters())
+#     criterion = torch.nn.MSELoss()
+#     for epoch in range(nEpochs):
+#         loss_per_epoch = 0
+#         for graph in range(data["n"]):
+#             optimizer.zero_grad()
+#             input_graph = data["input_graphs"]
+#             if not single_init_cond:
+#                 input_graph = data["input_graphs"][graph]
+#             out = model(input_graph, data["edges"], data["rates"][graph])
+#             loss = criterion(out, data["output_graphs"][graph])
+#             loss.backward()
+#             loss_per_epoch+=loss
+#             optimizer.step()
             
-        if epoch % 1 == 0:
-            print("Epoch:", epoch, " Loss:", loss_per_epoch)   
-    return model     
+#         if epoch % 1 == 0:
+#             print("Epoch:", epoch, " Loss:", loss_per_epoch)   
+#     return model     
