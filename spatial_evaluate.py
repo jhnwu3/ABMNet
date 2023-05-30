@@ -33,7 +33,8 @@ with torch.no_grad():
         overall_loss += criterion(out.detach(), output.to(device))
         predictions.append(out.cpu().numpy())
         ground_truth.append(output.cpu().numpy())
-        
+
+print("Overall Average Test MSE:", overall_loss / len(data))
 predictions = np.array(predictions).squeeze()
 ground_truth = np.array(ground_truth)
 # plot histograms and plot scatter plots
