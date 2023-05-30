@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/spatial_evaluate.py", line 16, in <module>
+    model = GCNComplexMoments()  # Replace "YourModel" with your own model class
+TypeError: GCNComplexMoments.__init__() missing 3 required positional arguments: 'n_inputs', 'hidden_channels', and 'n_rates'
+Job Statistics for 3762848:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3762848   rsjxw007 2023-05-30T09:44:23 2023-05-30T09:44:33   00:00:10             00:07.464     FAILED  1:0   r1pl-hpcf-g04 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3762848.batch            2023-05-30T09:44:23 2023-05-30T09:44:33   00:00:10          0  00:07.460     FAILED  1:0   r1pl-hpcf-g04                                          
+  3762848.extern            2023-05-30T09:44:23 2023-05-30T09:44:33   00:00:10          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 4.38% of 00:02:40 core-walltime
