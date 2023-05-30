@@ -1,0 +1,15 @@
+/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/loss.py:536: UserWarning: Using a target size (torch.Size([20])) that is different to the input size (torch.Size([1, 20])). This will likely lead to incorrect results due to broadcasting. Please ensure they have the same size.
+  return F.mse_loss(input, target, reduction=self.reduction)
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/spatial_evaluate.py", line 40, in <module>
+    plot_histograms(test_dataset=ground_truth,predictions=predictions, output="graphs/gnn/out")
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/graph.py", line 41, in plot_histograms
+    ax.hist(predictions[:,i],bins=bins_list(true[:,i].min(), true[:,i].max(), binwidth), label='Surrogate Model')
+IndexError: index 1 is out of bounds for axis 1 with size 1
+Job Statistics for 3762867:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3762867   rsjxw007 2023-05-30T10:29:46 2023-05-30T10:29:57   00:00:11             00:16.536     FAILED  1:0   r1pl-hpcf-g04 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3762867.batch            2023-05-30T10:29:46 2023-05-30T10:29:57   00:00:11          0  00:16.532     FAILED  1:0   r1pl-hpcf-g04                                          
+  3762867.extern            2023-05-30T10:29:46 2023-05-30T10:29:57   00:00:11          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 9.66% of 00:02:56 core-walltime
