@@ -54,8 +54,8 @@ class GCNComplexMoments(nn.Module):
         rates_rep = self.rates_encoder(rates)
         # concatenate both the graph and rates_representation and produce next
         graph = torch.cat((graph, self.rates_encoder(rates).repeat(graph.size()[0]).reshape((graph.size()[0], rates_rep.size()[0]))), dim=1)
-        graph = self.conv2(graph)
-        graph = self.conv3(graph)
+        graph = self.conv2(graph, edge_index)
+        graph = self.conv3(graph, edge_index)
         # get the average for final prediction.
         graph = global_mean_pool(graph)
         # convolve again and get the output u care about
