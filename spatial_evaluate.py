@@ -34,7 +34,7 @@ with torch.no_grad():
         predictions.append(out.cpu().numpy())
         ground_truth.append(output.cpu().numpy())
         
-predictions = np.array(predictions)
+predictions = np.array(predictions).squeeze()
 ground_truth = np.array(ground_truth)
 # plot histograms and plot scatter plots
 print(predictions.shape)
