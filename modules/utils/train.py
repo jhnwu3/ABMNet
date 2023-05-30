@@ -10,7 +10,7 @@ from torch.cuda.amp import autocast
 
 
 class SpatialModel():
-    def train_moments(data, nEpochs, n_inputs, n_outputs, n_rates, initial_graph, path = ""):
+    def train_moments(data, nEpochs, n_inputs, n_outputs, n_rates, initial_graph, edges, path = ""):
         model = GCNComplexMoments(n_inputs=n_inputs, n_rates=n_rates, hidden_channels=32, n_outputs=n_outputs)
         model.train()
         model = model.double()
@@ -39,7 +39,7 @@ class SpatialModel():
                 if using_gpu:
                     loss = 0
                     with autocast():
-                        out = model(initial_graph.to(device), data.edges.to(device), rates.to(device))
+                        out = model(initial_graph.to(device), edges.to(device), rates.to(device))
                         loss = criterion(out, output_graph.to(device))
                     scaler.scale(loss).backward()
                     scaler.step(optimizer)
