@@ -1,0 +1,8 @@
+slurmstepd: error: *** JOB 3762921 ON r1pl-hpcf-g04 CANCELLED AT 2023-05-30T11:02:54 ***
+Job Statistics for 3762921:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3762921   rsjxw007 2023-05-30T10:59:39 2023-05-30T11:02:54   00:03:15             03:15.029 CANCELLED+  0:0   r1pl-hpcf-g04 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3762921.batch            2023-05-30T10:59:39 2023-05-30T11:02:57   00:03:18  57251.16M  03:15.026  CANCELLED 0:15   r1pl-hpcf-g04                                          
+  3762921.extern            2023-05-30T10:59:39 2023-05-30T11:02:54   00:03:15      0.09M  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 6.25% of 00:52:00 core-walltime
