@@ -11,7 +11,7 @@ from torch.cuda.amp import autocast
 
 class SpatialModel():
     def train_moments(data, nEpochs, n_inputs, n_outputs, n_rates, path = ""):
-        model = GCNComplexMoments(n_features=n_inputs, n_classes=n_outputs, n_rates=n_rates, hidden_channels=32)
+        model = GCNComplexMoments(n_inputs=n_inputs, n_classes=n_outputs, n_rates=n_rates, hidden_channels=32)
         model.train()
         model = model.double()
         optimizer = torch.optim.AdamW(model.parameters())
