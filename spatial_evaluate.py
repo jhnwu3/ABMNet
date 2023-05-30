@@ -17,7 +17,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # get predictions and get ground truth stuff from entire dataset, might as well look at it holistically first.
 data = SingleInitialMomentsDataset("../gdag_data/gdag_spatial_moments.pickle")
-dataloader = torch.utils.data.DataLoader(data, batch_size=None, shuffle=True)
+
 criterion = torch.nn.MSELoss()
 train_size = int(0.8 * len(data))
 test_size = len(data) - train_size
@@ -32,6 +32,7 @@ model = GCNComplexMoments(n_inputs=data.n_inputs, n_outputs= data.n_outputs, n_r
 model.load_state_dict(torch.load("model/gdag_gnn.pt"))  # Replace "path_to_model.pth" with the path to your model file
 model.to(device)
 model = model.float()
+dataloader = torch.utils.data.DataLoader(test_data, batch_size=None, shuffle=True)
 with torch.no_grad():
     for rates, output in dataloader:
         out = model(data.initial_graph.to(device).float(), data.edges.to(device), rates.to(device).float())
