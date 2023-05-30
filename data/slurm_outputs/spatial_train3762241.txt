@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/spatial_train_moments.py", line 20, in <module>
+    SpatialModel.train_moments( train_data, 5, path="model/gdag_gnn.pt")
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/train.py", line 14, in train_moments
+    model = GCNComplexMoments(n_features=data.n_inputs, n_classes= data.n_outputs, n_rates=data.n_rates, hidden_channels=32)
+AttributeError: 'Subset' object has no attribute 'n_inputs'
+Job Statistics for 3762241:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3762241   rsjxw007 2023-05-29T21:07:10 2023-05-29T21:07:15   00:00:05             00:08.202     FAILED  1:0   r1pl-hpcf-g05 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3762241.batch            2023-05-29T21:07:10 2023-05-29T21:07:15   00:00:05          0  00:08.199     FAILED  1:0   r1pl-hpcf-g05                                          
+  3762241.extern            2023-05-29T21:07:10 2023-05-29T21:07:15   00:00:05          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g05                                          
+CPU Efficiency: 10.00% of 00:01:20 core-walltime
