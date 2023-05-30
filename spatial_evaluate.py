@@ -3,7 +3,7 @@ import matplotlib as mpl
 import numpy as np
 import pandas as pd
 import torch 
-import gc
+import torch_geometric
 from torch.cuda.amp import autocast
 from modules.utils.graph import *
 from modules.data.spatial import *
@@ -23,7 +23,7 @@ predictions = []
 ground_truth = []
 overall_loss = 0
 
-model = GCNComplex(n_features=data.n_inputs, n_classes= data.n_outputs, n_rates=data.n_rates, hidden_channels=32)
+model = GCNComplexMoments(n_features=data.n_inputs, n_classes= data.n_outputs, n_rates=data.n_rates, hidden_channels=32)
 model.load_state_dict(torch.load("model/gdag_gnn.pt"))  # Replace "path_to_model.pth" with the path to your model file
 model.to(device)
 with torch.no_grad():
