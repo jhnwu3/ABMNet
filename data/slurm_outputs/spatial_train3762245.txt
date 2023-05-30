@@ -1,0 +1,11 @@
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/spatial_train_moments.py", line 20
+    SpatialModel.train_moments(train_data, 5,n_inputs=data.n_inputs,n_outputs=data.n_outputs,n_rates=data.n_rates, initial_graph=data.initial_graph path="model/gdag_gnn.pt")
+                                                                                                                                 ^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+Job Statistics for 3762245:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3762245   rsjxw007 2023-05-29T21:22:23 2023-05-29T21:22:24   00:00:01             00:00.054     FAILED  1:0   r1pl-hpcf-g05 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3762245.batch            2023-05-29T21:22:23 2023-05-29T21:22:24   00:00:01          0  00:00.050     FAILED  1:0   r1pl-hpcf-g05                                          
+  3762245.extern            2023-05-29T21:22:23 2023-05-29T21:22:24   00:00:01          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g05                                          
+CPU Efficiency: 0.00% of 00:00:16 core-walltime
