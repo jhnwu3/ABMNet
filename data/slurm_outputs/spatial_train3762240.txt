@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/spatial_train_moments.py", line 15, in <module>
+    data = SingleInitialMomentsDataset("../gdag_data/gdag_spatial_moments.pickle")
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/data/spatial.py", line 525, in __init__
+    self.output_graphs[i] /= (torch.max(arr,dim=0) - torch.min(arr, dim=0))
+TypeError: unsupported operand type(s) for -: 'torch.return_types.max' and 'torch.return_types.min'
+Job Statistics for 3762240:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3762240   rsjxw007 2023-05-29T21:02:35 2023-05-29T21:02:44   00:00:09             00:06.986     FAILED  1:0   r1pl-hpcf-g05 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3762240.batch            2023-05-29T21:02:35 2023-05-29T21:02:44   00:00:09          0  00:06.982     FAILED  1:0   r1pl-hpcf-g05                                          
+  3762240.extern            2023-05-29T21:02:35 2023-05-29T21:02:44   00:00:09          0  00:00.004  COMPLETED  0:0   r1pl-hpcf-g05                                          
+CPU Efficiency: 4.86% of 00:02:24 core-walltime
