@@ -1,0 +1,58 @@
+/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/loss.py:536: UserWarning: Using a target size (torch.Size([20])) that is different to the input size (torch.Size([1, 20])). This will likely lead to incorrect results due to broadcasting. Please ensure they have the same size.
+  return F.mse_loss(input, target, reduction=self.reduction)
+Training Dataset Size: 1058
+Test Dataset Size: 265
+Epoch: 0  Loss: 99.16942023332817
+Epoch: 1  Loss: 71.5792590071368
+Epoch: 2  Loss: 71.06927970883028
+Epoch: 3  Loss: 65.60605617522891
+Epoch: 4  Loss: 59.491320499404246
+Epoch: 5  Loss: 59.04582088790199
+Epoch: 6  Loss: 58.78786945884
+Epoch: 7  Loss: 58.66693271306349
+Epoch: 8  Loss: 58.473911513567195
+Epoch: 9  Loss: 58.29976585413685
+Epoch: 10  Loss: 57.74817416788208
+Epoch: 11  Loss: 56.95073966345728
+Epoch: 12  Loss: 55.235515328121856
+Epoch: 13  Loss: 51.81561889415457
+Epoch: 14  Loss: 49.5890102241129
+Epoch: 15  Loss: 46.73076832619132
+Epoch: 16  Loss: 45.258258715383604
+Epoch: 17  Loss: 44.23201187453746
+Epoch: 18  Loss: 43.70965023092333
+Epoch: 19  Loss: 43.129617233042374
+Epoch: 20  Loss: 42.54683701212624
+Epoch: 21  Loss: 42.084837124378865
+Epoch: 22  Loss: 40.98153746478365
+Epoch: 23  Loss: 41.0520271950568
+Epoch: 24  Loss: 40.53108534260189
+Epoch: 25  Loss: 39.79983018041065
+Epoch: 26  Loss: 35.15596708771881
+Epoch: 27  Loss: 29.742911891031195
+Epoch: 28  Loss: 23.49722266634275
+Epoch: 29  Loss: 18.819339021189112
+Epoch: 30  Loss: 18.1650020742577
+Epoch: 31  Loss: 17.242487274747926
+Epoch: 32  Loss: 16.975198311968448
+Epoch: 33  Loss: 16.865953313232602
+Epoch: 34  Loss: 17.202753886708532
+Epoch: 35  Loss: 15.978601928598186
+Epoch: 36  Loss: 15.880792594258146
+Epoch: 37  Loss: 16.443394489021756
+Epoch: 38  Loss: 16.187126168514286
+Epoch: 39  Loss: 16.293337303147652
+Epoch: 40  Loss: 16.913683302194375
+Epoch: 41  Loss: 15.304949133800015
+Epoch: 42  Loss: 16.24543056014174
+Epoch: 43  Loss: 16.651918983483505
+Epoch: 44  Loss: 14.925099007670381
+Edge Length: torch.Size([2, 58806])
+Test Average MSE: 0.00966509341594236
+Job Statistics for 3765006:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3765006   rsjxw007 2023-05-31T11:28:30 2023-05-31T11:33:59   00:05:29             05:30.076  COMPLETED  0:0   r1pl-hpcf-g04 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3765006.batch            2023-05-31T11:28:30 2023-05-31T11:33:59   00:05:29   1915.02M  05:30.073  COMPLETED  0:0   r1pl-hpcf-g04                                          
+  3765006.extern            2023-05-31T11:28:30 2023-05-31T11:33:59   00:05:29      0.09M  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 6.27% of 01:27:44 core-walltime
