@@ -89,7 +89,7 @@ class GATComplex(nn.Module):
         x = self.conv2(x, edge_index)
         x = F.elu(x)
         print("before error:",x.size())
-        x = torch.cat([x[:, head_idx] for head_idx in range(x.size(1))], dim=2)
+        x = torch.cat([x[:, head_idx] for head_idx in range(x.size(1))])
         x = self.fc(x)
         x = x.relu()
         x = global_mean_pool(x, batch=None)
