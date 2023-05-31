@@ -84,7 +84,7 @@ class GATComplex(nn.Module):
         x = self.conv1(x, edge_index)
         x = F.elu(x)
         print(x.size())
-        x = torch.cat((x, self.rates_encoder(rates).repeat(x.size()[0]).reshape((x.size()[0], self.hidden_dim))), dim=1)
+        x = torch.cat((x, self.rates_encoder(rates).repeat(x.size()[0], 1).reshape((x.size()[0], self.hidden_dim))), dim=1)
         print(x.size())
         x = self.conv2(x, edge_index)
         x = F.elu(x)
