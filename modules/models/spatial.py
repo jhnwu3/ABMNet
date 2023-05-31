@@ -91,6 +91,7 @@ class GATComplex(nn.Module):
         print("before error:",x.size())
         # x = torch.cat([x[:, head_idx] for head_idx in range(x.size(1))], dim=0)
         x = self.fc(x)
+        print("x here", x.size())
         x = x.relu()
         x = global_mean_pool(x, batch=None)
         self.final_out(x)
