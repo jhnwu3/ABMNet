@@ -95,7 +95,7 @@ class GATComplex(nn.Module):
         x = x.relu()
         x = global_mean_pool(x, batch=None)
         print("final:", x.size())
-        self.final_out(x)
+        x = self.final_out(x)
         print("final_final_out", x.size())
         return x
 
