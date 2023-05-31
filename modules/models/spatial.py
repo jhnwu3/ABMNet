@@ -6,6 +6,8 @@ from torch_geometric.nn import GCNConv, global_mean_pool
 from scipy import spatial
 from modules.utils.graph import *
 from modules.data.spatial import *
+from torch_geometric.nn import GATConv
+
 class GCN(torch.nn.Module):
     def __init__(self, n_features, n_classes, hidden_channels=8):
         super().__init__()
@@ -42,8 +44,8 @@ class GCNComplexMoments(nn.Module):
         self.rates_encoder = EncoderLayer(n_rates, embedding_size, hidden_channels)
         self.conv2 = GCNConv(hidden_channels + hidden_channels, hidden_channels)
         self.conv3 = GCNConv(hidden_channels, hidden_channels)
-        self.hidden = nn.Linear(hidden_channels, hidden_channels)
-        self.hidden2 = nn.Linear(hidden_channels, hidden_channels)
+        self.hidden = nn.Linear(hidden_channels, hidden_channels*2)
+        self.hidden2 = nn.Linear(hidden_channels*2, hidden_channels)
         self.final = nn.Linear(hidden_channels, n_outputs)
         
         
@@ -65,7 +67,27 @@ class GCNComplexMoments(nn.Module):
         graph = F.relu(graph)
         graph = self.final(graph)
         return graph
-        
+
+
+# Define the Graph Attention Network (GAT) model
+class GATComplex(nn.Module):
+    def __init__(self, input_dim, hidden_dim, num_classes, n_rates, embedding_size=8, num_heads=4):
+        super(GATComplex, self).__init__()
+        self.conv1 = GATConv(input_dim, hidden_dim, heads=num_heads)
+        self.rates_encoder = EncoderLayer(n_rates, embedding_size, hidden_dim)
+        self.conv2 = GATConv(hidden_dim * num_heads, hidden_dim, heads=num_heads)
+        self.fc = nn.Linear(hidden_dim * num_heads, num_classes)
+
+    def forward(self, x, edge_index):
+        x = self.conv1(x, edge_index)
+        x = F.elu(x)
+        x = self.conv2(x, edge_index)
+        x = F.elu(x)
+        x = torch.cat([x[:, head_idx] for head_idx in range(x.size(1))], dim=1)
+        x = self.fc(x)
+        return x
+
+
 class GCNComplex(torch.nn.Module):
     # default embedding size maybe, 64?
     def __init__(self, n_features, n_classes, hidden_channels, n_rates, embedding_size=64):
