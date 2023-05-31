@@ -83,20 +83,14 @@ class GATComplex(nn.Module):
     def forward(self, x, edge_index, rates):
         x = self.conv1(x, edge_index)
         x = F.elu(x)
-        print(x.size())
         x = torch.cat((x, self.rates_encoder(rates).repeat(x.size()[0], 1).reshape((x.size()[0], self.hidden_dim))), dim=1)
-        print(x.size())
         x = self.conv2(x, edge_index)
         x = F.elu(x)
-        print("before error:",x.size())
         # x = torch.cat([x[:, head_idx] for head_idx in range(x.size(1))], dim=0)
         x = self.fc(x)
-        print("x here", x.size())
         x = x.relu()
         x = global_mean_pool(x, batch=None)
-        print("final:", x.size())
         x = self.final_out(x)
-        print("final_final_out", x.size())
         return x
 
 
