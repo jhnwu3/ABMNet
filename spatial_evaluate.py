@@ -29,7 +29,7 @@ ground_truth = []
 overall_loss = 0
 
 model = GCNComplexMoments(n_inputs=data.n_inputs, n_outputs= data.n_outputs, n_rates=data.n_rates, hidden_channels=256)
-model.load_state_dict(torch.load("model/gdag_gnn.pt"))  # Replace "path_to_model.pth" with the path to your model file
+model.load_state_dict(torch.load("model/gdag_gcn.pt"))  # Replace "path_to_model.pth" with the path to your model file
 model.to(device)
 model = model.float()
 dataloader = torch.utils.data.DataLoader(test_data, batch_size=None, shuffle=True)
