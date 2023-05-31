@@ -12,6 +12,20 @@ def convert_dataset_output_to_numpy(dataset):
         npy.append(sample['moments'].detach().numpy())
     return np.array(npy)
 
+def r_squared(y_true, y_pred):
+    # Calculate the mean of the true values
+    mean_true = np.mean(y_true)
+
+    # Calculate the total sum of squares (SS_tot)
+    ss_tot = np.sum((y_true - mean_true)**2)
+
+    # Calculate the residual sum of squares (SS_res)
+    ss_res = np.sum((y_true - y_pred)**2)
+
+    # Calculate R-squared (coefficient of determination)
+    r2 = 1 - (ss_res / ss_tot)
+
+    return r2
 
 # errors assume matrices.
 def numpy_mse(x,y):
@@ -92,7 +106,7 @@ def plot_scatter(true, predictions, output='data/graphs/out', nSpecies=None):
     optimal = axes.plot(np.unique(x123), np.poly1d(np.polyfit(x123, y123, 1))(np.unique(x123)),'--', c='k', label='Perfect Prediction')
     axes.set_xlabel("Original Model Value")
     axes.set_ylabel("Surrogate Model Prediction")
-    
+    r_sq = r_squared(true.flatten(), predictions.flatten())
     if nSpecies is not None:
         for c in range(true.shape[1]):
             if c < nSpecies: # means
@@ -106,6 +120,7 @@ def plot_scatter(true, predictions, output='data/graphs/out', nSpecies=None):
             
         # axes.legend(optimal, 'Perfect Prediction')
     axes.legend(loc='upper right')
+    axes.legend(["R^2=" + str(r_sq)])
     plt.savefig(output + '_scatter.png')  
 
 def visualize_graph(G, color, path="data/spatial/graph.png"):
