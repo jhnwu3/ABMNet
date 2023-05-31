@@ -1,0 +1,14 @@
+Reading From: ../gdag_data/gdag_test_full.pickle
+Computing Delaunay AutoCorrelation
+torch.Size([1, 5])
+10000
+39685
+39685
+Saving Graph Data to PKL
+Job Statistics for 3764947:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3764947   rsjxw007 2023-05-31T10:55:10 2023-05-31T14:35:36   03:40:26              03:43:30  COMPLETED  0:0   r1pl-hpcf-n21     billing=16,cpu=16,mem=119280M,node=1 
+   3764947.batch            2023-05-31T10:55:10 2023-05-31T14:35:36   03:40:26  84751.65M   03:43:30  COMPLETED  0:0   r1pl-hpcf-n21                                          
+  3764947.extern            2023-05-31T10:55:10 2023-05-31T14:35:36   03:40:26      0.09M  00:00.003  COMPLETED  0:0   r1pl-hpcf-n21                                          
+CPU Efficiency: 6.34% of 2-10:46:56 core-walltime
