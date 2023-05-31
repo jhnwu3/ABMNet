@@ -76,7 +76,8 @@ class GATComplex(nn.Module):
         self.conv1 = GATConv(input_dim, hidden_dim, heads=num_heads)
         self.rates_encoder = EncoderLayer(n_rates, embedding_size, hidden_dim)
         self.conv2 = GATConv(hidden_dim * num_heads + hidden_dim, hidden_dim, heads=num_heads)
-        self.fc = nn.Linear(hidden_dim * num_heads, num_classes)
+        self.fc = nn.Linear(hidden_dim * num_heads, hidden_dim)
+        self.final_out = nn.Linear(hidden_dim, num_classes)
 
     def forward(self, x, edge_index, rates):
         x = self.conv1(x, edge_index)
@@ -85,8 +86,10 @@ class GATComplex(nn.Module):
         x = self.conv2(x, edge_index)
         x = F.elu(x)
         x = torch.cat([x[:, head_idx] for head_idx in range(x.size(1))], dim=1)
-        x = global_mean_pool(x, batch=None)
         x = self.fc(x)
+        x = x.relu()
+        x = global_mean_pool(x, batch=None)
+        self.final_out(x)
         return x
 
 
