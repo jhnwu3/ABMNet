@@ -1,0 +1,28 @@
+Training Dataset Size: 1058
+Test Dataset Size: 265
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/spatial_evaluate.py", line 32, in <module>
+    model.load_state_dict(torch.load("model/gdag_gcn.pt"))  # Replace "path_to_model.pth" with the path to your model file
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 2041, in load_state_dict
+    raise RuntimeError('Error(s) in loading state_dict for {}:\n\t{}'.format(
+RuntimeError: Error(s) in loading state_dict for GCNComplexMoments:
+	size mismatch for conv1.bias: copying a param with shape torch.Size([8]) from checkpoint, the shape in current model is torch.Size([128]).
+	size mismatch for conv1.lin.weight: copying a param with shape torch.Size([8, 9]) from checkpoint, the shape in current model is torch.Size([128, 9]).
+	size mismatch for rates_encoder.linear2.weight: copying a param with shape torch.Size([8, 8]) from checkpoint, the shape in current model is torch.Size([128, 8]).
+	size mismatch for rates_encoder.linear2.bias: copying a param with shape torch.Size([8]) from checkpoint, the shape in current model is torch.Size([128]).
+	size mismatch for conv2.bias: copying a param with shape torch.Size([8]) from checkpoint, the shape in current model is torch.Size([128]).
+	size mismatch for conv2.lin.weight: copying a param with shape torch.Size([8, 16]) from checkpoint, the shape in current model is torch.Size([128, 256]).
+	size mismatch for conv3.bias: copying a param with shape torch.Size([8]) from checkpoint, the shape in current model is torch.Size([128]).
+	size mismatch for conv3.lin.weight: copying a param with shape torch.Size([8, 8]) from checkpoint, the shape in current model is torch.Size([128, 128]).
+	size mismatch for hidden.weight: copying a param with shape torch.Size([16, 8]) from checkpoint, the shape in current model is torch.Size([256, 128]).
+	size mismatch for hidden.bias: copying a param with shape torch.Size([16]) from checkpoint, the shape in current model is torch.Size([256]).
+	size mismatch for hidden2.weight: copying a param with shape torch.Size([8, 16]) from checkpoint, the shape in current model is torch.Size([128, 256]).
+	size mismatch for hidden2.bias: copying a param with shape torch.Size([8]) from checkpoint, the shape in current model is torch.Size([128]).
+	size mismatch for final.weight: copying a param with shape torch.Size([20, 8]) from checkpoint, the shape in current model is torch.Size([20, 128]).
+Job Statistics for 3765143:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3765143   rsjxw007 2023-05-31T12:29:04 2023-05-31T12:29:12   00:00:08             00:11.600     FAILED  1:0   r1pl-hpcf-g04 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3765143.batch            2023-05-31T12:29:04 2023-05-31T12:29:12   00:00:08          0  00:11.596     FAILED  1:0   r1pl-hpcf-g04                                          
+  3765143.extern            2023-05-31T12:29:04 2023-05-31T12:29:12   00:00:08          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 9.38% of 00:02:08 core-walltime
