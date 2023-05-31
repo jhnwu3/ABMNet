@@ -41,7 +41,7 @@ class SpatialModel():
                     loss = 0
                     with autocast():
                         out = model(initial_graph.to(device), edges.to(device), rates.to(device))
-                        loss = criterion(out, output_graph.to(device))
+                        loss = criterion(out.squeeze(), output_graph.squeeze().to(device))
                     scaler.scale(loss).backward()
                     scaler.step(optimizer)
                     scaler.update()

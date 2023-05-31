@@ -78,9 +78,10 @@ class GATComplex(nn.Module):
         self.conv2 = GATConv(hidden_dim * num_heads, hidden_dim, heads=num_heads)
         self.fc = nn.Linear(hidden_dim * num_heads, num_classes)
 
-    def forward(self, x, edge_index):
+    def forward(self, x, edge_index, rates):
         x = self.conv1(x, edge_index)
         x = F.elu(x)
+        x = torch.cat((x, self.rates_encoder(rates).repeat(x.size()[0]).reshape((x.size()[0], x.size()[0]))), dim=1)
         x = self.conv2(x, edge_index)
         x = F.elu(x)
         x = torch.cat([x[:, head_idx] for head_idx in range(x.size(1))], dim=1)
