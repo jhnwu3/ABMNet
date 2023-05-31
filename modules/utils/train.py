@@ -58,9 +58,9 @@ class SpatialModel():
                 torch.cuda.empty_cache()
                 gc.collect()
             
-            # if epoch % 1 == 0:
+            if epoch % 1 == 0:
             #     print("mem:", torch.cuda.memory_allocated(), " cached:", torch.cuda.memory_reserved())
-            #     print("Epoch:", epoch, " Loss:", loss_per_epoch)   
+                print("Epoch:", epoch, " Loss:", loss_per_epoch)   
         if len(path) > 0:
             torch.save(model.state_dict(), path)
             
