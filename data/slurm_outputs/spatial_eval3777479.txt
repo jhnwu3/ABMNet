@@ -1,0 +1,13 @@
+Training Dataset Size: 1058
+Test Dataset Size: 265
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/spatial_evaluate.py", line 31, in <module>
+    model = GATComplex(n_inputs=data.n_inputs, n_outputs= data.n_outputs, n_rates=data.n_rates, hidden_channels=128)
+TypeError: GATComplex.__init__() got an unexpected keyword argument 'n_inputs'
+Job Statistics for 3777479:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3777479   rsjxw007 2023-06-01T10:42:15 2023-06-01T10:42:22   00:00:07             00:11.153     FAILED  1:0   r1pl-hpcf-g04 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3777479.batch            2023-06-01T10:42:15 2023-06-01T10:42:22   00:00:07          0  00:11.150     FAILED  1:0   r1pl-hpcf-g04                                          
+  3777479.extern            2023-06-01T10:42:15 2023-06-01T10:42:22   00:00:07          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 9.82% of 00:01:52 core-walltime
