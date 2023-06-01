@@ -10,7 +10,7 @@ from torch.cuda.amp import autocast
 
 
 class SpatialModel():
-    def train_moments(data, nEpochs, n_inputs, n_outputs, n_rates, initial_graph, edges, hidden_channels, path = ""):
+    def train_gcn(data, nEpochs, n_inputs, n_outputs, n_rates, initial_graph, edges, hidden_channels, path = ""):
         model = GCNComplexMoments(n_inputs=n_inputs, n_rates=n_rates, hidden_channels=hidden_channels,
                                   n_outputs=n_outputs)
         model.train()
@@ -67,7 +67,7 @@ class SpatialModel():
         # return both a model and the device used to train it.
         return model, device
     
-    def train_gat_moments(data, nEpochs, n_inputs, n_outputs, n_rates, initial_graph, edges, hidden_channels, path = ""):
+    def train_gat(data, nEpochs, n_inputs, n_outputs, n_rates, initial_graph, edges, hidden_channels, path = ""):
         model = GATComplex(input_dim=n_inputs, n_rates=n_rates, hidden_dim=hidden_channels,
                                   num_classes=n_outputs)
         model.train()

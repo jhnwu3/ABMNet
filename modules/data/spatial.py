@@ -537,6 +537,86 @@ class SingleInitialMomentsDataset(Dataset):
         return self.rates[index], self.output_graphs[index]
 
 
+# Cytotoxic CD8+ T Cells, Cancer, Exhausted CD8+ T Cells, Dead Cancer Cells, Ignore, Ignore, TAMs, Ignore, Ignore
+class SingleInitialMomentsDataset(Dataset):
+    # path to a pickle file that contains a dictionary of the following variables shown below
+    # [] is a list of indices of features to keep in the input and output graphs
+    def __init__(self, path, min_max_scale = True):
+        # Initialize your dataset here
+        # Store the necessary data or file paths
+        data = pickle.load(open(path, "rb"))
+        self.output_graphs = data["output_graphs"]
+        self.initial_graph = data["input_graphs"]
+        self.edges = data["edges"]
+        self.rates = data["rates"]
+        self.n_outputs = data["n_outputs"] 
+        self.n_inputs = data["n_features"]
+        self.n_rates = data["n_rates"]
+        if min_max_scale:
+            # mins and maxes in the most roundabout way possible, haha ;(
+            # convert back to numpy to get them mins and maxes 
+            arr = []
+            for output in self.output_graphs:
+                arr.append(output.numpy())
+            arr = np.array(arr)
+            arr = torch.from_numpy(arr)
+            # now to do the ugly min maxing, Don't DO THIS KIDS
+            for i in range(len(self.output_graphs)):
+                self.output_graphs[i] -= torch.min(arr, dim=0).values
+                self.output_graphs[i] /= (torch.max(arr,dim=0).values - torch.min(arr, dim=0).values)
+            
+            
+    def __len__(self):
+        # Return the total number of samples in your dataset
+        return len(self.rates) # len(rates) == len(output_graphs)
+    
+    def __getitem__(self, index):
+        # Retrieve a single item from the dataset based on the given index
+        # Return a tuple (input, target) or dictionary {'input': input, 'target': target}
+        # The input and target can be tensors, NumPy arrays, or other data types
+        return self.rates[index], self.output_graphs[index]
+
+
+# Cytotoxic CD8+ T Cells, Cancer, Exhausted CD8+ T Cells, Dead Cancer Cells, Ignore, Ignore, TAMs, Ignore, Ignore
+class SingleInitialCorrelationDataset(Dataset):
+    # path to a pickle file that contains a dictionary of the following variables shown below
+    # [] is a list of indices of features to keep in the input and output graphs
+    def __init__(self, path, min_max_scale = True):
+        # Initialize your dataset here
+        # Store the necessary data or file paths
+        data = pickle.load(open(path, "rb"))
+        self.output_graphs = data["output_graphs"]
+        self.initial_graph = data["input_graphs"]
+        self.edges = data["edges"]
+        self.rates = data["rates"]
+        self.n_outputs = data["n_outputs"] 
+        self.n_inputs = data["n_features"]
+        self.n_rates = data["n_rates"]
+        if min_max_scale:
+            # mins and maxes in the most roundabout way possible, haha ;(
+            # convert back to numpy to get them mins and maxes 
+            arr = []
+            for output in self.output_graphs:
+                arr.append(output.numpy())
+            arr = np.array(arr)
+            arr = torch.from_numpy(arr)
+            # now to do the ugly min maxing, Don't DO THIS KIDS
+            for i in range(len(self.output_graphs)):
+                self.output_graphs[i] = self.output_graphs[i].squeeze() - torch.min(arr, dim=0).values
+                self.output_graphs[i] /= (torch.max(arr, dim=0).values - torch.min(arr, dim=0).values)
+            
+            
+    def __len__(self):
+        # Return the total number of samples in your dataset
+        return len(self.rates) # len(rates) == len(output_graphs)
+    
+    def __getitem__(self, index):
+        # Retrieve a single item from the dataset based on the given index
+        # Return a tuple (input, target) or dictionary {'input': input, 'target': target}
+        # The input and target can be tensors, NumPy arrays, or other data types
+        return self.rates[index], self.output_graphs[index]
+
+
 # come back to modify this if we find out it takes too long to train and we need to leverage more power
 class MyIterableDataset(IterableDataset):
     def __init__(self, start, end):

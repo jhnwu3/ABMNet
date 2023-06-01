@@ -12,7 +12,7 @@ from modules.utils.train import *
 
 
 
-data = SingleInitialMomentsDataset("../gdag_data/gdag_spatial_moments.pickle")
+data = SingleInitialCorrelationDataset("../gdag_data/gdag_spatial_moments.pickle")
 train_size = int(0.8 * len(data))
 test_size = len(data) - train_size
 print("Training Dataset Size:", train_size)
@@ -22,7 +22,7 @@ train_data, test_data = torch.utils.data.random_split(data, [train_size, test_si
 # model, device = SpatialModel.train_moments(train_data, 45, n_inputs=data.n_inputs,n_outputs=data.n_outputs,n_rates=data.n_rates,
 #                            initial_graph=data.initial_graph, edges=data.edges, hidden_channels=128, path="model/gdag_gat.pt")
 print(data.n_outputs)
-model, device = SpatialModel.train_gat_moments(train_data, 45, n_inputs=data.n_inputs,n_outputs=data.n_outputs,n_rates=data.n_rates,
+model, device = SpatialModel.train_gat(train_data, 45, n_inputs=data.n_inputs,n_outputs=data.n_outputs,n_rates=data.n_rates,
                            initial_graph=data.initial_graph, edges=data.edges, hidden_channels=128, path="model/gdag_gat.pt")
 
 

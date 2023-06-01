@@ -29,7 +29,7 @@ ground_truth = []
 overall_loss = 0
 
 model = GCNComplexMoments(n_inputs=data.n_inputs, n_outputs= data.n_outputs, n_rates=data.n_rates, hidden_channels=8)
-model.load_state_dict(torch.load("model/gdag_gcn.pt"))  # Replace "path_to_model.pth" with the path to your model file
+model.load_state_dict(torch.load("model/gdag_gat.pt"))  # Replace "path_to_model.pth" with the path to your model file
 model.to(device)
 model = model.float()
 dataloader = torch.utils.data.DataLoader(test_data, batch_size=None, shuffle=True)
@@ -46,8 +46,8 @@ ground_truth = np.array(ground_truth)
 # plot histograms and plot scatter plots
 print(predictions.shape)
 print(ground_truth.shape)
-plot_histograms(test_dataset=ground_truth,predictions=predictions, output="graphs/gnn/test")
-plot_scatter(true=ground_truth, predictions=predictions, output="graphs/gnn/test")
+plot_histograms(test_dataset=ground_truth,predictions=predictions, output="graphs/gnn/test_gat")
+plot_scatter(true=ground_truth, predictions=predictions, output="graphs/gnn/test_gat")
 
 
 
