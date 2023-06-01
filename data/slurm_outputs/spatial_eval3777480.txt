@@ -1,0 +1,16 @@
+/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/loss.py:536: UserWarning: Using a target size (torch.Size([20])) that is different to the input size (torch.Size([1, 20])). This will likely lead to incorrect results due to broadcasting. Please ensure they have the same size.
+  return F.mse_loss(input, target, reduction=self.reduction)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/graph.py:99: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  plt.figure()
+Training Dataset Size: 1058
+Test Dataset Size: 265
+Overall Average Test MSE: tensor(0.0023, device='cuda:0', dtype=torch.float64)
+(265, 20)
+(265, 20)
+Job Statistics for 3777480:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3777480   rsjxw007 2023-06-01T10:44:29 2023-06-01T10:44:41   00:00:12             00:21.457  COMPLETED  0:0   r1pl-hpcf-g04 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3777480.batch            2023-06-01T10:44:29 2023-06-01T10:44:41   00:00:12          0  00:21.453  COMPLETED  0:0   r1pl-hpcf-g04                                          
+  3777480.extern            2023-06-01T10:44:29 2023-06-01T10:44:41   00:00:12          0  00:00.004  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 10.94% of 00:03:12 core-walltime
