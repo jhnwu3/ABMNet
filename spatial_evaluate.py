@@ -28,7 +28,10 @@ predictions = []
 ground_truth = []
 overall_loss = 0
 
-model = GATComplex(n_inputs=data.n_inputs, n_outputs= data.n_outputs, n_rates=data.n_rates, hidden_channels=128)
+model = GATComplex(input_dim=data.n_inputs, 
+                   n_rates=data.n_rates, 
+                   hidden_dim=128,
+                    num_classes=data.n_outputs)
 model.load_state_dict(torch.load("model/gdag_gat.pt"))  # Replace "path_to_model.pth" with the path to your model file
 model.to(device)
 model = model.float()
