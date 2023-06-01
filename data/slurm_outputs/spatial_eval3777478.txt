@@ -1,0 +1,21 @@
+Training Dataset Size: 1058
+Test Dataset Size: 265
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/spatial_evaluate.py", line 32, in <module>
+    model.load_state_dict(torch.load("model/gdag_gat.pt"))  # Replace "path_to_model.pth" with the path to your model file
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 2041, in load_state_dict
+    raise RuntimeError('Error(s) in loading state_dict for {}:\n\t{}'.format(
+RuntimeError: Error(s) in loading state_dict for GCNComplexMoments:
+	Missing key(s) in state_dict: "conv1.lin.weight", "conv2.lin.weight", "conv3.bias", "conv3.lin.weight", "hidden.weight", "hidden.bias", "hidden2.weight", "hidden2.bias", "final.weight", "final.bias". 
+	Unexpected key(s) in state_dict: "fc.weight", "fc.bias", "final_out.input_ff.weight", "final_out.input_ff.bias", "final_out.hidden.0.ff.0.weight", "final_out.hidden.0.ff.0.bias", "final_out.hidden.1.ff.0.weight", "final_out.hidden.1.ff.0.bias", "final_out.hidden.2.ff.0.weight", "final_out.hidden.2.ff.0.bias", "final_out.output.weight", "final_out.output.bias", "conv1.att_src", "conv1.att_dst", "conv1.lin_src.weight", "conv1.lin_dst.weight", "conv2.att_src", "conv2.att_dst", "conv2.lin_src.weight", "conv2.lin_dst.weight". 
+	size mismatch for conv1.bias: copying a param with shape torch.Size([512]) from checkpoint, the shape in current model is torch.Size([8]).
+	size mismatch for rates_encoder.linear2.weight: copying a param with shape torch.Size([128, 8]) from checkpoint, the shape in current model is torch.Size([8, 8]).
+	size mismatch for rates_encoder.linear2.bias: copying a param with shape torch.Size([128]) from checkpoint, the shape in current model is torch.Size([8]).
+	size mismatch for conv2.bias: copying a param with shape torch.Size([512]) from checkpoint, the shape in current model is torch.Size([8]).
+Job Statistics for 3777478:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3777478   rsjxw007 2023-06-01T10:40:53 2023-06-01T10:41:01   00:00:08             00:11.804     FAILED  1:0   r1pl-hpcf-g04 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3777478.batch            2023-06-01T10:40:53 2023-06-01T10:41:01   00:00:08          0  00:11.800     FAILED  1:0   r1pl-hpcf-g04                                          
+  3777478.extern            2023-06-01T10:40:53 2023-06-01T10:41:01   00:00:08          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 9.38% of 00:02:08 core-walltime
