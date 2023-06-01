@@ -30,7 +30,35 @@ class TemporalModel(nn.Module):
         out = self.fc(out)
        
         return out, hidden
-    
+
+class TemporalComplexModel(nn.Module):
+    def __init__(self, input_size, output_size, hidden_dim, n_layers):
+        super(TemporalComplexModel, self).__init__()
+
+        # Defining some parameters
+        self.hidden_dim = hidden_dim
+        self.n_layers = n_layers
+
+        # Defining the layers
+        # RNN Layer
+        self.lstm = nn.LSTM(input_size, hidden_dim, n_layers, batch_first=False)  
+        # Fully connected layer
+        self.fc = nn.Linear(hidden_dim, output_size)
+   
+    def forward(self, x, hidden):
+
+        # Initializing hidden state for first input using method defined below
+        # hidden = self.init_hidden()
+
+        # Passing in the input and hidden state into the model and obtaining outputs
+        out, hidden = self.lstm(x, hidden)
+
+        # Reshaping the outputs such that it can be fit into the fully connected layer
+        # out = out.contiguous().view(-1, self.hidden_dim)
+        out = self.fc(out)
+       
+        return out, hidden
+
 def train_temporal_model():
     hidden_size = 256
     learning_rate = 0.1
