@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/spatial_train_moments.py", line 10, in <module>
+    from modules.models.spatial import *
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/models/spatial.py", line 9, in <module>
+    from modules.models.simple import *
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/models/simple.py", line 6, in <module>
+    from modules.data.mixed import *
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/data/mixed.py", line 1, in <module>
+    import mesa
+ModuleNotFoundError: No module named 'mesa'
+Job Statistics for 3779199:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3779199   rsjxw007 2023-06-02T11:38:22 2023-06-02T11:38:40   00:00:18             00:08.078     FAILED  1:0   r1pl-hpcf-g04 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3779199.batch            2023-06-02T11:38:22 2023-06-02T11:38:40   00:00:18          0  00:08.074     FAILED  1:0   r1pl-hpcf-g04                                          
+  3779199.extern            2023-06-02T11:38:22 2023-06-02T11:38:40   00:00:18          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 2.78% of 00:04:48 core-walltime
