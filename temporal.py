@@ -8,7 +8,7 @@ data = TemporalDataset("data/time_series/indrani.pickle")
 print(len(data))
 hidden_size=256
 lr=0.001
-n_epochs=20
+n_epochs=50
 n_layers=5
 model, device, test_data = train_temporal_model(data, hidden_size, lr, n_epochs, n_layers, path="model/indrani_temporal.pt")
 
