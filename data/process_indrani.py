@@ -39,6 +39,7 @@ for o in output:
     output_tensors.append(torch.from_numpy(o))    
 tosave["rates"] = rates_tensors
 tosave["outputs"] = output_tensors
+tosave["time_points"] = times
 with open("data/time_series/indrani.pickle", 'wb') as handle:
     pickle.dump(tosave, handle, protocol=pickle.HIGHEST_PROTOCOL)
 

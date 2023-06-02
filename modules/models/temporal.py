@@ -4,6 +4,7 @@ import torch
 import torch.nn as nn
 from modules.models.simple import *
 from modules.models.spatial import *
+from modules.data.temporal import *
 class TemporalModel(nn.Module):
     def __init__(self, input_size, output_size, hidden_dim, n_layers):
         super(TemporalModel, self).__init__()
@@ -62,7 +63,7 @@ class TemporalComplexModel(nn.Module):
        
         return out, hidden
 
-def train_temporal_model():
+def train_temporal_model(data, hidden_size, lr, n_epochs, n_layers):
     hidden_size = 256
     learning_rate = 0.1
     num_epochs = 100
@@ -70,12 +71,23 @@ def train_temporal_model():
     output_size = 3
     layer_size = 5
 
+    device = ""
+    if torch.cuda.is_available():
+        device = torch.device("cuda")
+        using_gpu = True
+    else:
+        device = torch.device("cpu")
+        using_gpu = False
+            
+    
     model = TemporalComplexModel(input_size=input_size, output_size=output_size, hidden_dim=hidden_size, n_layers=layer_size)
     model = model.float()
 
     criterion = nn.MSELoss()
     optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
-
+    dataloader = torch.utils.data.DataLoader(data, batch_size=None, shuffle=True) 
+    train_size = int(0.8 * len(data))
+    test_size = len(data) - train_size
     for epoch in range(1, num_epochs + 1):
         loss_per_epoch = 0
         hidden = (torch.zeros(layer_size, hidden_size).detach(), torch.zeros(layer_size, hidden_size).detach())
@@ -105,12 +117,3 @@ def train_temporal_model():
         loss.backward() # Does backpropagation and calculates gradients
 
     print("This is the test loss: ", test_loss.cpu().detach().numpy())
-
-    # plot_expected = np.array(plot_expected)
-    # plot_predicted = np.array(plot_predicted)
-    # plot_expected[:] = ((plot_expected[:] * (test_series[:].max() - test_series[:].min())) + test_series[:].min())
-    # plot_predicted[:] = ((plot_predicted[:] * (test_series[:].max() - test_series[:].min())) + test_series[:].min())
-
-    plt.plot(plot_expected, c="b")
-    plt.plot(plot_predicted, c="r")
-    plt.show()
