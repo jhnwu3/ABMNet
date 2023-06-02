@@ -166,4 +166,20 @@ def plot_graph_to_img(graph, path =""):
             channel+=1
             
     plt.savefig(path)        
-    
+
+
+def plot_time_series_errors(truth, predicted, times, path="graphs/temporal/errors.png"):
+    # Calculate element-wise square differences
+    print("plotting time errors")
+    differences = np.zeros(np.squeeze(truth[0]).shape)
+    print(truth[0].shape)
+    for tru, pred in zip(truth, predicted):
+        differences += (np.squeeze(tru) - np.squeeze(pred))
+    print("hm")
+    # Compute the mean of squared differences across all arrays
+    mean_differences = differences / len(truth)
+    plt.plot(times, mean_differences)
+    plt.xlabel('Time')
+    plt.ylabel('Mean Squared Difference')
+    plt.title('Comparison of Predicted and Truth')
+    plt.savefig(path)

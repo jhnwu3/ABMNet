@@ -140,7 +140,7 @@ def train_temporal_model(data : TemporalDataset, hidden_size=256, lr=0.001, n_ep
     criterion = nn.MSELoss()
     criterion = criterion.to(device)
     optimizer = torch.optim.SGD(model.parameters(), lr=lr)
-    train_size = int(0.8 * len(data))
+    train_size = int(0.1 * len(data))
     test_size = len(data) - train_size
     train_data, test_data = torch.utils.data.random_split(data, [train_size, test_size])
     dataloader = torch.utils.data.DataLoader(train_data, batch_size=None, shuffle=True) 

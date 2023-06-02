@@ -16,6 +16,7 @@ class TemporalDataset(Dataset):
         data = pickle.load(open(path, "rb"))
         self.outputs = data["outputs"] # N x L tensors
         self.rates = data["rates"]
+        self.times = data["time_points"]
         self.n_rates = self.rates[0].size()[0]
         self.input_size = 1
         if len(self.outputs[0].size()) > 1:
