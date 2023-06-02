@@ -6,7 +6,7 @@ import torch
 
 data = TemporalDataset("data/time_series/indrani.pickle")
 print(len(data))
-hidden_size=256
+hidden_size=128
 lr=0.001
 n_epochs=50
 n_layers=5
