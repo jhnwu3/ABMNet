@@ -1,0 +1,15 @@
+2500
+Using GPU
+Epoch: 0  loss: tensor(54.3647, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.46044898033142
+Epoch: 10  loss: tensor(19.2851, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 251.58462834358215
+Average Test Loss: tensor(0.0809, dtype=torch.float64)
+plotting time errors
+(600,)
+hm
+Job Statistics for 3780047:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3780047   rsjxw007 2023-06-02T16:18:08 2023-06-02T16:28:04   00:09:56             09:46.111  COMPLETED  0:0   r1pl-hpcf-g05 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3780047.batch            2023-06-02T16:18:08 2023-06-02T16:28:04   00:09:56   2334.14M  09:46.108  COMPLETED  0:0   r1pl-hpcf-g05                                          
+  3780047.extern            2023-06-02T16:18:08 2023-06-02T16:28:04   00:09:56      0.09M  00:00.002  COMPLETED  0:0   r1pl-hpcf-g05                                          
+CPU Efficiency: 6.15% of 02:38:56 core-walltime
