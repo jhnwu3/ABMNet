@@ -180,6 +180,6 @@ def plot_time_series_errors(truth, predicted, times, path="graphs/temporal/error
     mean_differences = differences / len(truth)
     plt.plot(times, mean_differences)
     plt.xlabel('Time')
-    plt.ylabel('Mean Squared Difference')
-    plt.title('Comparison of Predicted and Truth')
+    plt.ylabel('Average Mean Square Error')
+    plt.title('Error Through Time')
     plt.savefig(path)
