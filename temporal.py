@@ -9,7 +9,7 @@ print(len(data))
 hidden_size=128
 lr=0.001
 n_epochs=50
-n_layers=5
+n_layers=3
 model, device, test_data = train_temporal_model(data, hidden_size, lr, n_epochs, n_layers, path="model/indrani_temporal.pt")
 
 criterion = torch.nn.MSELoss().to(device)
@@ -30,4 +30,4 @@ with torch.no_grad():
         truth.append(output.cpu().numpy())
         
 print("Average Test Loss:", test_loss / len(test_data))
-plot_time_series_errors(truth, predicted, data.times[1:])
+plot_time_series_errors(truth, predicted, data.times[1:], path="graphs/temporal/errors_small.png")

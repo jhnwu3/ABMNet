@@ -175,7 +175,7 @@ def plot_time_series_errors(truth, predicted, times, path="graphs/temporal/error
     print(truth[0].shape)
     for tru, pred in zip(truth, predicted):
         differences += np.square(np.squeeze(tru) - np.squeeze(pred))
-    print("hm")
+    # print("hm")
     # Compute the mean of squared differences across all arrays
     mean_differences = differences / len(truth)
     plt.plot(times, mean_differences)
