@@ -6,43 +6,8 @@ from torch_geometric.nn import GCNConv, global_mean_pool
 from scipy import spatial
 from modules.utils.graph import *
 from modules.data.spatial import *
+from modules.models.simple import *
 from torch_geometric.nn import GATConv
-
-class LinLayer(nn.Module):
-    def __init__(self, i, o):
-        super(LinLayer, self).__init__()
-
-        self.ff = nn.Sequential(
-            nn.Linear(i, o),
-            nn.ReLU(),
-        )
-
-    def forward(self, x):
-        output = self.ff.forward(x)
-        return output
-
-class MLP(nn.Module):
-    def __init__(self, input_size, hidden_size, depth, output_size):
-        super(MLP, self).__init__()
-        self.input_size = input_size 
-        self.output_size = output_size
-        self.input_ff = nn.Linear(input_size, hidden_size)
-        hidden_layers = []
-        for i in range(depth):
-            hidden_layers.append(LinLayer(hidden_size, hidden_size))
-        
-        self.hidden = nn.Sequential(*hidden_layers)
-        self.output = nn.Linear(hidden_size, output_size)
-        # self.fc4 = nn.Linear(10,output_size)
-        # self.softmax = nn.Softmax(dim=0)
-        
-    def forward(self, input):
-        out = self.input_ff(input)
-        out = self.hidden(out)
-        out = self.output(out)
-        # output = self.softmax(line)
-        return out 
-
 
 class GCN(torch.nn.Module):
     def __init__(self, n_features, n_classes, hidden_channels=8):
@@ -113,7 +78,7 @@ class GATComplex(nn.Module):
         self.rates_encoder = EncoderLayer(n_rates, embedding_size, hidden_dim)
         self.conv2 = GATConv(hidden_dim * num_heads + hidden_dim, hidden_dim, heads=num_heads)
         self.fc = nn.Linear(hidden_dim * num_heads, hidden_dim)
-        self.final_out = MLP(hidden_dim, hidden_dim*2, 3, num_classes)
+        self.final_out = NeuralNetwork(hidden_dim, hidden_dim*2, 3, num_classes)
         self.hidden_dim = hidden_dim
 
     def forward(self, x, edge_index, rates):

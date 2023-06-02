@@ -99,7 +99,7 @@ class RecurrentNN(nn.Module):
 def train_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_size, nEpochs, use_gpu = False):
     
     model = NeuralNetwork(input_size, hidden_size, depth, output_size).double()
-    optimizer = optim.AdamW(model.parameters())
+    optimizer = optim.AdamW(model.parameters(),lr=0.0001)
     criterion = nn.MSELoss()
     
     if tc.cuda.is_available() and use_gpu:

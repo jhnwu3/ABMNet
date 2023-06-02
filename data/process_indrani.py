@@ -1,6 +1,8 @@
 import pandas as pd 
 import numpy as np
 import os 
+import torch
+import pickle
 # from modules.data.spatial import *
 def write_array_to_csv(array, column_labels, file_path):
     # Create a DataFrame from the array and column labels
@@ -9,29 +11,47 @@ def write_array_to_csv(array, column_labels, file_path):
     # Write the DataFrame to a CSV file
     df.to_csv(file_path, index=False)
 
-parent_dir = "data/John_Indrani_data/data"
+parent_dir = "data/John_Indrani_data/training_data_large"
 parameter_dirs = [os.path.join(parent_dir,x) for x in os.listdir(parent_dir)]
 print(parameter_dirs)
 
 rates = []
 output = []
+# keep one vector of the time steps too just in case.
+times = []
 for dir in parameter_dirs:
     if dir != parent_dir:
         data = np.loadtxt(dir)
-        print(data.shape)
-        
+        # print(data.shape)
         rates.append(data[0])
         output.append(data[1:,1])
-# exit(0)
+    if len(times) < 1:
+        times = data[1:,0] # keep for plotting
+
+
+# save into tensors and a dictionary
+tosave = {}
+rates_tensors = []
+output_tensors  = []
+for rate in rates: 
+    rates_tensors.append(torch.from_numpy(rate))
+for o in output:
+    output_tensors.append(torch.from_numpy(o))    
+tosave["rates"] = rates_tensors
+tosave["outputs"] = output_tensors
+with open("data/time_series/indrani.pickle", 'wb') as handle:
+    pickle.dump(tosave, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+
 rates = np.array(rates)
 output = np.array(output)
-
+# now let us create a dictionary for the dataset where each entity in the list is some time-series evolution 
 print(rates.shape)
 print(output.shape)
 
 # for simplicity, we'll just do counts for now, and save into a specific dataset
-output_file = "data/static/indrani.csv"
-time_point = 300
+output_file = "data/static/indrani_t400.csv"
+time_point = 400
 # matrix with inputs and outputs
 labels = []
 for i in range(1, rates.shape[1] + 1):

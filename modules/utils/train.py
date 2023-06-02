@@ -72,7 +72,7 @@ class SpatialModel():
                                   num_classes=n_outputs)
         model.train()
         model = model.double()
-        optimizer = torch.optim.AdamW(model.parameters())
+        optimizer = torch.optim.AdamW(model.parameters(), lr=0.0001)
         criterion = torch.nn.MSELoss()
 
         device = ""

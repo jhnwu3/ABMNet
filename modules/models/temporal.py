@@ -2,7 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import torch
 import torch.nn as nn
-
+from modules.models.simple import *
+from modules.models.spatial import *
 class TemporalModel(nn.Module):
     def __init__(self, input_size, output_size, hidden_dim, n_layers):
         super(TemporalModel, self).__init__()
@@ -32,27 +33,29 @@ class TemporalModel(nn.Module):
         return out, hidden
 
 class TemporalComplexModel(nn.Module):
-    def __init__(self, input_size, output_size, hidden_dim, n_layers):
+    def __init__(self, input_size, hidden_dim, n_layers, n_rates):
         super(TemporalComplexModel, self).__init__()
 
         # Defining some parameters
         self.hidden_dim = hidden_dim
         self.n_layers = n_layers
-
+        self.input_size = input_size
         # Defining the layers
         # RNN Layer
         self.lstm = nn.LSTM(input_size, hidden_dim, n_layers, batch_first=False)  
-        # Fully connected layer
-        self.fc = nn.Linear(hidden_dim, output_size)
+        # Fully connected MLP layer
+        self.encoder = EncoderLayer(n_rates, hidden_dim, input_size)
+        
+        self.fc = NeuralNetwork(input_size*2, hidden_dim ,output_size=input_size)
    
-    def forward(self, x, hidden):
+    def forward(self, x, hidden, rates):
 
         # Initializing hidden state for first input using method defined below
         # hidden = self.init_hidden()
 
         # Passing in the input and hidden state into the model and obtaining outputs
         out, hidden = self.lstm(x, hidden)
-
+        out = torch.cat((out, self.rates_encoder(rates)), dim=0)
         # Reshaping the outputs such that it can be fit into the fully connected layer
         # out = out.contiguous().view(-1, self.hidden_dim)
         out = self.fc(out)
@@ -67,35 +70,7 @@ def train_temporal_model():
     output_size = 3
     layer_size = 5
 
-    tdata = np.loadtxt("3linyt.csv", delimiter=",", dtype=float)
-    tdata = tdata[:, [0,1,2]]
-
-    train_series = tdata[0:80]
-    test_series = tdata[80:100]
-
-    train_series[:] = (train_series[:] - train_series[:].min()) / (train_series[:].max() - train_series[:].min())
-
-    train_input = []
-    train_output = []
-
-    for i in range(train_series.shape[0] - 10):
-        row1 = train_series[i:i+10]
-        row2 = train_series[i+1:i+10+1]
-        train_input.append(torch.from_numpy(row1).float())
-        train_output.append(torch.from_numpy(row2).float())
-
-    test_series[:] = (test_series[:] - test_series[:].min()) / (test_series[:].max() - test_series[:].min())
-
-    test_input = []
-    test_output = []
-
-    for i in range(test_series.shape[0] - 10):
-        row1 = test_series[i:i+10]
-        row2 = test_series[i+1:i+10+1]
-        test_input.append(torch.from_numpy(row1).float())
-        test_output.append(torch.from_numpy(row2).float())
-
-    model = TemporalModel(input_size=input_size, output_size=output_size, hidden_dim=hidden_size, n_layers=layer_size)
+    model = TemporalComplexModel(input_size=input_size, output_size=output_size, hidden_dim=hidden_size, n_layers=layer_size)
     model = model.float()
 
     criterion = nn.MSELoss()
