@@ -16,6 +16,12 @@ class TemporalDataset(Dataset):
         data = pickle.load(open(path, "rb"))
         self.outputs = data["outputs"] # N x L tensors
         self.rates = data["rates"]
+        self.n_rates = self.rates[0].size()[0]
+        self.input_size = 1
+        if len(self.outputs[0].size()) > 1:
+            print(self.outputs[0].size())
+            self.input_size = self.outputs[0].size()[1]
+            
         if min_max_scale:
             # mins and maxes in the most roundabout way possible, haha ;(
             # convert back to numpy to get them mins and maxes 
@@ -23,11 +29,10 @@ class TemporalDataset(Dataset):
             for output in self.outputs:
                 arr.append(output.numpy())
             arr = np.array(arr)
-            arr = torch.from_numpy(arr)
             # now to do the ugly min maxing, Don't DO THIS KIDS
             for i in range(len(self.outputs)):
-                self.outputs[i] = self.outputs[i].squeeze() - torch.min(arr, dim=0).values
-                self.outputs[i] /= (torch.max(arr, dim=0).values - torch.min(arr, dim=0).values)
+                self.outputs[i] = self.outputs[i].squeeze() - arr.min()
+                self.outputs[i] /= (arr.max() - arr.min())
             
             
     def __len__(self):
@@ -40,7 +45,7 @@ class TemporalDataset(Dataset):
         # The input and target can be tensors, NumPy arrays, or other data types
         # returns a 1D tensor of rates, one input sequence, one output sequence
         # need to convert to sets of sequences
-        return self.rates[index], self.outputs[index,:-1], self.outputs[index,1:]
+        return self.rates[index], self.outputs[index][:-1], self.outputs[index][1:]
 
 
 

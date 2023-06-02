@@ -1,4 +1,9 @@
 import sys
+
+def train_temporal():
+    return '--temporal' in sys.argv
+
+
 def get_depth():
     if '-d' in sys.argv:
         return int(sys.argv[sys.argv.index('-d') + 1])

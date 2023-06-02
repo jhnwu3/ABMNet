@@ -7,8 +7,9 @@ from torch_geometric.nn import GCNConv, global_mean_pool
 from scipy import spatial
 from modules.models.spatial import *
 from torch.cuda.amp import autocast
-
-
+from modules.models.temporal import *
+from modules.data.temporal import *
+import time 
 class SpatialModel():
     def train_gcn(data, nEpochs, n_inputs, n_outputs, n_rates, initial_graph, edges, hidden_channels, path = ""):
         model = GCNComplexMoments(n_inputs=n_inputs, n_rates=n_rates, hidden_channels=hidden_channels,
@@ -125,6 +126,42 @@ class SpatialModel():
         return model, device
 
 
-
+def train_temporal_model(data : TemporalDataset, hidden_size=256, lr=0.001, n_epochs=20, n_layers=5, path=""):
+    device = ""
+    if torch.cuda.is_available():
+        device = torch.device("cuda")
+        print("Using GPU")
+    else:
+        device = torch.device("cpu")
+            
+    model = TemporalComplexModel(input_size=data.input_size, hidden_dim=hidden_size, n_layers=n_layers, n_rates = data.n_rates)
+    model = model.to(device).float()
+    
+    criterion = nn.MSELoss()
+    criterion = criterion.to(device)
+    optimizer = torch.optim.SGD(model.parameters(), lr=lr)
+    train_size = int(0.8 * len(data))
+    test_size = len(data) - train_size
+    train_data, test_data = torch.utils.data.random_split(data, [train_size, test_size])
+    dataloader = torch.utils.data.DataLoader(train_data, batch_size=None, shuffle=True) 
+    epoch_start = time.time()
+    for epoch in range(n_epochs):
+        loss_per_epoch = 0
+        hidden = (torch.zeros(n_layers, hidden_size).detach(), torch.zeros(n_layers, hidden_size).detach())
+        for rates, input, output in dataloader:
+            optimizer.zero_grad() # Clears existing gradients from previous epoch
+            out, hidden = model(input.to(device).float(), (hidden[0].detach().to(device), hidden[1].detach().to(device)), rates.to(device).float())
+            loss = criterion(out.squeeze().float(), output.to(device).float())
+            loss_per_epoch += loss
+            loss.backward() # Does backpropagation and calculates gradients
+            optimizer.step() # Updates the weights accordingly
+        if(epoch % 10 == 0):
+            print("Epoch:", epoch, " loss:", loss_per_epoch, " in Time:", time.time() - epoch_start)
+            epoch_start = time.time()
+            
+    if len(path) > 0:
+        torch.save(model.state_dict(), path)
+        
+    return model, device, test_data
 
     
