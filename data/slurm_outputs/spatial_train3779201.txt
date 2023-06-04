@@ -1,0 +1,57 @@
+Training Dataset Size: 31748
+Test Dataset Size: 7937
+5
+Epoch: 0  Loss: 995.9242924287593
+Epoch: 1  Loss: 552.9956564426869
+Epoch: 2  Loss: 518.3836485022161
+Epoch: 3  Loss: 494.37753794014606
+Epoch: 4  Loss: 484.2936016311726
+Epoch: 5  Loss: 476.06121646094084
+Epoch: 6  Loss: 469.7720632688517
+Epoch: 7  Loss: 462.1514627432749
+Epoch: 8  Loss: 461.9600912561451
+Epoch: 9  Loss: 456.641556320519
+Epoch: 10  Loss: 450.8195639660318
+Epoch: 11  Loss: 452.45464258309687
+Epoch: 12  Loss: 450.5541955637529
+Epoch: 13  Loss: 450.9172458998951
+Epoch: 14  Loss: 444.8088447158711
+Epoch: 15  Loss: 443.92744779484406
+Epoch: 16  Loss: 445.960261019841
+Epoch: 17  Loss: 446.00075696178334
+Epoch: 18  Loss: 444.2812350874258
+Epoch: 19  Loss: 439.327478970354
+Epoch: 20  Loss: 442.54284608774844
+Epoch: 21  Loss: 441.79013690138146
+Epoch: 22  Loss: 441.4680142143149
+Epoch: 23  Loss: 440.96583184171425
+Epoch: 24  Loss: 441.762632213507
+Epoch: 25  Loss: 440.64606784249827
+Epoch: 26  Loss: 439.06729854487673
+Epoch: 27  Loss: 438.4417242233828
+Epoch: 28  Loss: 438.31604281308694
+Epoch: 29  Loss: 438.5339564674941
+Epoch: 30  Loss: 437.3127095585391
+Epoch: 31  Loss: 438.4013627568111
+Epoch: 32  Loss: 439.5644540183806
+Epoch: 33  Loss: 437.63535677445253
+Epoch: 34  Loss: 438.14909251458533
+Epoch: 35  Loss: 437.24824066198886
+Epoch: 36  Loss: 438.1476365054244
+Epoch: 37  Loss: 436.63847727626626
+Epoch: 38  Loss: 435.42192197262864
+Epoch: 39  Loss: 435.91699343494884
+Epoch: 40  Loss: 435.6232502726503
+Epoch: 41  Loss: 435.7521493715498
+Epoch: 42  Loss: 436.91272349316534
+Epoch: 43  Loss: 435.89987202431274
+Epoch: 44  Loss: 436.34300496305775
+Edge Length: torch.Size([2, 58806])
+Test Average MSE: 0.01300572142207082
+Job Statistics for 3779201:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3779201   rsjxw007 2023-06-02T11:52:04 2023-06-02T17:32:21   05:40:17              05:43:52  COMPLETED  0:0   r1pl-hpcf-g04 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3779201.batch            2023-06-02T11:52:04 2023-06-02T17:32:21   05:40:17   2056.85M   05:43:52  COMPLETED  0:0   r1pl-hpcf-g04                                          
+  3779201.extern            2023-06-02T11:52:04 2023-06-02T17:32:21   05:40:17      0.09M  00:00.004  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 6.32% of 3-18:44:32 core-walltime

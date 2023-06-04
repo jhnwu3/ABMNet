@@ -1,0 +1,31 @@
+2500
+Using GPU
+Epoch: 0  loss: tensor(10.3733, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.0913643836975098
+Epoch: 10  loss: tensor(0.0060, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 17.76632571220398
+Epoch: 20  loss: tensor(0.0041, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 17.368548154830933
+New Minimum Average Test Loss: tensor(1.1454e-06, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.01   25   2
+plotting time errors
+(600,)
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/temporal.py", line 56, in <module>
+    plot_time_series_errors(truth, predicted, data.times[1:], path="graphs/temporal/validation/errors_h" + str(hidden_size) +"lr" + str(lr) + "nEpc" + str(n_epochs) +"nlay" +str(n_layers))
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/graph.py", line 185, in plot_time_series_errors
+    plt.savefig(path)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/matplotlib/pyplot.py", line 977, in savefig
+    res = fig.savefig(*args, **kwargs)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/matplotlib/figure.py", line 3058, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/matplotlib/backend_bases.py", line 2259, in print_figure
+    canvas = self._get_output_canvas(backend, format)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/matplotlib/backend_bases.py", line 2188, in _get_output_canvas
+    raise ValueError(
+ValueError: Format '01nepc25nlay2' is not supported (supported formats: eps, jpeg, jpg, pdf, pgf, png, ps, raw, rgba, svg, svgz, tif, tiff)
+Job Statistics for 3780384:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3780384   rsjxw007 2023-06-02T17:30:05 2023-06-02T17:31:02   00:00:57             00:58.951     FAILED  1:0   r1pl-hpcf-g05 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3780384.batch            2023-06-02T17:30:05 2023-06-02T17:31:02   00:00:57   2316.39M  00:58.948     FAILED  1:0   r1pl-hpcf-g05                                          
+  3780384.extern            2023-06-02T17:30:05 2023-06-02T17:31:02   00:00:57      0.10M  00:00.003  COMPLETED  0:0   r1pl-hpcf-g05                                          
+CPU Efficiency: 6.47% of 00:15:12 core-walltime

@@ -1,0 +1,35 @@
+2500
+Using GPU
+Epoch: 0  loss: tensor(3.6452, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1.8394107818603516
+Epoch: 10  loss: tensor(nan, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 15.844221353530884
+Epoch: 20  loss: tensor(nan, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 15.83804440498352
+Using GPU
+Epoch: 0  loss: tensor(11.7170, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1.6930949687957764
+Epoch: 10  loss: tensor(0.0064, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 18.87828302383423
+Epoch: 20  loss: tensor(0.0979, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 18.860809803009033
+New Minimum Average Test Loss: tensor(9.1830e-06, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.01   25   3
+plotting time errors
+(600,)
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/temporal.py", line 56, in <module>
+    plot_time_series_errors(truth, predicted, data.times[1:], path="graphs/temporal/validation/errors_h" + str(hidden_size) +"lr" + str(lr) + "nEpc" + str(n_epochs) +"nlay" +str(n_layers))
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/graph.py", line 185, in plot_time_series_errors
+    plt.savefig(path)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/matplotlib/pyplot.py", line 977, in savefig
+    res = fig.savefig(*args, **kwargs)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/matplotlib/figure.py", line 3058, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/matplotlib/backend_bases.py", line 2259, in print_figure
+    canvas = self._get_output_canvas(backend, format)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/matplotlib/backend_bases.py", line 2188, in _get_output_canvas
+    raise ValueError(
+ValueError: Format '01nepc25nlay3' is not supported (supported formats: eps, jpeg, jpg, pdf, pgf, png, ps, raw, rgba, svg, svgz, tif, tiff)
+Job Statistics for 3780321:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3780321   rsjxw007 2023-06-02T17:28:15 2023-06-02T17:29:59   00:01:44             01:45.728     FAILED  1:0   r1pl-hpcf-g05 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3780321.batch            2023-06-02T17:28:15 2023-06-02T17:29:59   00:01:44   2318.58M  01:45.725     FAILED  1:0   r1pl-hpcf-g05                                          
+  3780321.extern            2023-06-02T17:28:15 2023-06-02T17:29:59   00:01:44      0.09M  00:00.002  COMPLETED  0:0   r1pl-hpcf-g05                                          
+CPU Efficiency: 6.37% of 00:27:44 core-walltime
