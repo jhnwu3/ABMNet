@@ -53,7 +53,7 @@ for hidden_size in hidden_sizes:
                     best_lr = lr 
                     best_epochs = n_epochs
                     best_layers = n_layers
-                    plot_time_series_errors(truth, predicted, data.times[1:], path="graphs/temporal/validation/errors_h" + str(hidden_size) +"lr" + str(lr) + "nEpc" + str(n_epochs) +"nlay" +str(n_layers))
+                    plot_time_series_errors(truth, predicted, data.times[1:], path="graphs/temporal/validation/errors_h" + str(hidden_size) +"lr" + str(lr) + "nEpc" + str(n_epochs) +"nlay" +str(n_layers) +".png")
 
 # do some final training
 model, device, test_data = train_temporal_model(data, best_hidden_size, best_lr, best_epochs, best_layers, "model/indrani_searched.pt")

@@ -136,7 +136,7 @@ def train_temporal_model(data : TemporalDataset, hidden_size=256, lr=0.001, n_ep
             
     model = TemporalComplexModel(input_size=data.input_size, hidden_dim=hidden_size, n_layers=n_layers, n_rates = data.n_rates)
     model = model.to(device).float()
-    
+    model.train()
     criterion = nn.MSELoss()
     criterion = criterion.to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr)
