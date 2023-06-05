@@ -1,0 +1,39 @@
+2500
+Using GPU
+Epoch: 0  loss: tensor(3.8713, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.7353384494781494
+Epoch: 10  loss: tensor(0.6073, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 21.209779500961304
+Epoch: 20  loss: tensor(0.0096, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 21.18514060974121
+New Minimum Average Test Loss: tensor(2.6956e-05, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.01   25   2
+plotting time errors
+(600,)
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/temporal.py", line 56, in <module>
+    plot_time_series_errors(truth, predicted, data.times[1:], path="graphs/temporal/validation/errors_h" + str(hidden_size) +"lr" + str(lr) + "nEpc" + str(n_epochs) +"nlay" +str(n_layers) +".png")
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/graph.py", line 185, in plot_time_series_errors
+    plt.savefig(path)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/matplotlib/pyplot.py", line 977, in savefig
+    res = fig.savefig(*args, **kwargs)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/matplotlib/figure.py", line 3058, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/matplotlib/backend_bases.py", line 2319, in print_figure
+    result = print_method(
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/matplotlib/backend_bases.py", line 1648, in wrapper
+    return func(*args, **kwargs)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/matplotlib/_api/deprecation.py", line 415, in wrapper
+    return func(*inner_args, **inner_kwargs)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/matplotlib/backends/backend_agg.py", line 541, in print_png
+    mpl.image.imsave(
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/matplotlib/image.py", line 1675, in imsave
+    image.save(fname, **pil_kwargs)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/PIL/Image.py", line 2317, in save
+    fp = builtins.open(filename, "w+b")
+FileNotFoundError: [Errno 2] No such file or directory: 'graphs/temporal/validation/errors_h64lr0.01nEpc25nlay2.png'
+Job Statistics for 3781037:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3781037   rsjxw007 2023-06-04T15:07:05 2023-06-04T15:08:20   00:01:15             01:11.524     FAILED  1:0   r1pl-hpcf-g04 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3781037.batch            2023-06-04T15:07:05 2023-06-04T15:08:20   00:01:15   2323.64M  01:11.520     FAILED  1:0   r1pl-hpcf-g04                                          
+  3781037.extern            2023-06-04T15:07:05 2023-06-04T15:08:20   00:01:15      0.09M  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 6.00% of 00:20:00 core-walltime
