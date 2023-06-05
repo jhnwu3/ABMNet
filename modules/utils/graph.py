@@ -183,10 +183,12 @@ def plot_time_series_errors(truth, predicted, times, path="graphs/temporal/error
     mean_differences = differences / len(truth)
     variances = np.var(diffs,axis=0)
     
-    plt.figure()
+    fig = plt.figure()
     plt.plot(times, mean_differences, label="Mean Square Error")
     plt.plot(times, variances, label="Variances of Square Error")
     plt.xlabel('Time')
     plt.ylabel('Square Error')
     plt.title('Average Error Through Time Across All Parameter Sets')
+    plt.legend()
     plt.savefig(path)
+    plt.close(fig)
