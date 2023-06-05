@@ -178,6 +178,7 @@ def plot_time_series_errors(truth, predicted, times, path="graphs/temporal/error
     # print("hm")
     # Compute the mean of squared differences across all arrays
     mean_differences = differences / len(truth)
+    plt.figure()
     plt.plot(times, mean_differences)
     plt.xlabel('Time')
     plt.ylabel('Average Mean Square Error')
