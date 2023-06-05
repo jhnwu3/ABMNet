@@ -173,14 +173,20 @@ def plot_time_series_errors(truth, predicted, times, path="graphs/temporal/error
     print("plotting time errors")
     differences = np.zeros(np.squeeze(truth[0]).shape)
     print(truth[0].shape)
+    diffs = []
     for tru, pred in zip(truth, predicted):
         differences += np.square(np.squeeze(tru) - np.squeeze(pred))
+        diffs.append(np.square(np.squeeze(tru) - np.squeeze(pred)))
     # print("hm")
+    diffs = np.array(diffs)
     # Compute the mean of squared differences across all arrays
     mean_differences = differences / len(truth)
+    variances = np.var(diffs,axis=0)
+    
     plt.figure()
-    plt.plot(times, mean_differences)
+    plt.plot(times, mean_differences, label="Mean Square Error")
+    plt.plot(times, variances, label="Variances of Square Error")
     plt.xlabel('Time')
-    plt.ylabel('Average Mean Square Error')
+    plt.ylabel('Square Error')
     plt.title('Average Error Through Time Across All Parameter Sets')
     plt.savefig(path)
