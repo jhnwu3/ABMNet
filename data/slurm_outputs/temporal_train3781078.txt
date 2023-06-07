@@ -1,0 +1,927 @@
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/graph.py:181: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  diffs = np.array(diffs)
+2500
+Using GPU
+Epoch: 0  loss: tensor(2.2872, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.3817973136901855
+Epoch: 10  loss: tensor(19.5553, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 21.62228512763977
+Epoch: 20  loss: tensor(19.5834, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 21.60191774368286
+New Minimum Average Test Loss: tensor(0.0819, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.01   25   2
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(1.9356, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.3165059089660645
+Epoch: 10  loss: tensor(0.0038, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.624526500701904
+Epoch: 20  loss: tensor(0.0007, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.662089824676514
+New Minimum Average Test Loss: tensor(0.0809, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.01   25   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(22.1463, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 3.016150951385498
+Epoch: 10  loss: tensor(20.4697, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.965556383132935
+Epoch: 20  loss: tensor(20.4751, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.990292072296143
+New Minimum Average Test Loss: tensor(0.0804, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.01   25   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(4.5286, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1.9602017402648926
+Epoch: 10  loss: tensor(0.0145, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 21.636393547058105
+Epoch: 20  loss: tensor(nan, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 21.735546350479126
+Epoch: 30  loss: tensor(nan, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 21.722877740859985
+Epoch: 40  loss: tensor(nan, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 21.731658935546875
+Using GPU
+Epoch: 0  loss: tensor(3.9120, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.3084335327148438
+Epoch: 10  loss: tensor(0.0453, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.773087739944458
+Epoch: 20  loss: tensor(0.0260, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.825663805007935
+Epoch: 30  loss: tensor(0.0103, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.841681003570557
+Epoch: 40  loss: tensor(0.0152, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.626919269561768
+New Minimum Average Test Loss: tensor(7.3589e-06, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.01   50   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(22.0850, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 3.020406723022461
+Epoch: 10  loss: tensor(19.9150, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.671222448349
+Epoch: 20  loss: tensor(19.7828, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.386925220489502
+Epoch: 30  loss: tensor(19.7801, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.36400866508484
+Epoch: 40  loss: tensor(19.7801, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.250336170196533
+New Minimum Average Test Loss: tensor(0.0808, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.01   50   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(6.4991, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1.9165434837341309
+Epoch: 10  loss: tensor(20.2756, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.72922945022583
+Epoch: 20  loss: tensor(20.2254, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 21.13324475288391
+Epoch: 30  loss: tensor(20.2472, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 21.764682054519653
+Epoch: 40  loss: tensor(20.2714, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 21.676424741744995
+Epoch: 50  loss: tensor(20.2460, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 21.639197826385498
+Epoch: 60  loss: tensor(20.2899, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 21.63041353225708
+Epoch: 70  loss: tensor(20.2529, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 21.662602424621582
+New Minimum Average Test Loss: tensor(0.0806, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.01   75   2
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(3.8777, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.2829501628875732
+Epoch: 10  loss: tensor(0.0073, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.667301416397095
+Epoch: 20  loss: tensor(0.4510, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.709062099456787
+Epoch: 30  loss: tensor(0.0360, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.678839206695557
+Epoch: 40  loss: tensor(20.6939, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.767775297164917
+Epoch: 50  loss: tensor(20.6475, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.756706714630127
+Epoch: 60  loss: tensor(20.5981, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.769540309906006
+Epoch: 70  loss: tensor(20.6733, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.604975938796997
+New Minimum Average Test Loss: tensor(0.0803, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.01   75   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(19.6410, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 3.08335280418396
+Epoch: 10  loss: tensor(0.0253, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.02639079093933
+Epoch: 20  loss: tensor(20.4107, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.031026124954224
+Epoch: 30  loss: tensor(20.5091, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.168756246566772
+Epoch: 40  loss: tensor(20.4621, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.178483486175537
+Epoch: 50  loss: tensor(20.4429, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.202784776687622
+Epoch: 60  loss: tensor(20.4615, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.189363479614258
+Epoch: 70  loss: tensor(20.3939, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.198667764663696
+New Minimum Average Test Loss: tensor(0.0804, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.01   75   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(6.6143, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1.9589259624481201
+Epoch: 10  loss: tensor(0.1449, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 21.657676458358765
+Epoch: 20  loss: tensor(0.0039, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 21.56816267967224
+New Minimum Average Test Loss: tensor(9.3384e-05, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.001   25   2
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(7.7837, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.2720885276794434
+Epoch: 10  loss: tensor(0.0186, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 23.78388023376465
+Epoch: 20  loss: tensor(0.0954, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 23.80707597732544
+New Minimum Average Test Loss: tensor(2.3129e-06, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.001   25   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(9.3859, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.9827446937561035
+Epoch: 10  loss: tensor(0.1651, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.42115831375122
+Epoch: 20  loss: tensor(0.0172, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.41654944419861
+New Minimum Average Test Loss: tensor(1.1960e-05, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.001   25   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(9.7535, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1.9201545715332031
+Epoch: 10  loss: tensor(0.0097, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.901081323623657
+Epoch: 20  loss: tensor(0.0091, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.93606734275818
+Epoch: 30  loss: tensor(0.0069, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.93599581718445
+Epoch: 40  loss: tensor(0.0607, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.89298391342163
+New Minimum Average Test Loss: tensor(0.0007, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.001   50   2
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(11.3502, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.2763054370880127
+Epoch: 10  loss: tensor(0.0125, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 23.806058883666992
+Epoch: 20  loss: tensor(0.0325, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 23.81623888015747
+Epoch: 30  loss: tensor(0.0029, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 23.800836324691772
+Epoch: 40  loss: tensor(0.0284, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 23.803950548171997
+New Minimum Average Test Loss: tensor(2.0381e-06, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.001   50   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(11.8451, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.9881632328033447
+Epoch: 10  loss: tensor(0.0093, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.430131912231445
+Epoch: 20  loss: tensor(0.0044, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.458035945892334
+Epoch: 30  loss: tensor(0.0027, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.431434631347656
+Epoch: 40  loss: tensor(0.0017, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.434346914291382
+New Minimum Average Test Loss: tensor(1.3433e-05, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.001   50   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(7.6735, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1.9224863052368164
+Epoch: 10  loss: tensor(0.0376, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.884129762649536
+Epoch: 20  loss: tensor(0.0265, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.93285322189331
+Epoch: 30  loss: tensor(0.0232, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.95644521713257
+Epoch: 40  loss: tensor(0.0025, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.9840886592865
+Epoch: 50  loss: tensor(0.0015, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.990919828414917
+Epoch: 60  loss: tensor(0.0057, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.95469355583191
+Epoch: 70  loss: tensor(0.0036, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.914283752441406
+New Minimum Average Test Loss: tensor(4.0110e-06, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.001   75   2
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(9.9815, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.2720108032226562
+Epoch: 10  loss: tensor(0.0306, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 23.886218070983887
+Epoch: 20  loss: tensor(0.0056, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 23.91111969947815
+Epoch: 30  loss: tensor(0.0134, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 23.886775732040405
+Epoch: 40  loss: tensor(0.0170, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 23.916198015213013
+Epoch: 50  loss: tensor(0.0455, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 23.87481713294983
+Epoch: 60  loss: tensor(0.0030, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 23.878445625305176
+Epoch: 70  loss: tensor(0.0021, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 23.86059331893921
+New Minimum Average Test Loss: tensor(5.1562e-06, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.001   75   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(14.5925, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.9769127368927
+Epoch: 10  loss: tensor(0.0081, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.338958978652954
+Epoch: 20  loss: tensor(0.0388, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.3570876121521
+Epoch: 30  loss: tensor(0.0114, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.358437061309814
+Epoch: 40  loss: tensor(0.0112, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.32345461845398
+Epoch: 50  loss: tensor(0.0021, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.25681161880493
+Epoch: 60  loss: tensor(0.0058, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.19938635826111
+Epoch: 70  loss: tensor(0.0055, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.184151887893677
+New Minimum Average Test Loss: tensor(7.2434e-07, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.001   75   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(24.6574, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1.9142591953277588
+Epoch: 10  loss: tensor(1.0658, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.939050674438477
+Epoch: 20  loss: tensor(0.7082, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.96461319923401
+New Minimum Average Test Loss: tensor(0.0021, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.0001   25   2
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(30.7832, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.2683069705963135
+Epoch: 10  loss: tensor(1.6919, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 23.980745553970337
+Epoch: 20  loss: tensor(1.2097, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 23.998109340667725
+New Minimum Average Test Loss: tensor(0.0051, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.0001   25   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(30.7965, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.7723565101623535
+Epoch: 10  loss: tensor(2.0034, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.477077960968018
+Epoch: 20  loss: tensor(1.3729, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.484253644943237
+New Minimum Average Test Loss: tensor(0.0051, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.0001   25   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(26.0440, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1.8169844150543213
+Epoch: 10  loss: tensor(1.2104, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.915889263153076
+Epoch: 20  loss: tensor(0.8579, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.96416211128235
+Epoch: 30  loss: tensor(0.5355, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.97583532333374
+Epoch: 40  loss: tensor(0.3402, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.976975440979004
+New Minimum Average Test Loss: tensor(0.0004, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.0001   50   2
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(22.1934, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.272616147994995
+Epoch: 10  loss: tensor(1.5502, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 23.893161296844482
+Epoch: 20  loss: tensor(1.0024, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 23.89932918548584
+Epoch: 30  loss: tensor(0.6544, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 23.903379917144775
+Epoch: 40  loss: tensor(0.6052, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 23.90527582168579
+New Minimum Average Test Loss: tensor(0.0011, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.0001   50   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(35.0930, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.7947795391082764
+Epoch: 10  loss: tensor(1.8925, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.48233151435852
+Epoch: 20  loss: tensor(1.3115, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.51902413368225
+Epoch: 30  loss: tensor(0.8943, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.514835834503174
+Epoch: 40  loss: tensor(0.8156, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.495225429534912
+New Minimum Average Test Loss: tensor(0.0025, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.0001   50   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(42.0915, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1.918595552444458
+Epoch: 10  loss: tensor(1.1808, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.924365520477295
+Epoch: 20  loss: tensor(0.7301, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.972835302352905
+Epoch: 30  loss: tensor(0.5260, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.97553586959839
+Epoch: 40  loss: tensor(0.2951, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.980453491210938
+Epoch: 50  loss: tensor(0.1289, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.992862701416016
+Epoch: 60  loss: tensor(0.0642, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.98551082611084
+Epoch: 70  loss: tensor(0.2528, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.990849256515503
+New Minimum Average Test Loss: tensor(9.3272e-05, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.0001   75   2
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(40.5496, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.2762229442596436
+Epoch: 10  loss: tensor(1.5384, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 23.967310905456543
+Epoch: 20  loss: tensor(0.8920, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 23.99802875518799
+Epoch: 30  loss: tensor(0.7437, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 23.992014408111572
+Epoch: 40  loss: tensor(0.4573, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 23.956743478775024
+Epoch: 50  loss: tensor(0.4376, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.01701307296753
+Epoch: 60  loss: tensor(0.3770, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.031916618347168
+Epoch: 70  loss: tensor(0.3630, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.96169900894165
+New Minimum Average Test Loss: tensor(0.0024, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.0001   75   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(52.0932, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 3.0088469982147217
+Epoch: 10  loss: tensor(1.9689, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.825326681137085
+Epoch: 20  loss: tensor(1.3096, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.50724458694458
+Epoch: 30  loss: tensor(0.9550, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.78181481361389
+Epoch: 40  loss: tensor(0.8098, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.259050130844116
+Epoch: 50  loss: tensor(0.5791, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.95587468147278
+Epoch: 60  loss: tensor(0.5621, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.4828941822052
+Epoch: 70  loss: tensor(0.3565, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 30.483113050460815
+New Minimum Average Test Loss: tensor(0.0008, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+64   0.0001   75   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(89.4546, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.3892061710357666
+Epoch: 10  loss: tensor(0.0736, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.19310235977173
+Epoch: 20  loss: tensor(0.0201, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.146562814712524
+New Minimum Average Test Loss: tensor(0.0001, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.01   25   2
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(60.3777, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 3.1337218284606934
+Epoch: 10  loss: tensor(0.0060, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.604058980941772
+Epoch: 20  loss: tensor(19.9578, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.04133176803589
+New Minimum Average Test Loss: tensor(0.0806, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.01   25   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(64.3793, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 4.8076372146606445
+Epoch: 10  loss: tensor(20.7157, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 48.51115036010742
+Epoch: 20  loss: tensor(20.7123, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 48.54577922821045
+New Minimum Average Test Loss: tensor(0.0804, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.01   25   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(92.6235, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.3998446464538574
+Epoch: 10  loss: tensor(0.0596, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.8615083694458
+Epoch: 20  loss: tensor(0.1429, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.88061809539795
+Epoch: 30  loss: tensor(0.0093, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.785655736923218
+Epoch: 40  loss: tensor(19.5124, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.54474425315857
+New Minimum Average Test Loss: tensor(0.0809, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.01   50   2
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(9.9181, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 3.1808393001556396
+Epoch: 10  loss: tensor(20.3082, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.015212535858154
+Epoch: 20  loss: tensor(20.3169, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.50454235076904
+Epoch: 30  loss: tensor(20.3525, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.51073122024536
+Epoch: 40  loss: tensor(20.3333, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.529608964920044
+New Minimum Average Test Loss: tensor(0.0805, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.01   50   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(110.0803, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 4.750913381576538
+Epoch: 10  loss: tensor(0.0591, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 47.86937761306763
+Epoch: 20  loss: tensor(0.0302, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 47.89392971992493
+Epoch: 30  loss: tensor(0.0972, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 47.88169598579407
+Epoch: 40  loss: tensor(20.1339, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 48.10082149505615
+New Minimum Average Test Loss: tensor(0.0820, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.01   50   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(29.8561, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.380744695663452
+Epoch: 10  loss: tensor(0.2765, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.24441933631897
+Epoch: 20  loss: tensor(21.1396, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.515180826187134
+Epoch: 30  loss: tensor(21.1272, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.56736946105957
+Epoch: 40  loss: tensor(21.2010, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.56778120994568
+Epoch: 50  loss: tensor(21.2525, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.55945324897766
+Epoch: 60  loss: tensor(21.2119, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.557591438293457
+Epoch: 70  loss: tensor(21.0092, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.56568932533264
+New Minimum Average Test Loss: tensor(0.0804, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.01   75   2
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(50.5723, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 3.184431791305542
+Epoch: 10  loss: tensor(20.9719, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.44067859649658
+Epoch: 20  loss: tensor(20.8918, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.429861545562744
+Epoch: 30  loss: tensor(20.9362, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.41623497009277
+Epoch: 40  loss: tensor(20.8624, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.32798957824707
+Epoch: 50  loss: tensor(20.8925, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.558775663375854
+Epoch: 60  loss: tensor(20.8286, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.54908084869385
+Epoch: 70  loss: tensor(20.8548, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.559656620025635
+New Minimum Average Test Loss: tensor(0.0804, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.01   75   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(127.3542, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 4.804628610610962
+Epoch: 10  loss: tensor(0.2404, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 48.4268102645874
+Epoch: 20  loss: tensor(0.1442, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 48.40030527114868
+Epoch: 30  loss: tensor(0.0332, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 48.386744022369385
+Epoch: 40  loss: tensor(19.7568, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 48.44383144378662
+Epoch: 50  loss: tensor(19.7965, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 48.53744101524353
+Epoch: 60  loss: tensor(19.7959, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 48.54187893867493
+Epoch: 70  loss: tensor(19.8217, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 48.521828413009644
+New Minimum Average Test Loss: tensor(0.0809, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.01   75   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(8.8191, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.385993719100952
+Epoch: 10  loss: tensor(0.0300, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.461697816848755
+Epoch: 20  loss: tensor(0.0012, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.35614514350891
+New Minimum Average Test Loss: tensor(0.0021, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.001   25   2
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(13.1829, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 3.192336320877075
+Epoch: 10  loss: tensor(0.0060, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.372981786727905
+Epoch: 20  loss: tensor(0.0217, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.36851906776428
+New Minimum Average Test Loss: tensor(5.4572e-06, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.001   25   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(11.3138, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 4.719740390777588
+Epoch: 10  loss: tensor(0.0011, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 47.79150700569153
+Epoch: 20  loss: tensor(0.0092, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 47.640464067459106
+New Minimum Average Test Loss: tensor(5.4482e-06, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.001   25   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(8.1373, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.3911936283111572
+Epoch: 10  loss: tensor(0.0100, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.3838951587677
+Epoch: 20  loss: tensor(0.0005, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.287213563919067
+Epoch: 30  loss: tensor(0.0024, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.22363257408142
+Epoch: 40  loss: tensor(0.0049, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.19546675682068
+New Minimum Average Test Loss: tensor(1.4775e-05, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.001   50   2
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(7.4200, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 3.1663060188293457
+Epoch: 10  loss: tensor(0.0308, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.192609548568726
+Epoch: 20  loss: tensor(0.1155, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.96304202079773
+Epoch: 30  loss: tensor(0.0004, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.73907470703125
+Epoch: 40  loss: tensor(0.2208, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.64185881614685
+New Minimum Average Test Loss: tensor(3.5771e-05, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.001   50   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(11.4787, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 4.701215744018555
+Epoch: 10  loss: tensor(0.0096, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 47.54965019226074
+Epoch: 20  loss: tensor(0.0011, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 47.38583755493164
+Epoch: 30  loss: tensor(0.0031, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 46.947970151901245
+Epoch: 40  loss: tensor(0.0771, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 46.78634333610535
+New Minimum Average Test Loss: tensor(0.0045, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.001   50   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(8.7048, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.39082407951355
+Epoch: 10  loss: tensor(0.0030, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.418591022491455
+Epoch: 20  loss: tensor(0.0018, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.336385488510132
+Epoch: 30  loss: tensor(0.0011, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.279541730880737
+Epoch: 40  loss: tensor(0.0041, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.236952543258667
+Epoch: 50  loss: tensor(0.0039, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.244481086730957
+Epoch: 60  loss: tensor(0.0024, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.229469060897827
+Epoch: 70  loss: tensor(0.0019, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 24.21746015548706
+New Minimum Average Test Loss: tensor(4.0637e-07, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.001   75   2
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(9.4790, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 3.166887044906616
+Epoch: 10  loss: tensor(0.0071, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.258485317230225
+Epoch: 20  loss: tensor(0.0049, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.21185803413391
+Epoch: 30  loss: tensor(0.0019, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.99815845489502
+Epoch: 40  loss: tensor(0.0028, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.90362548828125
+Epoch: 50  loss: tensor(0.0041, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.855183124542236
+Epoch: 60  loss: tensor(0.0145, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.755523681640625
+Epoch: 70  loss: tensor(0.0007, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.705139875411987
+New Minimum Average Test Loss: tensor(3.0782e-07, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.001   75   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(9.8968, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 4.7027411460876465
+Epoch: 10  loss: tensor(0.0019, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 47.77828645706177
+Epoch: 20  loss: tensor(0.0090, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 47.4796998500824
+Epoch: 30  loss: tensor(0.0007, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 47.68023085594177
+Epoch: 40  loss: tensor(0.0311, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 47.56981706619263
+Epoch: 50  loss: tensor(0.2304, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 47.492844343185425
+Epoch: 60  loss: tensor(0.0026, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 47.74893760681152
+Epoch: 70  loss: tensor(0.0019, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 47.71707367897034
+New Minimum Average Test Loss: tensor(4.7135e-06, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.001   75   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(22.4182, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.4079556465148926
+Epoch: 10  loss: tensor(1.6312, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 25.13267731666565
+Epoch: 20  loss: tensor(1.4571, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 25.12820339202881
+New Minimum Average Test Loss: tensor(0.0019, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.0001   25   2
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(20.8396, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 3.1729631423950195
+Epoch: 10  loss: tensor(2.0227, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.78108549118042
+Epoch: 20  loss: tensor(1.3360, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.79628872871399
+New Minimum Average Test Loss: tensor(0.0031, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.0001   25   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(19.2073, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 4.758184194564819
+Epoch: 10  loss: tensor(2.5986, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 48.82064366340637
+Epoch: 20  loss: tensor(1.8575, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 48.81049680709839
+New Minimum Average Test Loss: tensor(0.0059, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.0001   25   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(18.5478, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.4257824420928955
+Epoch: 10  loss: tensor(1.7798, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 25.204179525375366
+Epoch: 20  loss: tensor(0.9812, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 25.173476934432983
+Epoch: 30  loss: tensor(0.9016, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 25.209406852722168
+Epoch: 40  loss: tensor(0.7021, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 25.207934617996216
+New Minimum Average Test Loss: tensor(0.0003, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.0001   50   2
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(24.1145, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 3.164057970046997
+Epoch: 10  loss: tensor(1.8936, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.79401135444641
+Epoch: 20  loss: tensor(1.4500, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.782068490982056
+Epoch: 30  loss: tensor(0.9738, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.818225145339966
+Epoch: 40  loss: tensor(0.8195, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.824013471603394
+New Minimum Average Test Loss: tensor(0.0017, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.0001   50   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(22.9485, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 4.75429892539978
+Epoch: 10  loss: tensor(2.3854, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 48.72122621536255
+Epoch: 20  loss: tensor(1.8719, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 48.739012479782104
+Epoch: 30  loss: tensor(1.4448, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 48.72818446159363
+Epoch: 40  loss: tensor(1.1123, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 48.82356667518616
+New Minimum Average Test Loss: tensor(0.0023, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.0001   50   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(24.8291, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 2.4077556133270264
+Epoch: 10  loss: tensor(1.6399, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 25.172264337539673
+Epoch: 20  loss: tensor(1.2477, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 25.269379138946533
+Epoch: 30  loss: tensor(0.8080, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 25.297200918197632
+Epoch: 40  loss: tensor(0.3402, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 25.31763219833374
+Epoch: 50  loss: tensor(0.4239, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 25.23654818534851
+Epoch: 60  loss: tensor(0.1419, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 25.21394634246826
+Epoch: 70  loss: tensor(0.0530, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 25.205238103866577
+New Minimum Average Test Loss: tensor(0.0015, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.0001   75   2
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(28.1172, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 3.235896587371826
+Epoch: 10  loss: tensor(1.8658, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.89815664291382
+Epoch: 20  loss: tensor(1.3822, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.946929931640625
+Epoch: 30  loss: tensor(1.0929, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.946924924850464
+Epoch: 40  loss: tensor(0.8820, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.95249319076538
+Epoch: 50  loss: tensor(0.8438, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.77262091636658
+Epoch: 60  loss: tensor(0.5886, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.77535820007324
+Epoch: 70  loss: tensor(0.5485, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.83128213882446
+New Minimum Average Test Loss: tensor(0.0015, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.0001   75   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(24.4395, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 4.74985671043396
+Epoch: 10  loss: tensor(2.4824, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 48.8265016078949
+Epoch: 20  loss: tensor(1.8002, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 48.926753282547
+Epoch: 30  loss: tensor(1.3666, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 48.932637453079224
+Epoch: 40  loss: tensor(1.1165, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 48.92883324623108
+Epoch: 50  loss: tensor(0.8260, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 48.57878232002258
+Epoch: 60  loss: tensor(0.9814, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 48.45900011062622
+Epoch: 70  loss: tensor(0.6353, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 48.435123920440674
+New Minimum Average Test Loss: tensor(0.0019, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+128   0.0001   75   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(nan, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 21.31493377685547
+Epoch: 10  loss: tensor(nan, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.20658588409424
+Epoch: 20  loss: tensor(nan, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.14357662200928
+Using GPU
+Epoch: 0  loss: tensor(3058.4824, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.297839403152466
+Epoch: 10  loss: tensor(20.7765, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 313.25987005233765
+Epoch: 20  loss: tensor(20.5994, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 313.2133626937866
+New Minimum Average Test Loss: tensor(0.0805, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.01   25   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(281.1573, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 51.089805364608765
+Epoch: 10  loss: tensor(78252.0703, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 511.038227558136
+Epoch: 20  loss: tensor(20.4815, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 510.7976276874542
+New Minimum Average Test Loss: tensor(0.0808, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.01   25   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(287.8427, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 21.332686185836792
+Epoch: 10  loss: tensor(20.6549, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.5326635837555
+Epoch: 20  loss: tensor(20.5943, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.5287208557129
+Epoch: 30  loss: tensor(20.4922, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.55565571784973
+Epoch: 40  loss: tensor(20.4362, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.53134393692017
+New Minimum Average Test Loss: tensor(0.0806, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.01   50   2
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(58.8107, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.304383754730225
+Epoch: 10  loss: tensor(20.0422, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 313.3497483730316
+Epoch: 20  loss: tensor(20.1078, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 313.3487548828125
+Epoch: 30  loss: tensor(20.1875, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 313.3549256324768
+Epoch: 40  loss: tensor(20.1750, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 313.3950865268707
+New Minimum Average Test Loss: tensor(0.0806, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.01   50   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(114.4699, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 51.1226909160614
+Epoch: 10  loss: tensor(19.6545, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 511.15196466445923
+Epoch: 20  loss: tensor(19.6346, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 511.1411454677582
+Epoch: 30  loss: tensor(19.6311, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 510.78194880485535
+Epoch: 40  loss: tensor(19.5736, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 509.47033166885376
+New Minimum Average Test Loss: tensor(0.0808, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.01   50   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(174.1390, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 21.35282015800476
+Epoch: 10  loss: tensor(20.0198, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.67389154434204
+Epoch: 20  loss: tensor(19.8685, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.72817850112915
+Epoch: 30  loss: tensor(19.8176, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.70342135429382
+Epoch: 40  loss: tensor(19.7591, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.7117314338684
+Epoch: 50  loss: tensor(19.7631, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.68832635879517
+Epoch: 60  loss: tensor(19.7697, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.62098360061646
+Epoch: 70  loss: tensor(19.7859, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.64707374572754
+New Minimum Average Test Loss: tensor(0.0809, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.01   75   2
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(71.9990, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.221871614456177
+Epoch: 10  loss: tensor(19.3082, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 312.2199728488922
+Epoch: 20  loss: tensor(19.3328, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 312.25293612480164
+Epoch: 30  loss: tensor(19.3470, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 312.94639229774475
+Epoch: 40  loss: tensor(19.3649, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 313.4684283733368
+Epoch: 50  loss: tensor(19.3855, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 313.4779486656189
+Epoch: 60  loss: tensor(19.3569, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 313.45985651016235
+Epoch: 70  loss: tensor(19.3234, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 313.42229676246643
+New Minimum Average Test Loss: tensor(0.0813, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.01   75   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(209.5128, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 50.78358602523804
+Epoch: 10  loss: tensor(20.0914, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 506.84402203559875
+Epoch: 20  loss: tensor(20.0984, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 506.84312677383423
+Epoch: 30  loss: tensor(20.1612, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 508.86029052734375
+Epoch: 40  loss: tensor(20.1034, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 511.80323815345764
+Epoch: 50  loss: tensor(20.2008, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 511.8022623062134
+Epoch: 60  loss: tensor(20.1598, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 511.51452231407166
+Epoch: 70  loss: tensor(20.1370, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 511.6561896800995
+New Minimum Average Test Loss: tensor(0.0807, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.01   75   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(5.4686, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.98017168045044
+Epoch: 10  loss: tensor(0.9869, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.51538825035095
+Epoch: 20  loss: tensor(0.0123, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.50567197799683
+New Minimum Average Test Loss: tensor(1.9992e-06, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.001   25   2
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(5.6519, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.29894256591797
+Epoch: 10  loss: tensor(0.3309, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 313.40355920791626
+Epoch: 20  loss: tensor(0.2120, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 313.47580099105835
+New Minimum Average Test Loss: tensor(1.2193e-05, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.001   25   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(6.4515, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 51.1366171836853
+Epoch: 10  loss: tensor(0.0024, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 511.726842880249
+Epoch: 20  loss: tensor(0.0159, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 507.1137783527374
+New Minimum Average Test Loss: tensor(4.7218e-06, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.001   25   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(7.3244, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 21.218054056167603
+Epoch: 10  loss: tensor(0.0032, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 212.05363750457764
+Epoch: 20  loss: tensor(0.0050, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 212.0509476661682
+Epoch: 30  loss: tensor(0.0117, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 212.5643630027771
+Epoch: 40  loss: tensor(0.0047, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 212.6678488254547
+New Minimum Average Test Loss: tensor(1.8095e-05, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.001   50   2
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(6.0522, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.16896367073059
+Epoch: 10  loss: tensor(0.0016, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 311.29347705841064
+Epoch: 20  loss: tensor(0.0188, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 311.2658874988556
+Epoch: 30  loss: tensor(0.0028, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 311.4432020187378
+Epoch: 40  loss: tensor(0.0162, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 311.52143716812134
+New Minimum Average Test Loss: tensor(5.2511e-06, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.001   50   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(7.1995, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 51.11159539222717
+Epoch: 10  loss: tensor(0.0133, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 511.12409567832947
+Epoch: 20  loss: tensor(0.0028, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 510.3891832828522
+Epoch: 30  loss: tensor(0.0010, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 510.0373513698578
+Epoch: 40  loss: tensor(0.0035, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 507.37030053138733
+New Minimum Average Test Loss: tensor(6.6712e-06, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.001   50   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(6.6986, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 20.706883430480957
+Epoch: 10  loss: tensor(1.7578, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.72295427322388
+Epoch: 20  loss: tensor(0.0005, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.6691710948944
+Epoch: 30  loss: tensor(0.0062, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.67067337036133
+Epoch: 40  loss: tensor(0.0004, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.6459448337555
+Epoch: 50  loss: tensor(0.0004, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.65454244613647
+Epoch: 60  loss: tensor(0.0146, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.4066298007965
+Epoch: 70  loss: tensor(0.0009, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.3834912776947
+New Minimum Average Test Loss: tensor(2.1544e-06, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.001   75   2
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(8.2558, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.225425481796265
+Epoch: 10  loss: tensor(0.0147, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 312.2986595630646
+Epoch: 20  loss: tensor(0.0118, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 312.3186905384064
+Epoch: 30  loss: tensor(0.0025, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 312.03388357162476
+Epoch: 40  loss: tensor(0.0025, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 312.3015067577362
+Epoch: 50  loss: tensor(0.0013, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 312.2919445037842
+Epoch: 60  loss: tensor(0.0084, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 312.3927285671234
+Epoch: 70  loss: tensor(0.0112, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 312.3435711860657
+New Minimum Average Test Loss: tensor(3.8311e-07, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.001   75   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(6.2376, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 50.78302311897278
+Epoch: 10  loss: tensor(0.1424, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 507.1912007331848
+Epoch: 20  loss: tensor(0.0058, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 507.0249602794647
+Epoch: 30  loss: tensor(0.0022, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 506.92201828956604
+Epoch: 40  loss: tensor(0.0263, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 506.9592363834381
+Epoch: 50  loss: tensor(0.6393, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 508.92813539505005
+Epoch: 60  loss: tensor(0.0077, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 510.3256001472473
+Epoch: 70  loss: tensor(0.0024, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 510.2761161327362
+New Minimum Average Test Loss: tensor(0.0004, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.001   75   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(16.1207, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 21.369654417037964
+Epoch: 10  loss: tensor(2.3048, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.4467875957489
+Epoch: 20  loss: tensor(1.7678, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.45409560203552
+New Minimum Average Test Loss: tensor(0.0053, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.0001   25   2
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(15.2699, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.140272855758667
+Epoch: 10  loss: tensor(2.5284, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 311.60862398147583
+Epoch: 20  loss: tensor(1.9122, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 311.85007667541504
+New Minimum Average Test Loss: tensor(0.0053, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.0001   25   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(15.5393, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 50.632266998291016
+Epoch: 10  loss: tensor(2.7680, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 505.95435404777527
+Epoch: 20  loss: tensor(1.9202, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 508.62424206733704
+New Minimum Average Test Loss: tensor(0.0059, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.0001   25   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(15.4674, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 21.390087842941284
+Epoch: 10  loss: tensor(1.9653, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.68845009803772
+Epoch: 20  loss: tensor(2.1574, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.49175930023193
+Epoch: 30  loss: tensor(1.4108, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.38328456878662
+Epoch: 40  loss: tensor(0.8660, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 213.4557695388794
+New Minimum Average Test Loss: tensor(0.0021, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.0001   50   2
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(17.0392, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.229148864746094
+Epoch: 10  loss: tensor(2.7812, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 312.39565801620483
+Epoch: 20  loss: tensor(1.8578, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 312.0155739784241
+Epoch: 30  loss: tensor(1.5980, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 311.98828887939453
+Epoch: 40  loss: tensor(0.8680, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 312.0055513381958
+New Minimum Average Test Loss: tensor(0.0019, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.0001   50   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(15.8609, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 50.74963140487671
+Epoch: 10  loss: tensor(3.0409, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 506.91627287864685
+Epoch: 20  loss: tensor(2.0287, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 506.94084668159485
+Epoch: 30  loss: tensor(1.4906, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 511.4338028430939
+Epoch: 40  loss: tensor(1.6272, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 511.62596130371094
+New Minimum Average Test Loss: tensor(0.0027, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.0001   50   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(17.1916, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 21.27859401702881
+Epoch: 10  loss: tensor(2.4400, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 212.85796189308167
+Epoch: 20  loss: tensor(1.5596, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 212.8926498889923
+Epoch: 30  loss: tensor(1.0808, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 212.8415904045105
+Epoch: 40  loss: tensor(0.8955, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 212.90445470809937
+Epoch: 50  loss: tensor(0.5824, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 212.9509403705597
+Epoch: 60  loss: tensor(0.4392, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 212.89502930641174
+Epoch: 70  loss: tensor(0.2849, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 212.90791058540344
+New Minimum Average Test Loss: tensor(0.0014, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.0001   75   2
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(15.3765, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 31.315757036209106
+Epoch: 10  loss: tensor(2.4062, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 313.43337893486023
+Epoch: 20  loss: tensor(1.9037, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 313.40715312957764
+Epoch: 30  loss: tensor(1.3292, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 313.26470708847046
+Epoch: 40  loss: tensor(0.9633, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 313.20282220840454
+Epoch: 50  loss: tensor(0.9234, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 313.0583393573761
+Epoch: 60  loss: tensor(0.8434, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 312.65635776519775
+Epoch: 70  loss: tensor(0.8412, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 312.6125590801239
+New Minimum Average Test Loss: tensor(0.0013, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.0001   75   3
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(23.0138, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 51.149872064590454
+Epoch: 10  loss: tensor(3.0264, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 511.8180146217346
+Epoch: 20  loss: tensor(2.0176, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 511.7970058917999
+Epoch: 30  loss: tensor(1.4473, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 511.8038213253021
+Epoch: 40  loss: tensor(1.3460, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 511.80681800842285
+Epoch: 50  loss: tensor(1.1462, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 511.850191116333
+Epoch: 60  loss: tensor(0.8153, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 511.82630014419556
+Epoch: 70  loss: tensor(0.7467, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 511.8124113082886
+New Minimum Average Test Loss: tensor(0.0023, dtype=torch.float64)
+For hsize, lr, n_epochs, n_layers
+256   0.0001   75   5
+plotting time errors
+(600,)
+Using GPU
+Epoch: 0  loss: tensor(18.0625, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 51.16485261917114
+Epoch: 10  loss: tensor(2.8072, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 511.8750307559967
+Epoch: 20  loss: tensor(1.9495, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 511.8481113910675
+Epoch: 30  loss: tensor(1.4287, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 511.8319103717804
+Epoch: 40  loss: tensor(1.1759, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 511.88559651374817
+Epoch: 50  loss: tensor(1.0175, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 511.8366723060608
+Epoch: 60  loss: tensor(0.8325, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 511.8474705219269
+Epoch: 70  loss: tensor(0.3812, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 511.8539650440216
+Job Statistics for 3781078:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3781078   rsjxw007 2023-06-05T09:57:40 2023-06-06T02:40:37   16:42:57              16:37:31  COMPLETED  0:0   r1pl-hpcf-g04 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3781078.batch            2023-06-05T09:57:40 2023-06-06T02:40:37   16:42:57   2526.93M   16:37:31  COMPLETED  0:0   r1pl-hpcf-g04                                          
+  3781078.extern            2023-06-05T09:57:40 2023-06-06T02:40:37   16:42:57      0.09M  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 6.22% of 11-03:27:12 core-walltime
