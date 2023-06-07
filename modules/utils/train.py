@@ -63,7 +63,7 @@ class SpatialModel():
             #     print("mem:", torch.cuda.memory_allocated(), " cached:", torch.cuda.memory_reserved())
                 print("Epoch:", epoch, " Loss:", loss_per_epoch)   
         if len(path) > 0:
-            torch.save(model.state_dict(), path)
+            torch.save(model, path)
             
         # return both a model and the device used to train it.
         return model, device
@@ -120,7 +120,7 @@ class SpatialModel():
             #     print("mem:", torch.cuda.memory_allocated(), " cached:", torch.cuda.memory_reserved())
                 print("Epoch:", epoch, " Loss:", loss_per_epoch)   
         if len(path) > 0:
-            torch.save(model.state_dict(), path)
+            torch.save(model, path)
             
         # return both a model and the device used to train it.
         return model, device
@@ -160,7 +160,7 @@ def train_temporal_model(data : TemporalDataset, hidden_size=256, lr=0.001, n_ep
             epoch_start = time.time()
             
     if len(path) > 0:
-        torch.save(model.state_dict(), path)
+        torch.save(model, path)
         
     return model, device, test_data
 
