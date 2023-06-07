@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --time=0-20:10:00 
+#SBATCH --time=0-60:10:00 
 #SBATCH --job-name=SpatialABMNetTraining
 #SBATCH --partition=general,das,himem
 #SBATCH --nodes=1
