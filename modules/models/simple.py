@@ -218,33 +218,3 @@ def train_rnn(dataset : ABMDataset, input_size, hidden_size, depth, output_size,
             epoch_start = time.time()
             
     return model  
-
-# return MSE metric of moments
-def evaluate(model, dataset, use_gpu = False):
-    
-    criterion = nn.MSELoss()
-    if tc.cuda.is_available() and use_gpu:
-        device = tc.device("cuda")
-        model = model.cuda()
-        criterion = criterion.cuda()
-        using_gpu = True
-    else:
-        device = tc.device("cpu")
-        using_gpu = False
-
-    print(f"Using GPU: {using_gpu}")
-    model.eval()
-    loss = 0
-    start_time = time.time()
-    predicted = []
-    tested = []
-    for ex in range(len(dataset)):
-        sample = dataset[ex]
-        input = sample[0]
-        output = sample[1]
-        prediction = model.forward(input.to(device))
-        loss += criterion(prediction.squeeze(), output.squeeze().to(device))
-        tested.append(output.cpu().detach().numpy())
-        predicted.append(prediction.cpu().detach().numpy())
-        
-    return loss.cpu().detach().numpy() / len(dataset), time.time() - start_time, np.array(predicted), np.array(tested)

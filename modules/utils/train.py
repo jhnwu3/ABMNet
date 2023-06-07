@@ -126,7 +126,7 @@ class SpatialModel():
         return model, device
 
 
-def train_temporal_model(data : TemporalDataset, hidden_size=256, lr=0.001, n_epochs=20, n_layers=5, path=""):
+def train_temporal_model(data, input_size, n_rates, hidden_size=256, lr=0.001, n_epochs=20, n_layers=5, path=""):
     device = ""
     if torch.cuda.is_available():
         device = torch.device("cuda")
@@ -134,16 +134,16 @@ def train_temporal_model(data : TemporalDataset, hidden_size=256, lr=0.001, n_ep
     else:
         device = torch.device("cpu")
             
-    model = TemporalComplexModel(input_size=data.input_size, hidden_dim=hidden_size, n_layers=n_layers, n_rates = data.n_rates)
+    model = TemporalComplexModel(input_size=input_size, hidden_dim=hidden_size, n_layers=n_layers, n_rates = n_rates)
     model = model.to(device).float()
     model.train()
     criterion = nn.MSELoss()
     criterion = criterion.to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr)
-    train_size = int(0.1 * len(data))
-    test_size = len(data) - train_size
-    train_data, test_data = torch.utils.data.random_split(data, [train_size, test_size])
-    dataloader = torch.utils.data.DataLoader(train_data, batch_size=None, shuffle=True) 
+    # train_size = int(0.1 * len(data))
+    # test_size = len(data) - train_size
+    # train_data, test_data = torch.utils.data.random_split(data, [train_size, test_size])
+    dataloader = torch.utils.data.DataLoader(data, batch_size=None, shuffle=True) 
     epoch_start = time.time()
     for epoch in range(n_epochs):
         loss_per_epoch = 0
@@ -162,7 +162,7 @@ def train_temporal_model(data : TemporalDataset, hidden_size=256, lr=0.001, n_ep
     if len(path) > 0:
         torch.save(model, path)
         
-    return model, device, test_data
+    return model, device
 
 
 

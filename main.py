@@ -9,6 +9,7 @@ from modules.utils.cli import *
 from modules.data.mixed import *
 from modules.models.simple import *
 from modules.utils.graph import *
+from modules.utils.evaluate import *
 from sklearn.model_selection import KFold
  
 if __name__ == '__main__':
