@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created by BioNetGen 2.8.4  -->
+<!-- Created by BioNetGen 2.8.5  -->
 <sbml xmlns="http://www.sbml.org/sbml/level3" level="3" version="1">
   <model id="zeta_HPC">
     <ListOfParameters>
@@ -9,9 +9,9 @@
       <Parameter id="f" type="Constant" value="602.3" expr="602.3"/>
       <Parameter id="kon" type="Constant" value="0.78" expr="3.9E-2/Ve"/>
       <Parameter id="koff" type="Constant" value="0.01" expr="0.01"/>
-      <Parameter id="Kab" type="Constant" value="0.007992" expr="0.007992"/>
-      <Parameter id="KB" type="Constant" value="0.00031968" expr="Kab/A"/>
-      <Parameter id="KU" type="Constant" value="7.2" expr="7.2"/>
+      <Parameter id="Kab" type="Constant" value="0.0001998" expr="0.0001998"/>
+      <Parameter id="KB" type="Constant" value="7.992e-6" expr="Kab/A"/>
+      <Parameter id="KU" type="Constant" value="0.36" expr="0.36"/>
       <Parameter id="kp" type="Constant" value="0.0006" expr="0.015/A"/>
       <Parameter id="kd" type="Constant" value="0.001" expr="0.001"/>
       <Parameter id="ksbPP" type="Constant" value="1.66e-5" expr="4.15E-4/Vc"/>

@@ -7,9 +7,9 @@ begin parameters
   f 602.3
   kon 3.9E-2/Ve
   koff 0.01
-  Kab 0.007992
+  Kab 0.0001998
   KB Kab/A
-  KU 7.2
+  KU 0.54
   kp 0.015/A
   kd 0.001
   ksbPP 4.15E-4/Vc
