@@ -1,0 +1,32 @@
+[[0.        0.       ]
+ [0.        0.18     ]
+ [0.        0.36     ]
+ ...
+ [0.0097902 8.46     ]
+ [0.0097902 8.64     ]
+ [0.0097902 8.82     ]]
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta/training_kon_koff/training_data_generation.py", line 102, in <module>
+    main()
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta/training_kon_koff/training_data_generation.py", line 88, in main
+    time,mean_pZAP=pZAP_signal(kon,koff)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta/training_kon_koff/training_data_generation.py", line 38, in pZAP_signal
+    model = bionetgen.bngmodel("zeta_HPC_0.bngl")
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/bionetgen/modelapi/model.py", line 98, in __init__
+    self.bngparser.parse_model(self)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/bionetgen/modelapi/bngparser.py", line 64, in parse_model
+    self._parse_model_bngpl(model_obj)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/bionetgen/modelapi/bngparser.py", line 82, in _parse_model_bngpl
+    if self.bngfile.generate_xml(xml_file):
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/bionetgen/modelapi/bngfile.py", line 67, in generate_xml
+    stripped_bngl = self.strip_actions(model_file, temp_folder)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/bionetgen/modelapi/bngfile.py", line 108, in strip_actions
+    with open(model_path, "r", encoding="UTF-8") as mf:
+FileNotFoundError: [Errno 2] No such file or directory: 'zeta_HPC_0.bngl'
+Job Statistics for 3794123:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3794123   rsjxw007 2023-06-08T10:31:34 2023-06-08T10:31:44   00:00:10             00:01.387     FAILED  1:0   r1pl-hpcf-n21        billing=2,cpu=2,mem=14910M,node=1 
+   3794123.batch            2023-06-08T10:31:34 2023-06-08T10:31:44   00:00:10          0  00:01.384     FAILED  1:0   r1pl-hpcf-n21                                          
+  3794123.extern            2023-06-08T10:31:34 2023-06-08T10:31:44   00:00:10          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-n21                                          
+CPU Efficiency: 5.00% of 00:00:20 core-walltime
