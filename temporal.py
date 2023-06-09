@@ -16,10 +16,10 @@ lrs = [0.01, 0.001, 0.0001]
 range_epochs = [25, 50, 75]
 range_layers = [2,3,5]
 
-# hidden_sizes = [64]
-# lrs=[0.01]
-# range_epochs = [25]
-# range_layers = [2]
+hidden_sizes = [512]
+lrs=[0.0001]
+range_epochs = [100]
+range_layers = [5]
 
 # original just to test parameters
 # hidden_size=128
@@ -38,7 +38,8 @@ train_size = int(0.8 * len(data))
 test_size = len(data) - train_size
 train_data, test_data = tc.utils.data.random_split(data, [train_size, test_size])
 
-
+device = ""
+criterion = ""
 min_val_loss = 2114218412401248 # cheap max
 for hidden_size in hidden_sizes:
     for lr in lrs:
@@ -55,6 +56,16 @@ for hidden_size in hidden_sizes:
                     val_loss, truth, predicted = evaluate_temporal(k_val, model, criterion, device)
                     k_val_loss += val_loss / K
                     
+                # we want to save a checkpoint of the model's state dict, optimizers state dict, val_loss, epoch, n_layers, hidden_size
+                torch.save({
+                    'n_epochs': n_epochs,
+                    'model_state_dict': model.state_dict(),
+                    'loss': val_loss,
+                    'n_layers': n_layers,
+                    'lr':lr,
+                    'hidden_size':hidden_size
+                    }, 'checkpoints/indrani_model_gamma_chkpt.pth')
+                
                 if k_val_loss  < min_val_loss:
                     print("New Minimum Average Test Loss:", k_val_loss)
                     print("For hsize, lr, n_epochs, n_layers")
@@ -63,9 +74,11 @@ for hidden_size in hidden_sizes:
                     best_lr = lr 
                     best_epochs = n_epochs
                     best_layers = n_layers
-                    plot_time_series_errors(truth, predicted, data.times[1:], path="graphs/temporal/validation/errors_h" + str(hidden_size) +"lr" + str(lr) + "nEpc" + str(n_epochs) +"nlay" +str(n_layers) +".png")
+                    # plot_time_series_errors(truth, predicted, data.times[1:], path="graphs/temporal/validation/errors_h" + str(hidden_size) +"lr" + str(lr) + "nEpc" + str(n_epochs) +"nlay" +str(n_layers) +".png")
 
 # do some final training
 model, device = train_temporal_model(train_data, best_hidden_size, best_lr, best_epochs, best_layers, "model/indrani_crossed.pt")
 # now we evaluate!
-
+test_loss, truth, predicted = evaluate_temporal(test_data, model, criterion, device)
+print("Test MSE:", test_loss)
+plot_time_series_errors(truth, predicted, data.times[1:], path="graphs/temporal/validation/cross_val_errors_validated.png")
