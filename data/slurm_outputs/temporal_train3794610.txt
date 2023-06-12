@@ -1,0 +1,57 @@
+2500
+Using GPU
+Epoch: 0  loss: tensor(34.6552, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 120.59995007514954
+Epoch: 10  loss: tensor(3.6266, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1200.9550926685333
+Epoch: 20  loss: tensor(0.2611, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1196.100088596344
+Epoch: 30  loss: tensor(0.0811, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1196.1717760562897
+Epoch: 40  loss: tensor(0.0900, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1192.873790025711
+Epoch: 50  loss: tensor(0.0408, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1184.7833185195923
+Epoch: 60  loss: tensor(0.0998, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1184.5580248832703
+Epoch: 70  loss: tensor(0.0120, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1184.3990621566772
+Epoch: 80  loss: tensor(0.0152, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1184.133637189865
+Epoch: 90  loss: tensor(0.0107, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1184.8668520450592
+Using GPU
+Epoch: 0  loss: tensor(31.7493, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 118.01832270622253
+Epoch: 10  loss: tensor(3.5708, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1179.8465485572815
+Epoch: 20  loss: tensor(0.1155, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1179.2718000411987
+Epoch: 30  loss: tensor(0.0900, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1180.5857186317444
+Epoch: 40  loss: tensor(0.0575, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1179.850121974945
+Epoch: 50  loss: tensor(0.0746, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1181.8509185314178
+Epoch: 60  loss: tensor(0.0284, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1179.0873951911926
+Epoch: 70  loss: tensor(0.0251, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1181.2352738380432
+Epoch: 80  loss: tensor(0.0099, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1181.8417615890503
+Epoch: 90  loss: tensor(0.0252, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1180.96835231781
+Using GPU
+Epoch: 0  loss: tensor(36.5606, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 118.29635620117188
+Epoch: 10  loss: tensor(4.2798, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1182.7811107635498
+Epoch: 20  loss: tensor(0.1425, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1182.7651152610779
+Epoch: 30  loss: tensor(0.1647, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1183.2086353302002
+Epoch: 40  loss: tensor(0.0268, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1186.015986442566
+Epoch: 50  loss: tensor(0.0291, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1185.2619533538818
+Epoch: 60  loss: tensor(0.0044, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1183.496043920517
+Epoch: 70  loss: tensor(0.0401, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1182.799644947052
+Epoch: 80  loss: tensor(0.0189, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1182.7158873081207
+Epoch: 90  loss: tensor(0.0187, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1182.741860151291
+New Minimum Average Test Loss: 0.004277800727841205
+For hsize, lr, n_epochs, n_layers
+512   0.0001   100   5
+Using GPU
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/temporal.py", line 80, in <module>
+    model, device = train_temporal_model(train_data, best_hidden_size, best_lr, best_epochs, best_layers, "model/indrani_crossed.pt")
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/train.py", line 137, in train_temporal_model
+    model = TemporalComplexModel(input_size=input_size, hidden_dim=hidden_size, n_layers=n_layers, n_rates = n_rates)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/models/temporal.py", line 48, in __init__
+    self.encoder = EncoderLayer(n_rates, hidden_dim, hidden_dim)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/models/spatial.py", line 30, in __init__
+    self.linear1 = nn.Linear(input_dim, hidden_dim)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/linear.py", line 96, in __init__
+    self.weight = Parameter(torch.empty((out_features, in_features), **factory_kwargs))
+TypeError: empty(): argument 'size' must be tuple of ints, but found element of type float at pos 2
+Job Statistics for 3794610:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3794610   rsjxw007 2023-06-11T03:54:13 2023-06-11T13:47:56   09:53:43              09:51:09     FAILED  1:0   r1pl-hpcf-g04 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3794610.batch            2023-06-11T03:54:13 2023-06-11T13:47:56   09:53:43   2415.13M   09:51:09     FAILED  1:0   r1pl-hpcf-g04                                          
+  3794610.extern            2023-06-11T03:54:13 2023-06-11T13:47:56   09:53:43      0.09M  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 6.22% of 6-14:19:28 core-walltime

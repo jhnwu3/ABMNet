@@ -1,0 +1,8 @@
+slurmstepd: error: *** JOB 3795698 ON r1pl-hpcf-g03 CANCELLED AT 2023-06-12T09:45:25 ***
+Job Statistics for 3795698:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3795698   rsjxw007 2023-06-12T09:44:40 2023-06-12T09:45:25   00:00:45             00:30.031 CANCELLED+  0:0   r1pl-hpcf-g03 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3795698.batch            2023-06-12T09:44:40 2023-06-12T09:45:26   00:00:46   2347.64M  00:30.028  CANCELLED 0:15   r1pl-hpcf-g03                                          
+  3795698.extern            2023-06-12T09:44:40 2023-06-12T09:45:25   00:00:45      0.09M  00:00.003  COMPLETED  0:0   r1pl-hpcf-g03                                          
+CPU Efficiency: 4.17% of 00:12:00 core-walltime

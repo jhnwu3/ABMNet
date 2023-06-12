@@ -1,0 +1,8 @@
+slurmstepd: error: *** JOB 3786070 ON r1pl-hpcf-g04 CANCELLED AT 2023-06-10T03:18:31 DUE TO TIME LIMIT ***
+Job Statistics for 3786070:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3786070   rsjxw007 2023-06-07T15:08:11 2023-06-10T03:18:31 2-12:10:20            2-11:52:01    TIMEOUT  0:0   r1pl-hpcf-g04 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3786070.batch            2023-06-07T15:08:11 2023-06-10T03:18:32 2-12:10:21   2443.52M 2-11:52:01  CANCELLED 0:15   r1pl-hpcf-g04                                          
+  3786070.extern            2023-06-07T15:08:11 2023-06-10T03:18:31 2-12:10:20      0.09M  00:00.004  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 6.22% of 40-02:45:20 core-walltime
