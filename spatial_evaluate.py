@@ -34,7 +34,7 @@ predictions = []
 ground_truth = []
 with torch.no_grad():
     for rates, output_graph in test_dataloader:
-        out = model(data.initial_graph.to(device).double(), data.edges.to(device).double(), rates.to(device).double())
+        out = model(data.initial_graph.to(device).double(), data.edges.to(device), rates.to(device).double())
         test_loss += criterion(out.detach(), output_graph.to(device))
         predictions.append(out.detach().cpu().numpy())
         ground_truth.append(output_graph.detach().cpu().numpy())
