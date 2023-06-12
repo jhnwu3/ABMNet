@@ -41,5 +41,5 @@ with torch.no_grad():
 predictions = np.array(predictions).squeeze()
 ground_truth = np.array(ground_truth)
 print("Test Average MSE:", test_loss.item() / len(data))
-plot_histograms(test_dataset=ground_truth,predictions=predictions, output="graphs/gnn/all_gat_moms")
+# plot_histograms(test_dataset=ground_truth,predictions=predictions, output="graphs/gnn/all_gat_moms")
 plot_scatter(true=ground_truth, predictions=predictions, output="graphs/gnn/all_gat_moms", nSpecies=5)
