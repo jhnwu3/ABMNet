@@ -6,7 +6,7 @@ from sklearn.model_selection import KFold
 import torch
 
 
-data = TemporalDataset("data/time_series/indrani.pickle")
+data = TemporalDataset("data/time_series/indrani_zeta.pickle")
 print(len(data))
 # REMINDER: no cross-validation just yet, we will cross-validate next week!!
 # NEED TO REMIND OURSELVES TO WRITE MORE MODULAR CODE SUCH THAT IT IS EASY FOR US TO RUN CROSSVALIDATION
@@ -16,17 +16,17 @@ lrs = [0.01, 0.001, 0.0001]
 range_epochs = [25, 50, 75]
 range_layers = [2,3,5]
 
-# hidden_sizes = [512]
-# lrs=[0.0001]
-# range_epochs = [100]
-# range_layers = [5]
+hidden_sizes = [128]
+lrs=[0.0001]
+range_epochs = [75]
+range_layers = [3]
 
 # original just to test parameters
 # hidden_size=128
 # lr=0.001
 # n_epochs=50
 # n_layers=3
-K = 3
+K = 2
 kf = KFold(n_splits=K, shuffle=True, random_state=42) # seed it, shuffle it again, and n splits it.
 best_hidden_size = 0
 best_lr = 0
@@ -64,7 +64,7 @@ for hidden_size in hidden_sizes:
                     'n_layers': n_layers,
                     'lr':lr,
                     'hidden_size':hidden_size
-                    }, 'checkpoints/indrani_model_gamma_chkpt.pth')
+                    }, 'checkpoints/indrani_model_zeta_chkpt.pth')
                 
                 if k_val_loss  < min_val_loss:
                     print("New Minimum Average Test Loss:", k_val_loss)
@@ -77,8 +77,9 @@ for hidden_size in hidden_sizes:
                     # plot_time_series_errors(truth, predicted, data.times[1:], path="graphs/temporal/validation/errors_h" + str(hidden_size) +"lr" + str(lr) + "nEpc" + str(n_epochs) +"nlay" +str(n_layers) +".png")
 
 # do some final training
-model, device = train_temporal_model(train_data, int(best_hidden_size), best_lr, best_epochs, int(best_layers), "model/indrani_crossed.pt")
+model, device = train_temporal_model(train_data, int(best_hidden_size), best_lr, best_epochs, int(best_layers), "model/indrani_zeta.pt")
 # now we evaluate!
 test_loss, truth, predicted = evaluate_temporal(test_data, model, criterion, device)
 print("Test MSE:", test_loss)
-plot_time_series_errors(truth, predicted, data.times[1:], path="graphs/temporal/validation/cross_val_errors_validated.png")
+plot_time_series_errors(truth, predicted, data.times[1:], path="graphs/temporal/validation/zeta_errors.png")
+plot_scatter(truth, predicted, output="graphs/temporal/zeta")     
