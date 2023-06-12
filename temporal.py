@@ -16,10 +16,10 @@ lrs = [0.01, 0.001, 0.0001]
 range_epochs = [25, 50, 75]
 range_layers = [2,3,5]
 
-hidden_sizes = [512]
-lrs=[0.0001]
-range_epochs = [100]
-range_layers = [5]
+# hidden_sizes = [512]
+# lrs=[0.0001]
+# range_epochs = [100]
+# range_layers = [5]
 
 # original just to test parameters
 # hidden_size=128
