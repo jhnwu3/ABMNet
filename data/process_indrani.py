@@ -12,6 +12,7 @@ def write_array_to_csv(array, column_labels, file_path):
     df.to_csv(file_path, index=False)
 
 parent_dir = "data/John_Indrani_data/training_data_large"
+# parent_dir = "data/John_Indrani_data/zeta/training_kon_koff"
 parameter_dirs = [os.path.join(parent_dir,x) for x in os.listdir(parent_dir)]
 print(parameter_dirs)
 
@@ -20,13 +21,14 @@ output = []
 # keep one vector of the time steps too just in case.
 times = []
 for dir in parameter_dirs:
-    if dir != parent_dir:
+    if dir != parent_dir and ".txt" in dir:
         data = np.loadtxt(dir)
         # print(data.shape)
         rates.append(data[0])
         output.append(data[1:,1])
-    if len(times) < 1:
-        times = data[1:,0] # keep for plotting
+        
+        if len(times) < 1:
+            times = data[1:,0] # keep for plotting
 
 
 # save into tensors and a dictionary
@@ -40,7 +42,7 @@ for o in output:
 tosave["rates"] = rates_tensors
 tosave["outputs"] = output_tensors
 tosave["time_points"] = times
-with open("data/time_series/indrani.pickle", 'wb') as handle:
+with open("data/time_series/indrani_gamma.pickle", 'wb') as handle:
     pickle.dump(tosave, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 
