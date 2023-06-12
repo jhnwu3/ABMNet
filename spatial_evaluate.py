@@ -23,7 +23,7 @@ if torch.cuda.is_available():
     print("Using GPU")
 else:
     device = torch.device("cpu")
-model = model.to(device)
+model = model.to(device).double()
     
 test_dataloader = torch.utils.data.DataLoader(data, batch_size=None, shuffle=True)
 print("Edge Length:", data.edges.size())
@@ -34,10 +34,10 @@ predictions = []
 ground_truth = []
 with torch.no_grad():
     for rates, output_graph in test_dataloader:
-        out = model(data.initial_graph.to(device), data.edges.to(device), rates.to(device))
+        out = model(data.initial_graph.to(device).double(), data.edges.to(device).double(), rates.to(device).double())
         test_loss += criterion(out.detach(), output_graph.to(device))
-        predictions.append(out.cpu().numpy())
-        ground_truth.append(output_graph.cpu().numpy())
+        predictions.append(out.detach().cpu().numpy())
+        ground_truth.append(output_graph.detach().cpu().numpy())
 
 predictions = np.array(predictions).squeeze()
 ground_truth = np.array(ground_truth)
