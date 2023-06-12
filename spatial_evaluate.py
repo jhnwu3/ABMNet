@@ -11,17 +11,18 @@ from modules.models.spatial import *
 from modules.utils.train import *
 
 hidden_channels=128
-data = SingleInitialCorrelationDataset("../gdag_data/gdag_autocorr_r1.pickle")
+data = SingleInitialCorrelationDataset("../gdag_data/gdag_spatial_moments.pickle")
 model = GATComplex(input_dim=data.n_inputs, n_rates=data.n_rates, hidden_dim=hidden_channels,
                                   num_classes=data.n_outputs)
 model.load_state_dict(torch.load("model/gdag_gat.pt"))
-model = model.to(device)
+
 device = ""
 if torch.cuda.is_available():
     device = torch.device("cuda")
     print("Using GPU")
 else:
     device = torch.device("cpu")
+model = model.to(device)
     
 test_dataloader = torch.utils.data.DataLoader(data, batch_size=None, shuffle=True)
 print("Edge Length:", data.edges.size())
