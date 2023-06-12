@@ -16,10 +16,10 @@ lrs = [0.01, 0.001, 0.0001]
 range_epochs = [25, 50, 75]
 range_layers = [2,3,5]
 
-hidden_sizes = [1]
+hidden_sizes = [512]
 lrs=[0.0001]
-range_epochs = [1]
-range_layers = [1]
+range_epochs = [75]
+range_layers = [5]
 
 # original just to test parameters
 # hidden_size=128
@@ -79,7 +79,7 @@ for hidden_size in hidden_sizes:
 # do some final training
 print(best_layers)
 print(data.input_size)
-model, device = train_temporal_model(train_data, input_size=data.input_size, hidden_size= int(best_hidden_size), lr= best_lr, n_epochs= best_epochs, n_layers=int(best_layers), path="model/indrani_zeta.pt")
+model, device = train_temporal_model(train_data, input_size=data.input_size, hidden_size= int(best_hidden_size), lr= best_lr, n_rates=data.n_rates, n_epochs= best_epochs, n_layers=int(best_layers), path="model/indrani_zeta.pt")
 # now we evaluate!
 test_loss, truth, predicted = evaluate_temporal(test_data, model, criterion, device)
 print("Test MSE:", test_loss)
