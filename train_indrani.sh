@@ -5,7 +5,7 @@
 #SBATCH --nodes=1
 #SBATCH --output=./data/slurm_outputs/temporal_train%j.txt
 #SBATCH --cpus-per-task=16
-#SBATCH --gres=gpu:a100
+#SBATCH --gres=gpu
 
 python3 temporal.py
 # mprof plot
