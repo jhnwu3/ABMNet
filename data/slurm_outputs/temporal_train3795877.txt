@@ -1,0 +1,33 @@
+2500
+Using GPU
+Epoch: 0  loss: tensor(38.0505, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 12.527215480804443
+Epoch: 10  loss: tensor(4.1865, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 121.3691463470459
+Epoch: 20  loss: tensor(2.0382, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 121.40441346168518
+Epoch: 30  loss: tensor(0.0557, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 121.32682514190674
+Epoch: 40  loss: tensor(0.0110, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 121.29070711135864
+Epoch: 50  loss: tensor(0.1135, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 121.25851392745972
+Epoch: 60  loss: tensor(0.0241, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 120.7647762298584
+Epoch: 70  loss: tensor(0.0115, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 120.08260846138
+Using GPU
+Epoch: 0  loss: tensor(35.7464, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 11.984384536743164
+Epoch: 10  loss: tensor(3.9249, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 120.37536334991455
+Epoch: 20  loss: tensor(3.6613, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 120.39526534080505
+Epoch: 30  loss: tensor(0.1228, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 120.9577271938324
+Epoch: 40  loss: tensor(0.0333, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 121.76483058929443
+Epoch: 50  loss: tensor(0.0214, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 121.76741242408752
+Epoch: 60  loss: tensor(0.0121, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 121.62867951393127
+Epoch: 70  loss: tensor(0.0085, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 121.5581922531128
+New Minimum Average Test Loss: 0.040682643459531764
+For hsize, lr, n_epochs, n_layers
+128   0.0001   75   3
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/temporal.py", line 80, in <module>
+    model, device = train_temporal_model(train_data, int(best_hidden_size), best_lr, best_epochs, int(best_layers), "model/indrani_zeta.pt")
+TypeError: train_temporal_model() missing 1 required positional argument: 'n_layers'
+Job Statistics for 3795877:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3795877   rsjxw007 2023-06-12T11:51:15 2023-06-12T12:22:03   00:30:48             30:31.788     FAILED  1:0   r1pl-hpcf-g01 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3795877.batch            2023-06-12T11:51:15 2023-06-12T12:22:03   00:30:48   1883.05M  30:31.786     FAILED  1:0   r1pl-hpcf-g01                                          
+  3795877.extern            2023-06-12T11:51:15 2023-06-12T12:22:03   00:30:48      0.09M  00:00.002  COMPLETED  0:0   r1pl-hpcf-g01                                          
+CPU Efficiency: 6.20% of 08:12:48 core-walltime
