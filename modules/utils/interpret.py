@@ -406,3 +406,55 @@ class MultiInterpreter:
         plt.savefig(path)
 
 
+# returns a matrix of rates, and a tensor of time series data, n x f x t
+# where n is the # of rates, f is the number of observables, and t is the # of time pts
+def convert_temporal_to_numpy(data):
+    rates_set = []
+    trajectories = []
+    for rates in data["rates"]:
+        rates_set.append(rates.detach().numpy())
+    for trajectory in data["outputs"]:
+        trajectories.append(trajectory.detach().numpy())
+
+    return np.array(rates_set), np.array(trajectories)
+
+def get_rows_below_threshold(matrix, t):
+    row_averages = np.mean(matrix, axis=1)  # Calculate average values of each row
+    below_threshold = np.where(row_averages < t)[0]  # Boolean mask indicating rows below threshold
+    print(below_threshold)
+    # rows_below_threshold = matrix[below_threshold]  # Retrieve rows below threshold
+    return below_threshold
+
+# only works for pairwise parameters for now.
+def interpret_temporal(data, threshold, path="graphs/temporal/gamma"):
+    rates_set, trajectories = convert_temporal_to_numpy(data)
+    print(rates_set.shape)
+    print(trajectories.shape) # for now it's technically just a matrix
+    plt.figure() 
+    # Prepare data for heatmap
+    x_values = rates_set[:, 0]
+    y_values = rates_set[:, 1]
+    heatmap_data = np.mean(trajectories, axis=1)
+    # triang = plt.tri.Triangulation(x_values, y_values)
+    # Create heatmap
+    plt.tricontourf(x_values, y_values, heatmap_data, cmap='hot')
+    plt.colorbar()
+
+    # Customize the plot
+    # plt.xticks(range(len(x_values)), x_values)
+    # plt.yticks(range(len(y_values)), y_values)
+    plt.xlabel('k_on')
+    plt.ylabel('k_off')
+    plt.title('Average PZap Value Across Time')
+    plt.savefig(path + "_heatmap.png")
+    plt.close()
+    
+    plt.figure() 
+    row_idxs = get_rows_below_threshold(trajectories, threshold)
+    # print(row_idxs)
+    rates_zero = rates_set[row_idxs]
+    plt.plot(rates_zero[:,0], rates_zero[:,1])
+    plt.xlabel('k_on')
+    plt.ylabel('k_off')
+    plt.title('Where is pZap == 0 through time')
+    plt.savefig(path + "_line.png")
