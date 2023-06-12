@@ -78,15 +78,3 @@ with torch.no_grad():
         test_loss += criterion(out.detach(), output_graph.to(device))
 
 print("Test Average MSE:", test_loss.item() / len(test_data))
-
-
-# for i in range(len(output_graphs_chunk)):
-#     print(output_graphs_chunk[i].size())
-# train_profiled(input_graph, output_graphs_chunk, rates_chunk, edges)
-
-
-
-
-# model = train_giuseppe_surrogate_pkl(loaded_data, nEpochs=20)
-
-
