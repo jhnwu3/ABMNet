@@ -10,6 +10,7 @@ from modules.data.mixed import *
 from modules.models.simple import *
 from modules.utils.graph import *
 from modules.utils.evaluate import *
+from modules.utils.train import *
 from sklearn.model_selection import KFold
  
 if __name__ == '__main__':

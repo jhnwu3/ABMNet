@@ -126,7 +126,7 @@ class SpatialModel():
         return model, device
 
 
-def train_temporal_model(data, input_size, n_rates, hidden_size=256, lr=0.001, n_epochs=20, n_layers=5, path=""):
+def train_temporal_model(data, input_size : int, n_rates : int, hidden_size : int, lr : float, n_epochs : int, n_layers : int, path=""):
     device = ""
     if torch.cuda.is_available():
         device = torch.device("cuda")
@@ -164,6 +164,198 @@ def train_temporal_model(data, input_size, n_rates, hidden_size=256, lr=0.001, n
         
     return model, device
 
-
-
+# train stuff
+def train_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_size, nEpochs, use_gpu = False):
     
+    model = NeuralNetwork(input_size, hidden_size, depth, output_size).double()
+    optimizer = optim.AdamW(model.parameters(),lr=0.0001)
+    criterion = nn.MSELoss()
+    
+    if tc.cuda.is_available() and use_gpu:
+        device = tc.device("cuda")
+        model = model.cuda()
+        criterion = criterion.cuda()
+        using_gpu = True
+    else:
+        device = tc.device("cpu")
+        using_gpu = False
+
+    print(f"Using GPU: {using_gpu}")
+    model.train()
+    epoch_start = time.time()
+    
+    # enable shuffling so we can 
+    loader = tc.utils.data.DataLoader(dataset, batch_size=None, shuffle=True)  
+    for epoch in range(nEpochs):
+        loss_this_epoch = 0
+           
+        for input, output in loader:
+            optimizer.zero_grad()
+            loss = 0
+          
+            prediction = model.forward(input.to(device))
+            loss += criterion(prediction.squeeze(), output.squeeze().to(device))
+            loss_this_epoch += loss.item() 
+            loss.backward()
+            optimizer.step()
+            # print('Memory usage: %s (kb)', resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
+        if epoch % 10 == 0:
+            print(repr(f"Finished epoch {epoch} with loss {loss_this_epoch} in time {time.time() - epoch_start}"))
+            epoch_start = time.time()
+            
+    return model  
+
+
+def train_res_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_size, nEpochs, use_gpu = False):
+    
+    model = ResidualNN(input_size, hidden_size, depth, output_size).double()
+    optimizer = optim.AdamW(model.parameters())
+    criterion = nn.MSELoss()
+    
+    if tc.cuda.is_available() and use_gpu:
+        device = tc.device("cuda")
+        model = model.cuda()
+        criterion = criterion.cuda()
+        using_gpu = True
+    else:
+        device = tc.device("cpu")
+        using_gpu = False
+
+    print(f"Using GPU: {using_gpu}")
+    model.train()
+    epoch_start = time.time()
+    loader = tc.utils.data.DataLoader(dataset, batch_size=None, shuffle=True)
+    for epoch in range(nEpochs):
+        
+        loss_this_epoch = 0
+        for input, output in loader:
+            optimizer.zero_grad()
+            loss = 0
+            # sample = dataset[ex]
+            # input = sample[0] # no more keys, justt values input is first index, output is second
+            # output = sample[1] 
+            prediction = model.forward(input.to(device))
+            loss += criterion(prediction.squeeze(), output.squeeze().to(device))
+            loss_this_epoch += loss.item() 
+            loss.backward()
+            optimizer.step()
+            
+        if epoch % 10 == 0:
+            print(repr(f"Finished epoch {epoch} with loss {loss_this_epoch} in time {time.time() - epoch_start}"))
+            epoch_start = time.time()
+            
+    return model  
+
+
+def train_rnn(dataset : ABMDataset, input_size, hidden_size, depth, output_size, nEpochs, use_gpu = False):
+    model = RecurrentNN(input_size, hidden_size, depth, output_size).double()
+    optimizer = optim.AdamW(model.parameters())
+    criterion = nn.MSELoss()
+    
+    if tc.cuda.is_available() and use_gpu:
+        device = tc.device("cuda")
+        model = model.cuda()
+        criterion = criterion.cuda()
+        using_gpu = True
+    else:
+        device = tc.device("cpu")
+        using_gpu = False
+
+    print(f"Using GPU: {using_gpu}")
+    model.train()
+    epoch_start = time.time()
+    for epoch in range(nEpochs):
+        
+        loss_this_epoch = 0
+        for s in range(len(dataset)):
+            optimizer.zero_grad()
+            loss = 0
+            
+            # start with first sample and then iterate through each time step. 
+            
+            # sample = dataset[ex]
+            # input = sample[0] # no more keys, justt values input is first index, output is second
+            # output = sample[1] 
+            prediction = model.forward(input.to(device))
+            loss += criterion(prediction.squeeze(), output.squeeze().to(device))
+            loss_this_epoch += loss.item() 
+            loss.backward()
+            optimizer.step()
+            
+        if epoch % 10 == 0:
+            print(repr(f"Finished epoch {epoch} with loss {loss_this_epoch} in time {time.time() - epoch_start}"))
+            epoch_start = time.time()
+            
+    return model  
+
+
+# def train_giuseppe_surrogate(data_obj : GiuseppeSurrogateGraphData, nEpochs = 30, single_init_cond = True):
+#     model = GCNComplex(n_features=data_obj.n_features, n_classes=data_obj.n_output, hidden_channels=32, n_rates=data_obj.n_rates)
+#     model.train()
+#     model = model.double()
+#     optimizer = torch.optim.AdamW(model.parameters())
+#     criterion = torch.nn.MSELoss()
+#     for epoch in range(nEpochs):
+#         loss_per_epoch = 0
+#         for graph in range(data_obj.length):
+#             optimizer.zero_grad()
+#             input_graph = data_obj.input_graphs
+#             if not single_init_cond:
+#                 input_graph = data_obj.input_graphs[graph]
+#             out = model(input_graph, data_obj.edges, data_obj.rates[graph])
+#             loss = criterion(out, data_obj.output_graphs[graph])
+#             loss.backward()
+#             loss_per_epoch+= float(loss)
+#             optimizer.step()
+            
+#         if epoch % 10 == 0:
+#             print("Epoch:", epoch, " Loss:", loss_per_epoch)   
+#     return model     
+
+# def train_gnn(data_obj : GiuseppeSurrogateGraphData, nEpochs = 30, single_init_cond = True):
+#     model = GCN(n_features=data_obj.n_features, n_classes=data_obj.n_output, hidden_channels=32)
+#     model.train()
+#     model = model.double()
+#     optimizer = torch.optim.AdamW(model.parameters())
+#     criterion = torch.nn.MSELoss()
+#     for epoch in range(nEpochs):
+#         loss_per_epoch = 0
+#         for graph in range(data_obj.length):
+#             optimizer.zero_grad()
+#             input_graph = data_obj.input_graphs
+#             if not single_init_cond:
+#                 input_graph = data_obj.input_graphs[graph]
+#             out = model(input_graph, data_obj.edges)
+#             loss = criterion(out, data_obj.output_graphs[graph])
+#             loss.backward()
+#             loss_per_epoch+=loss
+#             optimizer.step()
+            
+#         if epoch % 10 == 0:
+#             print("Epoch:", epoch, " Loss:", loss_per_epoch)   
+            
+#     return model     
+
+
+# def train_giuseppe_surrogate_pkl(data : dict, nEpochs = 30, single_init_cond = True):
+#     model = GCNComplex(n_features=data["n_features"], n_classes=data["n_outputs"], n_rates=data["n_rates"],hidden_channels=32)
+#     model.train()
+#     model = model.double()
+#     optimizer = torch.optim.AdamW(model.parameters())
+#     criterion = torch.nn.MSELoss()
+#     for epoch in range(nEpochs):
+#         loss_per_epoch = 0
+#         for graph in range(data["n"]):
+#             optimizer.zero_grad()
+#             input_graph = data["input_graphs"]
+#             if not single_init_cond:
+#                 input_graph = data["input_graphs"][graph]
+#             out = model(input_graph, data["edges"], data["rates"][graph])
+#             loss = criterion(out, data["output_graphs"][graph])
+#             loss.backward()
+#             loss_per_epoch+=loss
+#             optimizer.step()
+            
+#         if epoch % 1 == 0:
+#             print("Epoch:", epoch, " Loss:", loss_per_epoch)   
+#     return model     

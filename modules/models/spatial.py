@@ -117,73 +117,53 @@ class GCNComplex(torch.nn.Module):
         graph = self.conv2(graph, edge_index)
         return graph
 
-# def train_giuseppe_surrogate(data_obj : GiuseppeSurrogateGraphData, nEpochs = 30, single_init_cond = True):
-#     model = GCNComplex(n_features=data_obj.n_features, n_classes=data_obj.n_output, hidden_channels=32, n_rates=data_obj.n_rates)
-#     model.train()
-#     model = model.double()
-#     optimizer = torch.optim.AdamW(model.parameters())
-#     criterion = torch.nn.MSELoss()
-#     for epoch in range(nEpochs):
-#         loss_per_epoch = 0
-#         for graph in range(data_obj.length):
-#             optimizer.zero_grad()
-#             input_graph = data_obj.input_graphs
-#             if not single_init_cond:
-#                 input_graph = data_obj.input_graphs[graph]
-#             out = model(input_graph, data_obj.edges, data_obj.rates[graph])
-#             loss = criterion(out, data_obj.output_graphs[graph])
-#             loss.backward()
-#             loss_per_epoch+= float(loss)
-#             optimizer.step()
-            
-#         if epoch % 10 == 0:
-#             print("Epoch:", epoch, " Loss:", loss_per_epoch)   
-#     return model     
 
-# def train_gnn(data_obj : GiuseppeSurrogateGraphData, nEpochs = 30, single_init_cond = True):
-#     model = GCN(n_features=data_obj.n_features, n_classes=data_obj.n_output, hidden_channels=32)
-#     model.train()
-#     model = model.double()
-#     optimizer = torch.optim.AdamW(model.parameters())
-#     criterion = torch.nn.MSELoss()
-#     for epoch in range(nEpochs):
-#         loss_per_epoch = 0
-#         for graph in range(data_obj.length):
-#             optimizer.zero_grad()
-#             input_graph = data_obj.input_graphs
-#             if not single_init_cond:
-#                 input_graph = data_obj.input_graphs[graph]
-#             out = model(input_graph, data_obj.edges)
-#             loss = criterion(out, data_obj.output_graphs[graph])
-#             loss.backward()
-#             loss_per_epoch+=loss
-#             optimizer.step()
-            
-#         if epoch % 10 == 0:
-#             print("Epoch:", epoch, " Loss:", loss_per_epoch)   
-            
-#     return model     
+#MLP heads for ViTs
+class MLP(nn.Module):
+    def __init__(self, input_dim, hidden_dim, output_dim):
+        super(MLP, self).__init__()
+        self.fc1 = nn.Linear(input_dim, hidden_dim)
+        self.fc2 = nn.Linear(hidden_dim, output_dim)
+
+    def forward(self, x):
+        x = F.relu(self.fc1(x))
+        x = self.fc2(x)
+        return x
 
 
-# def train_giuseppe_surrogate_pkl(data : dict, nEpochs = 30, single_init_cond = True):
-#     model = GCNComplex(n_features=data["n_features"], n_classes=data["n_outputs"], n_rates=data["n_rates"],hidden_channels=32)
-#     model.train()
-#     model = model.double()
-#     optimizer = torch.optim.AdamW(model.parameters())
-#     criterion = torch.nn.MSELoss()
-#     for epoch in range(nEpochs):
-#         loss_per_epoch = 0
-#         for graph in range(data["n"]):
-#             optimizer.zero_grad()
-#             input_graph = data["input_graphs"]
-#             if not single_init_cond:
-#                 input_graph = data["input_graphs"][graph]
-#             out = model(input_graph, data["edges"], data["rates"][graph])
-#             loss = criterion(out, data["output_graphs"][graph])
-#             loss.backward()
-#             loss_per_epoch+=loss
-#             optimizer.step()
-            
-#         if epoch % 1 == 0:
-#             print("Epoch:", epoch, " Loss:", loss_per_epoch)   
-#     return model     
+class PatchEmbedding(nn.Module):
+    def __init__(self, image_size, patch_size, in_channels, embed_dim):
+        super(PatchEmbedding, self).__init__()
+        self.image_size = image_size
+        self.patch_size = patch_size
+        self.num_patches = (image_size // patch_size) ** 2
+        self.proj = nn.Conv2d(in_channels, embed_dim, kernel_size=patch_size, stride=patch_size)
+
+    def forward(self, x):
+        x = self.proj(x)
+        x = x.flatten(2).transpose(1, 2)
+        return x
+
+# Define the Vision Transformer model
+class ViT(nn.Module):
+    # Implementation of ViT goes here...
+    def __init__(self, image_size, patch_size, num_classes, embed_dim, depth, num_heads, mlp_dim):
+        super(ViT, self).__init__()
+        self.patch_embedding = PatchEmbedding(image_size, patch_size, in_channels=1, embed_dim=embed_dim)
+        self.positional_encoding = nn.Parameter(torch.zeros(1, self.patch_embedding.num_patches, embed_dim))
+        self.transformer_blocks = nn.ModuleList([
+            nn.TransformerEncoderLayer(d_model=embed_dim, nhead=num_heads, dim_feedforward=mlp_dim)
+            for _ in range(depth)
+        ])
+        self.class_token = nn.Parameter(torch.zeros(1, 1, embed_dim))
+        self.mlp_head = MLP(embed_dim, mlp_dim, num_classes)
+
+    def forward(self, x):
+        x = self.patch_embedding(x)
+        x = x + self.positional_encoding
+        for transformer in self.transformer_blocks:
+            x = transformer(x)
+        x = x.mean(1)  # Global average pooling
+        x = self.mlp_head(x)
+        return x
+
