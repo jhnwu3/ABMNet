@@ -77,7 +77,7 @@ for hidden_size in hidden_sizes:
                     # plot_time_series_errors(truth, predicted, data.times[1:], path="graphs/temporal/validation/errors_h" + str(hidden_size) +"lr" + str(lr) + "nEpc" + str(n_epochs) +"nlay" +str(n_layers) +".png")
 
 # do some final training
-model, device = train_temporal_model(train_data, int(best_hidden_size), best_lr, best_epochs, int(best_layers), "model/indrani_zeta.pt")
+model, device = train_temporal_model(train_data, data.input_size ,int(best_hidden_size), best_lr, best_epochs, int(best_layers), "model/indrani_zeta.pt")
 # now we evaluate!
 test_loss, truth, predicted = evaluate_temporal(test_data, model, criterion, device)
 print("Test MSE:", test_loss)
