@@ -15,7 +15,7 @@ data = SingleInitialCorrelationDataset("../gdag_data/gdag_autocorr_r1.pickle")
 model = GATComplex(input_dim=data.n_inputs, n_rates=data.n_rates, hidden_dim=hidden_channels,
                                   num_classes=data.n_outputs)
 model.load_state_dict(torch.load("model/gdag_gat.pt"))
-
+model = model.to(device)
 device = ""
 if torch.cuda.is_available():
     device = torch.device("cuda")
