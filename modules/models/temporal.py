@@ -41,6 +41,8 @@ class TemporalComplexModel(nn.Module):
         self.hidden_dim = hidden_dim
         self.n_layers = n_layers
         self.input_size = input_size
+        print(type(n_layers))
+        print(n_layers)
         # Defining the layers
         # RNN Layer
         self.lstm = nn.LSTM(input_size, hidden_dim, n_layers, batch_first=True)  
