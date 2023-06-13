@@ -110,7 +110,7 @@ def plot_scatter(true, predictions, output='data/graphs/out', nSpecies=None):
     if nSpecies is not None:
         if true.shape[1] > 2*nSpecies:
             axes.scatter(true[:,:nSpecies], predictions[:,:nSpecies], c='r', label='Means')
-            axes.scatter(true[:,nSpecies:2*nSpecies], predictions[:,nSpecies:2*nSpecies], c='r', label='Variances')
+            axes.scatter(true[:,nSpecies:2*nSpecies], predictions[:,nSpecies:2*nSpecies], c='g', label='Variances')
             axes.scatter(true[:,2*nSpecies:], predictions[:,2*nSpecies:], c='b', label='Covariances')
         elif true.shape[1] > nSpecies and true.shape[1] < 2*nSpecies + 1:
             axes.scatter(true[:,:nSpecies], predictions[:,:nSpecies], c='r', label='Means')
