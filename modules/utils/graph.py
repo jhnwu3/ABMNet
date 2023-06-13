@@ -122,7 +122,7 @@ def plot_scatter(true, predictions, output='data/graphs/out', nSpecies=None):
             
         # axes.legend(optimal, 'Perfect Prediction')
     axes.legend(loc='upper right')
-    axes.legend(["R^2=" + str(r_sq)])
+    axes.set_title("R^2=" + str(r_sq))
     axes.legend()
     plt.savefig(output + '_scatter.png')  
 
