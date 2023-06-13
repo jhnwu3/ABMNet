@@ -99,7 +99,7 @@ def plot_scatter(true, predictions, output='data/graphs/out', nSpecies=None):
     plt.figure()
     fig, axes = plt.subplots(figsize=(8, 8))
     x123 = np.arange(np.min(true), np.max(true))
-    
+    size = 5
     if x123[0] == 0:
         x123 = np.append(x123,[1])
     y123 = x123
@@ -109,21 +109,14 @@ def plot_scatter(true, predictions, output='data/graphs/out', nSpecies=None):
     r_sq = r_squared(true.flatten(), predictions.flatten())
     if nSpecies is not None:
         if true.shape[1] > 2*nSpecies:
-            axes.scatter(true[:,:nSpecies], predictions[:,:nSpecies], c='r', label='Means')
-            axes.scatter(true[:,nSpecies:2*nSpecies], predictions[:,nSpecies:2*nSpecies], c='g', label='Variances')
-            axes.scatter(true[:,2*nSpecies:], predictions[:,2*nSpecies:], c='b', label='Covariances')
+            axes.scatter(true[:,:nSpecies], predictions[:,:nSpecies], c='r', label='Means', s=size)
+            axes.scatter(true[:,nSpecies:2*nSpecies], predictions[:,nSpecies:2*nSpecies], c='g', label='Variances', s=size)
+            axes.scatter(true[:,2*nSpecies:], predictions[:,2*nSpecies:], c='b', label='Covariances', s=size)
         elif true.shape[1] > nSpecies and true.shape[1] < 2*nSpecies + 1:
-            axes.scatter(true[:,:nSpecies], predictions[:,:nSpecies], c='r', label='Means')
-            axes.scatter(true[:,nSpecies:2*nSpecies], predictions[:,nSpecies:2*nSpecies], c='g', label='Variances')
+            axes.scatter(true[:,:nSpecies], predictions[:,:nSpecies], c='r', label='Means', s=size)
+            axes.scatter(true[:,nSpecies:2*nSpecies], predictions[:,nSpecies:2*nSpecies], c='g', label='Variances', s=size)
         else: 
-            axes.scatter(true[:,:nSpecies], predictions[:,:nSpecies], c='r', label='Means')
-        # for c in range(true.shape[1]):
-        #     if c < nSpecies: # means
-        #         axes.scatter(true[:,c], predictions[:,c],c='r', label='Means')
-        #     elif c < 2*nSpecies: # variances
-        #         axes.scatter(true[:,c], predictions[:,c],c='g', label='Variances')
-        #     else: # covariances
-        #         axes.scatter(true[:,c], predictions[:,c],c='b', label='Covariances')
+            axes.scatter(true[:,:nSpecies], predictions[:,:nSpecies], c='r', label='Means', s=size)
     else:
         axes.scatter(true.flatten(), predictions.flatten(), c='c')
             
