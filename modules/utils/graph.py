@@ -108,13 +108,22 @@ def plot_scatter(true, predictions, output='data/graphs/out', nSpecies=None):
     axes.set_ylabel("Surrogate Model Prediction")
     r_sq = r_squared(true.flatten(), predictions.flatten())
     if nSpecies is not None:
-        for c in range(true.shape[1]):
-            if c < nSpecies: # means
-                axes.scatter(true[:,c], predictions[:,c],c='r', label='Means')
-            elif c < 2*nSpecies: # variances
-                axes.scatter(true[:,c], predictions[:,c],c='g', label='Variances')
-            else: # covariances
-                axes.scatter(true[:,c], predictions[:,c],c='b', label='Covariances')
+        if true.shape[1] > 2*nSpecies:
+            axes.scatter(true[:,:nSpecies], predictions[:,:nSpecies], c='r', label='Means')
+            axes.scatter(true[:,nSpecies:2*nSpecies], predictions[:,nSpecies:2*nSpecies], c='r', label='Variances')
+            axes.scatter(true[:,2*nSpecies:], predictions[:,2*nSpecies:], c='b', label='Covariances')
+        elif true.shape[1] > nSpecies and true.shape[1] < 2*nSpecies + 1:
+            axes.scatter(true[:,:nSpecies], predictions[:,:nSpecies], c='r', label='Means')
+            axes.scatter(true[:,nSpecies:2*nSpecies], predictions[:,nSpecies:2*nSpecies], c='r', label='Variances')
+        else: 
+            axes.scatter(true[:,:nSpecies], predictions[:,:nSpecies], c='r', label='Means')
+        # for c in range(true.shape[1]):
+        #     if c < nSpecies: # means
+        #         axes.scatter(true[:,c], predictions[:,c],c='r', label='Means')
+        #     elif c < 2*nSpecies: # variances
+        #         axes.scatter(true[:,c], predictions[:,c],c='g', label='Variances')
+        #     else: # covariances
+        #         axes.scatter(true[:,c], predictions[:,c],c='b', label='Covariances')
     else:
         axes.scatter(true.flatten(), predictions.flatten(), c='c')
             
