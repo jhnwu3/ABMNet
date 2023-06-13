@@ -1,0 +1,48 @@
+2500
+Using GPU
+Epoch: 0  loss: tensor(35.2339, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 120.95477795600891
+Epoch: 10  loss: tensor(3.7674, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1210.3156082630157
+Epoch: 20  loss: tensor(0.1814, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1204.4925570487976
+Epoch: 30  loss: tensor(0.1522, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1201.0770428180695
+Epoch: 40  loss: tensor(0.0357, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1201.6700372695923
+Epoch: 50  loss: tensor(0.0024, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1198.1604771614075
+Epoch: 60  loss: tensor(0.0127, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1195.4210851192474
+Epoch: 70  loss: tensor(0.0134, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1186.5125031471252
+Epoch: 80  loss: tensor(0.0057, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1190.575050354004
+Epoch: 90  loss: tensor(0.0263, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1189.4106073379517
+Using GPU
+Epoch: 0  loss: tensor(37.1906, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 118.7455005645752
+Epoch: 10  loss: tensor(3.2186, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1191.6082587242126
+Epoch: 20  loss: tensor(0.1307, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1207.0423061847687
+Epoch: 30  loss: tensor(0.0570, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1206.4587483406067
+Epoch: 40  loss: tensor(0.0914, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1200.833790063858
+Epoch: 50  loss: tensor(0.1605, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1190.1370437145233
+Epoch: 60  loss: tensor(0.0561, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1190.7009780406952
+Epoch: 70  loss: tensor(0.0198, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1190.5963633060455
+Epoch: 80  loss: tensor(0.0100, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1190.45693898201
+Epoch: 90  loss: tensor(0.0185, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1205.8851563930511
+Using GPU
+Epoch: 0  loss: tensor(35.6656, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 120.459148645401
+Epoch: 10  loss: tensor(4.5272, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1202.0508358478546
+Epoch: 20  loss: tensor(0.3976, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1202.849289894104
+Epoch: 30  loss: tensor(0.1011, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1202.7145206928253
+Epoch: 40  loss: tensor(0.0157, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1202.9531998634338
+Epoch: 50  loss: tensor(0.0474, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1204.2038695812225
+Epoch: 60  loss: tensor(0.0060, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1190.2132630348206
+Epoch: 70  loss: tensor(0.0448, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1199.3397843837738
+Epoch: 80  loss: tensor(0.0163, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1198.4811882972717
+Epoch: 90  loss: tensor(0.0132, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 1201.3990199565887
+New Minimum Average Test Loss: 0.006047006128680206
+For hsize, lr, n_epochs, n_layers
+512   0.0001   100   5
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/temporal.py", line 80, in <module>
+    print(best_layers)
+TypeError: train_temporal_model() missing 1 required positional argument: 'n_layers'
+Job Statistics for 3795701:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3795701   rsjxw007 2023-06-12T09:45:32 2023-06-12T19:46:11   10:00:39              09:56:46     FAILED  1:0   r1pl-hpcf-g03 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3795701.batch            2023-06-12T09:45:32 2023-06-12T19:46:11   10:00:39   2440.50M   09:56:46     FAILED  1:0   r1pl-hpcf-g03                                          
+  3795701.extern            2023-06-12T09:45:32 2023-06-12T19:46:11   10:00:39      0.09M  00:00.003  COMPLETED  0:0   r1pl-hpcf-g03                                          
+CPU Efficiency: 6.21% of 6-16:10:24 core-walltime

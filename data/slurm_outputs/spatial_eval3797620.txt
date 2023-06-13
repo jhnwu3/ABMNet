@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/spatial_evaluate.py", line 17, in <module>
+    model.load_state_dict(torch.load("model/gdag_gat.pt"))
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/serialization.py", line 809, in load
+    return _load(opened_zipfile, map_location, pickle_module, **pickle_load_args)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/serialization.py", line 1172, in _load
+    result = unpickler.load()
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/serialization.py", line 1142, in persistent_load
+    typed_storage = load_tensor(dtype, nbytes, key, _maybe_decode_ascii(location))
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/serialization.py", line 1116, in load_tensor
+    wrap_storage=restore_location(storage, location),
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/serialization.py", line 217, in default_restore_location
+    result = fn(storage, location)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/serialization.py", line 182, in _cuda_deserialize
+    device = validate_cuda_device(location)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/serialization.py", line 166, in validate_cuda_device
+    raise RuntimeError('Attempting to deserialize object on a CUDA '
+RuntimeError: Attempting to deserialize object on a CUDA device but torch.cuda.is_available() is False. If you are running on a CPU-only machine, please use torch.load with map_location=torch.device('cpu') to map your storages to the CPU.
+Job Statistics for 3797620:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3797620   rsjxw007 2023-06-12T16:57:45 2023-06-12T16:58:20   00:00:35             01:39.010     FAILED  1:0   r1pl-hpcf-h05        billing=8,cpu=8,mem=59640M,node=1 
+   3797620.batch            2023-06-12T16:57:45 2023-06-12T16:58:20   00:00:35    376.45M  01:39.005     FAILED  1:0   r1pl-hpcf-h05                                          
+  3797620.extern            2023-06-12T16:57:45 2023-06-12T16:58:20   00:00:35      0.09M  00:00.004  COMPLETED  0:0   r1pl-hpcf-h05                                          
+CPU Efficiency: 35.36% of 00:04:40 core-walltime

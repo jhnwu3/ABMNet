@@ -1,0 +1,8 @@
+slurmstepd: error: *** JOB 3797837 ON r1pl-hpcf-h05 CANCELLED AT 2023-06-12T17:00:50 ***
+Job Statistics for 3797837:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3797837   rsjxw007 2023-06-12T17:00:45 2023-06-12T17:00:50   00:00:05             00:04.031 CANCELLED+  0:0   r1pl-hpcf-h05        billing=8,cpu=8,mem=59640M,node=1 
+   3797837.batch            2023-06-12T17:00:45 2023-06-12T17:00:51   00:00:06    209.81M  00:04.027  CANCELLED 0:15   r1pl-hpcf-h05                                          
+  3797837.extern            2023-06-12T17:00:45 2023-06-12T17:00:50   00:00:05          0  00:00.004  COMPLETED  0:0   r1pl-hpcf-h05                                          
+CPU Efficiency: 10.00% of 00:00:40 core-walltime

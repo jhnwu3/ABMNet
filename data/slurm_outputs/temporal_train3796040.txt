@@ -1,0 +1,42 @@
+2500
+Using GPU
+Epoch: 0  loss: tensor(36.4245, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 12.286991357803345
+Epoch: 10  loss: tensor(4.1966, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 121.09210014343262
+Epoch: 20  loss: tensor(1.6970, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 121.10937643051147
+Epoch: 30  loss: tensor(0.1015, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 121.14446473121643
+Epoch: 40  loss: tensor(0.0273, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 121.0995683670044
+Epoch: 50  loss: tensor(0.0145, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 120.99941110610962
+Epoch: 60  loss: tensor(0.1591, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 120.98839235305786
+Epoch: 70  loss: tensor(0.0012, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 121.0271348953247
+Using GPU
+Epoch: 0  loss: tensor(31.0425, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 12.075380563735962
+Epoch: 10  loss: tensor(4.5707, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 121.31974005699158
+Epoch: 20  loss: tensor(2.6215, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 121.35750126838684
+Epoch: 30  loss: tensor(0.1908, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 121.6216344833374
+Epoch: 40  loss: tensor(0.0381, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 121.7015790939331
+Epoch: 50  loss: tensor(0.0219, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 121.66746234893799
+Epoch: 60  loss: tensor(0.0578, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 121.71202325820923
+Epoch: 70  loss: tensor(0.0057, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 121.5403254032135
+New Minimum Average Test Loss: 0.0010849765356298977
+For hsize, lr, n_epochs, n_layers
+128   0.0001   75   3
+Using GPU
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/temporal.py", line 80, in <module>
+    model, device = train_temporal_model(train_data, data.input_size ,int(best_hidden_size), best_lr, best_epochs, int(best_layers), "model/indrani_zeta.pt")
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/train.py", line 137, in train_temporal_model
+    model = TemporalComplexModel(input_size=input_size, hidden_dim=hidden_size, n_layers=n_layers, n_rates = n_rates)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/models/temporal.py", line 46, in __init__
+    self.lstm = nn.LSTM(input_size, hidden_dim, n_layers, batch_first=True)  
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/rnn.py", line 711, in __init__
+    super().__init__('LSTM', *args, **kwargs)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/rnn.py", line 93, in __init__
+    for layer in range(num_layers):
+TypeError: 'str' object cannot be interpreted as an integer
+Job Statistics for 3796040:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3796040   rsjxw007 2023-06-12T12:59:16 2023-06-12T13:29:58   00:30:42             30:32.030     FAILED  1:0   r1pl-hpcf-g01 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3796040.batch            2023-06-12T12:59:16 2023-06-12T13:29:58   00:30:42   1890.16M  30:32.027     FAILED  1:0   r1pl-hpcf-g01                                          
+  3796040.extern            2023-06-12T12:59:16 2023-06-12T13:29:58   00:30:42      0.09M  00:00.002  COMPLETED  0:0   r1pl-hpcf-g01                                          
+CPU Efficiency: 6.22% of 08:11:12 core-walltime

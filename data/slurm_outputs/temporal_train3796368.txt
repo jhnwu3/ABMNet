@@ -1,0 +1,46 @@
+2500
+Using GPU
+<class 'int'>
+4
+Epoch: 0  loss: tensor(42.3474, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 16.502742052078247
+Epoch: 10  loss: tensor(4.2557, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 161.91431522369385
+Epoch: 20  loss: tensor(2.3463, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 162.276020526886
+Epoch: 30  loss: tensor(0.0626, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 161.6069905757904
+Epoch: 40  loss: tensor(0.0792, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 160.9168951511383
+Epoch: 50  loss: tensor(0.0181, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 160.80246567726135
+Epoch: 60  loss: tensor(0.0049, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 160.75918579101562
+Using GPU
+<class 'int'>
+4
+Epoch: 0  loss: tensor(37.6116, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 15.933031558990479
+Epoch: 10  loss: tensor(4.4242, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 160.7806510925293
+Epoch: 20  loss: tensor(2.5001, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 162.1809949874878
+Epoch: 30  loss: tensor(0.2313, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 161.98444819450378
+Epoch: 40  loss: tensor(0.0209, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 161.99707412719727
+Epoch: 50  loss: tensor(0.0120, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 161.83729767799377
+Epoch: 60  loss: tensor(0.0115, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 161.82599186897278
+New Minimum Average Test Loss: 0.001940626195621658
+For hsize, lr, n_epochs, n_layers
+128   0.0001   65   4
+4
+1
+Using GPU
+<class 'int'>
+4
+Epoch: 0  loss: tensor(51.1234, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 32.267226457595825
+Epoch: 10  loss: tensor(5.3352, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 322.11101055145264
+Epoch: 20  loss: tensor(0.1468, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 321.21313667297363
+Epoch: 30  loss: tensor(0.0300, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 320.57800483703613
+Epoch: 40  loss: tensor(0.0060, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 320.3045403957367
+Epoch: 50  loss: tensor(0.0102, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 320.29295587539673
+Epoch: 60  loss: tensor(0.0046, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 320.2723693847656
+Test MSE: 0.00037397194295044506
+plotting time errors
+(600,)
+Job Statistics for 3796368:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3796368   rsjxw007 2023-06-12T19:46:46 2023-06-12T20:57:01   01:10:15              01:09:51  COMPLETED  0:0   r1pl-hpcf-g03 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3796368.batch            2023-06-12T19:46:46 2023-06-12T20:57:01   01:10:15   2405.11M   01:09:51  COMPLETED  0:0   r1pl-hpcf-g03                                          
+  3796368.extern            2023-06-12T19:46:46 2023-06-12T20:57:01   01:10:15      0.09M  00:00.003  COMPLETED  0:0   r1pl-hpcf-g03                                          
+CPU Efficiency: 6.22% of 18:44:00 core-walltime
