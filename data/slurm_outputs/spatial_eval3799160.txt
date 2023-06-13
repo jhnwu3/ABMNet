@@ -1,0 +1,11 @@
+/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/loss.py:536: UserWarning: Using a target size (torch.Size([20])) that is different to the input size (torch.Size([1, 20])). This will likely lead to incorrect results due to broadcasting. Please ensure they have the same size.
+  return F.mse_loss(input, target, reduction=self.reduction)
+Edge Length: torch.Size([2, 58806])
+Test Average MSE: 0.01050628740766288
+Job Statistics for 3799160:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3799160   rsjxw007 2023-06-13T12:38:44 2023-06-13T12:41:48   00:03:04             23:30.804  COMPLETED  0:0   r1pl-hpcf-n21        billing=8,cpu=8,mem=59640M,node=1 
+   3799160.batch            2023-06-13T12:38:44 2023-06-13T12:41:48   00:03:04    961.34M  23:30.801  COMPLETED  0:0   r1pl-hpcf-n21                                          
+  3799160.extern            2023-06-13T12:38:44 2023-06-13T12:41:48   00:03:04      0.09M  00:00.003  COMPLETED  0:0   r1pl-hpcf-n21                                          
+CPU Efficiency: 95.86% of 00:24:32 core-walltime
