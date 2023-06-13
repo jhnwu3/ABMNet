@@ -6,7 +6,7 @@ from sklearn.model_selection import KFold
 import torch
 
 
-data = TemporalDataset("data/time_series/indrani_zeta.pickle")
+data = TemporalDataset("data/time_series/indrani_gamma_no_zeroes.pickle")
 print(len(data))
 # REMINDER: no cross-validation just yet, we will cross-validate next week!!
 # NEED TO REMIND OURSELVES TO WRITE MORE MODULAR CODE SUCH THAT IT IS EASY FOR US TO RUN CROSSVALIDATION
@@ -79,9 +79,14 @@ for hidden_size in hidden_sizes:
 # do some final training
 print(best_layers)
 print(data.input_size)
-model, device = train_temporal_model(train_data, input_size=data.input_size, hidden_size= int(best_hidden_size), lr= best_lr, n_rates=data.n_rates, n_epochs= best_epochs, n_layers=int(best_layers), path="model/indrani_zeta_small.pt")
+model, device = train_temporal_model(train_data, input_size=data.input_size,
+                                     hidden_size= int(best_hidden_size), 
+                                     lr= best_lr, n_rates=data.n_rates, 
+                                     n_epochs= best_epochs, 
+                                     n_layers=int(best_layers), 
+                                     path="model/indrani_gamma_nzero_small.pt")
 # now we evaluate!
 test_loss, truth, predicted = evaluate_temporal(test_data, model, criterion, device)
 print("Test MSE:", test_loss)
-plot_time_series_errors(truth, predicted, data.times[1:], path="graphs/temporal/validation/zeta_errors.png")
-plot_scatter(truth, predicted, output="graphs/temporal/zeta")     
+plot_time_series_errors(truth, predicted, data.times[1:], path="graphs/temporal/gamma_no_zero_errors.png")
+plot_scatter(truth, predicted, output="graphs/temporal/gamma_no_zero")     

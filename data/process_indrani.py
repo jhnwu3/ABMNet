@@ -12,6 +12,7 @@ def write_array_to_csv(array, column_labels, file_path):
     df.to_csv(file_path, index=False)
 
 parent_dir = "data/John_Indrani_data/training_data_large"
+output_path = "data/time_series/indrani_zeta_no_zeroes.pickle"
 # parent_dir = "data/John_Indrani_data/zeta/training_kon_koff"
 parameter_dirs = [os.path.join(parent_dir,x) for x in os.listdir(parent_dir)]
 print(parameter_dirs)
@@ -35,14 +36,15 @@ for dir in parameter_dirs:
 tosave = {}
 rates_tensors = []
 output_tensors  = []
-for rate in rates: 
-    rates_tensors.append(torch.from_numpy(rate))
-for o in output:
-    output_tensors.append(torch.from_numpy(o))    
+for i in range(len(rates)):
+    if np.sum(output[i]) > 0:
+        rates_tensors.append(torch.from_numpy(rates[i]))
+        output_tensors.append(torch.from_numpy(output[i]))    
+        
 tosave["rates"] = rates_tensors
 tosave["outputs"] = output_tensors
 tosave["time_points"] = times
-with open("data/time_series/indrani_gamma.pickle", 'wb') as handle:
+with open(output_path, 'wb') as handle:
     pickle.dump(tosave, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 
@@ -52,18 +54,18 @@ output = np.array(output)
 print(rates.shape)
 print(output.shape)
 
-# for simplicity, we'll just do counts for now, and save into a specific dataset
-output_file = "data/static/indrani_t400.csv"
-time_point = 400
-# matrix with inputs and outputs
-labels = []
-for i in range(1, rates.shape[1] + 1):
-    labels.append("k" + str(i))
-labels.append("o1")
+# # for simplicity, we'll just do counts for now, and save into a specific dataset
+# output_file = "data/static/indrani_t400.csv"
+# time_point = 400
+# # matrix with inputs and outputs
+# labels = []
+# for i in range(1, rates.shape[1] + 1):
+#     labels.append("k" + str(i))
+# labels.append("o1")
 
-output_data = np.zeros((rates.shape[0], rates.shape[1] + 1))
-output_data[:,:2] = rates
-output_data[:,2] = output[:,time_point]   
+# output_data = np.zeros((rates.shape[0], rates.shape[1] + 1))
+# output_data[:,:2] = rates
+# output_data[:,2] = output[:,time_point]   
 
 
-write_array_to_csv(output_data, labels, output_file) 
+# write_array_to_csv(output_data, labels, output_file) 
