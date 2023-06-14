@@ -50,6 +50,48 @@ class TemporalDataset(Dataset):
 
 
 
+class TemporalMultiStepDataset(Dataset):
+    def __init__(self, path, min_max_scale = True, time_chunk_size=5):
+            # Initialize your dataset here
+        # Store the necessary data or file paths
+        data = pickle.load(open(path, "rb"))
+        self.outputs = data["outputs"] # N x L tensors
+        self.rates = data["rates"]
+        self.times = data["time_points"]
+        self.n_rates = self.rates[0].size()[0]
+        self.input_size = 1
+        if len(self.outputs[0].size()) > 1:
+            print(self.outputs[0].size())
+            self.input_size = self.outputs[0].size()[1]
+            
+        if min_max_scale:
+            # mins and maxes in the most roundabout way possible, haha ;(
+            # convert back to numpy to get them mins and maxes 
+            arr = []
+            for output in self.outputs:
+                arr.append(output.numpy())
+            arr = np.array(arr)
+            # now to do the ugly min maxing, Don't DO THIS KIDS
+            for i in range(len(self.outputs)):
+                self.outputs[i] = self.outputs[i].squeeze() - arr.min()
+                self.outputs[i] /= (arr.max() - arr.min())
+            
+        # we need to then chunk all of them into little rate x time_chunk_size pairs.
+        # and put them back into the self.outputs and self.rates
+           
+    def __len__(self):
+        # Return the total number of samples in your dataset
+        return len(self.rates) # len(rates) == len(output_graphs)
+    
+    def __getitem__(self, index):
+        # Retrieve a single item from the dataset based on the given index
+        # Return a tuple (input, target) or dictionary {'input': input, 'target': target}
+        # The input and target can be tensors, NumPy arrays, or other data types
+        # returns a 1D tensor of rates, one input sequence, one output sequence
+        # need to convert to sets of sequences
+        return self.rates[index], self.outputs[index][:-1], self.outputs[index][1:]
+
+
 if __name__ == "__main__":
     time_points = 500
     num_parameters = 1000
