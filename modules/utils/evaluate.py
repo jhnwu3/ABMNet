@@ -7,6 +7,7 @@ from modules.models.simple import *
 
 
 # return MSE metric of moments for simple MLPs
+# %%
 def evaluate(model, dataset, use_gpu = False):
     
     criterion = nn.MSELoss()
@@ -69,7 +70,7 @@ def generate_temporal(data, model : TemporalComplexModel, criterion, device, t_o
         for rates, input, output in test_dataloader:
             pred, loss = generate_temporal_single(input, rates, output, model, criterion, device, t_observed)
             truth.append(output.cpu().numpy()) # matrix of just ground truths.
-            test_loss += loss 
+            test_loss += loss / len(data)
             predicted.append(pred)
             if i % 10 == 0:
                 print("Time For 10 Sequences of Generation:", time.time() - time_start)
@@ -85,18 +86,23 @@ def generate_temporal_single(input, rates, output, model, criterion, device, t_o
     hidden = (torch.zeros(model.n_layers, model.hidden_dim).detach(), torch.zeros(model.n_layers, model.hidden_dim).detach())
     # feed it first t_observed time points
     # print(input[:t_observed].size())
-    out, hidden = model(input[:t_observed].to(device).float(), (hidden[0].detach().to(device), hidden[1].detach().to(device)), rates.to(device).float())
+    curr = input[:t_observed].to(device).float() # current input of time points that the RNN might see.
+    out, hidden = model(curr, (hidden[0].detach().to(device), hidden[1].detach().to(device)), rates.to(device).float())
     # print("out:", out.size())
-    predicted.append(out.cpu().numpy())
+    predicted.append(out[-1].cpu().numpy())
     # now let's recursively generate given the new out and hidden units until we run out of space. Keep in mind, this only works for the output here.
-    for t in range(0,output.size()[0], t_observed):
-        out, hidden = model(out.to(device).float().squeeze(), (hidden[0].detach().to(device), hidden[1].detach().to(device)), rates.to(device).float())
-        predicted.append(out.cpu().numpy()) # so I can keep track of all the predictions
+    # note we need to offset by 1 to make sure the MSEs are aligned
+    for t in range(1, output.size()[0] - t_observed):
+        # print(curr.size())
+        # print(out[-1].size())
+        curr = torch.cat([curr[1:],out[-1]])
+        out, hidden = model(curr.float().squeeze(), (hidden[0].detach().to(device), hidden[1].detach().to(device)), rates.to(device).float())
+        predicted.append(out[-1].cpu().numpy()) # so I can keep track of all the predictions
         test_loss += criterion(out.squeeze(), output[t:t+t_observed].to(device)).cpu().detach()
 
-
+    # print(predicted)
     predicted = np.array(predicted)
     predicted = predicted.flatten()
-    return predicted, test_loss
+    return predicted, test_loss 
     
     

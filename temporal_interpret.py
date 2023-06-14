@@ -11,8 +11,8 @@ data = pickle.load(open(path, "rb"))
 # how many data points in the future can it predict?
 # and how many data points does it need??
 data = TemporalDataset(path)
-t_observed = 10 # can I just do it with 2 data points?
-device = ""
+t_observed = 50 # can I just do it with 2 data points?
+# device = ""
 if torch.cuda.is_available():
     device = torch.device("cuda")
     using_gpu = True
@@ -22,20 +22,21 @@ else:
 
 criterion = torch.nn.MSELoss().to(device)
 model = torch.load("model/indrani/indrani_zeta_small.pt", map_location=torch.device('cpu'))
+print(model)
 model = model.to(device)
 test_loss, truth, predicted = generate_temporal(data, model, criterion, device, t_observed)
 print(truth.shape)
 print(predicted.shape)
-
+print("MSE:", test_loss)
 # save these matrices for future use.
-np.savetxt("data/time_series/gen_i2t_zeta_surrogate.csv", predicted, delimiter=",")
+np.savetxt("data/time_series/gen_it" + str(t_observed) + "_zeta_surrogate.csv", predicted, delimiter=",")
 
 
 
 
 
 # self.rates[index], self.outputs[index][:-1], self.outputs[index][1:]
-generated = np.loadtxt("data/time_series/gen_i2t_zeta_surrogate.csv", delimiter=",")
-for i in range(0, len(data), 500):
+generated = np.loadtxt("data/time_series/gen_it"+ str(t_observed) + "_zeta_surrogate.csv", delimiter=",")
+for i in range(0, len(data), 300):
     rates, input, output = data[i]
-    plot_time_series(output.cpu().numpy(), generated[i,:-t_observed], data.times[1:], path="graphs/temporal/zeta_gen_it2_set" + str(i) + ".png")
+    plot_time_series(output[t_observed - 1:].cpu().numpy(), generated[i,:], data.times[t_observed:], path="graphs/temporal/zeta_gen_it"+ str(t_observed) + "_set" + str(i) + ".png")
