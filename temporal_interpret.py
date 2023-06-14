@@ -11,7 +11,7 @@ data = pickle.load(open(path, "rb"))
 # how many data points in the future can it predict?
 # and how many data points does it need??
 data = TemporalDataset(path)
-t_observed = 2 # can I just do it with 2 data points?
+t_observed = 10 # can I just do it with 2 data points?
 device = ""
 if torch.cuda.is_available():
     device = torch.device("cuda")
@@ -27,7 +27,15 @@ test_loss, truth, predicted = generate_temporal(data, model, criterion, device, 
 print(truth.shape)
 print(predicted.shape)
 
-
 # save these matrices for future use.
-
 np.savetxt("data/time_series/gen_i2t_zeta_surrogate.csv", predicted, delimiter=",")
+
+
+
+
+
+# self.rates[index], self.outputs[index][:-1], self.outputs[index][1:]
+generated = np.loadtxt("data/time_series/gen_i2t_zeta_surrogate.csv", delimiter=",")
+for i in range(0, len(data), 500):
+    rates, input, output = data[i]
+    plot_time_series(output.cpu().numpy(), generated[i,:-t_observed], data.times[1:], path="graphs/temporal/zeta_gen_it2_set" + str(i) + ".png")

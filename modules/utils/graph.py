@@ -106,20 +106,21 @@ def plot_scatter(true, predictions, output='data/graphs/out', nSpecies=None):
     if x123[0] == 0:
         x123 = np.append(x123,[1])
     y123 = x123
+    categorical = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"]
     optimal = axes.plot(np.unique(x123), np.poly1d(np.polyfit(x123, y123, 1))(np.unique(x123)),'--', c='k', label='Perfect Prediction')
     axes.set_xlabel("Original Model Value")
     axes.set_ylabel("Surrogate Model Prediction")
     r_sq = r_squared(true.flatten(), predictions.flatten())
     if nSpecies is not None:
         if true.shape[1] > 2*nSpecies:
-            axes.scatter(true[:,:nSpecies], predictions[:,:nSpecies], c='#1f77b4', label='Means', s=size)
-            axes.scatter(true[:,nSpecies:2*nSpecies], predictions[:,nSpecies:2*nSpecies], c='#808080', label='Variances', s=size)
-            axes.scatter(true[:,2*nSpecies:], predictions[:,2*nSpecies:], c='#ff7f0e', label='Covariances', s=size)
+            axes.scatter(true[:,:nSpecies], predictions[:,:nSpecies], c=categorical[0], label='Means', s=size)
+            axes.scatter(true[:,nSpecies:2*nSpecies], predictions[:,nSpecies:2*nSpecies], c=categorical[1], label='Variances', s=size)
+            axes.scatter(true[:,2*nSpecies:], predictions[:,2*nSpecies:], c=categorical[2], label='Covariances', s=size)
         elif true.shape[1] > nSpecies and true.shape[1] < 2*nSpecies + 1:
-            axes.scatter(true[:,:nSpecies], predictions[:,:nSpecies], c='r', label='Means', s=size)
-            axes.scatter(true[:,nSpecies:2*nSpecies], predictions[:,nSpecies:2*nSpecies], c='g', label='Variances', s=size)
+            axes.scatter(true[:,:nSpecies], predictions[:,:nSpecies], c=categorical[0], label='Means', s=size)
+            axes.scatter(true[:,nSpecies:2*nSpecies], predictions[:,nSpecies:2*nSpecies], c=categorical[1], label='Variances', s=size)
         else: 
-            axes.scatter(true[:,:nSpecies], predictions[:,:nSpecies], c='r', label='Means', s=size)
+            axes.scatter(true[:,:nSpecies], predictions[:,:nSpecies], c=categorical[0], label='Means', s=size)
     else:
         axes.scatter(true.flatten(), predictions.flatten(), c='c')
             
@@ -188,13 +189,25 @@ def plot_time_series_errors(truth, predicted, times, path="graphs/temporal/error
     # Compute the mean of squared differences across all arrays
     mean_differences = differences / len(truth)
     variances = np.var(diffs,axis=0)
-    
+    categorical = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"]
     fig = plt.figure()
-    plt.plot(times, mean_differences, label="Mean Square Error")
-    plt.plot(times, variances, label="Variances of Square Error")
+    plt.plot(times, mean_differences, c=categorical[0], label="Mean Square Error")
+    plt.plot(times, variances, c=categorical[1], label="Variances of Square Error")
     plt.xlabel('Time')
     plt.ylabel('Square Error')
     plt.title('Average Error Through Time Across All Parameter Sets')
+    plt.legend()
+    plt.savefig(path)
+    plt.close(fig)
+
+def plot_time_series(truth, predicted, times, path="graphs/temporal/trajectory.png"):
+    fig = plt.figure()
+    categorical = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"]
+    plt.plot(times, truth,c=categorical[0], label="Truth")
+    plt.plot(times, predicted,c=categorical[1], label="Predicted")
+    plt.xlabel('Time')
+    plt.grid(True)
+    plt.ylabel('Abundance')
     plt.legend()
     plt.savefig(path)
     plt.close(fig)
