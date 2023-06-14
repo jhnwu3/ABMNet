@@ -50,4 +50,3 @@ if __name__ == "__main__":
     # gdag.plot(path="graphs/interpretability/gdag1300ss_default_in", thetaStar=0, thetaFixed=0.1, nCols=3, nSteps=20)
     # for i in range(gdag.model.input_size):
     #     gdag.plot(path="graphs/interpretability/gdag1300ss_default_in", thetaStar=i, thetaFixed=0.1, nCols=3, nSteps=10)
-

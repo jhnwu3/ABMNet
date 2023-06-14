@@ -93,6 +93,9 @@ def bins_list(min, max, step_size):
         binss.append(current)
     return binss
 
+#Primary: #1f77b4 (Blue)
+# Secondary: #ff7f0e (Orange)
+# Neutral: #808080 (Gray)
 
 
 def plot_scatter(true, predictions, output='data/graphs/out', nSpecies=None):
@@ -109,9 +112,9 @@ def plot_scatter(true, predictions, output='data/graphs/out', nSpecies=None):
     r_sq = r_squared(true.flatten(), predictions.flatten())
     if nSpecies is not None:
         if true.shape[1] > 2*nSpecies:
-            axes.scatter(true[:,:nSpecies], predictions[:,:nSpecies], c='r', label='Means', s=size)
-            axes.scatter(true[:,nSpecies:2*nSpecies], predictions[:,nSpecies:2*nSpecies], c='g', label='Variances', s=size)
-            axes.scatter(true[:,2*nSpecies:], predictions[:,2*nSpecies:], c='b', label='Covariances', s=size)
+            axes.scatter(true[:,:nSpecies], predictions[:,:nSpecies], c='#1f77b4', label='Means', s=size)
+            axes.scatter(true[:,nSpecies:2*nSpecies], predictions[:,nSpecies:2*nSpecies], c='#808080', label='Variances', s=size)
+            axes.scatter(true[:,2*nSpecies:], predictions[:,2*nSpecies:], c='#ff7f0e', label='Covariances', s=size)
         elif true.shape[1] > nSpecies and true.shape[1] < 2*nSpecies + 1:
             axes.scatter(true[:,:nSpecies], predictions[:,:nSpecies], c='r', label='Means', s=size)
             axes.scatter(true[:,nSpecies:2*nSpecies], predictions[:,nSpecies:2*nSpecies], c='g', label='Variances', s=size)

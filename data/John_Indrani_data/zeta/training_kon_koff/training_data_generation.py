@@ -36,8 +36,8 @@ def pZAP_signal(K1,K2):
     
     #0. Bionetgen parameter set 
     model = bionetgen.bngmodel("zeta_HPC_0.bngl")
-    model.parameters.Kab = K1 # assigning new kon
-    model.parameters.KU = K2 # assigning new koff
+    model.parameters.Kab = K1 # assigning new kAB
+    model.parameters.KU = K2 # assigning new kU
               
    #print(model)
 
@@ -67,8 +67,8 @@ def main():
  
     xrange=(10**(-2)-10**(-5)) #(ymax - ymin)
     yrange=(10.0-1.0) # (xmax-xmin)
-    x_gap=(xrange/x_points) #deltay for parameter sweep kon
-    y_gap=(yrange/y_points) #deltax for parameter sweep koff
+    x_gap=(xrange/x_points) #deltay for parameter sweep kAB
+    y_gap=(yrange/y_points) #deltax for parameter sweep kU
     
     #This will generate the parameter sets for the kon and koff
     param=param_generate(x_points,y_points,x_gap,y_gap)
