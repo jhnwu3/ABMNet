@@ -3,7 +3,6 @@ from modules.utils.evaluate import *
 from modules.utils.graph import *
 import pickle 
 import torch 
-path = "data/time_series/indrani_zeta.pickle"
 # data = pickle.load(open(path, "rb"))
 
 # interpret_temporal(data, threshold = 0.00001, path="graphs/temporal/zeta")
@@ -29,7 +28,7 @@ def generate_time_series(path, model, device, criterion, t_observed):
         
 
 
-
+path = "data/time_series/indrani_zeta.pickle"
 device = ""
 if torch.cuda.is_available():
     device = torch.device("cuda")
