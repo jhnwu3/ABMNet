@@ -25,8 +25,8 @@ def generate_time_series(path, model, device, criterion, t_observed):
         print(output.size())
         print(output.shape)
         print(generated.shape)
-        # plot_time_series(output[t_observed:].cpu().numpy(), generated[i,:], data.times[t_observed + 1:], 
-                        # path="graphs/temporal/zeta_gen_it"+ str(t_observed) + "_set" + str(i) + ".png")
+        plot_time_series(output[t_observed:].cpu().numpy(), generated[i,:], data.times[t_observed + 1:], 
+                        path="graphs/temporal/zeta_gen_it"+ str(t_observed) + "_set" + str(i) + ".png")
     
     plot_scatter(output[t_observed:].cpu().numpy(), generated[i,:], output="graphs/temporal/zeta_gen_it")
 
