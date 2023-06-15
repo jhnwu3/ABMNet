@@ -11,21 +11,8 @@ path = "data/time_series/indrani_zeta.pickle"
 # load a model in, and now let's see can it do it from scratch? 
 # how many data points in the future can it predict?
 # and how many data points does it need??
-def generate_time_series(path, t_observed): 
+def generate_time_series(path, model, device, criterion, t_observed): 
     data = TemporalDataset(path)
-    t_observed = 50 # can I just do it with 2 data points?
-    # device = ""
-    if torch.cuda.is_available():
-        device = torch.device("cuda")
-        using_gpu = True
-    else:
-        device = torch.device("cpu")
-        using_gpu = False
-
-    criterion = torch.nn.MSELoss().to(device)
-    model = torch.load("model/indrani/indrani_zeta_small.pt", map_location=torch.device('cpu'))
-    print(model)
-    model = model.to(device)
     test_loss, truth, predicted = generate_temporal(data, model, criterion, device, t_observed)
     print(truth.shape)
     print(predicted.shape)
@@ -42,7 +29,21 @@ def generate_time_series(path, t_observed):
         
 
 
-generate_time_series(path, t_observed=50)
-generate_time_series(path, t_observed=25)
-generate_time_series(path, t_observed=10)
-generate_time_series(path, t_observed=2)
+
+device = ""
+if torch.cuda.is_available():
+    device = torch.device("cuda")
+    using_gpu = True
+else:
+    device = torch.device("cpu")
+    using_gpu = False
+
+criterion = torch.nn.MSELoss().to(device)
+model = torch.load("model/indrani/indrani_zeta_small.pt", map_location=torch.device('cpu'))
+print(model)
+model = model.to(device)
+
+generate_time_series(path, model, device, criterion, t_observed=50)
+generate_time_series(path, model, device, criterion, t_observed=25)
+generate_time_series(path, model, device, criterion, t_observed=10)
+generate_time_series(path, model, device, criterion, t_observed=2)
