@@ -16,8 +16,8 @@ lrs = [0.01, 0.001, 0.0001]
 range_epochs = [25, 50, 75]
 range_layers = [2,3,5]
 
-hidden_sizes = [128]
-lrs=[0.0001]
+hidden_sizes = [16]
+lrs=[0.001]
 range_epochs = [65]
 range_layers = [4]
 
@@ -84,9 +84,9 @@ model, device = train_temporal_model(train_data, input_size=data.input_size,
                                      lr= best_lr, n_rates=data.n_rates, 
                                      n_epochs= best_epochs, 
                                      n_layers=int(best_layers), 
-                                     path="model/indrani_gamma_nzero_small.pt")
+                                     path="model/indrani_gamma_nzero_smaller.pt")
 # now we evaluate!
 test_loss, truth, predicted = evaluate_temporal(test_data, model, criterion, device)
 print("Test MSE:", test_loss)
-plot_time_series_errors(truth, predicted, data.times[1:], path="graphs/temporal/gamma_no_zero_errors.png")
-plot_scatter(truth, predicted, output="graphs/temporal/gamma_no_zero")     
+plot_time_series_errors(truth, predicted, data.times[1:], path="graphs/temporal/gamma_no_zero_errors_smaller.png")
+plot_scatter(truth, predicted, output="graphs/temporal/gamma_no_zero_smaller")     
