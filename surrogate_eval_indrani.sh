@@ -3,7 +3,7 @@
 #SBATCH --job-name=SpatialABMNetTraining
 #SBATCH --partition=general,das,himem
 #SBATCH --nodes=1
-#SBATCH --output=./data/slurm_outputs/temporal_train%j.txt
+#SBATCH --output=./data/slurm_outputs/temporal_rnn_interpret%j.txt
 #SBATCH --cpus-per-task=16
 #SBATCH --gres=gpu
 

@@ -1,5 +1,6 @@
 from modules.utils.interpret import *
 from modules.utils.evaluate import *
+from modules.utils.graph import *
 import pickle 
 import torch 
 path = "data/time_series/indrani_zeta.pickle"
@@ -22,7 +23,7 @@ def generate_time_series(path, t_observed):
         using_gpu = False
 
     criterion = torch.nn.MSELoss().to(device)
-    model = torch.load("model/indrani/indrani_zeta_small.pt", map_lcation=torch.device('cpu'))
+    model = torch.load("model/indrani/indrani_zeta_small.pt", map_location=torch.device('cpu'))
     print(model)
     model = model.to(device)
     test_loss, truth, predicted = generate_temporal(data, model, criterion, device, t_observed)
