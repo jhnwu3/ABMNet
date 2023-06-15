@@ -88,11 +88,12 @@ def generate_temporal_single(input, rates, output, model, criterion, device, t_o
     # print(input[:t_observed].size())
     curr = input[:t_observed].to(device).float() # current input of time points that the RNN might see.
     out, hidden = model(curr, (hidden[0].detach().to(device), hidden[1].detach().to(device)), rates.to(device).float())
+    test_loss += criterion(out.squeeze(), output[:t_observed].to(device)).cpu().detach()
     # print("out:", out.size())
     predicted.append(out[-1].cpu().numpy())
     # now let's recursively generate given the new out and hidden units until we run out of space. Keep in mind, this only works for the output here.
     # note we need to offset by 1 to make sure the MSEs are aligned
-    for t in range(1, output.size()[0] - t_observed):
+    for t in range(1, output.size()[0] - t_observed + 1): # account for the missing one.
         # print(curr.size())
         # print(out[-1].size())
         curr = torch.cat([curr[1:],out[-1]])

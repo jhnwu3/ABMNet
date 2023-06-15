@@ -102,9 +102,14 @@ def plot_scatter(true, predictions, output='data/graphs/out', nSpecies=None):
     plt.figure()
     fig, axes = plt.subplots(figsize=(8, 8))
     x123 = np.arange(np.min(true), np.max(true))
+    # print(true)
     size = 5
-    if x123[0] == 0:
+    if len(x123) < 1:
+        x123 = np.append(x123,[0])
         x123 = np.append(x123,[1])
+    elif x123[0] == 0:
+        x123 = np.append(x123,[1])
+        
     y123 = x123
     categorical = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"]
     optimal = axes.plot(np.unique(x123), np.poly1d(np.polyfit(x123, y123, 1))(np.unique(x123)),'--', c='k', label='Perfect Prediction')

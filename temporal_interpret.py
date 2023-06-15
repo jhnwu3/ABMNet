@@ -19,13 +19,16 @@ def generate_time_series(path, model, device, criterion, t_observed):
     # save these matrices for future use.
     np.savetxt("data/time_series/gen_it" + str(t_observed) + "_zeta_surrogate.csv", predicted, delimiter=",")
 
-    # self.rates[index], self.outputs[index][:-1], self.outputs[index][1:]
     generated = np.loadtxt("data/time_series/gen_it"+ str(t_observed) + "_zeta_surrogate.csv", delimiter=",")
     for i in range(0, len(data), 300):
         rates, input, output = data[i]
-        plot_time_series(output[t_observed - 1:].cpu().numpy(), generated[i,:], data.times[t_observed:], 
-                        path="graphs/temporal/zeta_gen_it"+ str(t_observed) + "_set" + str(i) + ".png")
-        
+        print(output.size())
+        print(output.shape)
+        print(generated.shape)
+        # plot_time_series(output[t_observed:].cpu().numpy(), generated[i,:], data.times[t_observed + 1:], 
+                        # path="graphs/temporal/zeta_gen_it"+ str(t_observed) + "_set" + str(i) + ".png")
+    
+    plot_scatter(output[t_observed:].cpu().numpy(), generated[i,:], output="graphs/temporal/zeta_gen_it")
 
 
 path = "data/time_series/indrani_zeta.pickle"
@@ -43,6 +46,6 @@ print(model)
 model = model.to(device)
 
 generate_time_series(path, model, device, criterion, t_observed=50)
-generate_time_series(path, model, device, criterion, t_observed=25)
-generate_time_series(path, model, device, criterion, t_observed=10)
-generate_time_series(path, model, device, criterion, t_observed=2)
+generate_time_series(path, model, device, criterion, t_observed=100)
+# generate_time_series(path, model, device, criterion, t_observed=10)
+# generate_time_series(path, model, device, criterion, t_observed=2)
