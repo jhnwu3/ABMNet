@@ -23,13 +23,14 @@ def generate_time_series(path, model, device, criterion, t_observed):
     generated = np.loadtxt("data/time_series/gen_it"+ str(t_observed) + "_zeta_surrogate.csv", delimiter=",")
     truth = np.loadtxt("data/time_series/tru_it"+ str(t_observed) + "_zeta_surrogate.csv", delimiter=",")
     for i in range(0, len(data), 300):
-        print(output.size())
-        print(output.shape)
+        # print(output.size())
+        # print(output.shape)
+        print(truth.shape)
         print(generated.shape)
         plot_time_series(truth[i,:], generated[i,:], data.times[t_observed+1:], 
                         path="graphs/temporal/zeta_gen_it"+ str(t_observed) + "_set" + str(i) + ".png")
     
-    # plot_scatter(output[t_observed:].cpu().numpy(), generated[i,:], output="graphs/temporal/zeta_gen_it")
+    plot_scatter(truth, generated, output="graphs/temporal/zeta_gen_it" +str(t_observed))
 
 
 path = "data/time_series/indrani_zeta.pickle"
@@ -46,7 +47,7 @@ model = torch.load("model/indrani/indrani_zeta_small.pt", map_location=torch.dev
 print(model)
 model = model.to(device)
 
-generate_time_series(path, model, device, criterion, t_observed=50)
+# generate_time_series(path, model, device, criterion, t_observed=50)
 generate_time_series(path, model, device, criterion, t_observed=100)
 # generate_time_series(path, model, device, criterion, t_observed=10)
 # generate_time_series(path, model, device, criterion, t_observed=2)

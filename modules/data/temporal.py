@@ -9,20 +9,24 @@ import pickle
 def chunk_sequence(sequence, chunk_size):
     num_chunks = len(sequence) // chunk_size
     chunks = []
-    
+
     for i in range(num_chunks):
         start = i * chunk_size
         end = start + chunk_size
         chunk = sequence[start:end]
-        chunks.append(chunk)
-    
+
+        if chunk.size()[0] > 1:
+            chunks.append(chunk)
+
     # Handle the remaining elements
     remainder = len(sequence) % chunk_size
     if remainder != 0:
         last_chunk = sequence[-remainder:]
-        chunks.append(last_chunk)
-    
+        if last_chunk.size()[0] > 1:
+            chunks.append(last_chunk)
+
     return chunks
+
 
 
 # Cytotoxic CD8+ T Cells, Cancer, Exhausted CD8+ T Cells, Dead Cancer Cells, Ignore, Ignore, TAMs, Ignore, Ignore
@@ -101,7 +105,10 @@ class TemporalChunkedDataset(Dataset):
         chunked_outputs = []
         for i in range(len(self.outputs)):
             chunked = chunk_sequence(self.outputs[i], time_chunk_size)
+            
             chunked_outputs = chunked_outputs + chunked 
+            # print(chunked_outputs)
+            # exit(0)
             for j in range(len(chunked)):
                 chunked_rates.append(self.rates[i])
         self.rates = chunked_rates
@@ -128,6 +135,14 @@ if __name__ == "__main__":
     print(len(data))
     data_chunked = TemporalChunkedDataset("data/time_series/indrani_gamma_no_zeroes.pickle")
     print(len(data_chunked))
+    for i in range(len(data_chunked)):
+        rates, input, output = data_chunked[i]
+        if input.size()[0] < 1 or output.size()[0] < 1:
+            print("error we found some 0 sequences")
+            print(i)
+            print(input.size())
+            print(output.size())
+            exit(0)
     # time_points = 500
     # num_parameters = 1000
     # num_init_cond = 5000

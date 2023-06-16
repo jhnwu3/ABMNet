@@ -6,7 +6,7 @@ from sklearn.model_selection import KFold
 import torch
 
 
-data = TemporalChunkedDataset("data/time_series/indrani_gamma_no_zeroes.pickle")
+data = TemporalChunkedDataset("data/time_series/indrani_gamma_no_zeroes.pickle",time_chunk_size=10)
 print(len(data))
 # REMINDER: no cross-validation just yet, we will cross-validate next week!!
 # NEED TO REMIND OURSELVES TO WRITE MORE MODULAR CODE SUCH THAT IT IS EASY FOR US TO RUN CROSSVALIDATION
