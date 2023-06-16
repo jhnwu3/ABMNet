@@ -12,6 +12,9 @@ import torch
 # and how many data points does it need??
 def generate_time_series(path, model, device, criterion, t_observed): 
     data = TemporalDataset(path)
+    rates, input, output = data[0]
+    print(input.size())
+    print(output.size())
     print(data.times.shape)
     test_loss, truth, predicted = generate_temporal(data, model, criterion, device, t_observed)
     print(truth.shape)
@@ -26,7 +29,7 @@ def generate_time_series(path, model, device, criterion, t_observed):
         print(output.size())
         print(output.shape)
         print(generated.shape)
-        plot_time_series(output[t_observed:].cpu().numpy(), generated[i,:], data.times[t_observed:], 
+        plot_time_series(output[t_observed:].cpu().numpy(), generated[i,:], data.times[t_observed+1:], 
                         path="graphs/temporal/zeta_gen_it"+ str(t_observed) + "_set" + str(i) + ".png")
     
     # plot_scatter(output[t_observed:].cpu().numpy(), generated[i,:], output="graphs/temporal/zeta_gen_it")

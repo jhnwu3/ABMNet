@@ -83,6 +83,7 @@ def generate_temporal(data, model : TemporalComplexModel, criterion, device, t_o
 def generate_temporal_single(input, rates, output, model, criterion, device, t_observed):
     test_loss = 0
     predicted = []
+    truth = [] # let's actually make our lives easier by simply just returning the matching truth element
     hidden = (torch.zeros(model.n_layers, model.hidden_dim).detach(), torch.zeros(model.n_layers, model.hidden_dim).detach())
     # feed it first t_observed time points
     # print(input[:t_observed].size())
