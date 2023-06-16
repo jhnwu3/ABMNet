@@ -12,24 +12,21 @@ import torch
 # and how many data points does it need??
 def generate_time_series(path, model, device, criterion, t_observed): 
     data = TemporalDataset(path)
-    rates, input, output = data[0]
-    print(input.size())
-    print(output.size())
-    print(data.times.shape)
+    
     test_loss, truth, predicted = generate_temporal(data, model, criterion, device, t_observed)
-    print(truth.shape)
-    print(predicted.shape)
+
     print("MSE:", test_loss)
     # save these matrices for future use.
     np.savetxt("data/time_series/gen_it" + str(t_observed) + "_zeta_surrogate.csv", predicted, delimiter=",")
+    np.savetxt("data/time_series/tru_it" + str(t_observed) + "_zeta_surrogate.csv", truth, delimiter=",")
 
     generated = np.loadtxt("data/time_series/gen_it"+ str(t_observed) + "_zeta_surrogate.csv", delimiter=",")
+    truth = np.loadtxt("data/time_series/tru_it"+ str(t_observed) + "_zeta_surrogate.csv", delimiter=",")
     for i in range(0, len(data), 300):
-        rates, input, output = data[i]
         print(output.size())
         print(output.shape)
         print(generated.shape)
-        plot_time_series(output[t_observed:].cpu().numpy(), generated[i,:], data.times[t_observed+1:], 
+        plot_time_series(truth[i,:], generated[i,:], data.times[t_observed+1:], 
                         path="graphs/temporal/zeta_gen_it"+ str(t_observed) + "_set" + str(i) + ".png")
     
     # plot_scatter(output[t_observed:].cpu().numpy(), generated[i,:], output="graphs/temporal/zeta_gen_it")

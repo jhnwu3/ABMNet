@@ -1,0 +1,25 @@
+296450
+Using GPU
+<class 'int'>
+2
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/temporal.py", line 52, in <module>
+    model, device = train_temporal_model(k_train, data.input_size, data.n_rates, hidden_size, lr, n_epochs, n_layers, path="")
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/train.py", line 153, in train_temporal_model
+    out, hidden = model(input.to(device).float(), (hidden[0].detach().to(device), hidden[1].detach().to(device)), rates.to(device).float())
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/models/temporal.py", line 59, in forward
+    out, hidden = self.lstm(x.unsqueeze(dim=1), hidden)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/rnn.py", line 812, in forward
+    result = _VF.lstm(input, hx, self._flat_weights, self.bias, self.num_layers,
+RuntimeError: Expected sequence length to be larger than 0 in RNN
+Job Statistics for 3803549:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3803549   rsjxw007 2023-06-16T10:57:00 2023-06-16T10:57:38   00:00:38             00:19.817     FAILED  1:0   r1pl-hpcf-g03 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3803549.batch            2023-06-16T10:57:00 2023-06-16T10:57:38   00:00:38    337.80M  00:19.813     FAILED  1:0   r1pl-hpcf-g03                                          
+  3803549.extern            2023-06-16T10:57:00 2023-06-16T10:57:38   00:00:38      0.10M  00:00.003  COMPLETED  0:0   r1pl-hpcf-g03                                          
+CPU Efficiency: 3.29% of 00:10:08 core-walltime
