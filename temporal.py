@@ -11,7 +11,7 @@ print(len(data))
 # REMINDER: no cross-validation just yet, we will cross-validate next week!!
 # NEED TO REMIND OURSELVES TO WRITE MORE MODULAR CODE SUCH THAT IT IS EASY FOR US TO RUN CROSSVALIDATION
 
-hidden_sizes = [64, 128, 256]
+hidden_sizes = [256]
 lrs = [0.01, 0.001, 0.0001]
 range_epochs = [25, 50, 75]
 range_layers = [2,3,5]
