@@ -65,8 +65,8 @@ def main():
     y_points=50 #number of y points
     
  
-    xrange=(10**(-2)-10**(-5)) #(ymax - ymin)
-    yrange=(10.0-1.0) # (xmax-xmin)
+    xrange=(10**(-3)-10**(-7)) #(xmax - xmin)
+    yrange=(10.0-1.0) # (ymax-ymin)
     x_gap=(xrange/x_points) #deltay for parameter sweep kAB
     y_gap=(yrange/y_points) #deltax for parameter sweep kU
     
