@@ -1,0 +1,47 @@
+147000
+Using GPU
+<class 'int'>
+4
+Epoch: 0  loss: tensor(4537.4009, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 432.7058050632477
+Epoch: 10  loss: tensor(4486.5703, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 4365.853421449661
+Epoch: 20  loss: tensor(4487.4907, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 4397.96533203125
+Epoch: 30  loss: tensor(4487.8760, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 4384.795087337494
+Epoch: 40  loss: tensor(4487.3555, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 4368.583083629608
+Epoch: 50  loss: tensor(4487.5293, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 4310.56649184227
+Epoch: 60  loss: tensor(4484.4600, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 4315.457635641098
+Epoch: 70  loss: tensor(4487.6123, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 4324.62779545784
+Using GPU
+<class 'int'>
+4
+Epoch: 0  loss: tensor(82.3841, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 433.42168402671814
+Epoch: 10  loss: tensor(9.3240, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 4290.674767494202
+Epoch: 20  loss: tensor(9.2904, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 4297.821514368057
+Epoch: 30  loss: tensor(11.1004, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 4298.90895652771
+Epoch: 40  loss: tensor(9.3937, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 4292.115810394287
+Epoch: 50  loss: tensor(10.1162, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 4292.638799667358
+Epoch: 60  loss: tensor(9.8274, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 4293.311144828796
+Epoch: 70  loss: tensor(9.6747, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 4319.180840015411
+New Minimum Average Test Loss: 2259.6795492893234
+For hsize, lr, n_epochs, n_layers
+256   0.001   75   4
+4
+1
+Using GPU
+<class 'int'>
+4
+Epoch: 0  loss: tensor(96.0579, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 860.6988599300385
+Epoch: 10  loss: tensor(19.2023, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 8582.407890081406
+Epoch: 20  loss: tensor(19.5962, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 8581.814925909042
+Epoch: 30  loss: tensor(19.6262, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 8687.898968696594
+Epoch: 40  loss: tensor(20.8677, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 8583.708211421967
+Epoch: 50  loss: tensor(24.6069, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 8584.739911079407
+Epoch: 60  loss: tensor(1378.0131, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 8649.319396972656
+Epoch: 70  loss: tensor(9009.7598, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 8574.243309020996
+Test MSE: 2243.7828220624633
+Job Statistics for 3803562:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3803562   rsjxw007 2023-06-16T11:22:14 2023-06-17T23:22:14 1-12:00:00            1-11:48:41  COMPLETED  0:0   r1pl-hpcf-g04 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3803562.batch            2023-06-16T11:22:14 2023-06-17T23:22:14 1-12:00:00   5786.48M 1-11:48:41  COMPLETED  0:0   r1pl-hpcf-g04                                          
+  3803562.extern            2023-06-16T11:22:14 2023-06-17T23:22:14 1-12:00:00      0.09M  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 6.22% of 24-00:00:00 core-walltime

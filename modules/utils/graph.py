@@ -134,6 +134,7 @@ def plot_scatter(true, predictions, output='data/graphs/out', nSpecies=None):
     axes.set_title("R^2=" + str(r_sq))
     axes.legend()
     plt.savefig(output + '_scatter.png')  
+    plt.close()
 
 def visualize_graph(G, color, path="data/spatial/graph.png"):
     plt.figure(figsize=(7,7))

@@ -23,12 +23,13 @@ output = []
 times = []
 for dir in parameter_dirs:
     if dir != parent_dir and ".csv" in dir:
-        data = np.loadtxt(dir)
+        data = np.loadtxt(dir, delimiter=",")
         if "_moms" in dir:
-            for i in range() 
-            rates.append(data)
+            for i in range(data.shape[0]):
+                output.append(data[i])
         elif "_params" in dir: 
-            output.append(data)
+            for i in range(data.shape[0]):
+                rates.append(data[i])
         
         # print(data.shape)
         
@@ -37,23 +38,19 @@ for dir in parameter_dirs:
         # if len(times) < 1:
         #     times = data[1:,0] # keep for plotting
 
-
-
-
 # save into tensors and a dictionary
-tosave = {}
-rates_tensors = []
-output_tensors  = []
-for i in range(len(rates)):
-    if np.sum(output[i]) > 0:
-        rates_tensors.append(torch.from_numpy(rates[i]))
-        output_tensors.append(torch.from_numpy(output[i]))    
-        
-tosave["rates"] = rates_tensors
-tosave["outputs"] = output_tensors
-tosave["time_points"] = times
-with open(output_path, 'wb') as handle:
-    pickle.dump(tosave, handle, protocol=pickle.HIGHEST_PROTOCOL)
+# tosave = {}
+# rates_tensors = []
+# output_tensors  = []
+# for i in range(len(rates)):
+#     if np.sum(output[i]) > 0:
+#         rates_tensors.append(torch.from_numpy(rates[i]))
+#         output_tensors.append(torch.from_numpy(output[i]))    
+# tosave["rates"] = rates_tensors
+# tosave["outputs"] = output_tensors
+# tosave["time_points"] = times
+# with open(output_path, 'wb') as handle:
+#     pickle.dump(tosave, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 
 rates = np.array(rates)
@@ -65,15 +62,15 @@ print(output.shape)
 # # for simplicity, we'll just do counts for now, and save into a specific dataset
 # output_file = "data/static/indrani_t400.csv"
 # time_point = 400
-# # matrix with inputs and outputs
-# labels = []
-# for i in range(1, rates.shape[1] + 1):
-#     labels.append("k" + str(i))
-# labels.append("o1")
+# matrix with inputs and outputs
+labels = []
+for i in range(1, rates.shape[1] + 1):
+    labels.append("k" + str(i))
 
-# output_data = np.zeros((rates.shape[0], rates.shape[1] + 1))
-# output_data[:,:2] = rates
-# output_data[:,2] = output[:,time_point]   
+for o in range(1, output.shape[1] + 1):
+    labels.append("o" + str(o))
 
-
-# write_array_to_csv(output_data, labels, output_file) 
+output_data = np.zeros((rates.shape[0], rates.shape[1] + output.shape[1]))
+output_data[:,:rates.shape[1]] = rates
+output_data[:,rates.shape[1]:] = output   
+write_array_to_csv(output_data, labels, output_path) 

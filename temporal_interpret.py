@@ -48,6 +48,6 @@ print(model)
 model = model.to(device)
 
 # generate_time_series(path, model, device, criterion, t_observed=50)
-generate_time_series(path, model, device, criterion, t_observed=100)
+generate_time_series(path, model, device, criterion, t_observed=300)
 # generate_time_series(path, model, device, criterion, t_observed=10)
 # generate_time_series(path, model, device, criterion, t_observed=2)

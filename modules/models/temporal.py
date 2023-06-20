@@ -56,11 +56,26 @@ class TemporalComplexModel(nn.Module):
         # Initializing hidden state for first input using method defined below
         # hidden = self.init_hidden()
         # Passing in the input and hidden state into the model and obtaining outputs
-        out, hidden = self.lstm(x.unsqueeze(dim=1), hidden)
-        out = torch.cat((out, self.encoder(rates).repeat(out.size()[0]).reshape((out.size()[0], self.hidden_dim))), dim=1)
+        if len(x.size()) < 3:
+            out, hidden = self.lstm(x.unsqueeze(dim=1), hidden)
+            out = torch.cat((out, self.encoder(rates).repeat(out.size()[0]).reshape((out.size()[0], self.hidden_dim))), dim=1)
+        else:
+            # print("-----------------------")
+            # print("hidden:", hidden[0].size())
+            # print("hidden cell:", hidden[1].size()) 
+            out, hidden = self.lstm(x, hidden)
+            # print("rates to lstm:", rates.size())
+            # print("input to lstm:", x.size())
+            # print("out lstm:", out.size())
+            # print("encoder size:", self.encoder(rates).size())
+            # print("repeated size:", self.encoder(rates).repeat(out.size()[1],1).reshape((out.size()[0], out.size()[1], self.hidden_dim)).size())
+
+            # as a quick reminder to myself in the future, out is batch size x sequence length x hidden size. So we are repeating along dim=1 and mapping directly onto the sequence per batch unit
+            out = torch.cat((out, self.encoder(rates).repeat(out.size()[1],1).reshape((out.size()[0], out.size()[1], self.hidden_dim))), dim=2)
+            # print("out size:", out.size())
         # Reshaping the outputs such that it can be fit into the fully connected layer
         # out = out.contiguous().view(-1, self.hidden_dim)
         out = self.fc(out)
-
+        # print("out size:", out.size())
         return out, hidden
 

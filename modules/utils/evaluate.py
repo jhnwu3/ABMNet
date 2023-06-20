@@ -38,17 +38,21 @@ def evaluate(model, dataset, use_gpu = False):
     return loss.cpu().detach().numpy() / len(dataset), time.time() - start_time, np.array(predicted), np.array(tested)
 
 
-def evaluate_temporal(data, model : TemporalComplexModel, criterion, device):
+def evaluate_temporal(data, model : TemporalComplexModel, criterion, device, batch_size=None):
     predicted = []
     truth = []
-    test_dataloader = torch.utils.data.DataLoader(data, batch_size=None, shuffle=False)
+    test_dataloader = torch.utils.data.DataLoader(data, batch_size=batch_size, shuffle=False, drop_last=True)
     test_loss = 0
     model.eval()
     with torch.no_grad():
-        hidden = (torch.zeros(model.n_layers, model.hidden_dim).detach(), torch.zeros(model.n_layers, model.hidden_dim).detach())
+        h_0 = torch.zeros(model.n_layers, batch_size, model.hidden_dim)
+        c_0 = torch.zeros(model.n_layers, batch_size, model.hidden_dim)
+
+        # Initialize the LSTM hidden state
+        hidden = (h_0.to(device), c_0.to(device))
         for rates, input, output in test_dataloader:
             out, hidden = model(input.to(device).float(), (hidden[0].detach().to(device), hidden[1].detach().to(device)), rates.to(device).float())
-            test_loss += criterion(out.squeeze(), output.to(device)).cpu().detach()
+            test_loss += criterion(out, output.to(device)).cpu().detach()
             predicted.append(out.cpu().numpy())
             truth.append(output.cpu().numpy())
     

@@ -126,7 +126,7 @@ class SpatialModel():
         return model, device
 
 
-def train_temporal_model(data, input_size : int, n_rates : int, hidden_size : int, lr : float, n_epochs : int, n_layers : int, path=""):
+def train_temporal_model(data, input_size : int, n_rates : int, hidden_size : int, lr : float, n_epochs : int, n_layers : int, path="", batch_size = None):
     device = ""
     if torch.cuda.is_available():
         device = torch.device("cuda")
@@ -143,22 +143,45 @@ def train_temporal_model(data, input_size : int, n_rates : int, hidden_size : in
     # train_size = int(0.1 * len(data))
     # test_size = len(data) - train_size
     # train_data, test_data = torch.utils.data.random_split(data, [train_size, test_size])
-    dataloader = torch.utils.data.DataLoader(data, batch_size=None, shuffle=True) 
-    epoch_start = time.time()
-    for epoch in range(n_epochs):
-        loss_per_epoch = 0
-        hidden = (torch.zeros(n_layers, hidden_size).detach(), torch.zeros(n_layers, hidden_size).detach())
-        for rates, input, output in dataloader:
-            optimizer.zero_grad() # Clears existing gradients from previous epoch
-            out, hidden = model(input.to(device).float(), (hidden[0].detach().to(device), hidden[1].detach().to(device)), rates.to(device).float())
-            loss = criterion(out.squeeze().float(), output.to(device).float())
-            loss_per_epoch += loss
-            loss.backward() # Does backpropagation and calculates gradients
-            optimizer.step() # Updates the weights accordingly
-        if(epoch % 10 == 0):
-            print("Epoch:", epoch, " loss:", loss_per_epoch, " in Time:", time.time() - epoch_start)
-            epoch_start = time.time()
-            
+    if batch_size is None:
+        dataloader = torch.utils.data.DataLoader(data, batch_size=None, shuffle=True) 
+        epoch_start = time.time()
+        for epoch in range(n_epochs):
+            loss_per_epoch = 0
+            hidden = (torch.zeros(n_layers, hidden_size).detach(), torch.zeros(n_layers, hidden_size).detach())
+            for rates, input, output in dataloader:
+                optimizer.zero_grad() # Clears existing gradients from previous epoch
+                out, hidden = model(input.to(device).float(), (hidden[0].detach().to(device), hidden[1].detach().to(device)), rates.to(device).float())
+                loss = criterion(out.squeeze().float(), output.to(device).float())
+                loss_per_epoch += loss
+                loss.backward() # Does backpropagation and calculates gradients
+                optimizer.step() # Updates the weights accordingly
+            if(epoch % 5 == 0):
+                print("Epoch:", epoch, " loss:", loss_per_epoch, " in Time:", time.time() - epoch_start)
+                epoch_start = time.time()
+    else: 
+        dataloader = torch.utils.data.DataLoader(data, batch_size=batch_size, shuffle=True, drop_last=True) 
+        epoch_start = time.time()
+        for epoch in range(n_epochs):
+            loss_per_epoch = 0
+            h_0 = torch.zeros(n_layers, batch_size, hidden_size)
+            c_0 = torch.zeros(n_layers, batch_size, hidden_size)
+
+            # Initialize the LSTM hidden state
+            lstm_hidden = (h_0.to(device), c_0.to(device))
+            # hidden = (torch.zeros(n_layers, hidden_size).detach(), torch.zeros(n_layers, hidden_size).detach())
+            for rates, input, output in dataloader:
+                optimizer.zero_grad() # Clears existing gradients from previous epoch
+                
+                out, lstm_hidden = model(input.to(device).float(), (lstm_hidden[0][:,:input.size()[0],:].detach().contiguous(), lstm_hidden[1][:,:input.size()[0],:].detach().contiguous()), rates.to(device).float())
+                loss = criterion(out.float(), output.to(device).float())
+                loss_per_epoch += loss
+                loss.backward() # Does backpropagation and calculates gradients
+                optimizer.step() # Updates the weights accordingly
+            if(epoch % 5 == 0):
+                print("Epoch:", epoch, " loss:", loss_per_epoch, " in Time:", time.time() - epoch_start)
+                epoch_start = time.time()
+
     if len(path) > 0:
         torch.save(model, path)
         
@@ -192,7 +215,6 @@ def train_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_size, 
         for input, output in loader:
             optimizer.zero_grad()
             loss = 0
-          
             prediction = model.forward(input.to(device))
             loss += criterion(prediction.squeeze(), output.squeeze().to(device))
             loss_this_epoch += loss.item() 
