@@ -33,7 +33,7 @@ def chunk_sequence(sequence, chunk_size):
 class TemporalDataset(Dataset):
     # path to a pickle file that contains a dictionary of the following variables shown below
     # [] is a list of indices of features to keep in the input and output graphs
-    def __init__(self, path, min_max_scale = True):
+    def __init__(self, path, min_max_scale = True, steps=1):
         # Initialize your dataset here
         # Store the necessary data or file paths
         data = pickle.load(open(path, "rb"))
@@ -42,6 +42,7 @@ class TemporalDataset(Dataset):
         self.times = data["time_points"]
         self.n_rates = self.rates[0].size()[0]
         self.input_size = 1
+        self.steps_into_future = steps
         if len(self.outputs[0].size()) > 1:
             print(self.outputs[0].size())
             self.input_size = self.outputs[0].size()[1]
@@ -69,12 +70,12 @@ class TemporalDataset(Dataset):
         # The input and target can be tensors, NumPy arrays, or other data types
         # returns a 1D tensor of rates, one input sequence, one output sequence
         # need to convert to sets of sequences
-        return self.rates[index], self.outputs[index][:-1], self.outputs[index][1:]
+        return self.rates[index], self.outputs[index][:-self.steps_into_future], self.outputs[index][self.steps_into_future:]
 
 
 
 class TemporalChunkedDataset(Dataset):
-    def __init__(self, path, min_max_scale = True, time_chunk_size=5, batch_size=None):
+    def __init__(self, path, min_max_scale = True, time_chunk_size=5, batch_size=None, steps=5):
             # Initialize your dataset here
         # Store the necessary data or file paths
         data = pickle.load(open(path, "rb"))
@@ -84,6 +85,7 @@ class TemporalChunkedDataset(Dataset):
         self.n_rates = self.rates[0].size()[0]
         self.input_size = 1
         self.batch_size = batch_size
+        self.steps_into_future = steps
         if len(self.outputs[0].size()) > 1:
             print(self.outputs[0].size())
             self.input_size = self.outputs[0].size()[1]
@@ -131,7 +133,7 @@ class TemporalChunkedDataset(Dataset):
         if self.batch_size is None:
             return self.rates[index], self.outputs[index][:-1], self.outputs[index][1:]
         else: 
-            return self.rates[index], self.outputs[index][:-1].unsqueeze(dim=1), self.outputs[index][1:].unsqueeze(dim=1)
+            return self.rates[index], self.outputs[index][:-self.steps_into_future].unsqueeze(dim=1), self.outputs[index][self.steps_into_future:].unsqueeze(dim=1)
 
 
 if __name__ == "__main__":

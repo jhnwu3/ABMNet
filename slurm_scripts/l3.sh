@@ -23,3 +23,4 @@ python3 main.py -i 'data/static/l3p_100k.csv' -d 8 -h 128 --epochs 70 -o 'l3p_10
 
 #python3 main.py -i 'data/NL6_means.csv' -h 512 -d 32 -o 'nl6means_large' --epochs 1000 --gpu --type res_nn --normalize
 # python3 main.py -i 'data/static/l3p_pso.csv' -d 4 -h 64 --epochs 70 -o 'l3p_pso' --save --gpu --normalize --normalize_out 
+# python3 main.py -i 'data/static/l3p_pso.csv' -d 4 -h 64 --epochs 50 -o 'l3p_pso_early_tsteps' --save --gpu --normalize_out 

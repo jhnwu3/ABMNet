@@ -6,7 +6,8 @@ from sklearn.model_selection import KFold
 import torch
 
 batch_size = 64
-data = TemporalChunkedDataset("data/time_series/indrani_gamma_no_zeroes.pickle",time_chunk_size=20, batch_size=batch_size)
+future_steps = 4
+data = TemporalChunkedDataset("data/time_series/indrani_gamma_no_zeroes.pickle",time_chunk_size=20, batch_size=batch_size, steps=future_steps)
 print(len(data))
 # REMINDER: no cross-validation just yet, we will cross-validate next week!!
 # NEED TO REMIND OURSELVES TO WRITE MORE MODULAR CODE SUCH THAT IT IS EASY FOR US TO RUN CROSSVALIDATION
@@ -84,10 +85,10 @@ model, device = train_temporal_model(train_data, input_size=data.input_size,
                                      lr= best_lr, n_rates=data.n_rates, 
                                      n_epochs= best_epochs, 
                                      n_layers=int(best_layers), 
-                                     path="model/indrani_gamma_nzero_chunked.pt",
+                                     path="model/indrani_gamma_nzero_chunked_fs" + str(future_steps) +".pt",
                                      batch_size=batch_size)
 # now we evaluate!
 test_loss, truth, predicted = evaluate_temporal(test_data, model, criterion, device, batch_size=batch_size)
 print("Test MSE:", test_loss)
 # plot_time_series_errors(truth, predicted, data.times[1:], path="graphs/temporal/gamma_no_zero_errors_chunked.png")
-plot_scatter(truth, predicted, output="graphs/temporal/gamma_no_zero_chunked")     
+plot_scatter(truth, predicted, output="graphs/temporal/gamma_no_zero_chunked_fs" + str(future_steps))     

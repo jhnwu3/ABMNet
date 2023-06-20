@@ -5,6 +5,13 @@ from pyswarms.single.global_best import GlobalBestPSO
 from modules.utils.graph import *
 from modules.data.mixed import *
 
+
+
+def StewartPSO(model, y, wt):
+    
+
+
+
 def gmm_cost(x, surrogate, y, wt, dataset=None, standardize=False, normalize=False):
     # print("x:",x.shape)
     # print(x)
@@ -157,7 +164,7 @@ if __name__ == "__main__":
     
     # # pso for hard trained model
     l3Dataset100k = ABMDataset("data/static/l3p_100k.csv", root_dir="data/", standardize=True, norm_out=True)
-    sgModel = tc.load("model/l3p_100k_small_t3.pt")
+    sgModel = tc.load("model/l3p_pso_s9.pt")
     wt = np.loadtxt("pso/gmm_weight/l3p_t3.txt")
     # # wt = np.identity(sgModel.output_size)
     # # print(wt)

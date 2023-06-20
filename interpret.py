@@ -1,8 +1,11 @@
 from modules.data.mixed import *
 from modules.utils.graph import *
 from modules.utils.interpret import *
-
+from modules.utils.evaluate import *
+import torch
 if __name__ == "__main__":
+
+
     # nl6dataset = ABMDataset("data/static/NL6P_t05.csv", root_dir="data/", standardize=False, norm_out=True)
     # nl6Int= DumbInterpreter(modelPath="model/nl6_poster_default_inputs.pt", dataset=nl6dataset, normalize_out=True) 
     # wt = np.loadtxt("pso/gmm_weight/nl6p_t05.txt")
@@ -24,15 +27,21 @@ if __name__ == "__main__":
     # l3IntMulti.plot_mgmm_contour("graphs/contour/l3mgmm.png", nCols=3, groundTruthTheta = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]), resolution=100, y=y, wts=wts, levels=40)
     
     
-    l3NormDataset = ABMDataset("data/static/l3p_10k_t3_5kss.csv", root_dir="data/", standardize=True, norm_out=True)
-    l3Dataset100k = ABMDataset("data/static/l3p_100k.csv", root_dir="data/", standardize=True, norm_out=True)
+    # l3NormDataset = ABMDataset("data/static/l3p_10k_t3_5kss.csv", root_dir="data/", standardize=True, norm_out=True)
+    l3Dataset100k = ABMDataset("data/static/l3p_100k.csv", root_dir="data/", standardize=False, norm_out=True)
+    
+    model = torch.load("model/l3p_pso_s9.pt")
+    mse, t, predicted, truth = evaluate(model, l3Dataset100k, use_gpu=True)
+    print("Time Taken to Evaluate 100k params:", t)
+    print("Overall MSE:", mse)
+    plot_scatter(truth, predicted, output="graphs/L3/l3p_pso_s9_100ktest")
     # l3Int = DumbInterpreter(modelPath="model/l3p_10k_small_res_t3.pt", dataset=l3NormDataset, normalize_out=True, standardize_in=True)
-    l3Int100k = DumbInterpreter(modelPath="model/l3p_100k_small_t3.pt", dataset=l3Dataset100k, normalize_out=True, standardize_in=True)
-    wt = np.loadtxt("pso/gmm_weight/l3p_t3.txt")
+    # l3Int100k = DumbInterpreter(modelPath="model/l3p_100k_small_t3.pt", dataset=l3Dataset100k, normalize_out=True, standardize_in=True)
+    # wt = np.loadtxt("pso/gmm_weight/l3p_t3.txt")
     # l3Int.plot_contour(path="graphs/contour/l3_norm_t3.png",nCols=3, groundTruthTheta = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]), resolution=100, y=np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049]), levels=40)
     # l3Int.plot_gmm_contour(path="graphs/contour/l3_norm_gmm_t3.png",nCols=3, groundTruthTheta = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]), resolution=100, y=np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049]), wt=wt, levels = 40)
-    l3Int100k.plot_contour(path="graphs/contour/l3_norm_100k_t3.png",nCols=3, groundTruthTheta = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]), resolution=100, y=np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049]), levels=40)
-    l3Int100k.plot_gmm_contour(path="graphs/contour/l3_norm_gmm_100k_t3.png",nCols=3, groundTruthTheta = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]), resolution=100, y=np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049]), wt=wt, levels = 40)
+    # l3Int100k.plot_contour(path="graphs/contour/l3_norm_100k_t3.png",nCols=3, groundTruthTheta = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]), resolution=100, y=np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049]), levels=40)
+    # l3Int100k.plot_gmm_contour(path="graphs/contour/l3_norm_gmm_100k_t3.png",nCols=3, groundTruthTheta = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502]), resolution=100, y=np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049]), wt=wt, levels = 40)
     
     # l3tTestDataset = ABMDataset("data/time_series/l3p_unseen_data.csv", root_dir="data/time_series/")
     # l3tTrainDataset = ABMDataset("data/time_series/l3pt_i.csv", root_dir="data/")

@@ -38,8 +38,9 @@ def write_array_to_csv(array, column_labels, file_path):
     # Write the DataFrame to a CSV file
     df.to_csv(file_path, index=False)
 
+pso_steps = 9
 parent_dir = "data/l3p_pso"
-output_path = "data/static/l3p_pso.csv"
+output_path = "data/static/l3p_pso_s" +str(pso_steps) + ".csv"
 # parent_dir = "data/John_Indrani_data/zeta/training_kon_koff"
 parameter_dirs = [os.path.join(parent_dir,x) for x in os.listdir(parent_dir)]
 # print(parameter_dirs)
@@ -52,7 +53,7 @@ times = []
 moms = []
 params = []
 for dir in parameter_dirs:
-    if dir != parent_dir and ".csv" in dir and is_number_less_than_threshold(dir,32):
+    if dir != parent_dir and ".csv" in dir and is_number_less_than_threshold(dir,pso_steps):
         print(dir)
 
         data = np.loadtxt(dir, delimiter=",")

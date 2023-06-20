@@ -30,7 +30,7 @@ if __name__ == '__main__':
     cross = cross_validate()
     # data
     abm_dataset = ABMDataset(csv_file, root_dir="data/", standardize=normalize, norm_out=normalize_out)
-    train_size = int(0.8 * len(abm_dataset))
+    train_size = int(0.95 * len(abm_dataset))
     test_size = len(abm_dataset) - train_size
     
     # split dataset, into training set and test
@@ -139,3 +139,5 @@ if __name__ == '__main__':
     np.savetxt('data/nn_output/' + output_name + '_test.csv', tested, delimiter=',')
     plot_histograms(tested, predictions, output='graphs/histograms/' + output_name)
     plot_scatter(tested, predictions, output='graphs/scatter/' + output_name)
+
+    
