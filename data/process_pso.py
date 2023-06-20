@@ -3,6 +3,33 @@ import numpy as np
 import os 
 import torch
 import pickle
+
+import re
+def is_number_less_than_threshold(string, threshold):
+    # Extract the number from the string using regular expressions
+    number = re.findall(r'\d+', string)
+    # print(number)
+    if number:
+        isLess = True
+        for num in number:
+            num = int(num)  # Convert the extracted number to an integer
+            isLess = isLess and  num < threshold and len(number) > 1
+        # print(isLess)
+        return isLess
+    else:
+        return False  # If no number is found in the string
+
+
+def extract_number(string):
+    # Extract the number from the string using regular expressions
+    number = int(re.findall(r'\d+', string)[1])
+    return number
+
+def sort_strings_with_numbers(strings):
+    # Sort the strings based on the extracted numbers
+    sorted_strings = sorted(strings, key=extract_number)
+    return sorted_strings
+
 # from modules.data.spatial import *
 def write_array_to_csv(array, column_labels, file_path):
     # Create a DataFrame from the array and column labels
@@ -15,25 +42,41 @@ parent_dir = "data/l3p_pso"
 output_path = "data/static/l3p_pso.csv"
 # parent_dir = "data/John_Indrani_data/zeta/training_kon_koff"
 parameter_dirs = [os.path.join(parent_dir,x) for x in os.listdir(parent_dir)]
-print(parameter_dirs)
+# print(parameter_dirs)
 
 rates = []
 output = []
 # keep one vector of the time steps too just in case.
 times = []
+# basically check to make sure that the number inside of the dir name is less than 5.
+moms = []
+params = []
 for dir in parameter_dirs:
-    if dir != parent_dir and ".csv" in dir:
+    if dir != parent_dir and ".csv" in dir and is_number_less_than_threshold(dir,32):
+        print(dir)
+
         data = np.loadtxt(dir, delimiter=",")
         if "_moms" in dir:
-            for i in range(data.shape[0]):
-                output.append(data[i])
-        elif "_params" in dir: 
-            for i in range(data.shape[0]):
-                rates.append(data[i])
+            moms.append(dir)
+            # for i in range(data.shape[0]):
+                # output.append(data[i])
+        elif "_params" in dir:
+            params.append(dir) 
+            # for i in range(data.shape[0]):
+                # rates.append(data[i])
         
-        # print(data.shape)
-        
-    
+print("---------------")
+moms = sort_strings_with_numbers(moms)
+params = sort_strings_with_numbers(params)
+
+for n in range(len(moms)):
+    print(moms[n])
+    print(params[n])
+    moments = np.loadtxt(moms[n], delimiter=",")
+    param = np.loadtxt(params[n], delimiter=",") 
+    for i in range(moments.shape[0]):
+        output.append(moments[i])
+        rates.append(param[i])
         
         # if len(times) < 1:
         #     times = data[1:,0] # keep for plotting

@@ -10,7 +10,7 @@ import torch
 # load a model in, and now let's see can it do it from scratch? 
 # how many data points in the future can it predict?
 # and how many data points does it need??
-def generate_time_series(path, model, device, criterion, t_observed): 
+def generate_time_series(path, model, device, criterion, t_observed, out): 
     data = TemporalDataset(path)
     
     test_loss, truth, predicted = generate_temporal(data, model, criterion, device, t_observed)
@@ -28,12 +28,12 @@ def generate_time_series(path, model, device, criterion, t_observed):
         print(truth.shape)
         print(generated.shape)
         plot_time_series(truth[i,:], generated[i,:], data.times[t_observed+1:], 
-                        path="graphs/temporal/zeta_gen_it"+ str(t_observed) + "_set" + str(i) + ".png")
+                        path=out + str(t_observed) + "_set" + str(i) + ".png")
     
-    plot_scatter(truth, generated, output="graphs/temporal/zeta_gen_it" +str(t_observed))
+    plot_scatter(truth, generated, output=out + str(t_observed))
 
 
-path = "data/time_series/indrani_zeta.pickle"
+path = "data/time_series/indrani_gamma_no_zeroes.pickle"
 device = ""
 if torch.cuda.is_available():
     device = torch.device("cuda")
@@ -43,11 +43,11 @@ else:
     using_gpu = False
 
 criterion = torch.nn.MSELoss().to(device)
-model = torch.load("model/indrani/indrani_zeta_small.pt", map_location=torch.device('cpu'))
+model = torch.load("model/indrani_gamma_nzero_chunked.pt", map_location=torch.device('cpu'))
 print(model)
 model = model.to(device)
-
+output_path = "graphs/temporal/gamma_chunked"
 # generate_time_series(path, model, device, criterion, t_observed=50)
-generate_time_series(path, model, device, criterion, t_observed=300)
+generate_time_series(path, model, device, criterion, t_observed=20, out = output_path)
 # generate_time_series(path, model, device, criterion, t_observed=10)
 # generate_time_series(path, model, device, criterion, t_observed=2)

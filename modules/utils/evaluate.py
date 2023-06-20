@@ -62,7 +62,7 @@ def evaluate_temporal(data, model : TemporalComplexModel, criterion, device, bat
 
 # Given the first t_observed inputs, generate future trajectories using its own predictions. Then compare and contrast.
 # returns a matrix of predicted sequences, the mse, and the ground truth sequence, the times used as input for generation.
-def generate_temporal(data, model : TemporalComplexModel, criterion, device, t_observed):
+def generate_temporal(data, model : TemporalComplexModel, criterion, device, t_observed, batch_size = None):
     predicted = []
     ground_truth = []
     test_dataloader = torch.utils.data.DataLoader(data, batch_size=None, shuffle=False)
