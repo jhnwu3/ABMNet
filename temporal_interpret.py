@@ -43,7 +43,7 @@ else:
     using_gpu = False
 
 criterion = torch.nn.MSELoss().to(device)
-model = torch.load("model/indrani_gamma_nzero_chunked.pt", map_location=torch.device('cpu'))
+model = torch.load("model/indrani_gamma_nzero_chunked_fs4.pt", map_location=torch.device('cpu'))
 print(model)
 model = model.to(device)
 output_path = "graphs/temporal/gamma_chunked"
