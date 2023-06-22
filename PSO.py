@@ -55,10 +55,19 @@ def gmm_cost(x, surrogate, y, wt, dataset=None, standardize=False, normalize=Fal
     # print(input.size)
     costs = []
     if len(x.shape) < 2:
+        thetaCopy = x
+        if standardize:
+            thetaCopy = (thetaCopy - dataset.input_means) / dataset.input_stds
         input = tc.from_numpy(x)
+        
         if next(surrogate.parameters()).is_cuda:
             input = input.to(tc.device("cuda"))
         output = surrogate(input).cpu().detach().numpy()
+        
+        if normalize: 
+            scale_factor = dataset.output_maxes - dataset.output_mins
+            output = (output * scale_factor) + dataset.output_mins
+            
         costs.append(np.matmul(output-y, np.matmul((output - y).transpose(), wt)))
     else:
         for i in range(x.shape[0]):
@@ -77,7 +86,7 @@ def gmm_cost(x, surrogate, y, wt, dataset=None, standardize=False, normalize=Fal
 
     return np.array(costs)
 
-def rpoint(og_pos, seed=3, epsi=0.02, nan=0.005, hone =28):
+def rpoint(og_pos, seed=3, epsi=0.02, nan=0.02, hone =28):
     
     min_length = 0
     max_length = og_pos.shape[0]
@@ -117,6 +126,7 @@ def StewartPSO(model, y, wt, n_steps, n_particles, dataset, standardize=False, n
     # print(gbest)
     gcost = gmm_cost(gbest, model, y, wt, dataset=dataset, standardize=standardize, normalize=normalize_out)
     print("initialized gcost:", gcost)
+    print("with gbest:", gbest)
     for step in range(n_steps):
         w1 = pInertiaW_curr * np.random.uniform(0,1) 
         w2 = pBestW_curr * np.random.uniform(0,1)
@@ -132,10 +142,11 @@ def StewartPSO(model, y, wt, n_steps, n_particles, dataset, standardize=False, n
             # exit(0)
             cost = gmm_cost(posmat[p], model, y, wt, dataset=dataset, standardize=standardize, normalize=normalize_out)
             # print(cost)
-            if cost < pbmat[p,-1]:
+            # print(posmat[p])
+            if float(cost) < pbmat[p,-1]:
                 pbmat[p, -1] = cost 
                 pbmat[p,:-1] = posmat[p]
-            if cost < gcost: 
+            if float(cost) < float(gcost): 
                 gcost = cost 
                 gbest = posmat[p]
                 print("New Global Best:", gbest, " with cost:", gcost)
@@ -265,14 +276,14 @@ if __name__ == "__main__":
     # print("MSE of ground truth l3p:", mse_truth)
     
     # # pso for hard trained model
-    l3Dataset100k = ABMDataset("data/static/l3p_100k.csv", root_dir="data/", standardize=False, norm_out=True)
-    sgModel = tc.load("model/l3p_t3.pt")
+    l3Dataset100k = ABMDataset("data/static/l3p_100k.csv", root_dir="data/", standardize=True, norm_out=True)
+    sgModel = tc.load("model/l3p_100k_medium_res.pt")
     wt = np.loadtxt("pso/gmm_weight/l3p_t3.txt")
     # # wt = np.identity(sgModel.output_size)
     # # print(wt)
     x = np.zeros(sgModel.input_size)
     y = np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049])
-    StewartPSO(sgModel, y, wt, n_steps=30, n_particles=500, dataset=l3Dataset100k)
+    StewartPSO(sgModel, y, wt, n_steps=50, n_particles=500, dataset=l3Dataset100k, standardize=True)
 
 
 
