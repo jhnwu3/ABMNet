@@ -46,7 +46,7 @@ criterion = torch.nn.MSELoss().to(device)
 model = torch.load("model/indrani_gamma_nzero_chunked_fs4.pt", map_location=torch.device('cpu'))
 print(model)
 model = model.to(device)
-output_path = "graphs/temporal/gamma_chunked"
+output_path = "graphs/temporal/gamma_chunked_fs4"
 # generate_time_series(path, model, device, criterion, t_observed=50)
 generate_time_series(path, model, device, criterion, t_observed=20, out = output_path)
 # generate_time_series(path, model, device, criterion, t_observed=10)
