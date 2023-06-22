@@ -102,7 +102,7 @@ def generate_temporal_single(input, rates, output, model, criterion, device, t_o
     predicted.append(out[-fs:].cpu().numpy())
     # now let's recursively generate given the new out and hidden units until we run out of space. Keep in mind, this only works for the output here.
     # note we need to offset by 1 to make sure the MSEs are aligned
-    for t in range(1, output.size()[0] - t_observed, fs): # account for the missing one.
+    for t in range(fs, output.size()[0] - t_observed, fs): # account for the missing one.
         # print(curr.size())
         # print(out[-1].size())
         curr = torch.cat([curr[fs:],out[-fs]])
