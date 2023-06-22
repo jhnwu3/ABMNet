@@ -62,7 +62,7 @@ def evaluate_temporal(data, model : TemporalComplexModel, criterion, device, bat
 
 # Given the first t_observed inputs, generate future trajectories using its own predictions. Then compare and contrast.
 # returns a matrix of predicted sequences, the mse, and the ground truth sequence, the times used as input for generation.
-def generate_temporal(data, model : TemporalComplexModel, criterion, device, t_observed, batch_size = None):
+def generate_temporal(data, model : TemporalComplexModel, criterion, device, t_observed, batch_size = None, fs=1):
     predicted = []
     ground_truth = []
     test_dataloader = torch.utils.data.DataLoader(data, batch_size=None, shuffle=False)
@@ -72,7 +72,10 @@ def generate_temporal(data, model : TemporalComplexModel, criterion, device, t_o
     with torch.no_grad():
         time_start = time.time()
         for rates, input, output in test_dataloader:
-            truth, pred, loss = generate_temporal_single(input, rates, output, model, criterion, device, t_observed)
+            truth, pred, loss = generate_temporal_single(input, rates,
+                                                         output, model,
+                                                         criterion, device, 
+                                                         t_observed, fs=fs)
             ground_truth.append(truth) # matrix of just ground truths.
             test_loss += loss / len(data)
             predicted.append(pred)
@@ -84,7 +87,7 @@ def generate_temporal(data, model : TemporalComplexModel, criterion, device, t_o
 
 
 # recursively generates data and computes a loss
-def generate_temporal_single(input, rates, output, model, criterion, device, t_observed):
+def generate_temporal_single(input, rates, output, model, criterion, device, t_observed, fs = 4):
     test_loss = 0
     predicted = []
     truth = [] # let's actually make our lives easier by simply just returning the matching truth element
@@ -96,15 +99,15 @@ def generate_temporal_single(input, rates, output, model, criterion, device, t_o
     test_loss += criterion(out.squeeze(), output[:t_observed].to(device)).cpu().detach()
     # print("out:", out.size())
     truth.append(output[t_observed].cpu().numpy())
-    predicted.append(out[-1].cpu().numpy())
+    predicted.append(out[-fs:].cpu().numpy())
     # now let's recursively generate given the new out and hidden units until we run out of space. Keep in mind, this only works for the output here.
     # note we need to offset by 1 to make sure the MSEs are aligned
-    for t in range(1, output.size()[0] - t_observed): # account for the missing one.
+    for t in range(1, output.size()[0] - t_observed, fs): # account for the missing one.
         # print(curr.size())
         # print(out[-1].size())
         curr = torch.cat([curr[1:],out[-1]])
         out, hidden = model(curr.float().squeeze(), (hidden[0].detach().to(device), hidden[1].detach().to(device)), rates.to(device).float())
-        predicted.append(out[-1].cpu().numpy()) # so I can keep track of all the predictions
+        predicted.append(out[-fs:].cpu().numpy()) # so I can keep track of all the predictions
         test_loss += criterion(out.squeeze(), output[t:t+t_observed].to(device)).cpu().detach()
         truth.append(output[t+t_observed].numpy())
     # print(predicted)
