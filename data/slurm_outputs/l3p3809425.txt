@@ -1,0 +1,47 @@
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/graph.py:103: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  fig, axes = plt.subplots(figsize=(8, 8))
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py:141: RankWarning: Polyfit may be poorly conditioned
+  plot_scatter(tested, predictions, output='graphs/scatter/' + output_name)
+Standardization to Input Parameters Applied
+Original Mean Inputs: [0.50034145 0.50008009 0.49933786 0.50002038 0.5005286 ]
+Original Stds: [0.28864059 0.28848874 0.288921   0.28860286 0.28850536]
+New Average Input Value: [ 2.02336305e-14  2.67835604e-14  1.46833572e-14 -4.02135758e-15
+ -1.42309194e-14]
+New Std Input Value: [1. 1. 1. 1. 1.]
+max: 0.999997
+Normalization of Outputs
+New Max: 1.0
+New Min: 0.0
+Outputting: l3p_100k_medium_res
+Dataset: data/static/l3p_100k.csv
+Length of Training: 96216
+Length of Test: 5064
+Input Dimension: 5
+Output Dimension: 9
+Model Type: res_nn
+----- Hyperparameters used for final training -----
+Depth of NN: 8
+Hidden Neurons: 128
+# Epochs Used: 70
+input 5
+hidden 128
+Using GPU: True
+'Finished epoch 0 with loss 85.6042592061977 in time 595.5888919830322'
+'Finished epoch 10 with loss 32.0854750903246 in time 5062.831645965576'
+'Finished epoch 20 with loss 32.259046568742576 in time 6338.675128221512'
+'Finished epoch 30 with loss 31.39993902068727 in time 6109.302250862122'
+'Finished epoch 40 with loss 31.099867015559806 in time 6109.887560844421'
+'Finished epoch 50 with loss 31.231433428073355 in time 6111.300505399704'
+'Finished epoch 60 with loss 31.299196119274992 in time 6110.623433351517'
+Using GPU: True
+Final Average MSE On Test Dataset: 0.0005919096437401965 , Time For Inference: 6.688479423522949
+Unnormalized Max: 532.535
+Unnormalized Min: 0.0414
+Final Average Unnormalized MSE: 0.07999299292346236
+Job Statistics for 3809425:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3809425   rsjxw007 2023-06-21T15:51:59 2023-06-22T03:31:36   11:39:37              11:35:21  COMPLETED  0:0   r1pl-hpcf-g04 billing=5,cpu=5,gres/gpu=1,mem=37275M,n+ 
+   3809425.batch            2023-06-21T15:51:59 2023-06-22T03:31:36   11:39:37   2459.56M   11:35:21  COMPLETED  0:0   r1pl-hpcf-g04                                          
+  3809425.extern            2023-06-21T15:51:59 2023-06-22T03:31:36   11:39:37      0.09M  00:00.005  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 19.88% of 2-10:18:05 core-walltime

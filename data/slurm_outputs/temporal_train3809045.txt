@@ -1,0 +1,22 @@
+73500
+5
+1
+Using GPU
+<class 'int'>
+5
+Epoch: 0  loss: tensor(73.1955, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 9.66338562965393
+Epoch: 5  loss: tensor(0.0175, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 46.562971115112305
+Epoch: 10  loss: tensor(0.0094, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 46.46594285964966
+Epoch: 15  loss: tensor(0.0168, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 46.445154428482056
+Epoch: 20  loss: tensor(0.0049, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 46.465686082839966
+Epoch: 25  loss: tensor(0.0063, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 46.46147799491882
+Epoch: 30  loss: tensor(0.0128, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 46.426201581954956
+Epoch: 35  loss: tensor(0.0055, device='cuda:0', grad_fn=<AddBackward0>)  in Time: 46.47518563270569
+Test MSE: 0.0002507773025312913
+Job Statistics for 3809045:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3809045   rsjxw007 2023-06-20T15:50:24 2023-06-20T15:56:53   00:06:29             06:43.299  COMPLETED  0:0   r1pl-hpcf-g04 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3809045.batch            2023-06-20T15:50:24 2023-06-20T15:56:53   00:06:29   2406.18M  06:43.295  COMPLETED  0:0   r1pl-hpcf-g04                                          
+  3809045.extern            2023-06-20T15:50:24 2023-06-20T15:56:53   00:06:29      0.09M  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 6.47% of 01:43:44 core-walltime
