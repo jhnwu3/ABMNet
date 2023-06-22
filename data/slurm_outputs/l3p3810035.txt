@@ -1,0 +1,8 @@
+slurmstepd: error: *** JOB 3810035 ON r1pl-hpcf-g04 CANCELLED AT 2023-06-22T10:42:28 ***
+Job Statistics for 3810035:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3810035   rsjxw007 2023-06-22T10:42:21 2023-06-22T10:42:28   00:00:07             00:02.032 CANCELLED+  0:0   r1pl-hpcf-g04 billing=5,cpu=5,gres/gpu=1,mem=37275M,n+ 
+   3810035.batch            2023-06-22T10:42:21 2023-06-22T10:42:29   00:00:08    179.48M  00:02.028  CANCELLED 0:15   r1pl-hpcf-g04                                          
+  3810035.extern            2023-06-22T10:42:21 2023-06-22T10:42:28   00:00:07          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 5.71% of 00:00:35 core-walltime
