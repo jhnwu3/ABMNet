@@ -109,7 +109,7 @@ def generate_temporal_single(input, rates, output, model, criterion, device, t_o
         out, hidden = model(curr.float().squeeze(), (hidden[0].detach().to(device), hidden[1].detach().to(device)), rates.to(device).float())
         predicted.append(out[-fs:].cpu().numpy()) # so I can keep track of all the predictions
         test_loss += criterion(out.squeeze(), output[t:t+t_observed].to(device)).cpu().detach()
-        truth.append(output[t+t_observed].numpy())
+        truth.append(output[t + t_observed - fs: t+t_observed].numpy())
     # print(predicted)
     predicted = np.array(predicted)
     predicted = predicted.flatten()
