@@ -105,7 +105,7 @@ def generate_temporal_single(input, rates, output, model, criterion, device, t_o
     for t in range(1, output.size()[0] - t_observed, fs): # account for the missing one.
         # print(curr.size())
         # print(out[-1].size())
-        curr = torch.cat([curr[1:],out[-1]])
+        curr = torch.cat([curr[fs:],out[-fs]])
         out, hidden = model(curr.float().squeeze(), (hidden[0].detach().to(device), hidden[1].detach().to(device)), rates.to(device).float())
         predicted.append(out[-fs:].cpu().numpy()) # so I can keep track of all the predictions
         test_loss += criterion(out.squeeze(), output[t:t+t_observed].to(device)).cpu().detach()
