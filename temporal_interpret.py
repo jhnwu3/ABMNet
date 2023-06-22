@@ -10,10 +10,10 @@ import torch
 # load a model in, and now let's see can it do it from scratch? 
 # how many data points in the future can it predict?
 # and how many data points does it need??
-def generate_time_series(path, model, device, criterion, t_observed, out): 
+def generate_time_series(path, model, device, criterion, t_observed, out, fs=1): 
     data = TemporalDataset(path)
     
-    test_loss, truth, predicted = generate_temporal(data, model, criterion, device, t_observed)
+    test_loss, truth, predicted = generate_temporal(data, model, criterion, device, t_observed, fs=fs)
 
     print("MSE:", test_loss)
     # save these matrices for future use.
@@ -48,6 +48,6 @@ print(model)
 model = model.to(device)
 output_path = "graphs/temporal/gamma_chunked_fs4"
 # generate_time_series(path, model, device, criterion, t_observed=50)
-generate_time_series(path, model, device, criterion, t_observed=20, out = output_path)
+generate_time_series(path, model, device, criterion, t_observed=20, out = output_path, fs=4)
 # generate_time_series(path, model, device, criterion, t_observed=10)
 # generate_time_series(path, model, device, criterion, t_observed=2)
