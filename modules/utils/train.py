@@ -188,7 +188,7 @@ def train_temporal_model(data, input_size : int, n_rates : int, hidden_size : in
     return model, device
 
 # train stuff
-def train_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_size, nEpochs, use_gpu = False):
+def train_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_size, nEpochs, use_gpu = False, batch_size = 512):
     
     model = NeuralNetwork(input_size, hidden_size, depth, output_size).double()
     optimizer = optim.AdamW(model.parameters(),lr=0.0001)
@@ -204,11 +204,12 @@ def train_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_size, 
         using_gpu = False
 
     print(f"Using GPU: {using_gpu}")
+    print(f"Batch Size: {batch_size}")
     model.train()
     epoch_start = time.time()
     
     # enable shuffling so we can 
-    loader = tc.utils.data.DataLoader(dataset, batch_size=None, shuffle=True)  
+    loader = tc.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True)  
     for epoch in range(nEpochs):
         loss_this_epoch = 0
            

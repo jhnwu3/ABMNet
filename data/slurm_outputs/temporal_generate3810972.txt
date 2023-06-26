@@ -1,0 +1,8 @@
+slurmstepd: error: *** JOB 3810972 ON r1pl-hpcf-n21 CANCELLED AT 2023-06-23T11:54:01 ***
+Job Statistics for 3810972:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3810972   rsjxw007 2023-06-23T10:41:23 2023-06-23T11:54:01   01:12:38              01:10:24 CANCELLED+  0:0   r1pl-hpcf-n21        billing=5,cpu=5,mem=37275M,node=1 
+   3810972.batch            2023-06-23T10:41:23 2023-06-23T11:54:02   01:12:39    274.91M   01:10:24  CANCELLED 0:15   r1pl-hpcf-n21                                          
+  3810972.extern            2023-06-23T10:41:23 2023-06-23T11:54:01   01:12:38      0.09M  00:00.003  COMPLETED  0:0   r1pl-hpcf-n21                                          
+CPU Efficiency: 19.39% of 06:03:10 core-walltime

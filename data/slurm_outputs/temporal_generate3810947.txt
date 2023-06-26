@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/training_data_generation.py", line 152, in <module>
+    main()
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/training_data_generation.py", line 117, in main
+    time,mean_pZAP=pZAP_signal(kon,koff)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/training_data_generation.py", line 75, in pZAP_signal
+    T,avg=run_bionetgen(n,p) 
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/run_bngl.py", line 32, in run_bionetgen
+    Y.append(float(X[j].strip('\n').split('\t')[p])) #assign the pth column to Y or pZAP70
+IndexError: list index out of range
+Job Statistics for 3810947:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3810947   rsjxw007 2023-06-23T09:51:30 2023-06-23T09:53:40   00:02:10             01:54.698     FAILED  1:0   r1pl-hpcf-n21        billing=5,cpu=5,mem=37275M,node=1 
+   3810947.batch            2023-06-23T09:51:30 2023-06-23T09:53:40   00:02:10    237.04M  01:54.694     FAILED  1:0   r1pl-hpcf-n21                                          
+  3810947.extern            2023-06-23T09:51:30 2023-06-23T09:53:40   00:02:10      0.09M  00:00.003  COMPLETED  0:0   r1pl-hpcf-n21                                          
+CPU Efficiency: 17.69% of 00:10:50 core-walltime

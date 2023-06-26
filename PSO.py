@@ -46,7 +46,7 @@ from modules.data.mixed import *
 #     return rPoint;
 # }
 
-def gmm_cost(x, surrogate, y, wt, dataset=None, standardize=False, normalize=False):
+def gmm_cost(x, surrogate, y, wt, dataset=None, standardize=False, normalize=False, batch=True):
     # print("x:",x.shape)
     # print(x)
     # print(len(x.shape))
@@ -62,14 +62,19 @@ def gmm_cost(x, surrogate, y, wt, dataset=None, standardize=False, normalize=Fal
         
         if next(surrogate.parameters()).is_cuda:
             input = input.to(tc.device("cuda"))
-        output = surrogate(input).cpu().detach().numpy()
-        
+            
+        if batch: 
+            input = input.unsqueeze(dim=0)
+            # print(input.size())
+        output = surrogate(input).squeeze().cpu().detach().numpy()
+
         if normalize: 
             scale_factor = dataset.output_maxes - dataset.output_mins
             output = (output * scale_factor) + dataset.output_mins
             
         costs.append(np.matmul(output-y, np.matmul((output - y).transpose(), wt)))
     else:
+        print(x.shape)
         for i in range(x.shape[0]):
             thetaCopy = x[i]
             if standardize:
@@ -77,7 +82,12 @@ def gmm_cost(x, surrogate, y, wt, dataset=None, standardize=False, normalize=Fal
             input = tc.from_numpy(thetaCopy)
             if next(surrogate.parameters()).is_cuda:
                 input = input.to(tc.device("cuda"))
-            output = surrogate(input).cpu().detach().numpy()
+            if batch:
+                input = input.squeeze() # this is messy I agree...
+                input = input.unsqueeze(dim=0)
+            output = 0 
+            with tc.no_grad():
+                output = surrogate(input).squeeze().cpu().detach().numpy()
             if normalize: 
                 scale_factor = dataset.output_maxes - dataset.output_mins
                 output = (output * scale_factor) + dataset.output_mins
@@ -105,7 +115,7 @@ def rpoint(og_pos, seed=3, epsi=0.02, nan=0.02, hone =28):
     return new_pos
 
 # ported version of Dr. Stewart's PSO
-def StewartPSO(model, y, wt, n_steps, n_particles, dataset, standardize=False, normalize_out=True, pBestW_init = 3, gBestW_init = 1, pInertiaW_init = 6):
+def StewartPSO(model, y, wt, n_steps, n_particles, dataset, standardize=False, normalize_out=True, pBestW_init = 3, gBestW_init = 1, pInertiaW_init = 6, batch=True):
     pBestW_init = 3 
     gBestW_init = 1 
     pInertiaW_init = 6
@@ -120,11 +130,11 @@ def StewartPSO(model, y, wt, n_steps, n_particles, dataset, standardize=False, n
     max_array = np.full(n_particles, max_float)
 
     # print(max_array)
-
+    model.eval()
     pbmat = np.concatenate((posmat, max_array[:, np.newaxis]), axis=1)
     gbest = np.random.rand(1, model.input_size)
     # print(gbest)
-    gcost = gmm_cost(gbest, model, y, wt, dataset=dataset, standardize=standardize, normalize=normalize_out)
+    gcost = gmm_cost(gbest, model, y, wt, dataset=dataset, standardize=standardize, normalize=normalize_out, batch=batch)
     print("initialized gcost:", gcost)
     print("with gbest:", gbest)
     for step in range(n_steps):
@@ -140,7 +150,7 @@ def StewartPSO(model, y, wt, n_steps, n_particles, dataset, standardize=False, n
             # print(dataset)
             cost = 0
             # exit(0)
-            cost = gmm_cost(posmat[p], model, y, wt, dataset=dataset, standardize=standardize, normalize=normalize_out)
+            cost = gmm_cost(posmat[p], model, y, wt, dataset=dataset, standardize=standardize, normalize=normalize_out, batch=batch)
             # print(cost)
             # print(posmat[p])
             if float(cost) < pbmat[p,-1]:
@@ -277,18 +287,23 @@ if __name__ == "__main__":
     
     # # pso for hard trained model
     l3Dataset100k = ABMDataset("data/static/l3p_100k.csv", root_dir="data/", standardize=True, norm_out=True)
-    sgModel = tc.load("model/l3p_100k_medium_res.pt")
+    sgModel = tc.load("model/l3p_100k_large_batch_normed.pt")
     wt = np.loadtxt("pso/gmm_weight/l3p_t3.txt")
-    # # wt = np.identity(sgModel.output_size)
+    # wt = np.identity(sgModel.output_size)
     # # print(wt)
     x = np.zeros(sgModel.input_size)
     y = np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049])
-    StewartPSO(sgModel, y, wt, n_steps=50, n_particles=500, dataset=l3Dataset100k, standardize=True)
+    
+    
+    estimates = []
+    for i in range(10):   
+        gcost, gbest = StewartPSO(sgModel, y, wt, n_steps=50, n_particles=500, dataset=l3Dataset100k, standardize=False, normalize_out=True, batch=True)
+        estimates.append(gbest)
 
-
-
-
-
+    estimates = np.array(estimates)
+    print(estimates)
+    print(np.mean(estimates,axis=0))
+    print(np.var(estimates, axis=0))
     # print(gmm_cost(x, sgModel, y, wt ))
     # # print(sgModel.parameters)
     # gTruth = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502])

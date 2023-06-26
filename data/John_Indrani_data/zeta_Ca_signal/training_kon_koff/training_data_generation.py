@@ -70,7 +70,7 @@ def pZAP_signal(K1,K2):
           
           
    # #1. Bionetge run : average PZAP   over n run and obseravble is in the (p+1) column
-    n=3 #average over 3  trajectories : John you can change this
+    n=5 #average over 3  trajectories : John you can change this
     p=1 #2nd column in the file: pZAP is printed on the first column, time is printed on the zeroth column
     T,avg=run_bionetgen(n,p) 
     T=np.asarray(T)
@@ -83,7 +83,7 @@ def pZAP_signal(K1,K2):
 def main():
    
     #*****************John you can change
-    p=5 #the number of the parameter sets of [kon,koff,C1,C2,g]
+    p=1000 #the number of the parameter sets of [kon,koff,C1,C2,g]
     
     
     #actual experimental data

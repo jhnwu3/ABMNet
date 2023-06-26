@@ -1,0 +1,70 @@
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/graph.py:103: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  fig, axes = plt.subplots(figsize=(8, 8))
+Normalization of Outputs
+New Max: 1.0
+New Min: 0.0
+Outputting: l3p_100k_large_batch_normed
+Dataset: data/static/l3p_100k.csv
+Length of Training: 96216
+Length of Test: 5064
+Input Dimension: 5
+Output Dimension: 9
+Model Type: -1
+----- Hyperparameters used for final training -----
+Depth of NN: 10
+Hidden Neurons: 256
+# Epochs Used: 400
+Using GPU: True
+Batch Size: 512
+'Finished epoch 0 with loss 36.8727583588489 in time 8.591791152954102'
+'Finished epoch 10 with loss 0.37476162293459836 in time 66.36437821388245'
+'Finished epoch 20 with loss 0.2081931139924357 in time 64.67887830734253'
+'Finished epoch 30 with loss 0.1511242605465423 in time 64.68762230873108'
+'Finished epoch 40 with loss 0.1191047856126921 in time 64.38277959823608'
+'Finished epoch 50 with loss 0.08380461894068188 in time 64.2873125076294'
+'Finished epoch 60 with loss 0.0683326303737834 in time 63.90405011177063'
+'Finished epoch 70 with loss 0.06044117849847052 in time 64.05339980125427'
+'Finished epoch 80 with loss 0.053573135593816545 in time 63.996358156204224'
+'Finished epoch 90 with loss 0.05684648027830007 in time 63.89908170700073'
+'Finished epoch 100 with loss 0.047034219062132 in time 64.0997965335846'
+'Finished epoch 110 with loss 0.045920043702175346 in time 63.77088928222656'
+'Finished epoch 120 with loss 0.0463778174092293 in time 64.06169152259827'
+'Finished epoch 130 with loss 0.04588749679816975 in time 64.0722324848175'
+'Finished epoch 140 with loss 0.045704848805839374 in time 64.00287055969238'
+'Finished epoch 150 with loss 0.04353389284718615 in time 63.93180799484253'
+'Finished epoch 160 with loss 0.03872887983296831 in time 64.13592386245728'
+'Finished epoch 170 with loss 0.040311019827203844 in time 64.14436411857605'
+'Finished epoch 180 with loss 0.04039039456862325 in time 64.08133602142334'
+'Finished epoch 190 with loss 0.04040044801746051 in time 63.9352810382843'
+'Finished epoch 200 with loss 0.032895206263501016 in time 63.916351079940796'
+'Finished epoch 210 with loss 0.03755295096670461 in time 64.13345146179199'
+'Finished epoch 220 with loss 0.043858774857169706 in time 64.10786771774292'
+'Finished epoch 230 with loss 0.039221502968062684 in time 63.869099855422974'
+'Finished epoch 240 with loss 0.03359992669329339 in time 64.06615996360779'
+'Finished epoch 250 with loss 0.03357418406494306 in time 63.90756583213806'
+'Finished epoch 260 with loss 0.03710880113983898 in time 64.14162230491638'
+'Finished epoch 270 with loss 0.03682463926922609 in time 66.11179256439209'
+'Finished epoch 280 with loss 0.038294707446993016 in time 66.42865657806396'
+'Finished epoch 290 with loss 0.037166852841945874 in time 65.56854128837585'
+'Finished epoch 300 with loss 0.03607463637681827 in time 65.45196437835693'
+'Finished epoch 310 with loss 0.0359171948910185 in time 65.57209014892578'
+'Finished epoch 320 with loss 0.03356395356585373 in time 65.5075466632843'
+'Finished epoch 330 with loss 0.03542442052319043 in time 65.36712670326233'
+'Finished epoch 340 with loss 0.032759285181839334 in time 65.52997469902039'
+'Finished epoch 350 with loss 0.03265605145303672 in time 65.41681003570557'
+'Finished epoch 360 with loss 0.03522820085515541 in time 65.56893181800842'
+'Finished epoch 370 with loss 0.03371604079990491 in time 65.55586218833923'
+'Finished epoch 380 with loss 0.030364629569373806 in time 65.53276419639587'
+'Finished epoch 390 with loss 0.030612761294149443 in time 65.5553936958313'
+Using GPU: True
+Final Average MSE On Test Dataset: 8.53638426727207e-05 , Time For Inference: 4.756740093231201
+Unnormalized Max: 535.94
+Unnormalized Min: 0.027
+Final Average Unnormalized MSE: 0.011980972656019448
+Job Statistics for 3812316:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3812316   rsjxw007 2023-06-23T16:52:57 2023-06-23T17:36:23   00:43:26             43:55.577  COMPLETED  0:0   r1pl-hpcf-g04 billing=5,cpu=5,gres/gpu=1,mem=37275M,n+ 
+   3812316.batch            2023-06-23T16:52:57 2023-06-23T17:36:23   00:43:26   1973.30M  43:55.573  COMPLETED  0:0   r1pl-hpcf-g04                                          
+  3812316.extern            2023-06-23T16:52:57 2023-06-23T17:36:23   00:43:26      0.10M  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 20.23% of 03:37:10 core-walltime

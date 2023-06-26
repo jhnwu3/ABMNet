@@ -1,0 +1,24 @@
+/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/sklearn/utils/validation.py:63: FutureWarning: Arrays of bytes/strings is being converted to decimal numbers if dtype='numeric'. This behavior is deprecated in 0.24 and will be removed in 1.1 (renaming of 0.26). Please convert your data to numeric values explicitly instead.
+  return f(*args, **kwargs)
+/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/sklearn/utils/validation.py:63: FutureWarning: Arrays of bytes/strings is being converted to decimal numbers if dtype='numeric'. This behavior is deprecated in 0.24 and will be removed in 1.1 (renaming of 0.26). Please convert your data to numeric values explicitly instead.
+  return f(*args, **kwargs)
+Normalization of Outputs
+New Max: 1.0
+New Min: 0.0
+(2343, 5)
+(2343, 9)
+Traceback (most recent call last):
+[ERROR] [2023-06-23 14:31:53,702:Client-AutoPyTorch:SurrogateL3P:1] Dummy prediction failed with run state StatusType.MEMOUT and additional info:
+error: Memout (used more than 4096 MB).
+configuration_origin: DUMMY.
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/automl.py", line 32, in <module>
+    auto.search(
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/autoPyTorch/api/tabular_regression.py", line 451, in search
+    return self._search(
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/autoPyTorch/api/base_task.py", line 1114, in _search
+    self._do_dummy_prediction()
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/autoPyTorch/api/base_task.py", line 780, in _do_dummy_prediction
+    raise ValueError(err_msg)
+ValueError: Dummy prediction failed with run state StatusType.MEMOUT and additional info:
+error: Memout (used more than 4096 MB).
+configuration_origin: DUMMY.

@@ -11,8 +11,10 @@ def write_array_to_csv(array, column_labels, file_path):
     # Write the DataFrame to a CSV file
     df.to_csv(file_path, index=False)
 
-parent_dir = "data/John_Indrani_data/training_data_large"
-output_path = "data/time_series/indrani_zeta_no_zeroes.pickle"
+
+
+parent_dir = "data/John_Indrani_data/zeta_Ca_signal/training_kon_koff"
+output_path = "data/time_series/indrani_zeta_ca_no_zeroes.pickle"
 # parent_dir = "data/John_Indrani_data/zeta/training_kon_koff"
 parameter_dirs = [os.path.join(parent_dir,x) for x in os.listdir(parent_dir)]
 print(parameter_dirs)
@@ -22,7 +24,7 @@ output = []
 # keep one vector of the time steps too just in case.
 times = []
 for dir in parameter_dirs:
-    if dir != parent_dir and ".txt" in dir:
+    if dir != parent_dir and ".txt" in dir and "train" in dir:
         data = np.loadtxt(dir)
         # print(data.shape)
         rates.append(data[0])

@@ -60,8 +60,8 @@ if __name__ == '__main__':
     if cross:
         kf = KFold(n_splits=3, shuffle=True, random_state=42) # seed it, shuffle it again, and n splits it.
         print(kf)
-        depths_to_search = [2,4,6,8]
-        hidden_sizes_to_search = [32,64,128] # just go up to some reasonable number I guess.
+        depths_to_search = [2,4,6,8,10]
+        hidden_sizes_to_search = [32,64,128,256] # just go up to some reasonable number I guess.
         epochs_to_search = [50, 100, 150] # number of epochs to search and train for
         best_val_mse = np.Inf
         for d_len in depths_to_search:
@@ -106,18 +106,19 @@ if __name__ == '__main__':
     print("Depth of NN:", best_depth)
     print("Hidden Neurons:", best_hidden_size)
     print("# Epochs Used:", best_n_epochs)
+    batch_size = 512
     # now train using whatever cross-validated or user-specified 
     if model_type == 'res_nn':
         ABMNet = train_res_nn(train_dataset, input_size=input_len, hidden_size=best_hidden_size, depth=best_depth, output_size=output_len, nEpochs=best_n_epochs, use_gpu=using_GPU)
     else: 
-        ABMNet = train_nn(train_dataset, input_size=input_len, hidden_size=best_hidden_size, depth=best_depth, output_size=output_len, nEpochs=best_n_epochs, use_gpu=using_GPU)
+        ABMNet = train_nn(train_dataset, input_size=input_len, hidden_size=best_hidden_size, depth=best_depth, output_size=output_len, nEpochs=best_n_epochs, use_gpu=using_GPU, batch_size=batch_size)
         
     if saving_model:
         tc.save(ABMNet, 'model/' + output_name + '.pt')
    
 
-    # Validate On Test
-    mse, time_to_run, predictions, tested = evaluate(ABMNet, test_dataset, use_gpu=using_GPU)
+    # Validate On Test,
+    mse, time_to_run, predictions, tested = evaluate(ABMNet, test_dataset, use_gpu=using_GPU, batch_size=batch_size)
     print('Final Average MSE On Test Dataset:', mse, ', Time For Inference:', time_to_run)
     if normalize_out:
         scale_factor = abm_dataset.output_maxes - abm_dataset.output_mins
@@ -138,6 +139,12 @@ if __name__ == '__main__':
     np.savetxt('data/nn_output/' + output_name + '_predicted.csv', predictions, delimiter=',')
     np.savetxt('data/nn_output/' + output_name + '_test.csv', tested, delimiter=',')
     plot_histograms(tested, predictions, output='graphs/histograms/' + output_name)
-    plot_scatter(tested, predictions, output='graphs/scatter/' + output_name)
+    
+    nSpecies = get_n_species()
+    if nSpecies < 1:
+        nSpecies = None
+    else:
+        nSpecies = int(nSpecies)    
+    plot_scatter(tested, predictions, output='graphs/scatter/' + output_name, nSpecies=nSpecies)
 
     

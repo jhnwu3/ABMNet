@@ -1,0 +1,36 @@
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/graph.py:103: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`).
+  fig, axes = plt.subplots(figsize=(8, 8))
+Normalization of Outputs
+New Max: 1.0
+New Min: 0.0
+Outputting: l3p_100k_medium
+Dataset: data/static/l3p_100k.csv
+Length of Training: 96216
+Length of Test: 5064
+Input Dimension: 5
+Output Dimension: 9
+Model Type: -1
+----- Hyperparameters used for final training -----
+Depth of NN: 5
+Hidden Neurons: 64
+# Epochs Used: 70
+Using GPU: True
+'Finished epoch 0 with loss 137.87809922628142 in time 320.15667390823364'
+'Finished epoch 10 with loss 5.216330073107829 in time 2998.4071254730225'
+'Finished epoch 20 with loss 4.740160490492889 in time 2963.8207910060883'
+'Finished epoch 30 with loss 4.519788321195953 in time 2657.6111114025116'
+'Finished epoch 40 with loss 4.427659099728089 in time 2975.2657101154327'
+'Finished epoch 50 with loss 4.311376837948983 in time 2974.459463596344'
+'Finished epoch 60 with loss 4.2291940625518585 in time 2975.064966440201'
+Using GPU: True
+Final Average MSE On Test Dataset: 3.481333237994326e-05 , Time For Inference: 3.7975499629974365
+Unnormalized Max: 532.985
+Unnormalized Min: 0.0676
+Final Average Unnormalized MSE: 0.0044073150197024135
+Job Statistics for 3810036:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3810036   rsjxw007 2023-06-22T10:43:05 2023-06-22T16:25:47   05:42:42              05:41:18  COMPLETED  0:0   r1pl-hpcf-g04 billing=5,cpu=5,gres/gpu=1,mem=37275M,n+ 
+   3810036.batch            2023-06-22T10:43:05 2023-06-22T16:25:47   05:42:42   1971.14M   05:41:18  COMPLETED  0:0   r1pl-hpcf-g04                                          
+  3810036.extern            2023-06-22T10:43:05 2023-06-22T16:25:47   05:42:42      0.10M  00:00.004  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 19.92% of 1-04:33:30 core-walltime

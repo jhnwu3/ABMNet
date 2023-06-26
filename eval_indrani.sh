@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --time=0-80:10:00 
-#SBATCH --job-name=SpatialABMNetTraining
+#SBATCH --job-name=EvaluationOfIndrani
 #SBATCH --partition=general,das,himem
 #SBATCH --nodes=1
 #SBATCH --output=./data/slurm_outputs/temporal_rnn_interpret%j.txt

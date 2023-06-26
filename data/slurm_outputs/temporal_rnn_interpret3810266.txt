@@ -50,3 +50,10 @@ Traceback (most recent call last):
   File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/functional.py", line 74, in broadcast_tensors
     return _VF.broadcast_tensors(tensors)  # type: ignore[attr-defined]
 RuntimeError: The size of tensor a (17) must match the size of tensor b (20) at non-singleton dimension 0
+Job Statistics for 3810266:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3810266   rsjxw007 2023-06-22T13:39:24 2023-06-22T13:39:31   00:00:07             00:09.101     FAILED  1:0   r1pl-hpcf-g01 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3810266.batch            2023-06-22T13:39:24 2023-06-22T13:39:31   00:00:07          0  00:09.098     FAILED  1:0   r1pl-hpcf-g01                                          
+  3810266.extern            2023-06-22T13:39:24 2023-06-22T13:39:31   00:00:07          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g01                                          
+CPU Efficiency: 8.04% of 00:01:52 core-walltime

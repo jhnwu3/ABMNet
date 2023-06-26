@@ -34,11 +34,13 @@ class NeuralNetwork(nn.Module):
         self.input_size = input_size 
         self.output_size = output_size
         self.input_ff = nn.Linear(input_size, hidden_size)
+        self.bn1 = nn.BatchNorm1d(hidden_size)
         hidden_layers = []
         for i in range(depth):
             hidden_layers.append(ReLuBlock(hidden_size, hidden_size, initialize_kaiming))
         
         self.hidden = nn.Sequential(*hidden_layers)
+        self.bn2 = nn.BatchNorm1d(hidden_size)
         self.output = nn.Linear(hidden_size, output_size)
         
         if initialize_kaiming:
@@ -49,7 +51,9 @@ class NeuralNetwork(nn.Module):
         
     def forward(self, input):
         out = self.input_ff(input)
+        out = self.bn1(out)
         out = self.hidden(out)
+        out = self.bn2(out)
         out = self.output(out)
         # output = self.softmax(line)
         return out 
