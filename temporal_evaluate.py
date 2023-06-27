@@ -26,19 +26,10 @@ true_data = []
 predicted_data = []
 with torch.no_grad():
     for rates, input, true in dataloader:
-        
-        # print(input.size())
-        # print(true.size())
-        # print(data.times)
         predicted, hidden = model(input.to(device).float(), (hidden[0].detach().to(device), hidden[1].detach().to(device)),  rates.to(device).float())
         true_data.append(true.cpu().numpy())
         predicted_data.append(predicted.cpu().numpy())
 
 true_data = np.array(true_data)
 predicted_data = np.array(predicted_data)  
-plot_scatter(true_data, predicted_data, output="graphs/temporal/gamma")     
-        
-    # plt.plot(data.times[1:], true.cpu().numpy(), label="ground truth")
-    # plt.plot(data.times[1:], predicted.cpu().numpy(), label="surrogate")
-    # plt.legend()
-    # plt.savefig("graphs/temporal/indrani_sample1.png")
+plot_scatter(true_data, predicted_data, output="graphs/temporal/gamma")

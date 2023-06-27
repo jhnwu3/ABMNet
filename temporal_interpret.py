@@ -1,38 +1,11 @@
 from modules.utils.interpret import *
 from modules.utils.evaluate import *
 from modules.utils.graph import *
-import pickle 
+from modules.utils.temporal import *
 import torch 
 # data = pickle.load(open(path, "rb"))
 
 # interpret_temporal(data, threshold = 0.00001, path="graphs/temporal/zeta")
-
-# load a model in, and now let's see can it do it from scratch? 
-# how many data points in the future can it predict?
-# and how many data points does it need??
-def generate_time_series(path, model, device, criterion, t_observed, out, fs=1): 
-    data = TemporalDataset(path)
-    
-    test_loss, truth, predicted = generate_temporal(data, model, criterion, device, t_observed, fs=fs)
-
-    print("MSE:", test_loss)
-    # save these matrices for future use.
-    np.savetxt("data/time_series/gen_it" + str(t_observed) + "_zeta_surrogate.csv", predicted, delimiter=",")
-    np.savetxt("data/time_series/tru_it" + str(t_observed) + "_zeta_surrogate.csv", truth, delimiter=",")
-
-    generated = np.loadtxt("data/time_series/gen_it"+ str(t_observed) + "_zeta_surrogate.csv", delimiter=",")
-    truth = np.loadtxt("data/time_series/tru_it"+ str(t_observed) + "_zeta_surrogate.csv", delimiter=",")
-    for i in range(0, len(data), 300):
-        # print(output.size())
-        # print(output.shape)
-        print(truth.shape)
-        print(generated.shape)
-        plot_time_series(truth[i,:], generated[i,:], data.times[t_observed+1:], 
-                        path=out + str(t_observed) + "_set" + str(i) + ".png")
-    
-    plot_scatter(truth, generated, output=out + str(t_observed))
-
-
 path = "data/time_series/indrani_gamma_no_zeroes.pickle"
 device = ""
 if torch.cuda.is_available():
@@ -47,7 +20,4 @@ model = torch.load("model/indrani_gamma_nzero_chunked_fs4.pt", map_location=torc
 print(model)
 model = model.to(device)
 output_path = "graphs/temporal/gamma_chunked_fs4"
-# generate_time_series(path, model, device, criterion, t_observed=50)
 generate_time_series(path, model, device, criterion, t_observed=20, out = output_path, fs=4)
-# generate_time_series(path, model, device, criterion, t_observed=10)
-# generate_time_series(path, model, device, criterion, t_observed=2)
