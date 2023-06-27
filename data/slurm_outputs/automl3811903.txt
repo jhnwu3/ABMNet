@@ -22,3 +22,11 @@ configuration_origin: DUMMY.
 ValueError: Dummy prediction failed with run state StatusType.MEMOUT and additional info:
 error: Memout (used more than 4096 MB).
 configuration_origin: DUMMY.
+slurmstepd: error: *** JOB 3811903 ON r1pl-hpcf-g04 CANCELLED AT 2023-06-26T22:40:40 DUE TO TIME LIMIT ***
+Job Statistics for 3811903:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3811903   rsjxw007 2023-06-23T14:30:26 2023-06-26T22:40:40 3-08:10:14             00:19.029    TIMEOUT  0:0   r1pl-hpcf-g04 billing=8,cpu=8,gres/gpu=1,mem=59640M,n+ 
+   3811903.batch            2023-06-23T14:30:26 2023-06-26T22:40:41 3-08:10:15    574.89M  00:19.025  CANCELLED 0:15   r1pl-hpcf-g04                                          
+  3811903.extern            2023-06-23T14:30:26 2023-06-26T22:40:40 3-08:10:14      0.09M  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 0.00% of 26-17:21:52 core-walltime

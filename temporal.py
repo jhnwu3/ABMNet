@@ -85,10 +85,10 @@ model, device = train_temporal_model(train_data, input_size=data.input_size,
                                      lr= best_lr, n_rates=data.n_rates, 
                                      n_epochs= best_epochs, 
                                      n_layers=int(best_layers), 
-                                     path="model/indrani_gamma_nzero_chunked_fs" + str(future_steps) +".pt",
+                                     path="model/indrani_zeta_ca_chunked_fs" + str(future_steps) +".pt",
                                      batch_size=batch_size)
 # now we evaluate!
 test_loss, truth, predicted = evaluate_temporal(test_data, model, criterion, device, batch_size=batch_size)
 print("Test MSE:", test_loss)
 # plot_time_series_errors(truth, predicted, data.times[1:], path="graphs/temporal/gamma_no_zero_errors_chunked.png")
-plot_scatter(truth, predicted, output="graphs/temporal/gamma_no_zero_chunked_fs" + str(future_steps))     
+plot_scatter(truth, predicted, output="graphs/temporal/zeta_ca_chunked_fs" + str(future_steps))     

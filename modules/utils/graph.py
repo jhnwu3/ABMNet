@@ -127,7 +127,7 @@ def plot_scatter(true, predictions, output='data/graphs/out', nSpecies=None):
         else: 
             axes.scatter(true[:,:nSpecies], predictions[:,:nSpecies], c=categorical[0], label='Means', s=size)
     else:
-        axes.scatter(true.flatten(), predictions.flatten(), c='c')
+        axes.scatter(true.flatten(), predictions.flatten(), c='c', s=size)
             
         # axes.legend(optimal, 'Perfect Prediction')
     axes.legend(loc='upper right')

@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 import torch as tc 
 import pyswarms as ps
 import random
@@ -196,24 +197,32 @@ if __name__ == "__main__":
     # print("MSE of ground truth l3p:", mse_truth)
     
     # # pso for hard trained model
-    l3Dataset100k = ABMDataset("data/static/l3p_100k.csv", root_dir="data/", standardize=True, norm_out=True)
-    sgModel = tc.load("model/l3p_100k_large_batch_normed.pt")
-    wt = np.loadtxt("pso/gmm_weight/l3p_t3.txt")
-    # wt = np.identity(sgModel.output_size)
-    # # print(wt)
-    x = np.zeros(sgModel.input_size)
-    y = np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049])
+    # l3Dataset100k = ABMDataset("data/static/l3p_100k.csv", root_dir="data/", standardize=True, norm_out=True)
+    # sgModel = tc.load("model/l3p_100k_large_batch_normed.pt")
+    # wt = np.loadtxt("pso/gmm_weight/l3p_t3.txt")
+    # # wt = np.identity(sgModel.output_size)
+    # # # print(wt)
+    # x = np.zeros(sgModel.input_size)
+    # y = np.array([12.4509,  6.9795, 9.06247, 93.9796, 31.9489, 84.5102, 53.8117, 72.7715, 47.3049])
     
     
-    estimates = []
-    for i in range(10):   
-        gcost, gbest = StewartPSO(sgModel, y, wt, n_steps=50, n_particles=500, dataset=l3Dataset100k, standardize=False, normalize_out=True, batch=True)
-        estimates.append(gbest)
+    # estimates = []
+    # for i in range(10):   
+    #     gcost, gbest = StewartPSO(sgModel, y, wt, n_steps=50, n_particles=500, dataset=l3Dataset100k, standardize=False, normalize_out=True, batch=True)
+    #     estimates.append(gbest)
 
-    estimates = np.array(estimates)
-    print(estimates)
-    print(np.mean(estimates,axis=0))
-    print(np.var(estimates, axis=0))
+    # estimates = np.array(estimates)
+    # print("Surrogate Estimates:")
+    # print(estimates)
+    # print("Means:",np.mean(estimates,axis=0))
+    # print("Var:",np.var(estimates, axis=0))
+    # # from BioNetGMMFit:
+    bngmm_est = "data/BNGMMFit/model_estimates.csv"
+    print("BioNetGMMFit Estimates 200 Particles, 40 steps:")
+    data = np.genfromtxt(bngmm_est, delimiter=",", skip_header=True)
+    np.set_printoptions(suppress=True)
+    print("Means:", np.mean(data, axis=0))
+    print("Var:", np.var(data, axis=0))
     # print(gmm_cost(x, sgModel, y, wt ))
     # # print(sgModel.parameters)
     # gTruth = np.array([0.27678200,0.83708059,0.44321700,0.04244124, 0.30464502])
