@@ -43,6 +43,9 @@ class TemporalDataset(Dataset):
         self.n_rates = self.rates[0].size()[0]
         self.input_size = 1
         self.steps_into_future = steps
+        self.min = None 
+        self.max = None
+        
         if len(self.outputs[0].size()) > 1:
             print(self.outputs[0].size())
             self.input_size = self.outputs[0].size()[1]
@@ -54,10 +57,12 @@ class TemporalDataset(Dataset):
             for output in self.outputs:
                 arr.append(output.numpy())
             arr = np.array(arr)
+            self.min = arr.min(axis=0).min(axis=0)
+            self.max = arr.max(axis=0).max(axis=0)
             # now to do the ugly min maxing, Don't DO THIS KIDS
             for i in range(len(self.outputs)):
-                self.outputs[i] = self.outputs[i].squeeze() - arr.min()
-                self.outputs[i] /= (arr.max() - arr.min())
+                self.outputs[i] = self.outputs[i].squeeze() - arr.min(axis=0).min(axis=0)
+                self.outputs[i] /= (arr.max(axis=0).max(axis=0) - arr.min(axis=0).min(axis=0))
             
             
     def __len__(self):
@@ -89,7 +94,8 @@ class TemporalChunkedDataset(Dataset):
         if len(self.outputs[0].size()) > 1:
             print(self.outputs[0].size())
             self.input_size = self.outputs[0].size()[1]
-
+        self.min = None 
+        self.max = None
         if min_max_scale:
             # mins and maxes in the most roundabout way possible, haha ;(
             # convert back to numpy to get them mins and maxes 
@@ -97,10 +103,13 @@ class TemporalChunkedDataset(Dataset):
             for output in self.outputs:
                 arr.append(output.numpy())
             arr = np.array(arr)
+            print(arr.shape)
+            self.min = arr.min(axis=0).min(axis=0)
+            self.max = arr.max(axis=0).max(axis=0)
             # now to do the ugly min maxing, Don't DO THIS KIDS
             for i in range(len(self.outputs)):
-                self.outputs[i] = self.outputs[i].squeeze() - arr.min()
-                self.outputs[i] /= (arr.max() - arr.min())
+                self.outputs[i] = self.outputs[i].squeeze() - arr.min(axis=0).min(axis=0)
+                self.outputs[i] /= (arr.max(axis=0).max(axis=0) - arr.min(axis=0).min(axis=0))
             
         # we need to then chunk all of them into little rate x time_chunk_size pairs.
         # and put them back into the self.outputs and self.rates

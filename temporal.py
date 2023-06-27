@@ -7,11 +7,8 @@ import torch
 
 batch_size = 64
 future_steps = 4
-data = TemporalChunkedDataset("data/time_series/indrani_gamma_no_zeroes.pickle",time_chunk_size=20, batch_size=batch_size, steps=future_steps)
+data = TemporalChunkedDataset("data/time_series/indrani_zeta_ca_no_zeroes.pickle",time_chunk_size=20, batch_size=batch_size, steps=future_steps)
 print(len(data))
-# REMINDER: no cross-validation just yet, we will cross-validate next week!!
-# NEED TO REMIND OURSELVES TO WRITE MORE MODULAR CODE SUCH THAT IT IS EASY FOR US TO RUN CROSSVALIDATION
-
 hidden_sizes = [256]
 lrs = [0.01, 0.001]
 range_epochs = [25, 50, 75]
@@ -22,11 +19,6 @@ lrs=[0.001]
 range_epochs = [75]
 range_layers = [4]
 
-# original just to test parameters
-# hidden_size=128
-# lr=0.001
-# n_epochs=50
-# n_layers=3
 K = 2
 kf = KFold(n_splits=K, shuffle=True, random_state=42) # seed it, shuffle it again, and n splits it.
 best_hidden_size = 512
