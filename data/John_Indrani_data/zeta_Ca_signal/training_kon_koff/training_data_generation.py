@@ -83,7 +83,7 @@ def pZAP_signal(K1,K2):
 def main():
    
     #*****************John you can change
-    p=1000 #the number of the parameter sets of [kon,koff,C1,C2,g]
+    p=2500 #the number of the parameter sets of [kon,koff,C1,C2,g]
     
     
     #actual experimental data
