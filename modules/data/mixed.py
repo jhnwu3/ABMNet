@@ -66,7 +66,20 @@ class ABMDataset(Dataset):
         #sample = {'params': tc.tensor(dfRow[:self.final_input_idx]).double(), 'moments': tc.tensor(dfRow[self.final_input_idx:]).double()}
         
         return tc.tensor(dfRow[:self.final_input_idx]).double(), tc.tensor(dfRow[self.final_input_idx:]).double()
-            
+
+
+class StaticDataset(Dataset):
+    def __init__(self, rates, outputs):
+        self.rates = rates
+        self.outputs = outputs
+
+        
+    def __len__(self):
+        return len(self.rates)
+    
+    def __getitem__(self, idx):
+        return self.rates[idx], self.outputs[idx]
+          
 
 class TimeDataset(Dataset):
     def __init__(self, csv_file, root_dir, standardize=False, norm_out = False):

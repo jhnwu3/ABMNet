@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import roadrunner
 import torch
 from torch.utils.data import DataLoader, IterableDataset, Dataset
+from modules.data.mixed import *
 import pickle
 
 def chunk_sequence(sequence, chunk_size):
@@ -144,6 +145,14 @@ class TemporalChunkedDataset(Dataset):
         else: 
             return self.rates[index], self.outputs[index][:-self.steps_into_future].unsqueeze(dim=1), self.outputs[index][self.steps_into_future:].unsqueeze(dim=1)
 
+
+def generate_static_dataset(dataset : TemporalDataset, t):
+    rates = dataset.rates 
+    output = []
+    for i in range(len(dataset)):
+        output.append(dataset.outputs[i][t])
+
+    return StaticDataset(rates, output)
 
 if __name__ == "__main__":
     data = TemporalDataset("data/time_series/indrani_gamma_no_zeroes.pickle")

@@ -188,7 +188,7 @@ def train_temporal_model(data, input_size : int, n_rates : int, hidden_size : in
     return model, device
 
 # train stuff
-def train_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_size, nEpochs, use_gpu = False, batch_size = 512):
+def train_nn(dataset, input_size, hidden_size, depth, output_size, nEpochs, use_gpu = False, batch_size = 512):
     
     model = NeuralNetwork(input_size, hidden_size, depth, output_size).double()
     optimizer = optim.AdamW(model.parameters(),lr=0.0001)
