@@ -34,7 +34,7 @@ def chunk_sequence(sequence, chunk_size):
 class TemporalDataset(Dataset):
     # path to a pickle file that contains a dictionary of the following variables shown below
     # [] is a list of indices of features to keep in the input and output graphs
-    def __init__(self, path, min_max_scale = True, steps=1):
+    def __init__(self, path, min_max_scale = True, standardize_inputs = True, steps=1):
         # Initialize your dataset here
         # Store the necessary data or file paths
         data = pickle.load(open(path, "rb"))
@@ -81,7 +81,7 @@ class TemporalDataset(Dataset):
 
 
 class TemporalChunkedDataset(Dataset):
-    def __init__(self, path, min_max_scale = True, time_chunk_size=5, batch_size=None, steps=5):
+    def __init__(self, path, min_max_scale = True, standardize_inputs = True, time_chunk_size=5, batch_size=None, steps=5):
             # Initialize your dataset here
         # Store the necessary data or file paths
         data = pickle.load(open(path, "rb"))
