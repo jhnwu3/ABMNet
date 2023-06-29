@@ -55,15 +55,15 @@ if __name__ == '__main__':
     best_n_epochs = 0
     best_hidden_size = 0
     best_depth = 0
-    batch_size = 500
+    batch_size = 425
     # we do small cross validation to reduce time for nonlinear 6 protein system.
     if cross:
         kf = KFold(n_splits=3, shuffle=True, random_state=42) # seed it, shuffle it again, and n splits it.
         print(kf)
-        depths_to_search = [2,4,6,8,10]
-        hidden_sizes_to_search = [32,64,128,256] # just go up to some reasonable number I guess.
+        depths_to_search = [2,4,6]
+        hidden_sizes_to_search = [16,32,64] # just go up to some reasonable number I guess.
         epochs_to_search = [50, 100, 150] # number of epochs to search and train for
-        batch_sizes = [10,20,50,100,200,400,1000] 
+        batch_sizes = [425] 
         best_val_mse = np.Inf
         for batch in batch_sizes:
             for d_len in depths_to_search:
