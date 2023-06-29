@@ -9,6 +9,7 @@ from modules.models.spatial import *
 from torch.cuda.amp import autocast
 from modules.models.temporal import *
 from modules.data.temporal import *
+from modules.models.simple import *
 import time 
 class SpatialModel():
     def train_gcn(data, nEpochs, n_inputs, n_outputs, n_rates, initial_graph, edges, hidden_channels, path = ""):
