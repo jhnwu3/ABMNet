@@ -111,6 +111,16 @@ class TemporalChunkedDataset(Dataset):
             for i in range(len(self.outputs)):
                 self.outputs[i] = self.outputs[i].squeeze() - arr.min(axis=0).min(axis=0)
                 self.outputs[i] /= (arr.max(axis=0).max(axis=0) - arr.min(axis=0).min(axis=0))
+        
+        # standard
+        if standardize_inputs:
+            arr = []
+            for rate in self.rates:
+                arr.append(rate.numpy())
+            arr = np.array(arr)
+            for i in range(len(self.rates)):
+                self.rates[i] = (self.rates[i] - arr.mean(axis=0)) / arr.std(axis=0)
+            
             
         # we need to then chunk all of them into little rate x time_chunk_size pairs.
         # and put them back into the self.outputs and self.rates

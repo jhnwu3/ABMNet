@@ -60,8 +60,8 @@ if __name__ == '__main__':
     if cross:
         kf = KFold(n_splits=3, shuffle=True, random_state=42) # seed it, shuffle it again, and n splits it.
         print(kf)
-        depths_to_search = [2,4,6]
-        hidden_sizes_to_search = [16,32,64] # just go up to some reasonable number I guess.
+        depths_to_search = [6,8,10]
+        hidden_sizes_to_search = [64,128,256] # just go up to some reasonable number I guess.
         epochs_to_search = [50, 100, 150] # number of epochs to search and train for
         batch_sizes = [425] 
         best_val_mse = np.Inf
