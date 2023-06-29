@@ -46,12 +46,14 @@ class TemporalDataset(Dataset):
         self.steps_into_future = steps
         self.min = None 
         self.max = None
-        
+        self.input_mean = None
+        self.input_std = None
         if len(self.outputs[0].size()) > 1:
             print(self.outputs[0].size())
             self.input_size = self.outputs[0].size()[1]
             
         if min_max_scale:
+            print("Min Maxed Applied")
             # mins and maxes in the most roundabout way possible, haha ;(
             # convert back to numpy to get them mins and maxes 
             arr = []
@@ -59,12 +61,27 @@ class TemporalDataset(Dataset):
                 arr.append(output.numpy())
             arr = np.array(arr)
             self.min = arr.min(axis=0).min(axis=0)
+            print("Found Minimums:", self.min)
             self.max = arr.max(axis=0).max(axis=0)
+            print("Found Max:", self.max)
             # now to do the ugly min maxing, Don't DO THIS KIDS
             for i in range(len(self.outputs)):
                 self.outputs[i] = self.outputs[i].squeeze() - arr.min(axis=0).min(axis=0)
                 self.outputs[i] /= (arr.max(axis=0).max(axis=0) - arr.min(axis=0).min(axis=0))
-            
+                
+        # standard
+        if standardize_inputs:
+            print("Standardization to Input Parameters Applied")
+            arr = []
+            for rate in self.rates:
+                arr.append(rate.numpy())
+            arr = np.array(arr)
+            self.input_mean = arr.mean(axis=0)
+            self.input_std = arr.std(axis=0)
+            print("Found Mean Rates:", self.input_mean)
+            print("With Std:", self.input_std)
+            for i in range(len(self.rates)):
+                self.rates[i] = (self.rates[i] - arr.mean(axis=0)) / arr.std(axis=0)  
             
     def __len__(self):
         # Return the total number of samples in your dataset
@@ -98,29 +115,35 @@ class TemporalChunkedDataset(Dataset):
         self.min = None 
         self.max = None
         if min_max_scale:
+            print("Min Maxed Applied")
             # mins and maxes in the most roundabout way possible, haha ;(
             # convert back to numpy to get them mins and maxes 
             arr = []
             for output in self.outputs:
                 arr.append(output.numpy())
             arr = np.array(arr)
-            # print(arr.shape)
             self.min = arr.min(axis=0).min(axis=0)
+            print("Found Minimums:", self.min)
             self.max = arr.max(axis=0).max(axis=0)
+            print("Found Max:", self.max)
             # now to do the ugly min maxing, Don't DO THIS KIDS
             for i in range(len(self.outputs)):
                 self.outputs[i] = self.outputs[i].squeeze() - arr.min(axis=0).min(axis=0)
                 self.outputs[i] /= (arr.max(axis=0).max(axis=0) - arr.min(axis=0).min(axis=0))
-        
+                
         # standard
         if standardize_inputs:
+            print("Standardization to Input Parameters Applied")
             arr = []
             for rate in self.rates:
                 arr.append(rate.numpy())
             arr = np.array(arr)
+            self.input_mean = arr.mean(axis=0)
+            self.input_std = arr.std(axis=0)
+            print("Found Mean Rates:", self.input_mean)
+            print("With Std:", self.input_std)
             for i in range(len(self.rates)):
-                self.rates[i] = (self.rates[i] - arr.mean(axis=0)) / arr.std(axis=0)
-            
+                self.rates[i] = (self.rates[i] - arr.mean(axis=0)) / arr.std(axis=0)  
             
         # we need to then chunk all of them into little rate x time_chunk_size pairs.
         # and put them back into the self.outputs and self.rates

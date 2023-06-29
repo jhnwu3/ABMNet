@@ -5,10 +5,10 @@ from modules.utils.evaluate import *
 from sklearn.model_selection import KFold
 import torch
 
-batch_size = 100
+batch_size = 1
 future_steps = 1
 time_chunk_size= 2000
-data = TemporalChunkedDataset("data/time_series/indrani_zeta_ca_no_zeroes_2500.pickle",time_chunk_size=time_chunk_size, batch_size=batch_size, steps=future_steps)
+data = TemporalChunkedDataset("data/time_series/indrani_zeta_ca_no_zeroes.pickle",time_chunk_size=time_chunk_size, batch_size=batch_size, steps=future_steps)
 print("Batch_Size:", batch_size)
 print("Dataset Size:", len(data))
 print("Data Sequence Dimension:", data.outputs[0].size())
