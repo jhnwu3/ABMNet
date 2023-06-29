@@ -10,7 +10,7 @@ model = torch.load('model/l3p_100k_large_batch_normed.pt', map_location=torch.de
 state_dict = model.state_dict()
 
 # Extract the weights
-weights = []
+weights = [] 
 for name, param in state_dict.items():
     if 'weight' in name:
         weights.append(param)
