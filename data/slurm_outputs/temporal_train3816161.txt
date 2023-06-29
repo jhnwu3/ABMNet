@@ -1,0 +1,29 @@
+torch.Size([2000, 2])
+(1000, 2000, 2)
+100000
+5
+2
+Using GPU
+<class 'int'>
+5
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/temporal.py", line 75, in <module>
+    model, device = train_temporal_model(train_data, input_size=data.input_size,
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/train.py", line 176, in train_temporal_model
+    out, lstm_hidden = model(input.to(device).float(), (lstm_hidden[0][:,:input.size()[0],:].detach().contiguous(), lstm_hidden[1][:,:input.size()[0],:].detach().contiguous()), rates.to(device).float())
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/models/temporal.py", line 66, in forward
+    out, hidden = self.lstm(x, hidden)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/rnn.py", line 773, in forward
+    assert (input.dim() in (2, 3)), f"LSTM: Expected input to be 2-D or 3-D but received {input.dim()}-D tensor"
+AssertionError: LSTM: Expected input to be 2-D or 3-D but received 4-D tensor
+Job Statistics for 3816161:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3816161   rsjxw007 2023-06-27T17:07:30 2023-06-27T17:07:48   00:00:18             00:17.053     FAILED  1:0   r1pl-hpcf-g01 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3816161.batch            2023-06-27T17:07:30 2023-06-27T17:07:48   00:00:18          0  00:17.051     FAILED  1:0   r1pl-hpcf-g01                                          
+  3816161.extern            2023-06-27T17:07:30 2023-06-27T17:07:48   00:00:18          0  00:00.002  COMPLETED  0:0   r1pl-hpcf-g01                                          
+CPU Efficiency: 5.90% of 00:04:48 core-walltime

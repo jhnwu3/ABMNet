@@ -5,10 +5,13 @@ from modules.utils.evaluate import *
 from sklearn.model_selection import KFold
 import torch
 
-batch_size = 64
-future_steps = 4
-data = TemporalChunkedDataset("data/time_series/indrani_zeta_ca_no_zeroes.pickle",time_chunk_size=20, batch_size=batch_size, steps=future_steps)
-print(len(data))
+batch_size = 100
+future_steps = 1
+time_chunk_size= 2000
+data = TemporalChunkedDataset("data/time_series/indrani_zeta_ca_no_zeroes_2500.pickle",time_chunk_size=time_chunk_size, batch_size=batch_size, steps=future_steps)
+print("Batch_Size:", batch_size)
+print("Dataset Size:", len(data))
+print("Data Sequence Dimension:", data.outputs[0].size())
 hidden_sizes = [256]
 lrs = [0.01, 0.001]
 range_epochs = [25, 50, 75]
@@ -21,15 +24,17 @@ range_layers = [4]
 
 K = 2
 kf = KFold(n_splits=K, shuffle=True, random_state=42) # seed it, shuffle it again, and n splits it.
-best_hidden_size = 512
+best_hidden_size = 128
 best_lr = 0.0001
-best_epochs = 40
-best_layers = 5
+best_epochs = 50
+best_layers = 4
 
 # split into train and test
 train_size = int(0.8 * len(data))
 test_size = len(data) - train_size
 train_data, test_data = tc.utils.data.random_split(data, [train_size, test_size])
+print("Train Size:", train_size)
+print("Test Size:", test_size)
 
 device = ""
 criterion = torch.nn.MSELoss()
@@ -70,17 +75,24 @@ min_val_loss = 2114218412401248 # cheap max
 #                     # plot_time_series_errors(truth, predicted, data.times[1:], path="graphs/temporal/validation/errors_h" + str(hidden_size) +"lr" + str(lr) + "nEpc" + str(n_epochs) +"nlay" +str(n_layers) +".png")
 
 # do some final training
-print(best_layers)
-print(data.input_size)
+
+print("# LSTM Layers:", best_layers)
+print("Data Input Size:",data.input_size)
+print("hidden sizes:", best_hidden_size)
+print("# Of Epochs:", best_epochs)
+
 model, device = train_temporal_model(train_data, input_size=data.input_size,
-                                     hidden_size= int(best_hidden_size), 
-                                     lr= best_lr, n_rates=data.n_rates, 
-                                     n_epochs= best_epochs, 
-                                     n_layers=int(best_layers), 
-                                     path="model/indrani_zeta_ca_chunked_fs" + str(future_steps) +".pt",
-                                     batch_size=batch_size)
+                                    hidden_size= int(best_hidden_size), 
+                                    lr= best_lr, n_rates=data.n_rates, 
+                                    n_epochs= best_epochs, 
+                                    n_layers=int(best_layers), 
+                                    path="model/indrani_zeta_ca_chunked_fs" + str(future_steps) +".pt",
+                                    batch_size=batch_size)
+
 # now we evaluate!
 test_loss, truth, predicted = evaluate_temporal(test_data, model, criterion, device, batch_size=batch_size)
 print("Test MSE:", test_loss)
-# plot_time_series_errors(truth, predicted, data.times[1:], path="graphs/temporal/gamma_no_zero_errors_chunked.png")
-plot_scatter(truth, predicted, output="graphs/temporal/zeta_ca_chunked_fs" + str(future_steps))     
+print(truth.shape)
+print(predicted.shape)
+plot_time_series_errors(truth, predicted, data.times[1:], path="graphs/temporal/zeta_ca_chunked_errors.png")
+plot_scatter(truth, predicted, output="graphs/temporal/zeta_ca_chunked_fs" + str(future_steps) + "_t" + str(time_chunk_size))     

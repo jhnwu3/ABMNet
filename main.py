@@ -30,7 +30,7 @@ if __name__ == '__main__':
     cross = cross_validate()
     # data
     abm_dataset = ABMDataset(csv_file, root_dir="data/", standardize=normalize, norm_out=normalize_out)
-    train_size = int(0.95 * len(abm_dataset))
+    train_size = int(0.85 * len(abm_dataset))
     test_size = len(abm_dataset) - train_size
     
     # split dataset, into training set and test
@@ -63,32 +63,35 @@ if __name__ == '__main__':
         depths_to_search = [2,4,6,8,10]
         hidden_sizes_to_search = [32,64,128,256] # just go up to some reasonable number I guess.
         epochs_to_search = [50, 100, 150] # number of epochs to search and train for
+        batch_sizes = [10,20,50,100,200,400,1000] 
         best_val_mse = np.Inf
-        for d_len in depths_to_search:
-            for h_size in hidden_sizes_to_search:
-                for epochs in epochs_to_search:
-                    total_val_mse = 0
-                    print("--Scanning Number of Epochs:", epochs)
-                    for fold, (train_index, test_index) in enumerate(kf.split(train_dataset)):
-                        k_train = tc.utils.data.Subset(train_dataset, train_index)
-                        k_test = tc.utils.data.Subset(train_dataset, test_index)
-                        if model_type == 'res_nn':
-                            ABMNet = train_res_nn(k_train, input_size=input_len, hidden_size=h_size, depth=d_len, output_size=output_len, nEpochs=epochs, use_gpu=using_GPU)
-                        else: 
-                            ABMNet = train_nn(k_train, input_size=input_len, hidden_size=h_size, depth=d_len, output_size=output_len, nEpochs=epochs, use_gpu=using_GPU)
-                        mse, time_to_run, predictions, tested = evaluate(ABMNet, test_dataset, use_gpu=using_GPU)
-                        print(repr(f"Fold {fold}, Val_MSE: {mse}"))
-                        total_val_mse += mse
-                        print(repr(f"{d_len} {h_size} {epochs}"))
-                        
-                    # search for best combo of hyperparams
-                    if total_val_mse < best_val_mse:
-                        best_val_mse = total_val_mse
-                        best_depth = d_len 
-                        best_hidden_size = h_size
-                        best_n_epochs = epochs
-                        print("Found New Best Epochs:", best_n_epochs, "New Best Depth:", best_depth, " New Best Hidden Size:", best_hidden_size, " with mse:", best_val_mse)
-            
+        for batch in batch_sizes:
+            for d_len in depths_to_search:
+                for h_size in hidden_sizes_to_search:
+                    for epochs in epochs_to_search:
+                        total_val_mse = 0
+                        print("--Scanning Number of Epochs:", epochs)
+                        for fold, (train_index, test_index) in enumerate(kf.split(train_dataset)):
+                            k_train = tc.utils.data.Subset(train_dataset, train_index)
+                            k_test = tc.utils.data.Subset(train_dataset, test_index)
+                            if model_type == 'res_nn':
+                                ABMNet = train_res_nn(k_train, input_size=input_len, hidden_size=h_size, depth=d_len, output_size=output_len, nEpochs=epochs, use_gpu=using_GPU)
+                            else: 
+                                ABMNet = train_nn(k_train, input_size=input_len, hidden_size=h_size, depth=d_len, output_size=output_len, nEpochs=epochs, use_gpu=using_GPU, batch_size=batch)
+                            mse, time_to_run, predictions, tested = evaluate(ABMNet, k_test, use_gpu=using_GPU, batch_size=batch)
+                            print(repr(f"Fold {fold}, Val_MSE: {mse}"))
+                            total_val_mse += mse
+                            print(repr(f"{d_len} {h_size} {epochs}"))
+                            
+                        # search for best combo of hyperparams
+                        if total_val_mse < best_val_mse:
+                            batch_size = batch
+                            best_val_mse = total_val_mse
+                            best_depth = d_len 
+                            best_hidden_size = h_size
+                            best_n_epochs = epochs
+                            print("Found New Best Epochs:", best_n_epochs, "New Best Depth:", best_depth, " New Best Hidden Size:", best_hidden_size, " with mse:", best_val_mse)
+                
         # print(len(tc.utils.data.Subset(train_dataset, train_index)))
         
     
@@ -106,7 +109,7 @@ if __name__ == '__main__':
     print("Depth of NN:", best_depth)
     print("Hidden Neurons:", best_hidden_size)
     print("# Epochs Used:", best_n_epochs)
-    batch_size = 512
+    # batch_size = 500
     # now train using whatever cross-validated or user-specified 
     if model_type == 'res_nn':
         ABMNet = train_res_nn(train_dataset, input_size=input_len, hidden_size=best_hidden_size, depth=best_depth, output_size=output_len, nEpochs=best_n_epochs, use_gpu=using_GPU)
@@ -119,7 +122,7 @@ if __name__ == '__main__':
 
     # Validate On Test,
     mse, time_to_run, predictions, tested = evaluate(ABMNet, test_dataset, use_gpu=using_GPU, batch_size=batch_size)
-    print('Final Average MSE On Test Dataset:', mse, ', Time For Inference:', time_to_run)
+    print('Final MSE On Test Dataset:', mse, ', Time For Inference:', time_to_run)
     if normalize_out:
         scale_factor = abm_dataset.output_maxes - abm_dataset.output_mins
         # print(scale_factor)

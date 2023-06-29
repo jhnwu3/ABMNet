@@ -93,7 +93,7 @@ class TemporalChunkedDataset(Dataset):
         self.batch_size = batch_size
         self.steps_into_future = steps
         if len(self.outputs[0].size()) > 1:
-            print(self.outputs[0].size())
+            # print(self.outputs[0].size())
             self.input_size = self.outputs[0].size()[1]
         self.min = None 
         self.max = None
@@ -104,7 +104,7 @@ class TemporalChunkedDataset(Dataset):
             for output in self.outputs:
                 arr.append(output.numpy())
             arr = np.array(arr)
-            print(arr.shape)
+            # print(arr.shape)
             self.min = arr.min(axis=0).min(axis=0)
             self.max = arr.max(axis=0).max(axis=0)
             # now to do the ugly min maxing, Don't DO THIS KIDS

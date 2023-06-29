@@ -1,0 +1,128 @@
+Standardization to Input Parameters Applied
+Original Mean Inputs: [4.96350550e-03 5.53003525e+00 7.46723186e+03 5.47594297e+00
+ 5.05116749e-03]
+Original Stds: [2.88953121e-03 2.59400829e+00 1.42298525e+03 2.58551914e+00
+ 2.86515932e-03]
+New Average Input Value: [ 2.30215846e-15 -3.27062821e-15  1.66124892e-15  4.31299441e-16
+ -1.41540113e-15]
+New Std Input Value: [1. 1. 1. 1. 1.]
+max: 9991.864208558663
+Outputting: ixr_1k_zeta_ca_t10
+Dataset: data/static/indrani/indrani_zeta_ca_t10.csv
+Length of Training: 2125
+Length of Test: 375
+Input Dimension: 5
+Output Dimension: 2
+Model Type: -1
+KFold(n_splits=3, random_state=42, shuffle=True)
+--Scanning Number of Epochs: 50
+Using GPU: True
+Batch Size: 10
+'Finished epoch 0 with loss 122.02050631122788 in time 1.1957786083221436'
+'Finished epoch 10 with loss 24.291807635955557 in time 3.5354278087615967'
+'Finished epoch 20 with loss 12.629767987314327 in time 3.897627592086792'
+'Finished epoch 30 with loss 7.289579792860473 in time 4.794290065765381'
+'Finished epoch 40 with loss 4.2968387635244145 in time 3.6963067054748535'
+Using GPU: True
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py", line 81, in <module>
+    mse, time_to_run, predictions, tested = evaluate(ABMNet, test_dataset, use_gpu=using_GPU)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/evaluate.py", line 36, in evaluate
+    prediction = model.forward(input.to(device))
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/models/simple.py", line 54, in forward
+    out = self.bn1(out)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/batchnorm.py", line 138, in forward
+    self._check_input_dim(input)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/batchnorm.py", line 301, in _check_input_dim
+    raise ValueError(
+ValueError: expected 2D or 3D input (got 1D input)
+Standardization to Input Parameters Applied
+Original Mean Inputs: [4.96350550e-03 5.53003525e+00 7.46723186e+03 5.47594297e+00
+ 5.05116749e-03]
+Original Stds: [2.88953121e-03 2.59400829e+00 1.42298525e+03 2.58551914e+00
+ 2.86515932e-03]
+New Average Input Value: [ 2.30215846e-15 -3.27062821e-15  1.66124892e-15  4.31299441e-16
+ -1.41540113e-15]
+New Std Input Value: [1. 1. 1. 1. 1.]
+max: 9991.864208558663
+Outputting: ixr_1k_zeta_ca_t250
+Dataset: data/static/indrani/indrani_zeta_ca_t250.csv
+Length of Training: 2125
+Length of Test: 375
+Input Dimension: 5
+Output Dimension: 2
+Model Type: -1
+KFold(n_splits=3, random_state=42, shuffle=True)
+--Scanning Number of Epochs: 50
+Using GPU: True
+Batch Size: 10
+'Finished epoch 0 with loss 140.97130971919603 in time 1.086482048034668'
+'Finished epoch 10 with loss 17.696598637847753 in time 3.634953260421753'
+'Finished epoch 20 with loss 8.466712455808294 in time 4.6343724727630615'
+'Finished epoch 30 with loss 4.721313977676879 in time 3.7200911045074463'
+'Finished epoch 40 with loss 3.033745415273958 in time 3.756588935852051'
+Using GPU: True
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py", line 81, in <module>
+    mse, time_to_run, predictions, tested = evaluate(ABMNet, test_dataset, use_gpu=using_GPU)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/evaluate.py", line 36, in evaluate
+    prediction = model.forward(input.to(device))
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/models/simple.py", line 54, in forward
+    out = self.bn1(out)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/batchnorm.py", line 138, in forward
+    self._check_input_dim(input)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/batchnorm.py", line 301, in _check_input_dim
+    raise ValueError(
+ValueError: expected 2D or 3D input (got 1D input)
+Standardization to Input Parameters Applied
+Original Mean Inputs: [4.96350550e-03 5.53003525e+00 7.46723186e+03 5.47594297e+00
+ 5.05116749e-03]
+Original Stds: [2.88953121e-03 2.59400829e+00 1.42298525e+03 2.58551914e+00
+ 2.86515932e-03]
+New Average Input Value: [ 2.30215846e-15 -3.27062821e-15  1.66124892e-15  4.31299441e-16
+ -1.41540113e-15]
+New Std Input Value: [1. 1. 1. 1. 1.]
+max: 9991.864208558663
+Outputting: ixr_1k_zeta_ca_t750
+Dataset: data/static/indrani/indrani_zeta_ca_t750.csv
+Length of Training: 2125
+Length of Test: 375
+Input Dimension: 5
+Output Dimension: 2
+Model Type: -1
+KFold(n_splits=3, random_state=42, shuffle=True)
+--Scanning Number of Epochs: 50
+Using GPU: True
+Batch Size: 10
+'Finished epoch 0 with loss 240.26379623699214 in time 1.092012882232666'
+'Finished epoch 10 with loss 42.813267296174814 in time 3.540844202041626'
+'Finished epoch 20 with loss 21.06662944647687 in time 3.9631149768829346'
+'Finished epoch 30 with loss 12.267872723328797 in time 4.028906583786011'
+'Finished epoch 40 with loss 7.922304887686796 in time 4.211613178253174'
+Using GPU: True
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py", line 81, in <module>
+    mse, time_to_run, predictions, tested = evaluate(ABMNet, test_dataset, use_gpu=using_GPU, batch_size=batch)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/evaluate.py", line 36, in evaluate
+    prediction = model.forward(input.to(device))
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/models/simple.py", line 54, in forward
+    out = self.bn1(out)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/batchnorm.py", line 138, in forward
+    self._check_input_dim(input)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/batchnorm.py", line 301, in _check_input_dim
+    raise ValueError(
+ValueError: expected 2D or 3D input (got 1D input)
+slurmstepd: error: *** JOB 3819720 ON r1pl-hpcf-g04 CANCELLED AT 2023-06-28T13:37:39 ***
+Job Statistics for 3819720:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3819720   rsjxw007 2023-06-28T13:34:33 2023-06-28T13:37:39   00:03:06             03:06.936 CANCELLED+  0:0   r1pl-hpcf-g04 billing=5,cpu=5,gres/gpu=1,mem=37275M,n+ 
+   3819720.batch            2023-06-28T13:34:33 2023-06-28T13:37:40   00:03:07   1951.29M  03:06.932  CANCELLED 0:15   r1pl-hpcf-g04                                          
+  3819720.extern            2023-06-28T13:34:33 2023-06-28T13:37:39   00:03:06      0.09M  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 20.11% of 00:15:30 core-walltime

@@ -79,7 +79,32 @@ class StaticDataset(Dataset):
     
     def __getitem__(self, idx):
         return self.rates[idx], self.outputs[idx]
-          
+    
+    def write_to_csv(self, file_path):
+        rates = []
+        output = []
+        for rate in self.rates:
+            rates.append(rate.numpy())
+        for out in self.outputs:
+            output.append(out.numpy())
+            
+        rates = np.array(rates)
+        output = np.array(output)
+        labels = []
+        for i in range(1, rates.shape[1] + 1):
+            labels.append("k" + str(i))
+
+        for o in range(1, output.shape[1] + 1):
+            labels.append("o" + str(o))
+        array = np.zeros((rates.shape[0], rates.shape[1] + output.shape[1]))
+        array[:,:rates.shape[1]] = rates
+        array[:,rates.shape[1]:] = output   
+        # Create a DataFrame from the array and column labels
+        df = pd.DataFrame(data=array, columns=labels)
+
+        # Write the DataFrame to a CSV file
+        df.to_csv(file_path, index=False)
+        
 
 class TimeDataset(Dataset):
     def __init__(self, csv_file, root_dir, standardize=False, norm_out = False):

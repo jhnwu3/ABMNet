@@ -102,15 +102,26 @@ def plot_scatter(true, predictions, output='data/graphs/out', nSpecies=None):
     plt.figure()
     fig, axes = plt.subplots(figsize=(8, 8))
     x123 = np.arange(np.min(true), np.max(true))
-    # print(true)
-    size = 5
-    if len(x123) < 1:
+    # print(np.min(true))
+    # print(np.max(true))
+    # # print(true)
+    # print(x123)
+    size = 2
+    if x123.shape[0] < 2:
         x123 = np.append(x123,[0])
         x123 = np.append(x123,[1])
     elif x123[0] == 0:
         x123 = np.append(x123,[1])
         
     y123 = x123
+    
+    # Sort x123 and y123 in increasing order if necessary
+    sort_indices = np.argsort(x123)
+    x123 = x123[sort_indices]
+    y123 = y123[sort_indices]
+    print("Perfect Line Plotting With X and Y respectively:")
+    print(x123)
+    print(y123)
     categorical = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"]
     optimal = axes.plot(np.unique(x123), np.poly1d(np.polyfit(x123, y123, 1))(np.unique(x123)),'--', c='k', label='Perfect Prediction')
     axes.set_xlabel("Original Model Value")
@@ -184,8 +195,10 @@ def plot_graph_to_img(graph, path =""):
 def plot_time_series_errors(truth, predicted, times, path="graphs/temporal/errors.png"):
     # Calculate element-wise square differences
     print("plotting time errors")
-    differences = np.zeros(np.squeeze(truth[0]).shape)
-    print(truth[0].shape)
+    differences = np.zeros(np.squeeze(truth)[0].shape)
+    # print(truth.shape)
+    # print(differences.shape)
+    # print(predicted.shape)
     diffs = []
     for tru, pred in zip(truth, predicted):
         differences += np.square(np.squeeze(tru) - np.squeeze(pred))
@@ -197,8 +210,8 @@ def plot_time_series_errors(truth, predicted, times, path="graphs/temporal/error
     variances = np.var(diffs,axis=0)
     categorical = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"]
     fig = plt.figure()
-    plt.plot(times, mean_differences, c=categorical[0], label="Mean Square Error")
-    plt.plot(times, variances, c=categorical[1], label="Variances of Square Error")
+    plt.plot(mean_differences[:,1], c=categorical[0], label="Mean Square Error")
+    plt.plot(variances[:,1], c=categorical[1], label="Variances of Square Error")
     plt.xlabel('Time')
     plt.ylabel('Square Error')
     plt.title('Average Error Through Time Across All Parameter Sets')

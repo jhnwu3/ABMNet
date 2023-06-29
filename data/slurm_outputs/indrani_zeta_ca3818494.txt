@@ -1,0 +1,147 @@
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py:135: RankWarning: Polyfit may be poorly conditioned
+  plot_scatter(unnormalized_actual, unnormalized_predictions, output='graphs/scatter/' + output_name +'_og')
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py:148: RankWarning: Polyfit may be poorly conditioned
+  plot_scatter(tested, predictions, output='graphs/scatter/' + output_name, nSpecies=nSpecies)
+Normalization of Outputs
+New Max: 1.0
+New Min: 0.0
+Outputting: ixr_1k_zeta_ca_t10
+Dataset: data/static/indrani/indrani_zeta_ca_t10.csv
+Length of Training: 950
+Length of Test: 50
+Input Dimension: 5
+Output Dimension: 2
+Model Type: -1
+----- Hyperparameters used for final training -----
+Depth of NN: 6
+Hidden Neurons: 128
+# Epochs Used: 100
+Using GPU: True
+Batch Size: 64
+'Finished epoch 0 with loss 12.209801105934417 in time 0.5650854110717773'
+'Finished epoch 10 with loss 5.199417507715928 in time 0.8806579113006592'
+'Finished epoch 20 with loss 2.8868892526792838 in time 0.8822870254516602'
+'Finished epoch 30 with loss 1.453387664323725 in time 0.8781282901763916'
+'Finished epoch 40 with loss 0.7518547006312435 in time 0.8782336711883545'
+'Finished epoch 50 with loss 0.5686455092639339 in time 0.8835387229919434'
+'Finished epoch 60 with loss 0.5709772468254342 in time 0.8778688907623291'
+'Finished epoch 70 with loss 0.5679148280413862 in time 0.8821842670440674'
+'Finished epoch 80 with loss 0.49836413734237367 in time 0.8780121803283691'
+'Finished epoch 90 with loss 0.4867469611816017 in time 0.8764181137084961'
+Using GPU: True
+Final Average MSE On Test Dataset: 0.0482801981315502 , Time For Inference: 0.03360915184020996
+Unnormalized Max: 0.3192934054533767
+Unnormalized Min: 0.0111125007037157
+Final Average Unnormalized MSE: 4.098885909017613e-05
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py:135: RankWarning: Polyfit may be poorly conditioned
+  plot_scatter(unnormalized_actual, unnormalized_predictions, output='graphs/scatter/' + output_name +'_og')
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py:148: RankWarning: Polyfit may be poorly conditioned
+  plot_scatter(tested, predictions, output='graphs/scatter/' + output_name, nSpecies=nSpecies)
+Normalization of Outputs
+New Max: 1.0
+New Min: 0.0
+Outputting: ixr_1k_zeta_ca_t250
+Dataset: data/static/indrani/indrani_zeta_ca_t250.csv
+Length of Training: 950
+Length of Test: 50
+Input Dimension: 5
+Output Dimension: 2
+Model Type: -1
+----- Hyperparameters used for final training -----
+Depth of NN: 6
+Hidden Neurons: 128
+# Epochs Used: 100
+Using GPU: True
+Batch Size: 64
+'Finished epoch 0 with loss 12.649709664784215 in time 0.44324302673339844'
+'Finished epoch 10 with loss 4.8499136988842135 in time 0.882378101348877'
+'Finished epoch 20 with loss 2.7670364577799704 in time 0.8792672157287598'
+'Finished epoch 30 with loss 1.390341116810418 in time 0.8864490985870361'
+'Finished epoch 40 with loss 0.6421283200410345 in time 0.8831102848052979'
+'Finished epoch 50 with loss 0.35782563817754603 in time 0.8828527927398682'
+'Finished epoch 60 with loss 0.2840504671572863 in time 0.8866205215454102'
+'Finished epoch 70 with loss 0.2593096708956526 in time 0.8803622722625732'
+'Finished epoch 80 with loss 0.26473716249708223 in time 0.8816812038421631'
+'Finished epoch 90 with loss 0.2557358188595853 in time 0.8822338581085205'
+Using GPU: True
+Final Average MSE On Test Dataset: 0.011611557787605085 , Time For Inference: 0.03326082229614258
+Unnormalized Max: 0.8149828523758997
+Unnormalized Min: 0.22954906739261893
+Final Average Unnormalized MSE: 0.00012071611500627021
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py:135: RankWarning: Polyfit may be poorly conditioned
+  plot_scatter(unnormalized_actual, unnormalized_predictions, output='graphs/scatter/' + output_name +'_og')
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py:148: RankWarning: Polyfit may be poorly conditioned
+  plot_scatter(tested, predictions, output='graphs/scatter/' + output_name, nSpecies=nSpecies)
+Normalization of Outputs
+New Max: 1.0
+New Min: 0.0
+Outputting: ixr_1k_zeta_ca_t750
+Dataset: data/static/indrani/indrani_zeta_ca_t750.csv
+Length of Training: 950
+Length of Test: 50
+Input Dimension: 5
+Output Dimension: 2
+Model Type: -1
+----- Hyperparameters used for final training -----
+Depth of NN: 6
+Hidden Neurons: 128
+# Epochs Used: 100
+Using GPU: True
+Batch Size: 64
+'Finished epoch 0 with loss 12.425720199528495 in time 0.4442594051361084'
+'Finished epoch 10 with loss 3.4704174474738956 in time 0.8891127109527588'
+'Finished epoch 20 with loss 1.8015992828583989 in time 0.8858661651611328'
+'Finished epoch 30 with loss 0.8390076063317458 in time 0.8876690864562988'
+'Finished epoch 40 with loss 0.4301729591235592 in time 0.8821377754211426'
+'Finished epoch 50 with loss 0.30687111121302835 in time 0.8814311027526855'
+'Finished epoch 60 with loss 0.2573331314136709 in time 0.8853983879089355'
+'Finished epoch 70 with loss 0.2458962663604898 in time 0.8817806243896484'
+'Finished epoch 80 with loss 0.2520330971498596 in time 0.8806397914886475'
+'Finished epoch 90 with loss 0.23877916282484385 in time 0.8833692073822021'
+Using GPU: True
+Final Average MSE On Test Dataset: 0.018625587029178783 , Time For Inference: 0.034134626388549805
+Unnormalized Max: 0.6560816978000559
+Unnormalized Min: 0.114423586923171
+Final Average Unnormalized MSE: 0.0003739146304068075
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py:135: RankWarning: Polyfit may be poorly conditioned
+  plot_scatter(unnormalized_actual, unnormalized_predictions, output='graphs/scatter/' + output_name +'_og')
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py:148: RankWarning: Polyfit may be poorly conditioned
+  plot_scatter(tested, predictions, output='graphs/scatter/' + output_name, nSpecies=nSpecies)
+Normalization of Outputs
+New Max: 1.0
+New Min: 0.0
+Outputting: ixr_1k_zeta_ca_t1750
+Dataset: data/static/indrani/indrani_zeta_ca_t1750.csv
+Length of Training: 950
+Length of Test: 50
+Input Dimension: 5
+Output Dimension: 2
+Model Type: -1
+----- Hyperparameters used for final training -----
+Depth of NN: 6
+Hidden Neurons: 128
+# Epochs Used: 100
+Using GPU: True
+Batch Size: 64
+'Finished epoch 0 with loss 7.263733418851264 in time 0.44559383392333984'
+'Finished epoch 10 with loss 3.53224190109717 in time 0.8996665477752686'
+'Finished epoch 20 with loss 1.738448176466176 in time 0.8947460651397705'
+'Finished epoch 30 with loss 0.7222961871148526 in time 0.8919448852539062'
+'Finished epoch 40 with loss 0.3471462538162561 in time 0.889503002166748'
+'Finished epoch 50 with loss 0.2759300720088257 in time 0.889230489730835'
+'Finished epoch 60 with loss 0.2538173548342098 in time 0.8925862312316895'
+'Finished epoch 70 with loss 0.2555965985987605 in time 0.8862223625183105'
+'Finished epoch 80 with loss 0.2530306154341133 in time 0.8854465484619141'
+'Finished epoch 90 with loss 0.24738344505293794 in time 0.8878533840179443'
+Using GPU: True
+Final Average MSE On Test Dataset: 0.025109918109336063 , Time For Inference: 0.034302473068237305
+Unnormalized Max: 0.9424992471495508
+Unnormalized Min: 0.0168966460810232
+Final Average Unnormalized MSE: 0.0007605648996088427
+Job Statistics for 3818494:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3818494   rsjxw007 2023-06-28T09:52:39 2023-06-28T09:53:42   00:01:03             01:04.730  COMPLETED  0:0   r1pl-hpcf-g01 billing=5,cpu=5,gres/gpu=1,mem=37275M,n+ 
+   3818494.batch            2023-06-28T09:52:39 2023-06-28T09:53:42   00:01:03   1481.08M  01:04.728  COMPLETED  0:0   r1pl-hpcf-g01                                          
+  3818494.extern            2023-06-28T09:52:39 2023-06-28T09:53:42   00:01:03      0.10M  00:00.002  COMPLETED  0:0   r1pl-hpcf-g01                                          
+CPU Efficiency: 20.63% of 00:05:15 core-walltime

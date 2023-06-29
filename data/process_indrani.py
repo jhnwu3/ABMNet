@@ -38,7 +38,7 @@ def get_data_inhomogenous(filename):
     return data   
 
 parent_dir = "data/John_Indrani_data/zeta_Ca_signal/training_kon_koff"
-output_path = "data/time_series/indrani_zeta_ca_no_zeroes.pickle"
+output_path = "data/time_series/indrani_zeta_ca_no_zeroes_2500.pickle"
 # parent_dir = "data/John_Indrani_data/zeta/training_kon_koff"
 parameter_dirs = [os.path.join(parent_dir,x) for x in os.listdir(parent_dir)]
 print(parameter_dirs)
@@ -47,7 +47,7 @@ rates = []
 output = []
 # keep one vector of the time steps too just in case.
 times = []
-destination_dir = "data/zeta_Ca_signal/training_data_1000"
+destination_dir = "data/John_Indrani_data/zeta_Ca_signal/training_data_2500"
 for dir in parameter_dirs:
     if dir != parent_dir and ".txt" in dir and "train" in dir:
         data = get_data_inhomogenous(dir)
@@ -58,7 +58,7 @@ for dir in parameter_dirs:
         if len(times) < 1:
             times = data[1:,0] # keep for plotting
             
-        shutil.move(dir, destination_dir)
+        # shutil.move(dir, destination_dir)
 
 
 # save into tensors and a dictionary

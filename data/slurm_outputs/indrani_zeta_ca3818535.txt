@@ -1,0 +1,167 @@
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py:135: RankWarning: Polyfit may be poorly conditioned
+  plot_scatter(unnormalized_actual, unnormalized_predictions, output='graphs/scatter/' + output_name +'_og')
+Normalization of Outputs
+New Max: 1.0
+New Min: 0.0
+Outputting: ixr_1k_zeta_ca_t10
+Dataset: data/static/indrani/indrani_zeta_ca_t10.csv
+Length of Training: 800
+Length of Test: 200
+Input Dimension: 5
+Output Dimension: 2
+Model Type: -1
+----- Hyperparameters used for final training -----
+Depth of NN: 6
+Hidden Neurons: 128
+# Epochs Used: 100
+Using GPU: True
+Batch Size: 128
+'Finished epoch 0 with loss 11.338266690871661 in time 0.4314916133880615'
+'Finished epoch 10 with loss 3.193766029267157 in time 0.6307220458984375'
+'Finished epoch 20 with loss 2.5709168294535334 in time 0.6208770275115967'
+'Finished epoch 30 with loss 1.9675548526469786 in time 0.6204404830932617'
+'Finished epoch 40 with loss 1.4459574175659826 in time 0.6250927448272705'
+'Finished epoch 50 with loss 1.0550827097049744 in time 0.6237442493438721'
+'Finished epoch 60 with loss 0.7624400237159896 in time 0.6249480247497559'
+'Finished epoch 70 with loss 0.591915817593312 in time 0.6249051094055176'
+'Finished epoch 80 with loss 0.4144519720235171 in time 0.6306602954864502'
+'Finished epoch 90 with loss 0.3231776582546234 in time 0.6266040802001953'
+Using GPU: True
+Final Average MSE On Test Dataset: 0.051863608188935734 , Time For Inference: 0.13874173164367676
+Unnormalized Max: 0.3267498648847673
+Unnormalized Min: 0.0055226145932145
+Final Average Unnormalized MSE: 1.0495858531613496e-05
+Perfect Line Plotting With X and Y respectively:
+[0.00552261]
+[0.00552261]
+Perfect Line Plotting With X and Y respectively:
+[0. 1.]
+[0. 1.]
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py:135: RankWarning: Polyfit may be poorly conditioned
+  plot_scatter(unnormalized_actual, unnormalized_predictions, output='graphs/scatter/' + output_name +'_og')
+Normalization of Outputs
+New Max: 1.0
+New Min: 0.0
+Outputting: ixr_1k_zeta_ca_t250
+Dataset: data/static/indrani/indrani_zeta_ca_t250.csv
+Length of Training: 800
+Length of Test: 200
+Input Dimension: 5
+Output Dimension: 2
+Model Type: -1
+----- Hyperparameters used for final training -----
+Depth of NN: 6
+Hidden Neurons: 128
+# Epochs Used: 100
+Using GPU: True
+Batch Size: 128
+'Finished epoch 0 with loss 10.568807652832243 in time 0.4172537326812744'
+'Finished epoch 10 with loss 2.342559749815427 in time 0.6368558406829834'
+'Finished epoch 20 with loss 1.7116988225301477 in time 0.6270186901092529'
+'Finished epoch 30 with loss 1.260738278323831 in time 0.6272382736206055'
+'Finished epoch 40 with loss 0.8943997663758071 in time 0.6314857006072998'
+'Finished epoch 50 with loss 0.6226799387566204 in time 0.6269869804382324'
+'Finished epoch 60 with loss 0.41767250304723214 in time 0.6266303062438965'
+'Finished epoch 70 with loss 0.29577089263432843 in time 0.6277182102203369'
+'Finished epoch 80 with loss 0.20075065216026156 in time 0.6323404312133789'
+'Finished epoch 90 with loss 0.15965116473413113 in time 0.6328401565551758'
+Using GPU: True
+Final Average MSE On Test Dataset: 0.019753776379711686 , Time For Inference: 0.1380906105041504
+Unnormalized Max: 0.9379609188258868
+Unnormalized Min: 0.0074842436700438
+Final Average Unnormalized MSE: 5.168266184910811e-05
+Perfect Line Plotting With X and Y respectively:
+[0.00748424]
+[0.00748424]
+Perfect Line Plotting With X and Y respectively:
+[0. 1.]
+[0. 1.]
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py:135: RankWarning: Polyfit may be poorly conditioned
+  plot_scatter(unnormalized_actual, unnormalized_predictions, output='graphs/scatter/' + output_name +'_og')
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py:148: RankWarning: Polyfit may be poorly conditioned
+  plot_scatter(tested, predictions, output='graphs/scatter/' + output_name, nSpecies=nSpecies)
+Normalization of Outputs
+New Max: 1.0
+New Min: 0.0
+Outputting: ixr_1k_zeta_ca_t750
+Dataset: data/static/indrani/indrani_zeta_ca_t750.csv
+Length of Training: 800
+Length of Test: 200
+Input Dimension: 5
+Output Dimension: 2
+Model Type: -1
+----- Hyperparameters used for final training -----
+Depth of NN: 6
+Hidden Neurons: 128
+# Epochs Used: 100
+Using GPU: True
+Batch Size: 128
+'Finished epoch 0 with loss 6.8658861808340035 in time 0.41686105728149414'
+'Finished epoch 10 with loss 2.529265249632462 in time 0.6340005397796631'
+'Finished epoch 20 with loss 1.9349222045776104 in time 0.6231706142425537'
+'Finished epoch 30 with loss 1.446374954109115 in time 0.623039960861206'
+'Finished epoch 40 with loss 1.0445758988643712 in time 0.6271770000457764'
+'Finished epoch 50 with loss 0.7424407831484744 in time 0.6232271194458008'
+'Finished epoch 60 with loss 0.5010205568376155 in time 0.6233458518981934'
+'Finished epoch 70 with loss 0.33420796739790704 in time 0.6237130165100098'
+'Finished epoch 80 with loss 0.22767226433457005 in time 0.6289231777191162'
+'Finished epoch 90 with loss 0.1697113707454839 in time 0.6255133152008057'
+Using GPU: True
+Final Average MSE On Test Dataset: 0.02327035879752839 , Time For Inference: 0.13947844505310059
+Unnormalized Max: 0.8793138481350662
+Unnormalized Min: 0.0905126959254167
+Final Average Unnormalized MSE: 0.00011755051222364167
+Perfect Line Plotting With X and Y respectively:
+[0.0905127]
+[0.0905127]
+Perfect Line Plotting With X and Y respectively:
+[0.0119599]
+[0.0119599]
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py:135: RankWarning: Polyfit may be poorly conditioned
+  plot_scatter(unnormalized_actual, unnormalized_predictions, output='graphs/scatter/' + output_name +'_og')
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py:148: RankWarning: Polyfit may be poorly conditioned
+  plot_scatter(tested, predictions, output='graphs/scatter/' + output_name, nSpecies=nSpecies)
+Normalization of Outputs
+New Max: 1.0
+New Min: 0.0
+Outputting: ixr_1k_zeta_ca_t1750
+Dataset: data/static/indrani/indrani_zeta_ca_t1750.csv
+Length of Training: 800
+Length of Test: 200
+Input Dimension: 5
+Output Dimension: 2
+Model Type: -1
+----- Hyperparameters used for final training -----
+Depth of NN: 6
+Hidden Neurons: 128
+# Epochs Used: 100
+Using GPU: True
+Batch Size: 128
+'Finished epoch 0 with loss 13.022464656412225 in time 0.4151322841644287'
+'Finished epoch 10 with loss 2.6007909536318117 in time 0.6338317394256592'
+'Finished epoch 20 with loss 2.0264033966620283 in time 0.6250507831573486'
+'Finished epoch 30 with loss 1.536010701257361 in time 0.6241393089294434'
+'Finished epoch 40 with loss 1.1131930733728763 in time 0.6278724670410156'
+'Finished epoch 50 with loss 0.7984003820712953 in time 0.6242108345031738'
+'Finished epoch 60 with loss 0.5545040189252999 in time 0.6244237422943115'
+'Finished epoch 70 with loss 0.3843771649468881 in time 0.6247844696044922'
+'Finished epoch 80 with loss 0.26224497547892395 in time 0.6293370723724365'
+'Finished epoch 90 with loss 0.1920514553343706 in time 0.6251873970031738'
+Using GPU: True
+Final Average MSE On Test Dataset: 0.028840683009767224 , Time For Inference: 0.13589692115783691
+Unnormalized Max: 0.9461341494244316
+Unnormalized Min: 0.0111848132139277
+Final Average Unnormalized MSE: 0.00022049829884951625
+Perfect Line Plotting With X and Y respectively:
+[0.01118481]
+[0.01118481]
+Perfect Line Plotting With X and Y respectively:
+[0.00199011]
+[0.00199011]
+Job Statistics for 3818535:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3818535   rsjxw007 2023-06-28T11:09:31 2023-06-28T11:10:20   00:00:49             00:54.627  COMPLETED  0:0   r1pl-hpcf-g01 billing=5,cpu=5,gres/gpu=1,mem=37275M,n+ 
+   3818535.batch            2023-06-28T11:09:31 2023-06-28T11:10:20   00:00:49   1477.96M  00:54.625  COMPLETED  0:0   r1pl-hpcf-g01                                          
+  3818535.extern            2023-06-28T11:09:31 2023-06-28T11:10:20   00:00:49      0.09M  00:00.002  COMPLETED  0:0   r1pl-hpcf-g01                                          
+CPU Efficiency: 22.45% of 00:04:05 core-walltime

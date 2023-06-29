@@ -57,6 +57,29 @@ class NeuralNetwork(nn.Module):
         out = self.output(out)
         # output = self.softmax(line)
         return out 
+    
+    
+class MLPReLu(nn.Module):
+    def __init__(self, input_size, hidden_size, depth, output_size, initialize_kaiming=True):
+        super(MLPReLu, self).__init__()
+        self.input_size = input_size 
+        self.output_size = output_size
+        self.input_ff = nn.Linear(input_size, hidden_size)
+        hidden_layers = []
+        for i in range(depth):
+            hidden_layers.append(ReLuBlock(hidden_size, hidden_size, initialize_kaiming))
+        self.hidden = nn.Sequential(*hidden_layers)
+        self.output = nn.Linear(hidden_size, output_size)
+        if initialize_kaiming:
+            init.kaiming_normal_(self.input_ff.weight, mode="fan_in", nonlinearity="relu")
+            init.kaiming_normal_(self.output.weight,mode="fan_in", nonlinearity="relu")
+        
+    def forward(self, input):
+        out = self.input_ff(input)
+        out = self.hidden(out)
+        out = self.output(out)
+        # output = self.softmax(line)
+        return out 
 
 
 class ResidualReLuBlock(nn.Module):

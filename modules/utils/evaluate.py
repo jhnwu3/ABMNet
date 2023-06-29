@@ -44,7 +44,7 @@ def evaluate(model, dataset, use_gpu = False, batch_size=None):
 def evaluate_temporal(data, model : TemporalComplexModel, criterion, device, batch_size=None):
     predicted = []
     truth = []
-    test_dataloader = torch.utils.data.DataLoader(data, batch_size=batch_size, shuffle=False, drop_last=True)
+    test_dataloader = torch.utils.data.DataLoader(data, batch_size=batch_size, shuffle=False, drop_last=False)
     test_loss = 0
     model.eval()
     with torch.no_grad():
@@ -54,11 +54,16 @@ def evaluate_temporal(data, model : TemporalComplexModel, criterion, device, bat
         # Initialize the LSTM hidden state
         hidden = (h_0.to(device), c_0.to(device))
         for rates, input, output in test_dataloader:
+            if len(input.size()) > 3:
+                input = input.squeeze()
+                output = output.squeeze()
             out, hidden = model(input.to(device).float(), (hidden[0].detach().to(device), hidden[1].detach().to(device)), rates.to(device).float())
-            test_loss += criterion(out, output.to(device)).cpu().detach()
-            predicted.append(out.cpu().numpy())
-            truth.append(output.cpu().numpy())
+            test_loss += criterion(out, output.to(device)).cpu().item() / len(data)
+            predicted.append(out.squeeze().cpu().numpy())
+            truth.append(output.squeeze().cpu().numpy())
+    # Now stack each of the numpy arrays if truth and predicted along the correct dimension
     
-    
-    return test_loss.cpu().detach().numpy(), np.array(truth), np.array(predicted)
+        
+    # print(truth)
+    return test_loss, np.concatenate(truth, axis=0), np.concatenate(predicted, axis=0)
     

@@ -126,7 +126,7 @@ class SpatialModel():
         return model, device
 
 
-def train_temporal_model(data, input_size : int, n_rates : int, hidden_size : int, lr : float, n_epochs : int, n_layers : int, path="", batch_size = None):
+def train_temporal_model(data, input_size : int, n_rates : int, hidden_size : int, lr : float, n_epochs : int, n_layers : int, path="", batch_size = None, early_stopping = True):
     device = ""
     if torch.cuda.is_available():
         device = torch.device("cuda")
@@ -140,9 +140,12 @@ def train_temporal_model(data, input_size : int, n_rates : int, hidden_size : in
     criterion = nn.MSELoss()
     criterion = criterion.to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr)
+    
     # train_size = int(0.1 * len(data))
     # test_size = len(data) - train_size
     # train_data, test_data = torch.utils.data.random_split(data, [train_size, test_size])
+    best_training_loss = 30
+    counter = 0
     if batch_size is None:
         dataloader = torch.utils.data.DataLoader(data, batch_size=None, shuffle=True) 
         epoch_start = time.time()
@@ -166,12 +169,15 @@ def train_temporal_model(data, input_size : int, n_rates : int, hidden_size : in
             loss_per_epoch = 0
             h_0 = torch.zeros(n_layers, batch_size, hidden_size)
             c_0 = torch.zeros(n_layers, batch_size, hidden_size)
-
+            
             # Initialize the LSTM hidden state
             lstm_hidden = (h_0.to(device), c_0.to(device))
             # hidden = (torch.zeros(n_layers, hidden_size).detach(), torch.zeros(n_layers, hidden_size).detach())
             for rates, input, output in dataloader:
                 optimizer.zero_grad() # Clears existing gradients from previous epoch
+                if len(input.size()) > 3:
+                    input = input.squeeze()
+                    output = output.squeeze()
                 
                 out, lstm_hidden = model(input.to(device).float(), (lstm_hidden[0][:,:input.size()[0],:].detach().contiguous(), lstm_hidden[1][:,:input.size()[0],:].detach().contiguous()), rates.to(device).float())
                 loss = criterion(out.float(), output.to(device).float())
@@ -181,7 +187,16 @@ def train_temporal_model(data, input_size : int, n_rates : int, hidden_size : in
             if(epoch % 5 == 0):
                 print("Epoch:", epoch, " loss:", loss_per_epoch, " in Time:", time.time() - epoch_start)
                 epoch_start = time.time()
-
+                counter += 1
+            if loss_per_epoch < best_training_loss:
+                best_training_loss = loss_per_epoch
+                counter = 0
+                
+            if counter > 5: 
+                break
+                
+                
+                
     if len(path) > 0:
         torch.save(model, path)
         

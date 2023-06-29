@@ -1,0 +1,119 @@
+Outputting: ixr_1k_zeta_ca_t10
+Dataset: data/static/indrani/indrani_zeta_ca_t10.csv
+Length of Training: 800
+Length of Test: 200
+Input Dimension: 5
+Output Dimension: 2
+Model Type: -1
+----- Hyperparameters used for final training -----
+Depth of NN: 6
+Hidden Neurons: 128
+# Epochs Used: 100
+Using GPU: True
+Batch Size: 128
+'Finished epoch 0 with loss 4.327158582194967 in time 0.4166114330291748'
+'Finished epoch 10 with loss 0.2156306989478828 in time 0.6288409233093262'
+'Finished epoch 20 with loss 0.2283309291286288 in time 0.6199731826782227'
+'Finished epoch 30 with loss 0.06816214029340206 in time 0.6211583614349365'
+'Finished epoch 40 with loss 0.01987376185568205 in time 0.6241276264190674'
+'Finished epoch 50 with loss 0.02161434341342374 in time 0.6236200332641602'
+'Finished epoch 60 with loss 0.02562821089386524 in time 0.6400048732757568'
+'Finished epoch 70 with loss 0.014315798345263791 in time 0.6409614086151123'
+'Finished epoch 80 with loss 0.009951552297750906 in time 0.6332898139953613'
+'Finished epoch 90 with loss 0.01010196756273615 in time 0.6214599609375'
+Using GPU: True
+Final MSE On Test Dataset: 0.0015825111805102268 , Time For Inference: 0.13932561874389648
+Perfect Line Plotting With X and Y respectively:
+[0.         0.00251545 1.        ]
+[0.         0.00251545 1.        ]
+Outputting: ixr_1k_zeta_ca_t250
+Dataset: data/static/indrani/indrani_zeta_ca_t250.csv
+Length of Training: 800
+Length of Test: 200
+Input Dimension: 5
+Output Dimension: 2
+Model Type: -1
+----- Hyperparameters used for final training -----
+Depth of NN: 6
+Hidden Neurons: 128
+# Epochs Used: 100
+Using GPU: True
+Batch Size: 128
+'Finished epoch 0 with loss 5.111174213212008 in time 0.41410231590270996'
+'Finished epoch 10 with loss 0.6849285872456514 in time 0.6306865215301514'
+'Finished epoch 20 with loss 0.4612773829023623 in time 0.6222267150878906'
+'Finished epoch 30 with loss 0.2686714006316991 in time 0.6226763725280762'
+'Finished epoch 40 with loss 0.17138324725667592 in time 0.6264522075653076'
+'Finished epoch 50 with loss 0.11469306342686388 in time 0.6223232746124268'
+'Finished epoch 60 with loss 0.0680899481377721 in time 0.6223504543304443'
+'Finished epoch 70 with loss 0.06030577925080355 in time 0.62164306640625'
+'Finished epoch 80 with loss 0.05550126890117334 in time 0.6265368461608887'
+'Finished epoch 90 with loss 0.042399100812268775 in time 0.6267237663269043'
+Using GPU: True
+Final MSE On Test Dataset: 0.005116998730097009 , Time For Inference: 0.13891124725341797
+Perfect Line Plotting With X and Y respectively:
+[0.         0.13073526 1.        ]
+[0.         0.13073526 1.        ]
+Outputting: ixr_1k_zeta_ca_t750
+Dataset: data/static/indrani/indrani_zeta_ca_t750.csv
+Length of Training: 800
+Length of Test: 200
+Input Dimension: 5
+Output Dimension: 2
+Model Type: -1
+----- Hyperparameters used for final training -----
+Depth of NN: 6
+Hidden Neurons: 128
+# Epochs Used: 100
+Using GPU: True
+Batch Size: 128
+'Finished epoch 0 with loss 8.179317381018478 in time 0.41699743270874023'
+'Finished epoch 10 with loss 1.278181979141711 in time 0.6287732124328613'
+'Finished epoch 20 with loss 0.8854757218279896 in time 0.6201794147491455'
+'Finished epoch 30 with loss 0.5822021841136631 in time 0.6197817325592041'
+'Finished epoch 40 with loss 0.36364703122976005 in time 0.6224873065948486'
+'Finished epoch 50 with loss 0.291258873272113 in time 0.6193373203277588'
+'Finished epoch 60 with loss 0.13537746797586409 in time 0.6274664402008057'
+'Finished epoch 70 with loss 0.09020530627416921 in time 0.6197023391723633'
+'Finished epoch 80 with loss 0.07798383903270623 in time 0.6237096786499023'
+'Finished epoch 90 with loss 0.06768696843481078 in time 0.6194174289703369'
+Using GPU: True
+Final MSE On Test Dataset: 0.016209242283018645 , Time For Inference: 0.13896942138671875
+Perfect Line Plotting With X and Y respectively:
+[0.         0.02595683 1.        ]
+[0.         0.02595683 1.        ]
+Outputting: ixr_1k_zeta_ca_t1750
+Dataset: data/static/indrani/indrani_zeta_ca_t1750.csv
+Length of Training: 800
+Length of Test: 200
+Input Dimension: 5
+Output Dimension: 2
+Model Type: -1
+----- Hyperparameters used for final training -----
+Depth of NN: 6
+Hidden Neurons: 128
+# Epochs Used: 100
+Using GPU: True
+Batch Size: 128
+'Finished epoch 0 with loss 6.015157996581375 in time 0.41823434829711914'
+'Finished epoch 10 with loss 2.536422321861243 in time 0.6393585205078125'
+'Finished epoch 20 with loss 1.986947080680724 in time 0.62923264503479'
+'Finished epoch 30 with loss 1.4946697857740994 in time 0.6276402473449707'
+'Finished epoch 40 with loss 1.0982475140569656 in time 0.6329865455627441'
+'Finished epoch 50 with loss 0.7692811271207133 in time 0.6282753944396973'
+'Finished epoch 60 with loss 0.5233145115739508 in time 0.6285214424133301'
+'Finished epoch 70 with loss 0.3466639698506212 in time 0.642287015914917'
+'Finished epoch 80 with loss 0.22372704873541682 in time 0.6407923698425293'
+'Finished epoch 90 with loss 0.15581748267173703 in time 0.629357099533081'
+Using GPU: True
+Final MSE On Test Dataset: 0.01746938660398923 , Time For Inference: 0.13655829429626465
+Perfect Line Plotting With X and Y respectively:
+[0.         0.00993782 1.        ]
+[0.         0.00993782 1.        ]
+Job Statistics for 3818559:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3818559   rsjxw007 2023-06-28T11:23:02 2023-06-28T11:23:50   00:00:48             00:50.611  COMPLETED  0:0   r1pl-hpcf-g01 billing=5,cpu=5,gres/gpu=1,mem=37275M,n+ 
+   3818559.batch            2023-06-28T11:23:02 2023-06-28T11:23:50   00:00:48   1482.43M  00:50.608  COMPLETED  0:0   r1pl-hpcf-g01                                          
+  3818559.extern            2023-06-28T11:23:02 2023-06-28T11:23:50   00:00:48      0.09M  00:00.002  COMPLETED  0:0   r1pl-hpcf-g01                                          
+CPU Efficiency: 21.25% of 00:04:00 core-walltime

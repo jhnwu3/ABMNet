@@ -49,7 +49,7 @@ class TemporalComplexModel(nn.Module):
         # Fully connected MLP layer
         self.encoder = EncoderLayer(n_rates, hidden_dim, hidden_dim)
         
-        self.fc = NeuralNetwork(hidden_dim*2, hidden_dim, depth=3, output_size=input_size)
+        self.fc = MLPReLu(hidden_dim*2, hidden_dim, depth=2, output_size=input_size)
    
     def forward(self, x, hidden, rates):
 
