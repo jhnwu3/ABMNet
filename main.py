@@ -134,7 +134,7 @@ if __name__ == '__main__':
         print("Unnormalized Min:", unnormalized_actual.min())
         print('Final Average Unnormalized MSE:', numpy_mse(unnormalized_predictions, unnormalized_actual))
         # print("Final Average Percent Error:", avg_percent_error(unnormalized_predictions, unnormalized_actual)) This computation is incorrect and doesn't make any sense at the moment.
-        plot_histograms(unnormalized_actual, unnormalized_predictions,output='graphs/histograms/' + output_name + '_og')
+        plot_histograms_subplots(unnormalized_actual, unnormalized_predictions,output='graphs/histograms/' + output_name + '_og')
         plot_scatter(unnormalized_actual, unnormalized_predictions, output='graphs/scatter/' + output_name +'_og')
         np.savetxt('data/nn_output/' + output_name + '_predicted_og.csv', unnormalized_predictions, delimiter=',')
         np.savetxt('data/nn_output/' + output_name + '_test_og.csv', unnormalized_actual, delimiter=',')
