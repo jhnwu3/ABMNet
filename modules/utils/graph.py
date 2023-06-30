@@ -57,7 +57,38 @@ def plot_histograms(test_dataset, predictions, output='data/graphs/out', transfo
         ax.set_xlabel("Value of Model Output")
         ax.set_ylabel("Number of Parameter Sets")
         plt.savefig(output + str(i) +'.png')
-    
+
+def plot_histograms_subplots(test_dataset, predictions, output='data/graphs/out', transform=False):
+    binwidth = 2
+    true = test_dataset
+    num_plots = true.shape[1]
+    plots_per_row = 4
+    num_rows = int(np.ceil(num_plots / plots_per_row))
+    fig, axes = plt.subplots(num_rows, plots_per_row, figsize=(20, 5*num_rows))
+
+    for i in range(num_plots):
+        row_idx = i // plots_per_row
+        col_idx = i % plots_per_row
+        ax = axes[row_idx, col_idx]
+
+        binwidth = (np.max(true[:, i]) - np.min(true[:, i])) / 20.0
+        if binwidth == 0:
+            binwidth = 1
+
+        ax.hist(true[:, i], bins=bins_list(true[:, i].min(), true[:, i].max(), binwidth), label='Ground Truth')
+        ax.hist(predictions[:, i], bins=bins_list(true[:, i].min(), true[:, i].max(), binwidth), label='Surrogate Model')
+        ax.legend(loc='upper right')
+        ax.set_xlabel("Value of Model Output")
+        ax.set_ylabel("Number of Parameter Sets")
+
+    # Hide empty subplots
+    for i in range(num_plots, num_rows * plots_per_row):
+        row_idx = i // plots_per_row
+        col_idx = i % plots_per_row
+        fig.delaxes(axes[row_idx, col_idx])
+
+    plt.tight_layout()
+    plt.savefig(output + '.png')
 
     # for i in range(true.shape[1]):
     #     binwidth = (np.max(true[:,i]) - np.min(true[:,i]) )/ 10.0
