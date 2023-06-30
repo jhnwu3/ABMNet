@@ -141,7 +141,7 @@ if __name__ == '__main__':
         
     np.savetxt('data/nn_output/' + output_name + '_predicted.csv', predictions, delimiter=',')
     np.savetxt('data/nn_output/' + output_name + '_test.csv', tested, delimiter=',')
-    plot_histograms(tested, predictions, output='graphs/histograms/' + output_name)
+    plot_histograms_subplots(tested, predictions, output='graphs/histograms/' + output_name)
     
     nSpecies = get_n_species()
     if nSpecies < 1:
@@ -154,5 +154,7 @@ if __name__ == '__main__':
 ABMNet =  train_nn(abm_dataset, input_size=input_len, hidden_size=best_hidden_size, depth=best_depth, output_size=output_len, nEpochs=best_n_epochs, use_gpu=using_GPU, batch_size=batch_size)
 mse, time_to_run, predictions, tested = evaluate(ABMNet, abm_dataset, use_gpu=True, batch_size=batch_size)
 print('Final Average MSE On Whole Dataset:', mse, ', Time For Inference:', time_to_run)
+plot_scatter(tested, predictions, output='graphs/scatter/' + output_name +"_full", nSpecies=nSpecies)
+
 if saving_model:
     tc.save(ABMNet, 'model/' + output_name + '_full.pt')
