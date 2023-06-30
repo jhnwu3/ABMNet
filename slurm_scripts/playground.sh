@@ -1,7 +1,9 @@
 git pull
 
 python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t750.csv' -h 96 -d 4 --epochs 150 -o 'ixr_1k_zeta_ca_t750_res_batch' --save --gpu --normalize --normalize_out --type res_nn --batch 500
-
+python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t750.csv' -h 96 -d 4 --epochs 150 -o 'ixr_1k_zeta_ca_t750_res_batch' --save --gpu --normalize --normalize_out --type res_nn --batch 500
+python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t750.csv' -h 96 -d 4 --epochs 150 -o 'ixr_1k_zeta_ca_t750_res_batch' --save --gpu --normalize --normalize_out --type res_nn --batch 500
+python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t750.csv' -h 96 -d 4 --epochs 150 -o 'ixr_1k_zeta_ca_t750_res_batch' --save --gpu --normalize --normalize_out --type res_nn --batch 500
 
 git add .
 git commit -m "$"
