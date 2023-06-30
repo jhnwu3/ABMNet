@@ -62,9 +62,12 @@ def plot_histograms_subplots(test_dataset, predictions, output='data/graphs/out'
     binwidth = 2
     true = test_dataset
     num_plots = true.shape[1]
-    plots_per_row = 4
+    plots_per_row = min(num_plots, 4)
     num_rows = int(np.ceil(num_plots / plots_per_row))
-    fig, axes = plt.subplots(num_rows, plots_per_row, figsize=(20, 5*num_rows))
+    fig, axes = plt.subplots(num_rows, plots_per_row, figsize=(5*plots_per_row, 5*num_rows))
+
+    if num_rows == 1:
+        axes = np.expand_dims(axes, axis=0)
 
     for i in range(num_plots):
         row_idx = i // plots_per_row
