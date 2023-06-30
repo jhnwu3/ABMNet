@@ -1,0 +1,61 @@
+Standardization to Input Parameters Applied
+Original Mean Inputs: [4.95693817e-03 5.50389764e+00 7.46893493e+03 5.50635952e+00
+ 5.07432157e-03]
+Original Stds: [2.89444027e-03 2.59283647e+00 1.42760721e+03 2.58733497e+00
+ 2.85315851e-03]
+New Average Input Value: [ 6.02946264e-16 -4.74642547e-15  7.16937620e-15  2.36306213e-15
+ -5.33719101e-15]
+New Std Input Value: [1. 1. 1. 1. 1.]
+max: 9998.776099064178
+Normalization of Outputs
+New Max: 1.0
+New Min: 0.0
+Outputting: ixr_1k_zeta_ca_t10
+Dataset: data/static/indrani/indrani_zeta_ca_t10.csv
+Length of Training: 2975
+Length of Test: 525
+Input Dimension: 5
+Output Dimension: 2
+Model Type: -1
+----- Hyperparameters used for final training -----
+Depth of NN: 6
+Hidden Neurons: 32
+# Epochs Used: 150
+Using GPU: True
+Batch Size: None
+'Finished epoch 0 with loss 322.4653220973925 in time 12.687796354293823'
+'Finished epoch 10 with loss 4.494104345778589 in time 109.25376844406128'
+'Finished epoch 20 with loss 2.0750979981505306 in time 109.33225965499878'
+'Finished epoch 30 with loss 1.337022050491039 in time 109.31667160987854'
+'Finished epoch 40 with loss 1.0355772775938794 in time 109.31655049324036'
+'Finished epoch 50 with loss 0.8811649381143369 in time 109.2090277671814'
+'Finished epoch 60 with loss 0.7308244612016653 in time 108.87482023239136'
+'Finished epoch 70 with loss 0.6799707954022748 in time 108.68363785743713'
+'Finished epoch 80 with loss 0.6202360299921634 in time 108.61014008522034'
+'Finished epoch 90 with loss 0.5897936434816413 in time 108.60975122451782'
+'Finished epoch 100 with loss 0.5497344642118893 in time 108.94151568412781'
+'Finished epoch 110 with loss 0.5278190410281824 in time 108.96333146095276'
+'Finished epoch 120 with loss 0.5023282710311034 in time 108.98400259017944'
+'Finished epoch 130 with loss 0.5100580186578454 in time 108.97587704658508'
+'Finished epoch 140 with loss 0.4821486832993141 in time 108.99903845787048'
+Using GPU: True
+Final MSE On Test Dataset: 0.0001998973987209697 , Time For Inference: 0.6282856464385986
+Unnormalized Max: 39720.35120007484
+Unnormalized Min: 0.0006626517691761
+Final Average Unnormalized MSE: 13.826525129442135
+Perfect Line Plotting With X and Y respectively:
+[6.62651769e-04 1.00066265e+00 2.00066265e+00 ... 3.97180007e+04
+ 3.97190007e+04 3.97200007e+04]
+[6.62651769e-04 1.00066265e+00 2.00066265e+00 ... 3.97180007e+04
+ 3.97190007e+04 3.97200007e+04]
+Perfect Line Plotting With X and Y respectively:
+[0.         0.00788879 1.        ]
+[0.         0.00788879 1.        ]
+slurmstepd: error: *** JOB 3822475 ON r1pl-hpcf-g04 CANCELLED AT 2023-06-30T13:27:16 ***
+Job Statistics for 3822475:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3822475   rsjxw007 2023-06-30T12:59:21 2023-06-30T13:27:16   00:27:55             27:40.849 CANCELLED+  0:0   r1pl-hpcf-g04 billing=5,cpu=5,gres/gpu=1,mem=37275M,n+ 
+   3822475.batch            2023-06-30T12:59:21 2023-06-30T13:27:17   00:27:56   1957.02M  27:40.845  CANCELLED 0:15   r1pl-hpcf-g04                                          
+  3822475.extern            2023-06-30T12:59:21 2023-06-30T13:27:16   00:27:55      0.10M  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 19.83% of 02:19:35 core-walltime
