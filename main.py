@@ -152,4 +152,7 @@ if __name__ == '__main__':
 
 # full train on entire dataset and evaluate for "maximal" performance on actual parameter estimation task
 ABMNet =  train_nn(abm_dataset, input_size=input_len, hidden_size=best_hidden_size, depth=best_depth, output_size=output_len, nEpochs=best_n_epochs, use_gpu=using_GPU, batch_size=batch_size)
-evaluate(ABMNet, abm_dataset, use_gpu=True, batch_size=batch_size)
+mse, time_to_run, predictions, tested = evaluate(ABMNet, abm_dataset, use_gpu=True, batch_size=batch_size)
+print('Final MSE On Whole Dataset:', mse, ', Time For Inference:', time_to_run)
+if saving_model:
+    tc.save(ABMNet, 'model/' + output_name + '_full.pt')
