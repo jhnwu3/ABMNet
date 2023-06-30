@@ -8,3 +8,5 @@ path = "data/time_series/indrani_zeta_ca_no_zeroes_3500.pickle"
 combined = combine_temporal_pickles(file1, file2, save=True, path=path)
 print(len(combined["outputs"]))
 print(len(combined["rates"]))
+
+seq_data = TemporalDataset(path,min_max_scale=False, standardize_inputs=False)
