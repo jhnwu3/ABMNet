@@ -1,0 +1,111 @@
+Standardization to Input Parameters Applied
+Original Mean Inputs: [4.95693817e-03 5.50389764e+00 7.46893493e+03 5.50635952e+00
+ 5.07432157e-03]
+Original Stds: [2.89444027e-03 2.59283647e+00 1.42760721e+03 2.58733497e+00
+ 2.85315851e-03]
+New Average Input Value: [ 6.02946264e-16 -4.74642547e-15  7.16937620e-15  2.36306213e-15
+ -5.33719101e-15]
+New Std Input Value: [1. 1. 1. 1. 1.]
+max: 9998.776099064178
+Outputting: ixr_1k_zeta_ca_t10
+Dataset: data/static/indrani/indrani_zeta_ca_t10.csv
+Length of Training: 2975
+Length of Test: 525
+Input Dimension: 5
+Output Dimension: 2
+Model Type: -1
+KFold(n_splits=3, random_state=42, shuffle=True)
+--Scanning Number of Epochs: 50
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py", line 80, in <module>
+    ABMNet = train_nn(k_train, input_size=input_len, hidden_size=h_size, depth=d_len, output_size=output_len, nEpochs=epochs, use_gpu=using_GPU, batch_size=batch)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/train.py", line 208, in train_nn
+    model = NeuralNetworkBatch(input_size, hidden_size, depth, output_size).double()
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/models/simple.py", line 33, in __init__
+    super(NeuralNetwork, self).__init__()
+NameError: name 'NeuralNetwork' is not defined. Did you mean: 'NeuralNetworkBatch'?
+Standardization to Input Parameters Applied
+Original Mean Inputs: [4.95693817e-03 5.50389764e+00 7.46893493e+03 5.50635952e+00
+ 5.07432157e-03]
+Original Stds: [2.89444027e-03 2.59283647e+00 1.42760721e+03 2.58733497e+00
+ 2.85315851e-03]
+New Average Input Value: [ 6.02946264e-16 -4.74642547e-15  7.16937620e-15  2.36306213e-15
+ -5.33719101e-15]
+New Std Input Value: [1. 1. 1. 1. 1.]
+max: 9998.776099064178
+Outputting: ixr_1k_zeta_ca_t250
+Dataset: data/static/indrani/indrani_zeta_ca_t250.csv
+Length of Training: 2975
+Length of Test: 525
+Input Dimension: 5
+Output Dimension: 2
+Model Type: -1
+KFold(n_splits=3, random_state=42, shuffle=True)
+--Scanning Number of Epochs: 50
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py", line 80, in <module>
+    ABMNet = train_nn(k_train, input_size=input_len, hidden_size=h_size, depth=d_len, output_size=output_len, nEpochs=epochs, use_gpu=using_GPU, batch_size=batch)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/train.py", line 208, in train_nn
+    model = NeuralNetworkBatch(input_size, hidden_size, depth, output_size).double()
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/models/simple.py", line 33, in __init__
+    super(NeuralNetwork, self).__init__()
+NameError: name 'NeuralNetwork' is not defined. Did you mean: 'NeuralNetworkBatch'?
+Standardization to Input Parameters Applied
+Original Mean Inputs: [4.95693817e-03 5.50389764e+00 7.46893493e+03 5.50635952e+00
+ 5.07432157e-03]
+Original Stds: [2.89444027e-03 2.59283647e+00 1.42760721e+03 2.58733497e+00
+ 2.85315851e-03]
+New Average Input Value: [ 6.02946264e-16 -4.74642547e-15  7.16937620e-15  2.36306213e-15
+ -5.33719101e-15]
+New Std Input Value: [1. 1. 1. 1. 1.]
+max: 9998.776099064178
+Outputting: ixr_1k_zeta_ca_t750
+Dataset: data/static/indrani/indrani_zeta_ca_t750.csv
+Length of Training: 2975
+Length of Test: 525
+Input Dimension: 5
+Output Dimension: 2
+Model Type: -1
+KFold(n_splits=3, random_state=42, shuffle=True)
+--Scanning Number of Epochs: 50
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py", line 80, in <module>
+    ABMNet = train_nn(k_train, input_size=input_len, hidden_size=h_size, depth=d_len, output_size=output_len, nEpochs=epochs, use_gpu=using_GPU, batch_size=batch)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/train.py", line 208, in train_nn
+    model = NeuralNetworkBatch(input_size, hidden_size, depth, output_size).double()
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/models/simple.py", line 33, in __init__
+    super(NeuralNetwork, self).__init__()
+NameError: name 'NeuralNetwork' is not defined. Did you mean: 'NeuralNetworkBatch'?
+Standardization to Input Parameters Applied
+Original Mean Inputs: [4.95693817e-03 5.50389764e+00 7.46893493e+03 5.50635952e+00
+ 5.07432157e-03]
+Original Stds: [2.89444027e-03 2.59283647e+00 1.42760721e+03 2.58733497e+00
+ 2.85315851e-03]
+New Average Input Value: [ 6.02946264e-16 -4.74642547e-15  7.16937620e-15  2.36306213e-15
+ -5.33719101e-15]
+New Std Input Value: [1. 1. 1. 1. 1.]
+max: 9998.776099064178
+Outputting: ixr_1k_zeta_ca_t1750
+Dataset: data/static/indrani/indrani_zeta_ca_t1750.csv
+Length of Training: 2975
+Length of Test: 525
+Input Dimension: 5
+Output Dimension: 2
+Model Type: -1
+KFold(n_splits=3, random_state=42, shuffle=True)
+--Scanning Number of Epochs: 50
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py", line 80, in <module>
+    ABMNet = train_nn(k_train, input_size=input_len, hidden_size=h_size, depth=d_len, output_size=output_len, nEpochs=epochs, use_gpu=using_GPU, batch_size=batch)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/train.py", line 208, in train_nn
+    model = NeuralNetworkBatch(input_size, hidden_size, depth, output_size).double()
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/models/simple.py", line 33, in __init__
+    super(NeuralNetwork, self).__init__()
+NameError: name 'NeuralNetwork' is not defined. Did you mean: 'NeuralNetworkBatch'?
+Job Statistics for 3822473:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3822473   rsjxw007 2023-06-30T12:40:20 2023-06-30T12:40:45   00:00:25             00:22.790     FAILED  1:0   r1pl-hpcf-g04 billing=5,cpu=5,gres/gpu=1,mem=37275M,n+ 
+   3822473.batch            2023-06-30T12:40:20 2023-06-30T12:40:45   00:00:25          0  00:22.787     FAILED  1:0   r1pl-hpcf-g04                                          
+  3822473.extern            2023-06-30T12:40:20 2023-06-30T12:40:45   00:00:25          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 18.40% of 00:02:05 core-walltime
