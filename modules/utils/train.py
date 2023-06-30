@@ -207,7 +207,8 @@ def train_nn(dataset, input_size, hidden_size, depth, output_size, nEpochs, use_
     
     model = NeuralNetworkBatch(input_size, hidden_size, depth, output_size).double()
     if batch_size is None:
-        model = MLPReLu(input_size, hidden_size, depth, output_size)
+        model = MLPReLu(input_size, hidden_size, depth, output_size).double()
+        
     optimizer = optim.AdamW(model.parameters(),lr=0.0001)
     criterion = nn.MSELoss()
     
