@@ -50,7 +50,7 @@ def get_nn_type():
         return -1 
 
 def get_n_species():
-    if '--type' in sys.argv:
+    if '--nSpecies' in sys.argv:
         return sys.argv[sys.argv.index('--nSpecies') + 1]
     else: 
         return -1 
