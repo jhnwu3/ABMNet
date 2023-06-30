@@ -198,8 +198,11 @@ def combine_temporal_pickles(file1, file2, save=True, path=""):
     combined_data = {}
 
     for key in data1:
-        combined_data[key] = data1[key] + data2[key]
-    
+        if key is not "time_points":
+            combined_data[key] = data1[key] + data2[key]
+        else:
+            combined_data[key] = data1[key]
+            
     if save:
         with open(path, 'wb') as f:
             pickle.dump(combined_data, f)
