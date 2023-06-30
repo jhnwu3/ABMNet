@@ -142,3 +142,78 @@ Batch Size: None
 'Finished epoch 130 with loss 0.7179684316897933 in time 83.72587299346924'
 'Finished epoch 140 with loss 0.5710441133465815 in time 83.72964024543762'
 Using GPU: True
+Standardization to Input Parameters Applied
+Original Mean Inputs: [4.95693817e-03 5.50389764e+00 7.46893493e+03 5.50635952e+00
+ 5.07432157e-03]
+Original Stds: [2.89444027e-03 2.59283647e+00 1.42760721e+03 2.58733497e+00
+ 2.85315851e-03]
+New Average Input Value: [ 6.02946264e-16 -4.74642547e-15  7.16937620e-15  2.36306213e-15
+ -5.33719101e-15]
+New Std Input Value: [1. 1. 1. 1. 1.]
+max: 9998.776099064178
+Normalization of Outputs
+New Max: 1.0
+New Min: 0.0
+Outputting: ixr_1k_zeta_ca_t750
+Dataset: data/static/indrani/indrani_zeta_ca_t750.csv
+Length of Training: 2975
+Length of Test: 525
+Input Dimension: 5
+Output Dimension: 2
+Model Type: -1
+----- Hyperparameters used for final training -----
+Depth of NN: 10
+Hidden Neurons: 64
+# Epochs Used: 150
+Using GPU: True
+Batch Size: None
+'Finished epoch 0 with loss 205.7702364600852 in time 8.538707494735718'
+'Finished epoch 10 with loss 4.988881585284752 in time 81.71540927886963'
+'Finished epoch 20 with loss 3.1523956597101344 in time 81.68478918075562'
+'Finished epoch 30 with loss 2.077341652072754 in time 81.63093948364258'
+'Finished epoch 40 with loss 1.9589849521634524 in time 81.74165034294128'
+'Finished epoch 50 with loss 1.6924336451683466 in time 81.70110654830933'
+'Finished epoch 60 with loss 1.3002575829680636 in time 81.74772810935974'
+'Finished epoch 70 with loss 1.0052693808226305 in time 81.74690198898315'
+'Finished epoch 80 with loss 0.7553231704648892 in time 81.59595727920532'
+'Finished epoch 90 with loss 1.0417328431243054 in time 81.74107336997986'
+'Finished epoch 100 with loss 0.9865538836792983 in time 81.68198204040527'
+'Finished epoch 110 with loss 0.7849961749876033 in time 81.77857184410095'
+'Finished epoch 120 with loss 0.787492377204737 in time 81.77115631103516'
+'Finished epoch 130 with loss 0.7216369459797902 in time 81.69674277305603'
+'Finished epoch 140 with loss 0.508332686449655 in time 81.77859497070312'
+Using GPU: True
+Final MSE On Test Dataset: 0.000540525117730782 , Time For Inference: 0.4660642147064209
+Unnormalized Max: 100348.0815421506
+Unnormalized Min: 0.01233740709495
+Final Average Unnormalized MSE: 1013.5838259035766
+Perfect Line Plotting With X and Y respectively:
+[1.23374071e-02 1.01233741e+00 2.01233741e+00 ... 1.00346012e+05
+ 1.00347012e+05 1.00348012e+05]
+[1.23374071e-02 1.01233741e+00 2.01233741e+00 ... 1.00346012e+05
+ 1.00347012e+05 1.00348012e+05]
+Perfect Line Plotting With X and Y respectively:
+[0.         0.00580051 1.        ]
+[0.         0.00580051 1.        ]
+Using GPU: True
+Batch Size: None
+'Finished epoch 0 with loss 148.91327187744253 in time 9.625240802764893'
+'Finished epoch 10 with loss 5.272243533375523 in time 96.36680245399475'
+'Finished epoch 20 with loss 3.220712591664212 in time 96.431077003479'
+'Finished epoch 30 with loss 2.3705484920265953 in time 96.48503923416138'
+'Finished epoch 40 with loss 1.8338173456736704 in time 96.42679953575134'
+'Finished epoch 50 with loss 1.6095589078547385 in time 96.32195925712585'
+'Finished epoch 60 with loss 1.6446235240254403 in time 96.40859746932983'
+'Finished epoch 70 with loss 1.5527424012610982 in time 96.39618873596191'
+'Finished epoch 80 with loss 1.312764243026972 in time 95.83668422698975'
+'Finished epoch 90 with loss 1.0289728908707692 in time 95.69490909576416'
+'Finished epoch 100 with loss 1.1053187683263836 in time 95.95273303985596'
+'Finished epoch 110 with loss 0.9775201384610347 in time 95.93791484832764'
+'Finished epoch 120 with loss 0.9013887547138282 in time 95.91353344917297'
+'Finished epoch 130 with loss 0.941139191392466 in time 95.92917084693909'
+'Finished epoch 140 with loss 0.9174808012461372 in time 95.71362853050232'
+Using GPU: True
+Final Average MSE On Whole Dataset: 0.00021269093179075366 , Time For Inference: 3.114800453186035
+Perfect Line Plotting With X and Y respectively:
+[0. 0. 1.]
+[0. 0. 1.]
