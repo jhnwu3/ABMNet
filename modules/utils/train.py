@@ -263,6 +263,7 @@ def train_res_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_si
         using_gpu = False
 
     print(f"Using GPU: {using_gpu}")
+    print("Batch Size:", batch_size)
     model.train()
     epoch_start = time.time()
     loader = tc.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True)
