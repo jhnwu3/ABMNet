@@ -55,7 +55,7 @@ if __name__ == '__main__':
     best_n_epochs = 0
     best_hidden_size = 0
     best_depth = 0
-    batch_size = None
+    batch_size = get_batch_size()
     # we do small cross validation to reduce time for nonlinear 6 protein system.
     if cross:
         kf = KFold(n_splits=3, shuffle=True, random_state=42) # seed it, shuffle it again, and n splits it.
@@ -150,4 +150,6 @@ if __name__ == '__main__':
         nSpecies = int(nSpecies)    
     plot_scatter(tested, predictions, output='graphs/scatter/' + output_name, nSpecies=nSpecies)
 
-    
+# full train on entire dataset and evaluate for "maximal" performance on actual parameter estimation task
+ABMNet =  train_nn(abm_dataset, input_size=input_len, hidden_size=best_hidden_size, depth=best_depth, output_size=output_len, nEpochs=best_n_epochs, use_gpu=using_GPU, batch_size=batch_size)
+evaluate(ABMNet, abm_dataset, use_gpu=True, batch_size=batch_size)

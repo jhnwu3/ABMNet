@@ -54,3 +54,9 @@ def get_n_species():
         return sys.argv[sys.argv.index('--nSpecies') + 1]
     else: 
         return -1 
+    
+def get_batch_size():
+    if '--batch' in sys.argv: 
+        return int(sys.argv[sys.argv.index('--batch') + 1])
+    else: 
+        return None
