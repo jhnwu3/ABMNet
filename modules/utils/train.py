@@ -283,7 +283,7 @@ def train_res_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_si
             print(repr(f"Finished epoch {epoch} with loss {loss_this_epoch} in time {time.time() - epoch_start}"))
             epoch_start = time.time()
             
-#     return model  
+    return model  
 
 
 # def train_rnn(dataset : ABMDataset, input_size, hidden_size, depth, output_size, nEpochs, use_gpu = False):
