@@ -30,7 +30,7 @@ class ReLuBlock(nn.Module):
 
 class NeuralNetworkBatch(nn.Module):
     def __init__(self, input_size, hidden_size, depth, output_size, initialize_kaiming=True):
-        super(NeuralNetwork, self).__init__()
+        super(NeuralNetworkBatch, self).__init__()
         self.input_size = input_size 
         self.output_size = output_size
         self.input_ff = nn.Linear(input_size, hidden_size)

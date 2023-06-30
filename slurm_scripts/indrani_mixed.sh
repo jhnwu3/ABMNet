@@ -26,9 +26,9 @@
 # python3 main.py -i 'data/static/l3p_pso.csv' -d 4 -h 64 --epochs 50 -o 'l3p_pso_early_tsteps' --save --gpu --normalize_out 
 
 
-python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t10.csv' -o 'ixr_1k_zeta_ca_t10' --save --gpu --normalize --cross
-python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t250.csv' -o 'ixr_1k_zeta_ca_t250' --save --gpu --normalize --cross
-python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t750.csv' -o 'ixr_1k_zeta_ca_t750' --save --gpu --normalize --cross
-python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t1750.csv' -o 'ixr_1k_zeta_ca_t1750' --save --gpu --normalize --cross
+# python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t10.csv' -o 'ixr_1k_zeta_ca_t10' --save --gpu --normalize --cross
+# python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t250.csv' -o 'ixr_1k_zeta_ca_t250' --save --gpu --normalize --cross
+# python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t750.csv' -o 'ixr_1k_zeta_ca_t750' --save --gpu --normalize --cross
+# python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t1750.csv' -o 'ixr_1k_zeta_ca_t1750' --save --gpu --normalize --cross
 
-# python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t750.csv' -d 4 -h 64 --epochs 50 -o 'ixr_1k_zeta_ca_t750' --save --gpu --normalize --normalize_out
+python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t750.csv' -d 4 -h 64 --epochs 50 -o 'ixr_1k_zeta_ca_t750' --save --gpu --normalize --normalize_out
