@@ -247,7 +247,7 @@ def train_nn(dataset, input_size, hidden_size, depth, output_size, nEpochs, use_
     return model  
 
 
-def train_res_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_size, nEpochs, use_gpu = False):
+def train_res_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_size, nEpochs, use_gpu = False, batch_size=None):
     
     model = ResidualNN(input_size, hidden_size, depth, output_size).double()
     optimizer = optim.AdamW(model.parameters())
@@ -265,7 +265,7 @@ def train_res_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_si
     print(f"Using GPU: {using_gpu}")
     model.train()
     epoch_start = time.time()
-    loader = tc.utils.data.DataLoader(dataset, batch_size=None, shuffle=True)
+    loader = tc.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True)
     for epoch in range(nEpochs):
         
         loss_this_epoch = 0
