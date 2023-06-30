@@ -217,3 +217,85 @@ Final Average MSE On Whole Dataset: 0.00021269093179075366 , Time For Inference:
 Perfect Line Plotting With X and Y respectively:
 [0. 0. 1.]
 [0. 0. 1.]
+Standardization to Input Parameters Applied
+Original Mean Inputs: [4.95693817e-03 5.50389764e+00 7.46893493e+03 5.50635952e+00
+ 5.07432157e-03]
+Original Stds: [2.89444027e-03 2.59283647e+00 1.42760721e+03 2.58733497e+00
+ 2.85315851e-03]
+New Average Input Value: [ 6.02946264e-16 -4.74642547e-15  7.16937620e-15  2.36306213e-15
+ -5.33719101e-15]
+New Std Input Value: [1. 1. 1. 1. 1.]
+max: 9998.776099064178
+Normalization of Outputs
+New Max: 1.0
+New Min: 0.0
+Outputting: ixr_1k_zeta_ca_t1750
+Dataset: data/static/indrani/indrani_zeta_ca_t1750.csv
+Length of Training: 2975
+Length of Test: 525
+Input Dimension: 5
+Output Dimension: 2
+Model Type: -1
+----- Hyperparameters used for final training -----
+Depth of NN: 10
+Hidden Neurons: 128
+# Epochs Used: 150
+Using GPU: True
+Batch Size: None
+'Finished epoch 0 with loss 183.4181895340972 in time 8.616216897964478'
+'Finished epoch 10 with loss 5.844287010098134 in time 82.39572620391846'
+'Finished epoch 20 with loss 3.396135903551775 in time 82.24727320671082'
+'Finished epoch 30 with loss 2.93801639107485 in time 82.23676633834839'
+'Finished epoch 40 with loss 1.9028866191590015 in time 82.22513508796692'
+'Finished epoch 50 with loss 1.4626230934213038 in time 82.18848037719727'
+'Finished epoch 60 with loss 1.1681306238307196 in time 82.20189166069031'
+'Finished epoch 70 with loss 1.4460336272689571 in time 82.16766309738159'
+'Finished epoch 80 with loss 1.011557435747395 in time 82.14778351783752'
+'Finished epoch 90 with loss 0.8421922380810398 in time 82.1719810962677'
+'Finished epoch 100 with loss 0.9789141170315586 in time 82.18136715888977'
+'Finished epoch 110 with loss 0.7077810113298196 in time 82.06929159164429'
+'Finished epoch 120 with loss 0.7847165943496162 in time 81.85801005363464'
+'Finished epoch 130 with loss 0.8320831514007203 in time 81.9388120174408'
+'Finished epoch 140 with loss 0.5268017303926967 in time 81.92255020141602'
+Using GPU: True
+Final MSE On Test Dataset: 0.0007728853286244899 , Time For Inference: 0.46863746643066406
+Unnormalized Max: 100004.8468734754
+Unnormalized Min: 0.0159443052176279
+Final Average Unnormalized MSE: 2137.3840758282095
+Perfect Line Plotting With X and Y respectively:
+[1.59443052e-02 1.01594431e+00 2.01594431e+00 ... 1.00002016e+05
+ 1.00003016e+05 1.00004016e+05]
+[1.59443052e-02 1.01594431e+00 2.01594431e+00 ... 1.00002016e+05
+ 1.00003016e+05 1.00004016e+05]
+Perfect Line Plotting With X and Y respectively:
+[0. 0. 1.]
+[0. 0. 1.]
+Using GPU: True
+Batch Size: None
+'Finished epoch 0 with loss 211.39707026833148 in time 9.645653247833252'
+'Finished epoch 10 with loss 5.72958522916093 in time 96.67473816871643'
+'Finished epoch 20 with loss 3.7877467935759026 in time 96.96148300170898'
+'Finished epoch 30 with loss 3.174067579704846 in time 96.9715723991394'
+'Finished epoch 40 with loss 1.9196399272527676 in time 96.90738344192505'
+'Finished epoch 50 with loss 1.4456123498152806 in time 96.91119074821472'
+'Finished epoch 60 with loss 1.7564508720209586 in time 96.88331985473633'
+'Finished epoch 70 with loss 1.3563661203240225 in time 96.93944263458252'
+'Finished epoch 80 with loss 1.4122626070094535 in time 96.88922715187073'
+'Finished epoch 90 with loss 1.5288309657860182 in time 96.9152524471283'
+'Finished epoch 100 with loss 0.9413105079788299 in time 96.90424060821533'
+'Finished epoch 110 with loss 1.0886072998166423 in time 96.86800980567932'
+'Finished epoch 120 with loss 0.9240269951984105 in time 96.87734723091125'
+'Finished epoch 130 with loss 1.1311500227587135 in time 96.90058398246765'
+'Finished epoch 140 with loss 1.6403590587622299 in time 96.93620562553406'
+Using GPU: True
+Final Average MSE On Whole Dataset: 7.215842499808026e-05 , Time For Inference: 3.121321439743042
+Perfect Line Plotting With X and Y respectively:
+[0. 0. 1.]
+[0. 0. 1.]
+Job Statistics for 3822486:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3822486   rsjxw007 2023-06-30T13:40:12 2023-06-30T16:21:13   02:41:01              02:40:04  COMPLETED  0:0   r1pl-hpcf-g01 billing=5,cpu=5,gres/gpu=1,mem=37275M,n+ 
+   3822486.batch            2023-06-30T13:40:12 2023-06-30T16:21:13   02:41:01   1764.48M   02:40:04  COMPLETED  0:0   r1pl-hpcf-g01                                          
+  3822486.extern            2023-06-30T13:40:12 2023-06-30T16:21:13   02:41:01      0.10M  00:00.002  COMPLETED  0:0   r1pl-hpcf-g01                                          
+CPU Efficiency: 19.88% of 13:25:05 core-walltime
