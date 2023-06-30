@@ -71,3 +71,74 @@ Batch Size: None
 'Finished epoch 130 with loss 0.6488741026625383 in time 70.25387167930603'
 'Finished epoch 140 with loss 0.6003040773037225 in time 70.1801187992096'
 Using GPU: True
+Standardization to Input Parameters Applied
+Original Mean Inputs: [4.95693817e-03 5.50389764e+00 7.46893493e+03 5.50635952e+00
+ 5.07432157e-03]
+Original Stds: [2.89444027e-03 2.59283647e+00 1.42760721e+03 2.58733497e+00
+ 2.85315851e-03]
+New Average Input Value: [ 6.02946264e-16 -4.74642547e-15  7.16937620e-15  2.36306213e-15
+ -5.33719101e-15]
+New Std Input Value: [1. 1. 1. 1. 1.]
+max: 9998.776099064178
+Normalization of Outputs
+New Max: 1.0
+New Min: 0.0
+Outputting: ixr_1k_zeta_ca_t250
+Dataset: data/static/indrani/indrani_zeta_ca_t250.csv
+Length of Training: 2975
+Length of Test: 525
+Input Dimension: 5
+Output Dimension: 2
+Model Type: -1
+----- Hyperparameters used for final training -----
+Depth of NN: 8
+Hidden Neurons: 64
+# Epochs Used: 150
+Using GPU: True
+Batch Size: None
+'Finished epoch 0 with loss 226.31658228392251 in time 7.496789932250977'
+'Finished epoch 10 with loss 4.55202810992379 in time 71.31056118011475'
+'Finished epoch 20 with loss 2.2696809516779437 in time 71.34903025627136'
+'Finished epoch 30 with loss 1.761868803725587 in time 71.33980417251587'
+'Finished epoch 40 with loss 1.5614936307717757 in time 71.3748710155487'
+'Finished epoch 50 with loss 1.077950895635443 in time 71.26143383979797'
+'Finished epoch 60 with loss 0.9921622419781865 in time 71.11668992042542'
+'Finished epoch 70 with loss 0.9540345173088853 in time 71.08232760429382'
+'Finished epoch 80 with loss 0.9445535325427499 in time 71.08093237876892'
+'Finished epoch 90 with loss 0.6716851564164825 in time 71.08471488952637'
+'Finished epoch 100 with loss 0.7105339209382033 in time 70.85801196098328'
+'Finished epoch 110 with loss 0.6259372497013814 in time 70.8961169719696'
+'Finished epoch 120 with loss 0.6337420537268151 in time 70.96280241012573'
+'Finished epoch 130 with loss 0.6772262408264332 in time 70.89961433410645'
+'Finished epoch 140 with loss 0.6177450014001139 in time 70.91603946685791'
+Using GPU: True
+Final MSE On Test Dataset: 0.0002674416789121755 , Time For Inference: 0.419710636138916
+Unnormalized Max: 107876.31334490336
+Unnormalized Min: 0.0029053208400812
+Final Average Unnormalized MSE: 2082.4379944140364
+Perfect Line Plotting With X and Y respectively:
+[2.90532084e-03 1.00290532e+00 2.00290532e+00 ... 1.07874003e+05
+ 1.07875003e+05 1.07876003e+05]
+[2.90532084e-03 1.00290532e+00 2.00290532e+00 ... 1.07874003e+05
+ 1.07875003e+05 1.07876003e+05]
+Perfect Line Plotting With X and Y respectively:
+[0.         0.00765235 1.        ]
+[0.         0.00765235 1.        ]
+Using GPU: True
+Batch Size: None
+'Finished epoch 0 with loss 252.975337216235 in time 8.38461947441101'
+'Finished epoch 10 with loss 4.134342536101882 in time 83.6559829711914'
+'Finished epoch 20 with loss 2.5507279301058636 in time 83.62920331954956'
+'Finished epoch 30 with loss 1.6719793413654827 in time 83.63839673995972'
+'Finished epoch 40 with loss 1.4594348448559993 in time 83.64680075645447'
+'Finished epoch 50 with loss 1.1874064928007289 in time 83.67675757408142'
+'Finished epoch 60 with loss 1.1402462969339275 in time 83.6551685333252'
+'Finished epoch 70 with loss 1.0269770835471848 in time 83.63919401168823'
+'Finished epoch 80 with loss 1.0881566898938653 in time 83.73975324630737'
+'Finished epoch 90 with loss 0.8002137749457415 in time 83.62633061408997'
+'Finished epoch 100 with loss 0.6687825995862493 in time 83.68044829368591'
+'Finished epoch 110 with loss 0.795002296970688 in time 83.69970226287842'
+'Finished epoch 120 with loss 0.836373658007968 in time 83.71894097328186'
+'Finished epoch 130 with loss 0.7179684316897933 in time 83.72587299346924'
+'Finished epoch 140 with loss 0.5710441133465815 in time 83.72964024543762'
+Using GPU: True
