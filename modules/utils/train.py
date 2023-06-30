@@ -196,8 +196,7 @@ def train_temporal_model(data, input_size : int, n_rates : int, hidden_size : in
             if counter > 5: 
                 break
                 
-                
-                
+
     if len(path) > 0:
         torch.save(model, path)
         
@@ -206,7 +205,9 @@ def train_temporal_model(data, input_size : int, n_rates : int, hidden_size : in
 # train stuff
 def train_nn(dataset, input_size, hidden_size, depth, output_size, nEpochs, use_gpu = False, batch_size = 512):
     
-    model = NeuralNetwork(input_size, hidden_size, depth, output_size).double()
+    model = NeuralNetworkBatch(input_size, hidden_size, depth, output_size).double()
+    if batch_size is None:
+        model = MLPReLu(input_size, hidden_size, depth, output_size)
     optimizer = optim.AdamW(model.parameters(),lr=0.0001)
     criterion = nn.MSELoss()
     

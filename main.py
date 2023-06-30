@@ -55,7 +55,7 @@ if __name__ == '__main__':
     best_n_epochs = 0
     best_hidden_size = 0
     best_depth = 0
-    batch_size = 425
+    batch_size = None
     # we do small cross validation to reduce time for nonlinear 6 protein system.
     if cross:
         kf = KFold(n_splits=3, shuffle=True, random_state=42) # seed it, shuffle it again, and n splits it.

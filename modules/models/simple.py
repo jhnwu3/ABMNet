@@ -28,7 +28,7 @@ class ReLuBlock(nn.Module):
         return output
 
 
-class NeuralNetwork(nn.Module):
+class NeuralNetworkBatch(nn.Module):
     def __init__(self, input_size, hidden_size, depth, output_size, initialize_kaiming=True):
         super(NeuralNetwork, self).__init__()
         self.input_size = input_size 

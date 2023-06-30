@@ -187,6 +187,24 @@ def generate_static_dataset(dataset : TemporalDataset, t):
 
     return StaticDataset(rates, output)
 
+
+def combine_temporal_pickles(file1, file2, save=True, path=""):
+    with open(file1, 'rb') as f1, open(file2, 'rb') as f2:
+        data1 = pickle.load(f1)
+        data2 = pickle.load(f2)
+
+    combined_data = {}
+
+    for key in data1:
+        combined_data[key] = data1[key] + data2[key]
+    
+    if save:
+        with open(path, 'wb') as f:
+            pickle.dump(data, f)
+    
+    return combined_data
+
+
 if __name__ == "__main__":
     data = TemporalDataset("data/time_series/indrani_gamma_no_zeroes.pickle")
     print(len(data))
