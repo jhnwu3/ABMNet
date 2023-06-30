@@ -25,6 +25,50 @@ def rpoint(og_pos, seed=3, epsi=0.02, nan=0.02, hone =28):
 
     return new_pos
 
+def indrani_cost(x, surrogate, y, dataset, standardize=True, normalize = True, batch=True):
+    costs = []
+    if len(x.shape) < 2:
+        thetaCopy = x
+        if standardize:
+            thetaCopy = (thetaCopy - dataset.input_means) / dataset.input_stds
+        input = tc.from_numpy(x)
+        
+        if next(surrogate.parameters()).is_cuda:
+            input = input.to(tc.device("cuda"))
+            
+        if batch: 
+            input = input.unsqueeze(dim=0)
+
+        output = surrogate(input).squeeze().cpu().detach().numpy()
+
+        if normalize: 
+            scale_factor = dataset.output_maxes - dataset.output_mins
+            output = (output * scale_factor) + dataset.output_mins
+            
+        costs.append(np.matmul(output-y, np.matmul((output - y).transpose(), wt)))
+    else:
+        print(x.shape)
+        for i in range(x.shape[0]):
+            thetaCopy = x[i]
+            if standardize:
+                thetaCopy = (thetaCopy - dataset.input_means) / dataset.input_stds
+            input = tc.from_numpy(thetaCopy)
+            if next(surrogate.parameters()).is_cuda:
+                input = input.to(tc.device("cuda"))
+            if batch:
+                input = input.squeeze() # this is messy I agree...
+                input = input.unsqueeze(dim=0)
+            output = 0 
+            with tc.no_grad():
+                output = surrogate(input).squeeze().cpu().detach().numpy()
+            if normalize: 
+                scale_factor = dataset.output_maxes - dataset.output_mins
+                output = (output * scale_factor) + dataset.output_mins
+
+            costs.append(np.matmul(output-y, np.matmul((output - y).transpose(), wt)))
+
+    return np.array(costs)
+
 def gmm_cost(x, surrogate, y, wt, dataset=None, standardize=False, normalize=False, batch=True):
     costs = []
     if len(x.shape) < 2:
