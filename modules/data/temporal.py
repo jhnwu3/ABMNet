@@ -198,7 +198,7 @@ def combine_temporal_pickles(file1, file2, save=True, path=""):
     combined_data = {}
 
     for key in data1:
-        if key is not "time_points":
+        if key != "time_points":
             combined_data[key] = data1[key] + data2[key]
         else:
             combined_data[key] = data1[key]

@@ -33,7 +33,13 @@
 
 
 
-python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t10.csv' -d 6 -h 32 --epochs 150 -o 'ixr_1k_zeta_ca_t10' --save --gpu --normalize --normalize_out
-python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t250.csv' -d 8 -h 64 --epochs 150 -o 'ixr_1k_zeta_ca_t250' --save --gpu --normalize --normalize_out
-python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t750.csv' -d 10 -h 64 --epochs 150 -o 'ixr_1k_zeta_ca_t750' --save --gpu --normalize --normalize_out
-python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t1750.csv' -d 10 -h 128 --epochs 150 -o 'ixr_1k_zeta_ca_t1750' --save --gpu --normalize --normalize_out
+# python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t10.csv' -d 6 -h 32 --epochs 150 -o 'ixr_1k_zeta_ca_t10' --save --gpu --normalize --normalize_out
+# python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t250.csv' -d 8 -h 64 --epochs 150 -o 'ixr_1k_zeta_ca_t250' --save --gpu --normalize --normalize_out
+# python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t750.csv' -d 10 -h 64 --epochs 150 -o 'ixr_1k_zeta_ca_t750' --save --gpu --normalize --normalize_out
+# python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t1750.csv' -d 10 -h 128 --epochs 150 -o 'ixr_1k_zeta_ca_t1750' --save --gpu --normalize --normalize_out
+
+
+python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t750.csv' -h 128 -d 6 --epochs 1000 -o 'ixr3k_zeta_ca_t750_res_batch' --save --gpu --normalize --normalize_out --type res_nn --batch 500
+python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t250.csv' -h 128 -d 6 --epochs 1000 -o 'ixr3k_zeta_ca_t250_res_batch' --save --gpu --normalize --normalize_out --type res_nn --batch 500
+python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t10.csv' -h 128 -d 6 --epochs 1000 -o 'ixr3k_zeta_ca_t10_res_batch' --save --gpu --normalize --normalize_out --type res_nn --batch 500
+python3 main.py -i 'data/static/indrani/indrani_zeta_ca_t1750.csv' -h 128 -d 6 --epochs 1000 -o 'ixr3k_zeta_ca_t1750_res_batch' --save --gpu --normalize --normalize_out --type res_nn --batch 500
