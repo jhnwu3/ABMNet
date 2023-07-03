@@ -78,6 +78,30 @@ def plot_confidence_intervals(x, confidence=0.95, title=None, labels=None):
     plt.grid(True)
     plt.savefig(title + ".png")
 
+def plot_confidence_intervals_log(x, confidence=0.95, title=None, labels=None):
+    n_features = x.shape[1]
+    n_samples = x.shape[0]
+    
+    # Convert features to log scale
+    x_log = np.log(x)
+    
+    mean = np.mean(x_log, axis=0)
+    std = np.std(x_log, axis=0)
+    z_value = np.abs(np.random.standard_normal(x_log.shape)) * std
+    intervals = np.percentile(x_log, [(1-confidence)*50, (1+confidence)*50], axis=0)
+
+    plt.figure(figsize=(10, 6))
+    for i in range(n_features):
+        plt.plot([i, i], intervals[:, i], 'r-', lw=2)
+        plt.plot(i, mean[i], 'bo', markersize=6)
+    plt.xticks(range(n_features), labels)
+    plt.xlabel('Features')
+    plt.ylabel('Values (Log Scale)')
+    plt.title(title)
+    plt.grid(True)
+    plt.savefig(title + ".png")
+
+
 def find_closest_index(arr, value):
     closest_index = np.abs(arr - value).argmin()
     return closest_index
@@ -176,7 +200,7 @@ bounds = (lower_bound, upper_bound)
 print(bounds)
 options = {'c1': 0.5, 'c2': 0.3, 'w':0.9}
 num_particles = 2500  # Number of particles in the swarm
-n_iters = 1000
+n_iters = 600
 dim = 5  # Dimensionality of the problem
 
 n_runs = 5
@@ -196,9 +220,11 @@ for label, observed_data in Y_dict.items():
         optimizer = ps.single.GlobalBestPSO(n_particles=num_particles, dimensions=dim, bounds=bounds, options=options)
         cost, pos = optimizer.optimize(multi_indrani_cost_fxn, iters=n_iters, surrogates=surrogates, ys=ys, datasets=datasets)
         estimates.append(pos)
+        costs.append(cost)
     estimates = np.array(estimates)
+    estimates = np.hstack((estimates, np.array(costs).reshape(-1,1)))
     results_dict[label] = estimates
-    results_dict[label + "_cost"] = cost
+    # results_dict[label + "_cost"] = costs
     print(estimates.shape)
     # plot_confidence_intervals(estimates, title=label,labels=rate_labels)
 
@@ -210,7 +236,6 @@ for label, estimates in results_dict.items():
     # print("STANDARD DEVIATION:")
     # print(np.std(estimates, axis= 0))
     np.savetxt(label + ".csv", estimates, delimiter=",", fmt='%.5f')
-    
     ys = get_corresponding_y(Y_dict[label], actual_times)
     # evaluate_pso_estimate(np.mean(estimates, axis=0), surrogates[0], ys[0], datasets[0])
     print("---------------------------------------------------------------------------------------------") 
@@ -218,7 +243,7 @@ for label, estimates in results_dict.items():
     # print("Estimates:")
     # print(estimates)
     for i in range(len(ys)):
-        evaluate_pso_estimate(np.mean(estimates, axis=0), surrogates[i], ys[i], datasets[i])
+        evaluate_pso_estimate(np.mean(estimates[:,:dim], axis=0), surrogates[i], ys[i], datasets[i])
     if label == "46L_50F_53V":
         print("------------------------------- When Using Indrani's Estimates -------------------------------")
         for i in range(len(ys)):
