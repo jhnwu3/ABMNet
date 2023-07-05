@@ -6,7 +6,20 @@ For a more complex model that includes a temporal component see [here]().
 
 Please excuse the current mess the repo is in. When it comes time to publish, it will be cleaned up fully.
 
-Indrani's model parameter estimation
+Hi Github.
+
+
+
+# Why Surrogate Modeling?
+
+< insert picture of super long parameter estimation runs and simulation times>
+
+Here is a flowchart providing some contextual relationships as to how a surrogate relates to an actual mechanistic model and what we are using it for. 
+![Context](figs/Surrogate.jpg)
+
+
+
+Indrani's model parameter estimation (Ignore For Now)
 
 # 46L_50F_53V
 |"k1"| "k2"| "C1"| "C2"| "g"| cost|
