@@ -8,6 +8,7 @@ from pyswarms.single.global_best import GlobalBestPSO
 import numpy as np
 import torch 
 import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
 # file1 = "data/time_series/indrani_zeta_ca_no_zeroes_2500.pickle"
 # file2 = "data/time_series/indrani_zeta_ca_no_zeroes.pickle"
 # path = "data/time_series/indrani_zeta_ca_no_zeroes_3500.pickle"
@@ -58,6 +59,33 @@ def indrani_costss(x, surrogate, y, dataset, standardize=True, normalize=True, b
    
     # print(cost.shape)
     return cost
+
+def evaluate_MLP_surrogate(x, surrogate, dataset, standardize=True, normalize=True, batch=False):
+    if len(x.shape) < 2:
+        thetaCopy = x
+    else:
+        thetaCopy = x.reshape(x.shape[0], -1)
+    # print("ThetaCopy:", thetaCopy.shape)
+    # print(thetaCopy)
+    if standardize:
+        thetaCopy = (thetaCopy - dataset.input_means) / dataset.input_stds
+    surrogate.eval()
+    input = tc.from_numpy(thetaCopy)
+    if next(surrogate.parameters()).is_cuda:
+        input = input.to(tc.device("cuda"))
+
+    if batch:
+        input = input.unsqueeze(dim=0)
+    # print(" IM ALIVE")
+    output = None
+    with tc.no_grad():
+        output = surrogate(input).squeeze().cpu().numpy()
+
+    if normalize:
+        scale_factor = dataset.output_maxes - dataset.output_mins
+        output = (output * scale_factor) + dataset.output_mins
+    return output
+
 
 def plot_confidence_intervals(x, confidence=0.95, title=None, labels=None):
     n_features = x.shape[1]
@@ -204,81 +232,116 @@ n_iters = 600
 dim = 5  # Dimensionality of the problem
 
 n_runs = 5
+
+# generate contour plots across the 5 different parameters.
+kon=random.uniform(1e-7,1e-2)
+koff=random.uniform(1,10)
+C1= 4499.4346#random.uniform(5e3,1e4)
+C2= 1.28873#random.uniform(1,10)
+g= 0.0032684#random.uniform(1e-4,1e-2)
+# between k1 and k2 
+N = 100000
+surr_input = np.zeros((N,5))
+
+
+
+for i in range(N):
+    surr_input[i] = np.array([random.uniform(1e-7,1e-2),random.uniform(1,10), C1, C2, g])
+    
+ys = get_corresponding_y(Y_dict["CD3z_46L"], actual_times)
+for i in range(len(surrogates)):
+    evaluations = indrani_costss(surr_input, surrogates[i], ys[i], datasets[i], batch=False)  
+    print(evaluations.shape)
+    print(evaluations.max())
+    print(evaluations.min())
+    plt.figure()
+    norm = mcolors.Normalize(vmin=np.min(evaluations), vmax=np.max(evaluations))
+    plt.scatter(surr_input[:,0], surr_input[:,1] , c=(evaluations[:]),s=4, norm =norm)
+    plt.scatter(0.00026,9.232 ,c="r", s=50, label="Indrani's Estimate")
+    plt.colorbar()
+    plt.legend()
+    plt.savefig("Surrogate"+str(i)+ "_Contour.png")
+    plt.close()
+# between C1 and C2
+
+
+# Between C2 and g
+
 # MISSING KD!!!
-rate_labels = ["k1", "k2", "C1", "C2", "g"]
-results_dict = {}
-for label, observed_data in Y_dict.items(): 
-    # get the y observed values
-    ys = get_corresponding_y(observed_data, actual_times)
-    print(ys)
-    # exit(0)
-    # multiple n_runs
-    estimates = []
-    costs = []
-    for r in range(n_runs):
-    # optimize multi-cost function with all the surrogates and the datasets, also redeclare optimizer every time
-        optimizer = ps.single.GlobalBestPSO(n_particles=num_particles, dimensions=dim, bounds=bounds, options=options)
-        cost, pos = optimizer.optimize(multi_indrani_cost_fxn, iters=n_iters, surrogates=surrogates, ys=ys, datasets=datasets)
-        estimates.append(pos)
-        costs.append(cost)
-    estimates = np.array(estimates)
-    estimates = np.hstack((estimates, np.array(costs).reshape(-1,1)))
-    results_dict[label] = estimates
-    # results_dict[label + "_cost"] = costs
-    print(estimates.shape)
-    # plot_confidence_intervals(estimates, title=label,labels=rate_labels)
+# rate_labels = ["k1", "k2", "C1", "C2", "g"]
+# results_dict = {}
+# for label, observed_data in Y_dict.items(): 
+#     # get the y observed values
+#     ys = get_corresponding_y(observed_data, actual_times)
+#     print(ys)
+#     # exit(0)
+#     # multiple n_runs
+#     estimates = []
+#     costs = []
+#     for r in range(n_runs):
+#     # optimize multi-cost function with all the surrogates and the datasets, also redeclare optimizer every time
+#         optimizer = ps.single.GlobalBestPSO(n_particles=num_particles, dimensions=dim, bounds=bounds, options=options)
+#         cost, pos = optimizer.optimize(multi_indrani_cost_fxn, iters=n_iters, surrogates=surrogates, ys=ys, datasets=datasets)
+#         estimates.append(pos)
+#         costs.append(cost)
+#     estimates = np.array(estimates)
+#     estimates = np.hstack((estimates, np.array(costs).reshape(-1,1)))
+#     results_dict[label] = estimates
+#     # results_dict[label + "_cost"] = costs
+#     print(estimates.shape)
+#     # plot_confidence_intervals(estimates, title=label,labels=rate_labels)
 
 # Set the print options to display in decimal format
-np.set_printoptions(precision=6, suppress=True)
-for label, estimates in results_dict.items():
-    # print("MEAN ESTIMATES FOR " + label + ":")
-    # print(np.mean(estimates, axis=0))
-    # print("STANDARD DEVIATION:")
-    # print(np.std(estimates, axis= 0))
-    np.savetxt(label + ".csv", estimates, delimiter=",", fmt='%.5f')
-    ys = get_corresponding_y(Y_dict[label], actual_times)
-    # evaluate_pso_estimate(np.mean(estimates, axis=0), surrogates[0], ys[0], datasets[0])
-    print("---------------------------------------------------------------------------------------------") 
-    print(label)
-    # print("Estimates:")
-    # print(estimates)
-    for i in range(len(ys)):
-        evaluate_pso_estimate(np.mean(estimates[:,:dim], axis=0), surrogates[i], ys[i], datasets[i])
-    if label == "46L_50F_53V":
-        print("------------------------------- When Using Indrani's Estimates -------------------------------")
-        for i in range(len(ys)):
-            evaluate_pso_estimate(np.array([0.00075, 3.7, 7292.38, 1.07, 0.004432]), surrogates[i], ys[i], datasets[i])
-        print("---------------------------------------------------------------------------------------------")
-    if label == "CD3z_46L":
-        print("------------------------------- When Using Indrani's Estimates -------------------------------")
-        for i in range(len(ys)):
-            evaluate_pso_estimate(np.array([0.00026, 9.232, 4499.434, 1.289, 0.003268]), surrogates[i], ys[i], datasets[i])
+# np.set_printoptions(precision=6, suppress=True)
+# for label, estimates in results_dict.items():
+#     # print("MEAN ESTIMATES FOR " + label + ":")
+#     # print(np.mean(estimates, axis=0))
+#     # print("STANDARD DEVIATION:")
+#     # print(np.std(estimates, axis= 0))
+#     np.savetxt(label + ".csv", estimates, delimiter=",", fmt='%.5f')
+#     ys = get_corresponding_y(Y_dict[label], actual_times)
+#     # evaluate_pso_estimate(np.mean(estimates, axis=0), surrogates[0], ys[0], datasets[0])
+#     print("---------------------------------------------------------------------------------------------") 
+#     print(label)
+#     # print("Estimates:")
+#     # print(estimates)
+#     for i in range(len(ys)):
+#         evaluate_pso_estimate(np.mean(estimates[:,:dim], axis=0), surrogates[i], ys[i], datasets[i])
+#     if label == "46L_50F_53V":
+#         print("------------------------------- When Using Indrani's Estimates -------------------------------")
+#         for i in range(len(ys)):
+#             evaluate_pso_estimate(np.array([0.00075, 3.7, 7292.38, 1.07, 0.004432]), surrogates[i], ys[i], datasets[i])
+#         print("---------------------------------------------------------------------------------------------")
+#     if label == "CD3z_46L":
+#         print("------------------------------- When Using Indrani's Estimates -------------------------------")
+#         for i in range(len(ys)):
+#             evaluate_pso_estimate(np.array([0.00026, 9.232, 4499.434, 1.289, 0.003268]), surrogates[i], ys[i], datasets[i])
         
-        print("---------------------------------------------------------------------------------------------")
+#         print("---------------------------------------------------------------------------------------------")
     
-    if label == "46L_50F":
-        print("------------------------------- When Using Indrani's Estimates -------------------------------")
-        for i in range(len(ys)):
-            evaluate_pso_estimate(np.array([0.000593, 1.86284, 9578.257, 1.09531, 0.004975]), surrogates[i], ys[i], datasets[i])
-        print("---------------------------------------------------------------------------------------------")
+#     if label == "46L_50F":
+#         print("------------------------------- When Using Indrani's Estimates -------------------------------")
+#         for i in range(len(ys)):
+#             evaluate_pso_estimate(np.array([0.000593, 1.86284, 9578.257, 1.09531, 0.004975]), surrogates[i], ys[i], datasets[i])
+#         print("---------------------------------------------------------------------------------------------")
     
-    if label == "46l_53V":
-        print("------------------------------- When Using Indrani's Estimates -------------------------------")
-        for i in range(len(ys)):
-            evaluate_pso_estimate(np.array([0.0006219, 7.04903588, 6757.33744, 1.06661, 0.00456079]), surrogates[i], ys[i], datasets[i])
-        print("---------------------------------------------------------------------------------------------")
+#     if label == "46l_53V":
+#         print("------------------------------- When Using Indrani's Estimates -------------------------------")
+#         for i in range(len(ys)):
+#             evaluate_pso_estimate(np.array([0.0006219, 7.04903588, 6757.33744, 1.06661, 0.00456079]), surrogates[i], ys[i], datasets[i])
+#         print("---------------------------------------------------------------------------------------------")
     
-    if label == "CD3z_human":
-        print("------------------------------- When Using Indrani's Estimates -------------------------------")
-        for i in range(len(ys)):
-            evaluate_pso_estimate(np.array([0.0005028, 4.25944, 9742.070, 1.35489753, 0.00464946]), surrogates[i], ys[i], datasets[i])
-        print("---------------------------------------------------------------------------------------------")
+#     if label == "CD3z_human":
+#         print("------------------------------- When Using Indrani's Estimates -------------------------------")
+#         for i in range(len(ys)):
+#             evaluate_pso_estimate(np.array([0.0005028, 4.25944, 9742.070, 1.35489753, 0.00464946]), surrogates[i], ys[i], datasets[i])
+#         print("---------------------------------------------------------------------------------------------")
     
-    if label == "CD3z_mouse":
-        print("------------------------------- When Using Indrani's Estimates -------------------------------")
-        for i in range(len(ys)):
-            evaluate_pso_estimate(np.array([0.02509417, 6.80673, 581.867, 2.811, 0.0003667823]), surrogates[i], ys[i], datasets[i])
-        print("---------------------------------------------------------------------------------------------")
+#     if label == "CD3z_mouse":
+#         print("------------------------------- When Using Indrani's Estimates -------------------------------")
+#         for i in range(len(ys)):
+#             evaluate_pso_estimate(np.array([0.02509417, 6.80673, 581.867, 2.811, 0.0003667823]), surrogates[i], ys[i], datasets[i])
+#         print("---------------------------------------------------------------------------------------------")
         
-# using indranis 
-# labels = ["46L_50F_53V", "46L_50F", "46L_53V", "CD3z_46L", "CD3z_mouse", "CD3z_human"]
+# # using indranis 
+# # labels = ["46L_50F_53V", "46L_50F", "46L_53V", "CD3z_46L", "CD3z_mouse", "CD3z_human"]
