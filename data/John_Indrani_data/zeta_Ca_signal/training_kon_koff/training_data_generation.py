@@ -43,6 +43,11 @@ def param_generate(p):
     param=[]
     
     for i in range(p):
+        # kon = 0.00601 
+        # koff = 4.71749
+        # C1 = 14187.77794
+        # C2 = 15.40922
+        # g = 0.00411
         kon=random.uniform(1e-7,1e-2)
         koff=random.uniform(1,10)
         C1=random.uniform(5e3,1e4)
@@ -83,7 +88,7 @@ def pZAP_signal(K1,K2):
 def main():
    
     #*****************John you can change
-    p=2500 #the number of the parameter sets of [kon,koff,C1,C2,g]
+    p=5000 #the number of the parameter sets of [kon,koff,C1,C2,g]
     
     
     #actual experimental data
@@ -95,7 +100,7 @@ def main():
     
    
     N=2000 #Ca signal at N time points 
-    tstart=26.0 # Fit to be start from which timepoint : interpolation of pZAP70 signal starts at 25 sec
+    tstart=25.0 # Fit to be start from which timepoint : interpolation of pZAP70 signal starts at 25 sec
     Vc=25 #pZAP molecules in the simulation box of size 25 um^3
     z=602 #constant factor to convert from molecules/um3 to uM
     
@@ -144,7 +149,7 @@ def main():
             file.write(str(kon)+"\t"+str(koff)+"\t"+str(C1)+"\t"+str(C2)+"\t"+str(g)+"\n")
             
             for k in range(len(tnew)):
-                file.write(str(tnew[k])+"\t"+str(PZAP[k])+"\t"+str(ca[k])+"\n")
+                file.write(str(tnew[k])+"\t"+str(PZAP[k])+"\t"+str(ca[k])+"\t" +str(h[k]) +"\n")
             
       
     
