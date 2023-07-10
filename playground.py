@@ -234,20 +234,32 @@ dim = 5  # Dimensionality of the problem
 n_runs = 5
 
 # generate contour plots across the 5 different parameters.
-kon=random.uniform(1e-7,1e-2)
-koff=random.uniform(1,10)
-C1= 4499.4346#random.uniform(5e3,1e4)
-C2= 1.28873#random.uniform(1,10)
+# kon=random.uniform(1e-7,1e-2)
+# koff=random.uniform(1,10)
+
+varyingX = 2
+varyingY = 3
+kon = 0.000026
+koff = 9.23215
+C1 = 4499.4346#random.uniform(5e3,1e4)
+C2 = 1.28873#random.uniform(1,10)
+# C1 = random.uniform(5e3,1e4)
+# C2 = random.uniform(1,10)
 g= 0.0032684#random.uniform(1e-4,1e-2)
 # between k1 and k2 
 N = 100000
 surr_input = np.zeros((N,5))
-
-
-
+labels = ["k1", "k2", "C1", "C2", "g"]
+indraniTruth = np.array([kon, koff, C1, C2, g])
 for i in range(N):
-    surr_input[i] = np.array([random.uniform(1e-7,1e-2),random.uniform(1,10), C1, C2, g])
+    # surr_input[i] = np.array([random.uniform(1e-7,1e-2),random.uniform(1,10), C1, C2, g])
+    # surr_input[i] = np.array([kon,koff, random.uniform(5e3,1e4), random.uniform(1,10), g])
+    surr_input[i] = indraniTruth
+    randomVector = np.array([random.uniform(1e-7,1e-2), random.uniform(1,10), random.uniform(5e3,1e4), random.uniform(1,10), random.uniform(1e-4,1e-2) ])
+    surr_input[i,varyingX] = randomVector[varyingX]
+    surr_input[i, varyingY] = randomVector[varyingY]
     
+
 ys = get_corresponding_y(Y_dict["CD3z_46L"], actual_times)
 for i in range(len(surrogates)):
     evaluations = indrani_costss(surr_input, surrogates[i], ys[i], datasets[i], batch=False)  
@@ -255,10 +267,16 @@ for i in range(len(surrogates)):
     print(evaluations.max())
     print(evaluations.min())
     plt.figure()
-    norm = mcolors.Normalize(vmin=np.min(evaluations), vmax=np.max(evaluations))
-    plt.scatter(surr_input[:,0], surr_input[:,1] , c=(evaluations[:]),s=4, norm =norm)
-    plt.scatter(0.00026,9.232 ,c="r", s=50, label="Indrani's Estimate")
-    plt.colorbar()
+    # norm = mcolors.Normalize(vmin=np.min(evaluations), vmax=np.max(evaluations))
+    heat = np.log(evaluations)
+    plt.title("Surrogate for t="+ str(actual_times[i]))
+    plt.xlabel(labels[varyingX])
+    plt.ylabel(labels[varyingY])
+    plt.scatter(surr_input[:,varyingX], surr_input[:,varyingY] , c=heat,s=4)
+    plt.scatter(indraniTruth[varyingX], indraniTruth[varyingY], c="r", s=50, label="Indrani's Estimate")
+    colorbar = plt.colorbar()
+    colorbar.set_ticks([0, 0.5 ,1.0])  # Tick positions
+    colorbar.set_ticklabels([str(int(heat.min())),"log(square error)", str(int(heat.max()))])  # Tick labels
     plt.legend()
     plt.savefig("Surrogate"+str(i)+ "_Contour.png")
     plt.close()
