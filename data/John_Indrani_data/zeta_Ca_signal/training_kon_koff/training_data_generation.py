@@ -153,7 +153,7 @@ def main():
     
     #Number of (kon,koff) exists, printing in the files
     for i in range(len(param)) :
-        f = f"../train{i}_set1.txt"  # Generate file name (e.g., output1.txt)
+        f = f"../train{i}_set2.txt"  # Generate file name (e.g., output1.txt)
         
         #load each set of (kon, koff,C1,C2,g)
         kon=param[i,0]
