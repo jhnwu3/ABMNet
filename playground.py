@@ -209,7 +209,7 @@ print("--- Times: -----")
 print(actual_times)
 surrogates = []
 prefix = "model/ixr3k_zeta_ca_t"
-suffix = "_res_batch_full.pt"
+suffix = "_res_batch.pt"
 
 dataset_prefix = "data/static/indrani/indrani_zeta_ca_t"
 dataset_suffix = ".csv"
@@ -225,7 +225,7 @@ ixr_data = ABMDataset("data/static/indrani/indrani_zeta_ca_t750.csv", root_dir="
 lower_bound = np.zeros(5)  # Lower bound array with all zeros
 upper_bound = ixr_data.input_means + 6*ixr_data.input_stds  # Upper bound array with all 10,000s
 bounds = (lower_bound, upper_bound)
-print(bounds)
+# print(bounds)
 options = {'c1': 0.5, 'c2': 0.3, 'w':0.9}
 num_particles = 2500  # Number of particles in the swarm
 n_iters = 600
@@ -247,45 +247,121 @@ C2 = 1.28873#random.uniform(1,10)
 # C2 = random.uniform(1,10)
 g= 0.0032684#random.uniform(1e-4,1e-2)
 # between k1 and k2 
-N = 100000
+N = 1000000
 surr_input = np.zeros((N,5))
 labels = ["k1", "k2", "C1", "C2", "g"]
 indraniTruth = np.array([kon, koff, C1, C2, g])
 for i in range(N):
     # surr_input[i] = np.array([random.uniform(1e-7,1e-2),random.uniform(1,10), C1, C2, g])
     # surr_input[i] = np.array([kon,koff, random.uniform(5e3,1e4), random.uniform(1,10), g])
-    surr_input[i] = indraniTruth
-    randomVector = np.array([random.uniform(1e-7,1e-2), random.uniform(1,10), random.uniform(5e3,1e4), random.uniform(1,10), random.uniform(1e-4,1e-2) ])
-    surr_input[i,varyingX] = randomVector[varyingX]
-    surr_input[i, varyingY] = randomVector[varyingY]
+    # surr_input[i] = indraniTruth
+    randomVector = np.array([random.uniform(1e-7,1e-2), random.uniform(1,10), random.uniform(5e3,1e4), random.uniform(1,10), random.uniform(1e-4,1e-2)])
+    # surr_input[i,varyingX] = randomVector[varyingX]
+    # surr_input[i, varyingY] = randomVector[varyingY]
+    surr_input[i] = randomVector
     
 
 ys = get_corresponding_y(Y_dict["CD3z_46L"], actual_times)
-for i in range(len(surrogates)):
-    evaluations = indrani_costss(surr_input, surrogates[i], ys[i], datasets[i], batch=False)  
-    print(evaluations.shape)
-    print(evaluations.max())
-    print(evaluations.min())
-    plt.figure()
-    # norm = mcolors.Normalize(vmin=np.min(evaluations), vmax=np.max(evaluations))
-    heat = np.log(evaluations)
-    plt.title("Surrogate for t="+ str(actual_times[i]))
-    plt.xlabel(labels[varyingX])
-    plt.ylabel(labels[varyingY])
-    plt.scatter(surr_input[:,varyingX], surr_input[:,varyingY] , c=heat,s=4)
-    plt.scatter(indraniTruth[varyingX], indraniTruth[varyingY], c="r", s=50, label="Indrani's Estimate")
-    colorbar = plt.colorbar()
-    colorbar.set_ticks([0, 0.5 ,1.0])  # Tick positions
-    colorbar.set_ticklabels([str(int(heat.min())),"log(square error)", str(int(heat.max()))])  # Tick labels
-    plt.legend()
-    plt.savefig("Surrogate"+str(i)+ "_Contour.png")
-    plt.close()
-# between C1 and C2
+# for i in range(len(surrogates)):
+#     evaluations = indrani_costss(surr_input, surrogates[i], ys[i], datasets[i], batch=False)  
+#     print(evaluations.shape)
+#     print(evaluations.max())
+#     print(evaluations.min())
+#     plt.figure()
+    
+#     # norm = mcolors.Normalize(vmin=np.min(evaluations), vmax=np.max(evaluations))
+#     heat = np.log(evaluations)
+#     plt.title("Surrogate for t="+ str(actual_times[i]))
+#     plt.xlabel(labels[varyingX])
+#     plt.ylabel(labels[varyingY])
+#     plt.scatter(surr_input[:,varyingX], surr_input[:,varyingY] , c=heat,s=4)
+#     plt.scatter(indraniTruth[varyingX], indraniTruth[varyingY], c="r", s=50, label="Indrani's Estimate")
+#     colorbar = plt.colorbar()
+#     colorbar.set_ticks([0, 0.5 ,1.0])  # Tick positions
+#     colorbar.set_ticklabels([str(int(heat.min())),"log(square error)", str(int(heat.max()))])  # Tick labels
+#     plt.legend()
+#     plt.savefig("Surrogate"+str(i)+ "_Contour_Full_random.png")
+#     plt.close()
+
+evaluations = evaluate_MLP_surrogate(surr_input, surrogates[2], datasets[2])
+print("EVALUATIONS", evaluations.shape)
+fig, axs = plt.subplots(5,5, figsize=(75,25))
+for j in range(5):
+    for i in range(5):
+        axs[j, i].scatter(surr_input[:,j], surr_input[:,i], c=evaluations[:,1], s=1)
+        fig.colorbar(axs[j, i].collections[0], ax=axs[j, i])
+plt.savefig("surr_eval.png")
 
 
-# Between C2 and g
+# minEstimates = []
+# minCosts = []
+# quad_costs = []
+# for e in range(20):
+#     for i in range(N):
+#         randomVector = np.array([random.uniform(1e-7,1e-2), random.uniform(1,10), random.uniform(5e3,1e4), random.uniform(1,10), random.uniform(1e-4,1e-2)])
+#         surr_input[i] = randomVector
+#     quad_costs = multi_indrani_cost_fxn(surr_input, surrogates=surrogates, ys=ys, datasets=datasets)
+#     minCosts.append(quad_costs.min())
+#     minEstimates.append(surr_input[np.argmin(quad_costs)])
+#     print("Found New Min Cost:")
+#     print(minCosts[e])
+#     print("Estimate:")
+#     print(minEstimates[e])
 
-# MISSING KD!!!
+# minCosts = np.array(minCosts)
+# minEstimates = np.array(minEstimates)
+
+# print(minEstimates.shape)
+# print("Final Min Cost:")
+# print(minCosts.min())
+# print("Final Min Estimate:")
+# print(minEstimates[np.argmin(minCosts)])
+
+
+# 3.50749103e-04 3.81711042e+00 6.22638543e+03 2.45842800e+00
+# 1.74688920e-03
+
+
+# print("with cost:",quad_costs[np.argmin(quad_costs)])
+# colorbar.set_ticks([0, 0.5 ,1.0])  # Tick positions
+# colorbar.set_ticklabels([str(int(heat.min())),"log(square error)", str(int(heat.max()))])  # Tick labels
+# plt.legend()
+# heat = np.log(quad_costs)
+# plt.scatter(surr_input[:,varyingX], surr_input[:,varyingY] , c=heat,s=1)
+# colorbar = plt.colorbar()
+# plt.savefig("ixr_Surrogate_MultiCost.png")
+
+# load in and rescale indrani's estimates
+# indrani_estimates = np.loadtxt("CD3z_46L_indrani_estimates.dat")
+# print(indrani_estimates.shape)
+# indrani_estimates = np.power(10, indrani_estimates[:15,:-1])
+# print(indrani_estimates.shape)
+# print(indrani_estimates.max())
+# print(indrani_estimates.min())
+# predictions = [] # get all the predictions and plot them across time
+# for i in range(len(surrogates)):
+#     predictions.append(evaluate_MLP_surrogate(indrani_estimates,surrogate=surrogates[i],dataset=datasets[i], standardize=True, normalize=True)[:,1])
+# predictions = np.array(predictions)
+# print(predictions[:,:5])
+# print(predictions.shape)
+# plt.figure()
+# true = plt.plot(actual_times, ys, label="Observed Data",c="b", linewidth=10, alpha=0.5)
+# for i in range(predictions.shape[1]):
+#     plt.scatter(actual_times, predictions[:,i])
+# plt.legend()
+# plt.savefig("IndraniEstSurr.png")
+# check if anything in the dataset is outta bounds!
+# for i in range(indrani_estimates.shape[0]):
+#     for j in range(indrani_estimates.shape[1]):
+#         if indrani_estimates[i,j] > upper_bound[j]:
+#             print("TOO LARGE")
+#             print("i:",i,"+","j:",j)
+#         if indrani_estimates[i,j] < lower_bound[j]:
+#             print("TOO SMALL")
+#             print("i:",i,"+","j:",j)
+
+
+
 # rate_labels = ["k1", "k2", "C1", "C2", "g"]
 # results_dict = {}
 # for label, observed_data in Y_dict.items(): 

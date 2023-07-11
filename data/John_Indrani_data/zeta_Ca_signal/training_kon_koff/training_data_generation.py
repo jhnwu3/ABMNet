@@ -48,6 +48,50 @@ def param_generate(p):
         # C1 = 14187.77794
         # C2 = 15.40922
         # g = 0.00411
+        
+        # 350k
+        # kon = 3.50749103e-04
+        # koff = 3.81711042e+00
+        # C1 = 6.22638543e+03
+        # C2 = 2.45842800e+00
+        # g = 1.74688920e-03
+        
+        # 264k
+        # kon = 1.69782590e-04 
+        # koff = 1.18486403e+00
+        # C1 = 5.69739756e+03 
+        # C2= 3.67541211e+00
+        # g = 1.12731354e-03
+        
+        # 82k
+        # kon = 3.07598542e-03 
+        # koff = 5.00039210e+00 
+        # C1 = 5.07948984e+03 
+        # C2= 3.87763875e+00
+        # g = 7.67350887e-03
+        
+        # 525k
+        # kon = 1.65079865e-03
+        # koff = 5.14053840e+00 
+        # C1 = 8.20097588e+03 
+        # C2 = 2.91216075e+00
+        # g = 3.56477064e-03
+        
+        # 92k without "full" model
+        # kon = 4.59461120e-04 
+        # koff = 8.01328689e+00 
+        # C1= 8.15367177e+03
+        # C2 = 2.86002175e+00
+        # g = 2.47548736e-03
+        
+        # # 22k without full model
+        # kon = 9.10917059e-03 
+        # koff = 4.20443821e+00
+        # C1 = 6.40326243e+03 
+        # C2 = 1.60359680e+00
+        # g = 5.49390322e-03
+        
+        
         kon=random.uniform(1e-7,1e-2)
         koff=random.uniform(1,10)
         C1=random.uniform(5e3,1e4)
@@ -99,7 +143,7 @@ def main():
     exp_data=data[:,1]
     
    
-    N=2000 #Ca signal at N time points 
+    N=1000 #Ca signal at N time points 
     tstart=25.0 # Fit to be start from which timepoint : interpolation of pZAP70 signal starts at 25 sec
     Vc=25 #pZAP molecules in the simulation box of size 25 um^3
     z=602 #constant factor to convert from molecules/um3 to uM
@@ -109,7 +153,7 @@ def main():
     
     #Number of (kon,koff) exists, printing in the files
     for i in range(len(param)) :
-        f = f"train{i}.txt"  # Generate file name (e.g., output1.txt)
+        f = f"../train{i}_set0.txt"  # Generate file name (e.g., output1.txt)
         
         #load each set of (kon, koff,C1,C2,g)
         kon=param[i,0]
