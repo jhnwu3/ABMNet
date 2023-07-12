@@ -143,7 +143,7 @@ def main():
     exp_data=data[:,1]
     
    
-    N=1000 #Ca signal at N time points 
+    N=2000 #Ca signal at N time points 
     tstart=25.0 # Fit to be start from which timepoint : interpolation of pZAP70 signal starts at 25 sec
     Vc=25 #pZAP molecules in the simulation box of size 25 um^3
     z=602 #constant factor to convert from molecules/um3 to uM

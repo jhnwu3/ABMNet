@@ -7,9 +7,9 @@ begin parameters
   f 602.3
   kon 3.9E-2/Ve
   koff 0.01
-  Kab 0.00910917059
+  Kab 0.002144672287598507
   KB Kab/A
-  KU 4.20443821
+  KU 2.028787909835054
   kp 0.015/A
   kd 0.001
   ksbPP 4.15E-4/Vc
@@ -94,8 +94,8 @@ begin reaction rules
   SHP_binding_ITAM5_U: A(State~SHP) + Zeta(receptor!+,ITAM5~U) <-> Zeta(receptor!+,ITAM5~U!1).A(State~SHP!1) ksbU,ksuU 
   SHP_binding_ITAM6_U: A(State~SHP) + Zeta(receptor!+,ITAM6~U) <-> Zeta(receptor!+,ITAM6~U!1).A(State~SHP!1) ksbU,ksuU 
   ZAP_phosphorylation: Zeta(receptor!+).A(State~UZAP!+) + LCK() -> Zeta(receptor!+).A(State~PZAP!+) + LCK() kzp 
-  ZAP_dephosphorylation_SHP_1: Zeta%1(receptor!+).A%3(State~SHP!+) + Zeta%2(receptor!+).A%4(State~PZAP!+) -> Zeta%2(receptor!+).A%4(State~SHP!+) + Zeta%1(receptor!+).A%3(State~UZAP!+) kzd 
-  ZAP_dephosphorylation_SHP_2: Zeta(receptor!+).A%1(State~SHP!+) + A%2(State~PZAP) -> Zeta(receptor!+).A%1(State~SHP!+) + A%2(State~UZAP) kzd 
+  ZAP_dephosphorylation_SHP_1: Zeta(receptor!+)%1.A(State~SHP!+)%3 + Zeta(receptor!+)%2.A(State~PZAP!+)%4 -> Zeta(receptor!+)%2.A(State~SHP!+)%4 + Zeta(receptor!+)%1.A(State~UZAP!+)%3 kzd 
+  ZAP_dephosphorylation_SHP_2: Zeta(receptor!+).A(State~SHP!+)%1 + A(State~PZAP)%2 -> Zeta(receptor!+).A(State~SHP!+)%1 + A(State~UZAP)%2 kzd 
   KP: Zeta(receptor!1).CD16(lig!2,receptor!1).Ligand(Site!2) -> Ligand(Site) + CD16(lig,receptor) + Zeta(receptor) KPR 
   KP_adaptor_dephosph: Zeta(receptor).A(State~PZAP!+) -> Zeta(receptor).A(State~UZAP!+) kh 
   LRZ1_breaking_ITAM1: Zeta(receptor,ITAM1!1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6).A(State!1) -> A(State) + Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) kh 
@@ -104,63 +104,63 @@ begin reaction rules
   LRZ1_breaking_ITAM4: Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4!1,ITAM5,ITAM6).A(State!1) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State) kh 
   LRZ1_breaking_ITAM5: Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5!1,ITAM6).A(State!1) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State) kh 
   LRZ1_breaking_ITAM6: Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6!1).A(State!1) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State) kh 
-  LRZ2_breaking_12: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3,ITAM4,ITAM5,ITAM6).A%1(State!1).A%2(State!2) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) kh 
-  LRZ2_breaking_13: Zeta(receptor,ITAM1!1,ITAM2,ITAM3!2,ITAM4,ITAM5,ITAM6).A%1(State!1).A%2(State!2) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) kh 
-  LRZ2_breaking_14: Zeta(receptor,ITAM1!1,ITAM2,ITAM3,ITAM4!2,ITAM5,ITAM6).A%1(State!1).A%2(State!2) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) kh 
-  LRZ2_breaking_15: Zeta(receptor,ITAM1!1,ITAM2,ITAM3,ITAM4,ITAM5!2,ITAM6).A%1(State!1).A%2(State!2) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) kh 
-  LRZ2_breaking_16: Zeta(receptor,ITAM1!1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6!2).A%1(State!1).A%2(State!2) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) kh 
-  LRZ2_breaking_23: Zeta(receptor,ITAM1,ITAM2!1,ITAM3!2,ITAM4,ITAM5,ITAM6).A%1(State!1).A%2(State!2) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) kh 
-  LRZ2_breaking_24: Zeta(receptor,ITAM1,ITAM2!1,ITAM3,ITAM4!2,ITAM5,ITAM6).A%1(State!1).A%2(State!2) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) kh 
-  LRZ2_breaking_25: Zeta(receptor,ITAM1,ITAM2!1,ITAM3,ITAM4,ITAM5!2,ITAM6).A%1(State!1).A%2(State!2) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) kh 
-  LRZ2_breaking_26: Zeta(receptor,ITAM1,ITAM2!1,ITAM3,ITAM4,ITAM5,ITAM6!2).A%1(State!1).A%2(State!2) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) kh 
-  LRZ2_breaking_34: Zeta(receptor,ITAM1,ITAM2,ITAM3!1,ITAM4!2,ITAM5,ITAM6).A%1(State!1).A%2(State!2) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) kh 
-  LRZ2_breaking_35: Zeta(receptor,ITAM1,ITAM2,ITAM3!1,ITAM4,ITAM5!2,ITAM6).A%1(State!1).A%2(State!2) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) kh 
-  LRZ2_breaking_36: Zeta(receptor,ITAM1,ITAM2,ITAM3!1,ITAM4,ITAM5,ITAM6!2).A%1(State!1).A%2(State!2) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) kh 
-  LRZ2_breaking_45: Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4!1,ITAM5!2,ITAM6).A%1(State!1).A%2(State!2) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) kh 
-  LRZ2_breaking_46: Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4!1,ITAM5,ITAM6!2).A%1(State!1).A%2(State!2) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) kh 
-  LRZ2_breaking_56: Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5!1,ITAM6!2).A%1(State!1).A%2(State!2) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) kh 
-  LRZ3_breaking_123: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3!3,ITAM4,ITAM5,ITAM6).A%1(State!1).A%2(State!2).A%3(State!3) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) kh 
-  LRZ3_breaking_124: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3,ITAM4!3,ITAM5,ITAM6).A%1(State!1).A%2(State!2).A%3(State!3) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) kh 
-  LRZ3_breaking_125: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3,ITAM4,ITAM5!3,ITAM6).A%1(State!1).A%2(State!2).A%3(State!3) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) kh 
-  LRZ3_breaking_126: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3,ITAM4,ITAM5,ITAM6!3).A%1(State!1).A%2(State!2).A%3(State!3) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) kh 
-  LRZ3_breaking_134: Zeta(receptor,ITAM1!1,ITAM2,ITAM3!2,ITAM4!3,ITAM5,ITAM6).A%1(State!1).A%2(State!2).A%3(State!3) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) kh 
-  LRZ3_breaking_135: Zeta(receptor,ITAM1!1,ITAM2,ITAM3!2,ITAM4,ITAM5!3,ITAM6).A%1(State!1).A%2(State!2).A%3(State!3) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) kh 
-  LRZ3_breaking_136: Zeta(receptor,ITAM1!1,ITAM2,ITAM3!2,ITAM4,ITAM5,ITAM6!3).A%1(State!1).A%2(State!2).A%3(State!3) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) kh 
-  LRZ3_breaking_145: Zeta(receptor,ITAM1!1,ITAM2,ITAM3,ITAM4!2,ITAM5!3,ITAM6).A%1(State!1).A%2(State!2).A%3(State!3) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) kh 
-  LRZ3_breaking_146: Zeta(receptor,ITAM1!1,ITAM2,ITAM3,ITAM4!2,ITAM5,ITAM6!3).A%1(State!1).A%2(State!2).A%3(State!3) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) kh 
-  LRZ3_breaking_156: Zeta(receptor,ITAM1!1,ITAM2,ITAM3,ITAM4,ITAM5!2,ITAM6!3).A%1(State!1).A%2(State!2).A%3(State!3) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) kh 
-  LRZ3_breaking_234: Zeta(receptor,ITAM1,ITAM2!1,ITAM3!2,ITAM4!3,ITAM5,ITAM6).A%1(State!1).A%2(State!2).A%3(State!3) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) kh 
-  LRZ3_breaking_235: Zeta(receptor,ITAM1,ITAM2!1,ITAM3!2,ITAM4,ITAM5!3,ITAM6).A%1(State!1).A%2(State!2).A%3(State!3) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) kh 
-  LRZ3_breaking_236: Zeta(receptor,ITAM1,ITAM2!1,ITAM3!2,ITAM4,ITAM5,ITAM6!3).A%1(State!1).A%2(State!2).A%3(State!3) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) kh 
-  LRZ3_breaking_245: Zeta(receptor,ITAM1,ITAM2!1,ITAM3,ITAM4!2,ITAM5!3,ITAM6).A%1(State!1).A%2(State!2).A%3(State!3) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) kh 
-  LRZ3_breaking_246: Zeta(receptor,ITAM1,ITAM2!1,ITAM3,ITAM4!2,ITAM5,ITAM6!3).A%1(State!1).A%2(State!2).A%3(State!3) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) kh 
-  LRZ3_breaking_256: Zeta(receptor,ITAM1,ITAM2!1,ITAM3,ITAM4,ITAM5!2,ITAM6!3).A%1(State!1).A%2(State!2).A%3(State!3) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) kh 
-  LRZ3_breaking_345: Zeta(receptor,ITAM1,ITAM2,ITAM3!1,ITAM4!2,ITAM5!3,ITAM6).A%1(State!1).A%2(State!2).A%3(State!3) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) kh 
-  LRZ3_breaking_346: Zeta(receptor,ITAM1,ITAM2,ITAM3!1,ITAM4!2,ITAM5,ITAM6!3).A%1(State!1).A%2(State!2).A%3(State!3) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) kh 
-  LRZ3_breaking_356: Zeta(receptor,ITAM1,ITAM2,ITAM3!1,ITAM4,ITAM5!2,ITAM6!3).A%1(State!1).A%2(State!2).A%3(State!3) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) kh 
-  LRZ3_breaking_456: Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4!1,ITAM5!2,ITAM6!3).A%1(State!1).A%2(State!2).A%3(State!3) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) kh 
-  LRZ4_breaking_12: Zeta(receptor,ITAM1,ITAM2,ITAM3!1,ITAM4!2,ITAM5!3,ITAM6!4).A%1(State!1).A%2(State!2).A%3(State!3).A%4(State!4) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) + A%4(State) kh 
-  LRZ4_breaking_13: Zeta(receptor,ITAM1,ITAM2!1,ITAM3,ITAM4!2,ITAM5!3,ITAM6!4).A%1(State!1).A%2(State!2).A%3(State!3).A%4(State!4) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) + A%4(State) kh 
-  LRZ4_breaking_14: Zeta(receptor,ITAM1,ITAM2!1,ITAM3!2,ITAM4,ITAM5!3,ITAM6!4).A%1(State!1).A%2(State!2).A%3(State!3).A%4(State!4) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) + A%4(State) kh 
-  LRZ4_breaking_15: Zeta(receptor,ITAM1,ITAM2!1,ITAM3!2,ITAM4!3,ITAM5,ITAM6!4).A%1(State!1).A%2(State!2).A%3(State!3).A%4(State!4) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) + A%4(State) kh 
-  LRZ4_breaking_16: Zeta(receptor,ITAM1,ITAM2!1,ITAM3!2,ITAM4!3,ITAM5!4,ITAM6).A%1(State!1).A%2(State!2).A%3(State!3).A%4(State!4) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) + A%4(State) kh 
-  LRZ4_breaking_23: Zeta(receptor,ITAM1!1,ITAM2,ITAM3,ITAM4!2,ITAM5!3,ITAM6!4).A%1(State!1).A%2(State!2).A%3(State!3).A%4(State!4) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) + A%4(State) kh 
-  LRZ4_breaking_24: Zeta(receptor,ITAM1!1,ITAM2,ITAM3!2,ITAM4,ITAM5!3,ITAM6!4).A%1(State!1).A%2(State!2).A%3(State!3).A%4(State!4) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) + A%4(State) kh 
-  LRZ4_breaking_25: Zeta(receptor,ITAM1!1,ITAM2,ITAM3!2,ITAM4!3,ITAM5,ITAM6!4).A%1(State!1).A%2(State!2).A%3(State!3).A%4(State!4) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) + A%4(State) kh 
-  LRZ4_breaking_26: Zeta(receptor,ITAM1!1,ITAM2,ITAM3!2,ITAM4!3,ITAM5!4,ITAM6).A%1(State!1).A%2(State!2).A%3(State!3).A%4(State!4) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) + A%4(State) kh 
-  LRZ4_breaking_34: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3,ITAM4,ITAM5!3,ITAM6!4).A%1(State!1).A%2(State!2).A%3(State!3).A%4(State!4) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) + A%4(State) kh 
-  LRZ4_breaking_35: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3,ITAM4!3,ITAM5,ITAM6!4).A%1(State!1).A%2(State!2).A%3(State!3).A%4(State!4) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) + A%4(State) kh 
-  LRZ4_breaking_36: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3,ITAM4!3,ITAM5!4,ITAM6).A%1(State!1).A%2(State!2).A%3(State!3).A%4(State!4) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) + A%4(State) kh 
-  LRZ4_breaking_45: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3!3,ITAM4,ITAM5,ITAM6!4).A%1(State!1).A%2(State!2).A%3(State!3).A%4(State!4) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) + A%4(State) kh 
-  LRZ4_breaking_46: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3!3,ITAM4,ITAM5!4,ITAM6).A%1(State!1).A%2(State!2).A%3(State!3).A%4(State!4) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) + A%4(State) kh 
-  LRZ4_breaking_56: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3!3,ITAM4!4,ITAM5,ITAM6).A%1(State!1).A%2(State!2).A%3(State!3).A%4(State!4) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) + A%4(State) kh 
-  LRZ5_breaking_1: Zeta(receptor,ITAM1,ITAM2!1,ITAM3!2,ITAM4!3,ITAM5!4,ITAM6!5).A%1(State!1).A%2(State!2).A%3(State!3).A%4(State!4).A%5(State!5) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) + A%4(State) + A%5(State) kh 
-  LRZ5_breaking_2: Zeta(receptor,ITAM1!1,ITAM2,ITAM3!2,ITAM4!3,ITAM5!4,ITAM6!5).A%1(State!1).A%2(State!2).A%3(State!3).A%4(State!4).A%5(State!5) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) + A%4(State) + A%5(State) kh 
-  LRZ5_breaking_3: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3,ITAM4!3,ITAM5!4,ITAM6!5).A%1(State!1).A%2(State!2).A%3(State!3).A%4(State!4).A%5(State!5) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) + A%4(State) + A%5(State) kh 
-  LRZ5_breaking_4: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3!3,ITAM4,ITAM5!4,ITAM6!5).A%1(State!1).A%2(State!2).A%3(State!3).A%4(State!4).A%5(State!5) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) + A%4(State) + A%5(State) kh 
-  LRZ5_breaking_5: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3!3,ITAM4!4,ITAM5,ITAM6!5).A%1(State!1).A%2(State!2).A%3(State!3).A%4(State!4).A%5(State!5) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) + A%4(State) + A%5(State) kh 
-  LRZ5_breaking_6: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3!3,ITAM4!4,ITAM5!5,ITAM6).A%1(State!1).A%2(State!2).A%3(State!3).A%4(State!4).A%5(State!5) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) + A%4(State) + A%5(State) kh 
-  LRZ6_breaking: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3!3,ITAM4!4,ITAM5!5,ITAM6!6).A%1(State!1).A%2(State!2).A%3(State!3).A%4(State!4).A%5(State!5).A%6(State!6) -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A%1(State) + A%2(State) + A%3(State) + A%4(State) + A%5(State) + A%6(State) kh 
+  LRZ2_breaking_12: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3,ITAM4,ITAM5,ITAM6).A(State!1)%1.A(State!2)%2 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 kh 
+  LRZ2_breaking_13: Zeta(receptor,ITAM1!1,ITAM2,ITAM3!2,ITAM4,ITAM5,ITAM6).A(State!1)%1.A(State!2)%2 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 kh 
+  LRZ2_breaking_14: Zeta(receptor,ITAM1!1,ITAM2,ITAM3,ITAM4!2,ITAM5,ITAM6).A(State!1)%1.A(State!2)%2 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 kh 
+  LRZ2_breaking_15: Zeta(receptor,ITAM1!1,ITAM2,ITAM3,ITAM4,ITAM5!2,ITAM6).A(State!1)%1.A(State!2)%2 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 kh 
+  LRZ2_breaking_16: Zeta(receptor,ITAM1!1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6!2).A(State!1)%1.A(State!2)%2 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 kh 
+  LRZ2_breaking_23: Zeta(receptor,ITAM1,ITAM2!1,ITAM3!2,ITAM4,ITAM5,ITAM6).A(State!1)%1.A(State!2)%2 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 kh 
+  LRZ2_breaking_24: Zeta(receptor,ITAM1,ITAM2!1,ITAM3,ITAM4!2,ITAM5,ITAM6).A(State!1)%1.A(State!2)%2 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 kh 
+  LRZ2_breaking_25: Zeta(receptor,ITAM1,ITAM2!1,ITAM3,ITAM4,ITAM5!2,ITAM6).A(State!1)%1.A(State!2)%2 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 kh 
+  LRZ2_breaking_26: Zeta(receptor,ITAM1,ITAM2!1,ITAM3,ITAM4,ITAM5,ITAM6!2).A(State!1)%1.A(State!2)%2 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 kh 
+  LRZ2_breaking_34: Zeta(receptor,ITAM1,ITAM2,ITAM3!1,ITAM4!2,ITAM5,ITAM6).A(State!1)%1.A(State!2)%2 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 kh 
+  LRZ2_breaking_35: Zeta(receptor,ITAM1,ITAM2,ITAM3!1,ITAM4,ITAM5!2,ITAM6).A(State!1)%1.A(State!2)%2 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 kh 
+  LRZ2_breaking_36: Zeta(receptor,ITAM1,ITAM2,ITAM3!1,ITAM4,ITAM5,ITAM6!2).A(State!1)%1.A(State!2)%2 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 kh 
+  LRZ2_breaking_45: Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4!1,ITAM5!2,ITAM6).A(State!1)%1.A(State!2)%2 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 kh 
+  LRZ2_breaking_46: Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4!1,ITAM5,ITAM6!2).A(State!1)%1.A(State!2)%2 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 kh 
+  LRZ2_breaking_56: Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5!1,ITAM6!2).A(State!1)%1.A(State!2)%2 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 kh 
+  LRZ3_breaking_123: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3!3,ITAM4,ITAM5,ITAM6).A(State!1)%1.A(State!2)%2.A(State!3)%3 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 kh 
+  LRZ3_breaking_124: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3,ITAM4!3,ITAM5,ITAM6).A(State!1)%1.A(State!2)%2.A(State!3)%3 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 kh 
+  LRZ3_breaking_125: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3,ITAM4,ITAM5!3,ITAM6).A(State!1)%1.A(State!2)%2.A(State!3)%3 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 kh 
+  LRZ3_breaking_126: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3,ITAM4,ITAM5,ITAM6!3).A(State!1)%1.A(State!2)%2.A(State!3)%3 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 kh 
+  LRZ3_breaking_134: Zeta(receptor,ITAM1!1,ITAM2,ITAM3!2,ITAM4!3,ITAM5,ITAM6).A(State!1)%1.A(State!2)%2.A(State!3)%3 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 kh 
+  LRZ3_breaking_135: Zeta(receptor,ITAM1!1,ITAM2,ITAM3!2,ITAM4,ITAM5!3,ITAM6).A(State!1)%1.A(State!2)%2.A(State!3)%3 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 kh 
+  LRZ3_breaking_136: Zeta(receptor,ITAM1!1,ITAM2,ITAM3!2,ITAM4,ITAM5,ITAM6!3).A(State!1)%1.A(State!2)%2.A(State!3)%3 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 kh 
+  LRZ3_breaking_145: Zeta(receptor,ITAM1!1,ITAM2,ITAM3,ITAM4!2,ITAM5!3,ITAM6).A(State!1)%1.A(State!2)%2.A(State!3)%3 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 kh 
+  LRZ3_breaking_146: Zeta(receptor,ITAM1!1,ITAM2,ITAM3,ITAM4!2,ITAM5,ITAM6!3).A(State!1)%1.A(State!2)%2.A(State!3)%3 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 kh 
+  LRZ3_breaking_156: Zeta(receptor,ITAM1!1,ITAM2,ITAM3,ITAM4,ITAM5!2,ITAM6!3).A(State!1)%1.A(State!2)%2.A(State!3)%3 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 kh 
+  LRZ3_breaking_234: Zeta(receptor,ITAM1,ITAM2!1,ITAM3!2,ITAM4!3,ITAM5,ITAM6).A(State!1)%1.A(State!2)%2.A(State!3)%3 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 kh 
+  LRZ3_breaking_235: Zeta(receptor,ITAM1,ITAM2!1,ITAM3!2,ITAM4,ITAM5!3,ITAM6).A(State!1)%1.A(State!2)%2.A(State!3)%3 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 kh 
+  LRZ3_breaking_236: Zeta(receptor,ITAM1,ITAM2!1,ITAM3!2,ITAM4,ITAM5,ITAM6!3).A(State!1)%1.A(State!2)%2.A(State!3)%3 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 kh 
+  LRZ3_breaking_245: Zeta(receptor,ITAM1,ITAM2!1,ITAM3,ITAM4!2,ITAM5!3,ITAM6).A(State!1)%1.A(State!2)%2.A(State!3)%3 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 kh 
+  LRZ3_breaking_246: Zeta(receptor,ITAM1,ITAM2!1,ITAM3,ITAM4!2,ITAM5,ITAM6!3).A(State!1)%1.A(State!2)%2.A(State!3)%3 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 kh 
+  LRZ3_breaking_256: Zeta(receptor,ITAM1,ITAM2!1,ITAM3,ITAM4,ITAM5!2,ITAM6!3).A(State!1)%1.A(State!2)%2.A(State!3)%3 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 kh 
+  LRZ3_breaking_345: Zeta(receptor,ITAM1,ITAM2,ITAM3!1,ITAM4!2,ITAM5!3,ITAM6).A(State!1)%1.A(State!2)%2.A(State!3)%3 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 kh 
+  LRZ3_breaking_346: Zeta(receptor,ITAM1,ITAM2,ITAM3!1,ITAM4!2,ITAM5,ITAM6!3).A(State!1)%1.A(State!2)%2.A(State!3)%3 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 kh 
+  LRZ3_breaking_356: Zeta(receptor,ITAM1,ITAM2,ITAM3!1,ITAM4,ITAM5!2,ITAM6!3).A(State!1)%1.A(State!2)%2.A(State!3)%3 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 kh 
+  LRZ3_breaking_456: Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4!1,ITAM5!2,ITAM6!3).A(State!1)%1.A(State!2)%2.A(State!3)%3 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 kh 
+  LRZ4_breaking_12: Zeta(receptor,ITAM1,ITAM2,ITAM3!1,ITAM4!2,ITAM5!3,ITAM6!4).A(State!1)%1.A(State!2)%2.A(State!3)%3.A(State!4)%4 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 + A(State)%4 kh 
+  LRZ4_breaking_13: Zeta(receptor,ITAM1,ITAM2!1,ITAM3,ITAM4!2,ITAM5!3,ITAM6!4).A(State!1)%1.A(State!2)%2.A(State!3)%3.A(State!4)%4 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 + A(State)%4 kh 
+  LRZ4_breaking_14: Zeta(receptor,ITAM1,ITAM2!1,ITAM3!2,ITAM4,ITAM5!3,ITAM6!4).A(State!1)%1.A(State!2)%2.A(State!3)%3.A(State!4)%4 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 + A(State)%4 kh 
+  LRZ4_breaking_15: Zeta(receptor,ITAM1,ITAM2!1,ITAM3!2,ITAM4!3,ITAM5,ITAM6!4).A(State!1)%1.A(State!2)%2.A(State!3)%3.A(State!4)%4 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 + A(State)%4 kh 
+  LRZ4_breaking_16: Zeta(receptor,ITAM1,ITAM2!1,ITAM3!2,ITAM4!3,ITAM5!4,ITAM6).A(State!1)%1.A(State!2)%2.A(State!3)%3.A(State!4)%4 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 + A(State)%4 kh 
+  LRZ4_breaking_23: Zeta(receptor,ITAM1!1,ITAM2,ITAM3,ITAM4!2,ITAM5!3,ITAM6!4).A(State!1)%1.A(State!2)%2.A(State!3)%3.A(State!4)%4 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 + A(State)%4 kh 
+  LRZ4_breaking_24: Zeta(receptor,ITAM1!1,ITAM2,ITAM3!2,ITAM4,ITAM5!3,ITAM6!4).A(State!1)%1.A(State!2)%2.A(State!3)%3.A(State!4)%4 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 + A(State)%4 kh 
+  LRZ4_breaking_25: Zeta(receptor,ITAM1!1,ITAM2,ITAM3!2,ITAM4!3,ITAM5,ITAM6!4).A(State!1)%1.A(State!2)%2.A(State!3)%3.A(State!4)%4 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 + A(State)%4 kh 
+  LRZ4_breaking_26: Zeta(receptor,ITAM1!1,ITAM2,ITAM3!2,ITAM4!3,ITAM5!4,ITAM6).A(State!1)%1.A(State!2)%2.A(State!3)%3.A(State!4)%4 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 + A(State)%4 kh 
+  LRZ4_breaking_34: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3,ITAM4,ITAM5!3,ITAM6!4).A(State!1)%1.A(State!2)%2.A(State!3)%3.A(State!4)%4 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 + A(State)%4 kh 
+  LRZ4_breaking_35: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3,ITAM4!3,ITAM5,ITAM6!4).A(State!1)%1.A(State!2)%2.A(State!3)%3.A(State!4)%4 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 + A(State)%4 kh 
+  LRZ4_breaking_36: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3,ITAM4!3,ITAM5!4,ITAM6).A(State!1)%1.A(State!2)%2.A(State!3)%3.A(State!4)%4 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 + A(State)%4 kh 
+  LRZ4_breaking_45: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3!3,ITAM4,ITAM5,ITAM6!4).A(State!1)%1.A(State!2)%2.A(State!3)%3.A(State!4)%4 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 + A(State)%4 kh 
+  LRZ4_breaking_46: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3!3,ITAM4,ITAM5!4,ITAM6).A(State!1)%1.A(State!2)%2.A(State!3)%3.A(State!4)%4 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 + A(State)%4 kh 
+  LRZ4_breaking_56: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3!3,ITAM4!4,ITAM5,ITAM6).A(State!1)%1.A(State!2)%2.A(State!3)%3.A(State!4)%4 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 + A(State)%4 kh 
+  LRZ5_breaking_1: Zeta(receptor,ITAM1,ITAM2!1,ITAM3!2,ITAM4!3,ITAM5!4,ITAM6!5).A(State!1)%1.A(State!2)%2.A(State!3)%3.A(State!4)%4.A(State!5)%5 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 + A(State)%4 + A(State)%5 kh 
+  LRZ5_breaking_2: Zeta(receptor,ITAM1!1,ITAM2,ITAM3!2,ITAM4!3,ITAM5!4,ITAM6!5).A(State!1)%1.A(State!2)%2.A(State!3)%3.A(State!4)%4.A(State!5)%5 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 + A(State)%4 + A(State)%5 kh 
+  LRZ5_breaking_3: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3,ITAM4!3,ITAM5!4,ITAM6!5).A(State!1)%1.A(State!2)%2.A(State!3)%3.A(State!4)%4.A(State!5)%5 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 + A(State)%4 + A(State)%5 kh 
+  LRZ5_breaking_4: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3!3,ITAM4,ITAM5!4,ITAM6!5).A(State!1)%1.A(State!2)%2.A(State!3)%3.A(State!4)%4.A(State!5)%5 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 + A(State)%4 + A(State)%5 kh 
+  LRZ5_breaking_5: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3!3,ITAM4!4,ITAM5,ITAM6!5).A(State!1)%1.A(State!2)%2.A(State!3)%3.A(State!4)%4.A(State!5)%5 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 + A(State)%4 + A(State)%5 kh 
+  LRZ5_breaking_6: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3!3,ITAM4!4,ITAM5!5,ITAM6).A(State!1)%1.A(State!2)%2.A(State!3)%3.A(State!4)%4.A(State!5)%5 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 + A(State)%4 + A(State)%5 kh 
+  LRZ6_breaking: Zeta(receptor,ITAM1!1,ITAM2!2,ITAM3!3,ITAM4!4,ITAM5!5,ITAM6!6).A(State!1)%1.A(State!2)%2.A(State!3)%3.A(State!4)%4.A(State!5)%5.A(State!6)%6 -> Zeta(receptor,ITAM1,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) + A(State)%1 + A(State)%2 + A(State)%3 + A(State)%4 + A(State)%5 + A(State)%6 kh 
   zeta_convert1: Zeta(receptor,ITAM1~PP,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) -> Zeta(receptor,ITAM1~U,ITAM2,ITAM3,ITAM4,ITAM5,ITAM6) kh 
   zeta_convert2: Zeta(receptor,ITAM1,ITAM2~PP,ITAM3,ITAM4,ITAM5,ITAM6) -> Zeta(receptor,ITAM1,ITAM2~U,ITAM3,ITAM4,ITAM5,ITAM6) kh 
   zeta_convert3: Zeta(receptor,ITAM1,ITAM2,ITAM3~PP,ITAM4,ITAM5,ITAM6) -> Zeta(receptor,ITAM1,ITAM2,ITAM3~U,ITAM4,ITAM5,ITAM6) kh 
