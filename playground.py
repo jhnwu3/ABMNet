@@ -203,13 +203,14 @@ for i in range(len(labels)):
 
 # get surrogates
 time_pts = [10, 250, 750, 1750]
+time_pts = [250]
 # get their corresponding list of actual time-values
 actual_times = full_seq_dataset.times[time_pts]
 print("--- Times: -----")
 print(actual_times)
 surrogates = []
 prefix = "model/ixr3k_zeta_ca_t"
-suffix = "_res_batch.pt"
+suffix = "_res_batch_full.pt"
 
 dataset_prefix = "data/static/indrani/indrani_zeta_ca_t"
 dataset_suffix = ".csv"
@@ -247,7 +248,7 @@ C2 = 1.28873#random.uniform(1,10)
 # C2 = random.uniform(1,10)
 g= 0.0032684#random.uniform(1e-4,1e-2)
 # between k1 and k2 
-N = 1000000
+N = 10000
 surr_input = np.zeros((N,5))
 labels = ["k1", "k2", "C1", "C2", "g"]
 indraniTruth = np.array([kon, koff, C1, C2, g])
@@ -283,39 +284,39 @@ ys = get_corresponding_y(Y_dict["CD3z_46L"], actual_times)
 #     plt.savefig("Surrogate"+str(i)+ "_Contour_Full_random.png")
 #     plt.close()
 
-evaluations = evaluate_MLP_surrogate(surr_input, surrogates[2], datasets[2])
-print("EVALUATIONS", evaluations.shape)
-fig, axs = plt.subplots(5,5, figsize=(75,25))
-for j in range(5):
-    for i in range(5):
-        axs[j, i].scatter(surr_input[:,j], surr_input[:,i], c=evaluations[:,1], s=1)
-        fig.colorbar(axs[j, i].collections[0], ax=axs[j, i])
-plt.savefig("surr_eval.png")
+# evaluations = evaluate_MLP_surrogate(surr_input, surrogates[1], datasets[1])
+# print("EVALUATIONS", evaluations.shape)
+# fig, axs = plt.subplots(5,5, figsize=(75,25))
+# for j in range(5):
+#     for i in range(5):
+#         axs[j, i].scatter(surr_input[:,j], surr_input[:,i], c=evaluations[:,1], s=1)
+#         fig.colorbar(axs[j, i].collections[0], ax=axs[j, i])
+# plt.savefig("surr_eval_full_t250.png")
 
 
-# minEstimates = []
-# minCosts = []
-# quad_costs = []
-# for e in range(20):
-#     for i in range(N):
-#         randomVector = np.array([random.uniform(1e-7,1e-2), random.uniform(1,10), random.uniform(5e3,1e4), random.uniform(1,10), random.uniform(1e-4,1e-2)])
-#         surr_input[i] = randomVector
-#     quad_costs = multi_indrani_cost_fxn(surr_input, surrogates=surrogates, ys=ys, datasets=datasets)
-#     minCosts.append(quad_costs.min())
-#     minEstimates.append(surr_input[np.argmin(quad_costs)])
-#     print("Found New Min Cost:")
-#     print(minCosts[e])
-#     print("Estimate:")
-#     print(minEstimates[e])
+minEstimates = []
+minCosts = []
+quad_costs = []
+for e in range(1):
+    for i in range(N):
+        randomVector = np.array([random.uniform(1e-7,1e-2), random.uniform(1,10), random.uniform(5e3,1e4), random.uniform(1,10), random.uniform(1e-4,1e-2)])
+        surr_input[i] = randomVector
+    quad_costs = multi_indrani_cost_fxn(surr_input, surrogates=surrogates, ys=ys, datasets=datasets)
+    minCosts.append(quad_costs.min())
+    minEstimates.append(surr_input[np.argmin(quad_costs)])
+    print("Found New Min Cost:")
+    print(minCosts[e])
+    print("Estimate:")
+    print(minEstimates[e])
 
-# minCosts = np.array(minCosts)
-# minEstimates = np.array(minEstimates)
+minCosts = np.array(minCosts)
+minEstimates = np.array(minEstimates)
 
-# print(minEstimates.shape)
-# print("Final Min Cost:")
-# print(minCosts.min())
-# print("Final Min Estimate:")
-# print(minEstimates[np.argmin(minCosts)])
+print(minEstimates.shape)
+print("Final Min Cost:")
+print(minCosts.min())
+print("Final Min Estimate:")
+print(minEstimates[np.argmin(minCosts)])
 
 
 # 3.50749103e-04 3.81711042e+00 6.22638543e+03 2.45842800e+00
