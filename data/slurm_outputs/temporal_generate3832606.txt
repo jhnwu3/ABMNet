@@ -1,0 +1,25 @@
+[31mERROR:BNGCLI:from: /home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/bionetgen/core/tools/cli.py : BNGCLI.run() : Command failed to run[0m
+Couldn't run the simulation, see error
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/training_data_generation.py", line 208, in <module>
+    main()
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/training_data_generation.py", line 173, in main
+    time,mean_pZAP=pZAP_signal(kon,koff)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/training_data_generation.py", line 131, in pZAP_signal
+    T,avg=run_bionetgen(n,p) 
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/run_bngl.py", line 21, in run_bionetgen
+    ret = bionetgen.run("zeta_HPC.bngl", out="HPC_output_"+str(i),suppress=True)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/bionetgen/modelapi/runner.py", line 50, in run
+    raise e
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/bionetgen/modelapi/runner.py", line 44, in run
+    cli.run()
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/bionetgen/core/tools/cli.py", line 166, in run
+    stdout_str = out.stdout.decode("utf-8")
+AttributeError: 'NoneType' object has no attribute 'decode'
+Job Statistics for 3832606:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3832606   rsjxw007 2023-07-12T12:22:12 2023-07-12T12:23:06   00:00:54             00:49.110     FAILED  1:0   r1pl-hpcf-n21        billing=5,cpu=5,mem=37275M,node=1 
+   3832606.batch            2023-07-12T12:22:12 2023-07-12T12:23:06   00:00:54    112.09M  00:49.105     FAILED  1:0   r1pl-hpcf-n21                                          
+  3832606.extern            2023-07-12T12:22:12 2023-07-12T12:23:06   00:00:54      0.09M  00:00.004  COMPLETED  0:0   r1pl-hpcf-n21                                          
+CPU Efficiency: 18.15% of 00:04:30 core-walltime

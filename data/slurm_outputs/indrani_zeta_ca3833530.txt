@@ -1,0 +1,79 @@
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py", line 32, in <module>
+    abm_dataset = ABMDataset(csv_file, root_dir="data/", standardize=normalize, norm_out=normalize_out)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/data/mixed.py", line 10, in __init__
+    self.dframe = pd.read_csv(csv_file)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/pandas/util/_decorators.py", line 311, in wrapper
+    return func(*args, **kwargs)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 680, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 575, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 934, in __init__
+    self._engine = self._make_engine(f, self.engine)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 1218, in _make_engine
+    self.handles = get_handle(  # type: ignore[call-overload]
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/pandas/io/common.py", line 786, in get_handle
+    handle = open(
+FileNotFoundError: [Errno 2] No such file or directory: 'data/static/indrani/indrani_zeta_ca_h_t750.csv'
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py", line 32, in <module>
+    abm_dataset = ABMDataset(csv_file, root_dir="data/", standardize=normalize, norm_out=normalize_out)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/data/mixed.py", line 10, in __init__
+    self.dframe = pd.read_csv(csv_file)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/pandas/util/_decorators.py", line 311, in wrapper
+    return func(*args, **kwargs)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 680, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 575, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 934, in __init__
+    self._engine = self._make_engine(f, self.engine)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 1218, in _make_engine
+    self.handles = get_handle(  # type: ignore[call-overload]
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/pandas/io/common.py", line 786, in get_handle
+    handle = open(
+FileNotFoundError: [Errno 2] No such file or directory: 'data/static/indrani/indrani_zeta_ca_h_t250.csv'
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py", line 32, in <module>
+    abm_dataset = ABMDataset(csv_file, root_dir="data/", standardize=normalize, norm_out=normalize_out)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/data/mixed.py", line 10, in __init__
+    self.dframe = pd.read_csv(csv_file)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/pandas/util/_decorators.py", line 311, in wrapper
+    return func(*args, **kwargs)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 680, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 575, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 934, in __init__
+    self._engine = self._make_engine(f, self.engine)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 1218, in _make_engine
+    self.handles = get_handle(  # type: ignore[call-overload]
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/pandas/io/common.py", line 786, in get_handle
+    handle = open(
+FileNotFoundError: [Errno 2] No such file or directory: 'data/static/indrani/indrani_zeta_ca_h_t10.csv'
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/main.py", line 32, in <module>
+    abm_dataset = ABMDataset(csv_file, root_dir="data/", standardize=normalize, norm_out=normalize_out)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/data/mixed.py", line 10, in __init__
+    self.dframe = pd.read_csv(csv_file)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/pandas/util/_decorators.py", line 311, in wrapper
+    return func(*args, **kwargs)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 680, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 575, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 934, in __init__
+    self._engine = self._make_engine(f, self.engine)
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 1218, in _make_engine
+    self.handles = get_handle(  # type: ignore[call-overload]
+  File "/export/apps/opt/qiskit/0.34.2/envs/qiskit/lib/python3.10/site-packages/pandas/io/common.py", line 786, in get_handle
+    handle = open(
+FileNotFoundError: [Errno 2] No such file or directory: 'data/static/indrani/indrani_zeta_ca_h_t1750.csv'
+Job Statistics for 3833530:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3833530   rsjxw007 2023-07-12T16:27:00 2023-07-12T16:27:53   00:00:53             00:25.694     FAILED  1:0   r1pl-hpcf-g04 billing=5,cpu=5,gres/gpu=1,mem=37275M,n+ 
+   3833530.batch            2023-07-12T16:27:00 2023-07-12T16:27:53   00:00:53    234.68M  00:25.690     FAILED  1:0   r1pl-hpcf-g04                                          
+  3833530.extern            2023-07-12T16:27:00 2023-07-12T16:27:53   00:00:53      0.10M  00:00.004  COMPLETED  0:0   r1pl-hpcf-g04                                          
+CPU Efficiency: 9.81% of 00:04:25 core-walltime
