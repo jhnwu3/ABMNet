@@ -97,11 +97,11 @@ def param_generate(p):
         C2 = 2.77281935e+00
         g= 4.45680870e-03
         
-        # kon=random.uniform(1e-7,1e-2)
-        # koff=random.uniform(1,10)
-        # C1=random.uniform(5e3,1e4)
-        # C2=random.uniform(1,10)
-        # g=random.uniform(1e-4,1e-2)
+        kon=random.uniform(1e-7,1e-2)
+        koff=random.uniform(1,10)
+        C1=random.uniform(5e3,1e4)
+        C2=random.uniform(1,10)
+        g=random.uniform(1e-4,1e-2)
         
         
         param.append((kon,koff,C1,C2,g))
