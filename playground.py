@@ -100,8 +100,8 @@ def plot_confidence_intervals(x, confidence=0.95, title=None, labels=None):
         plt.plot([i, i], intervals[:, i], 'r-', lw=2)
         plt.plot(i, mean[i], 'bo', markersize=6)
     plt.xticks(range(n_features), labels)
-    plt.xlabel('Features')
-    plt.ylabel('Values')
+    plt.xlabel('Surrogates')
+    plt.ylabel('Ca')
     plt.title(title)
     plt.grid(True)
     plt.savefig(title + ".png")
@@ -185,7 +185,10 @@ def evaluate_pso_estimate(estimate, surrogate, y, dataset, standardize=True, nor
     
     
 # Get the actual experimental data vectors
-full_seq_dataset = TemporalDataset("data/time_series/indrani_zeta_ca_no_zeroes.pickle", min_max_scale=True)
+# full_seq_dataset = TemporalDataset("data/time_series/indrani_zeta_ca_no_zeroes.pickle", min_max_scale=True)
+full_seq_dataset = TemporalDataset("data/time_series/indrani_zeta_ca_h_no_zeroes_3704.pickle", standardize_inputs=False, min_max_scale=False)
+triangle_data = generate_static_with_temporal_features_dataset(full_seq_dataset)
+triangle_data.write_to_csv("data/static/indrani_triangle_features.csv")
 
 data_46L_50F_53V_85k = np.loadtxt("data/John_Indrani_data/zeta_Ca_signal/test_data_experiments/46L_50F_53V_85k.dat")
 data_46L_50F_100k = np.loadtxt("data/John_Indrani_data/zeta_Ca_signal/test_data_experiments/46L_50F_100k.dat")
@@ -203,7 +206,7 @@ for i in range(len(labels)):
 
 # get surrogates
 time_pts = [10, 250, 750, 1750]
-time_pts = [250]
+# time_pts = [250]
 # get their corresponding list of actual time-values
 actual_times = full_seq_dataset.times[time_pts]
 print("--- Times: -----")
@@ -294,29 +297,29 @@ ys = get_corresponding_y(Y_dict["CD3z_46L"], actual_times)
 # plt.savefig("surr_eval_full_t250.png")
 
 
-minEstimates = []
-minCosts = []
-quad_costs = []
-for e in range(1):
-    for i in range(N):
-        randomVector = np.array([random.uniform(1e-7,1e-2), random.uniform(1,10), random.uniform(5e3,1e4), random.uniform(1,10), random.uniform(1e-4,1e-2)])
-        surr_input[i] = randomVector
-    quad_costs = multi_indrani_cost_fxn(surr_input, surrogates=surrogates, ys=ys, datasets=datasets)
-    minCosts.append(quad_costs.min())
-    minEstimates.append(surr_input[np.argmin(quad_costs)])
-    print("Found New Min Cost:")
-    print(minCosts[e])
-    print("Estimate:")
-    print(minEstimates[e])
+# minEstimates = []
+# minCosts = []
+# quad_costs = []
+# for e in range(1):
+#     for i in range(N):
+#         randomVector = np.array([random.uniform(1e-7,1e-2), random.uniform(1,10), random.uniform(5e3,1e4), random.uniform(1,10), random.uniform(1e-4,1e-2)])
+#         surr_input[i] = randomVector
+#     quad_costs = multi_indrani_cost_fxn(surr_input, surrogates=surrogates, ys=ys, datasets=datasets)
+#     minCosts.append(quad_costs.min())
+#     minEstimates.append(surr_input[np.argmin(quad_costs)])
+#     print("Found New Min Cost:")
+#     print(minCosts[e])
+#     print("Estimate:")
+#     print(minEstimates[e])
 
-minCosts = np.array(minCosts)
-minEstimates = np.array(minEstimates)
+# minCosts = np.array(minCosts)
+# minEstimates = np.array(minEstimates)
 
-print(minEstimates.shape)
-print("Final Min Cost:")
-print(minCosts.min())
-print("Final Min Estimate:")
-print(minEstimates[np.argmin(minCosts)])
+# print(minEstimates.shape)
+# print("Final Min Cost:")
+# print(minCosts.min())
+# print("Final Min Estimate:")
+# print(minEstimates[np.argmin(minCosts)])
 
 
 # 3.50749103e-04 3.81711042e+00 6.22638543e+03 2.45842800e+00
@@ -333,33 +336,35 @@ print(minEstimates[np.argmin(minCosts)])
 # plt.savefig("ixr_Surrogate_MultiCost.png")
 
 # load in and rescale indrani's estimates
-# indrani_estimates = np.loadtxt("CD3z_46L_indrani_estimates.dat")
-# print(indrani_estimates.shape)
-# indrani_estimates = np.power(10, indrani_estimates[:15,:-1])
-# print(indrani_estimates.shape)
-# print(indrani_estimates.max())
-# print(indrani_estimates.min())
-# predictions = [] # get all the predictions and plot them across time
-# for i in range(len(surrogates)):
-#     predictions.append(evaluate_MLP_surrogate(indrani_estimates,surrogate=surrogates[i],dataset=datasets[i], standardize=True, normalize=True)[:,1])
-# predictions = np.array(predictions)
-# print(predictions[:,:5])
-# print(predictions.shape)
-# plt.figure()
-# true = plt.plot(actual_times, ys, label="Observed Data",c="b", linewidth=10, alpha=0.5)
-# for i in range(predictions.shape[1]):
-#     plt.scatter(actual_times, predictions[:,i])
-# plt.legend()
-# plt.savefig("IndraniEstSurr.png")
+indrani_estimates = np.loadtxt("CD3z_46L_indrani_estimates.dat")
+print(indrani_estimates.shape)
+indrani_estimates = np.power(10, indrani_estimates[:15,:-1])
+print(indrani_estimates.shape)
+print(indrani_estimates.max())
+print(indrani_estimates.min())
+predictions = [] # get all the predictions and plot them across time
+for i in range(len(surrogates)):
+    predictions.append(evaluate_MLP_surrogate(indrani_estimates,surrogate=surrogates[i],dataset=datasets[i], standardize=True, normalize=True)[:,1])
+predictions = np.array(predictions)
+print(predictions[:,:5])
+print(predictions.shape)
+plt.figure()
+true = plt.plot(actual_times, ys, label="Observed Data",c="b", linewidth=10, alpha=0.5)
+for i in range(predictions.shape[1]):
+    plt.scatter(actual_times, predictions[:,i])
+plt.legend()
+plt.savefig("IndraniEstSurr.png")
+plot_confidence_intervals(predictions.transpose(), title="Indrani_CI_EstSurr")
+
 # check if anything in the dataset is outta bounds!
-# for i in range(indrani_estimates.shape[0]):
-#     for j in range(indrani_estimates.shape[1]):
-#         if indrani_estimates[i,j] > upper_bound[j]:
-#             print("TOO LARGE")
-#             print("i:",i,"+","j:",j)
-#         if indrani_estimates[i,j] < lower_bound[j]:
-#             print("TOO SMALL")
-#             print("i:",i,"+","j:",j)
+for i in range(indrani_estimates.shape[0]):
+    for j in range(indrani_estimates.shape[1]):
+        if indrani_estimates[i,j] > upper_bound[j]:
+            print("TOO LARGE")
+            print("i:",i,"+","j:",j)
+        if indrani_estimates[i,j] < lower_bound[j]:
+            print("TOO SMALL")
+            print("i:",i,"+","j:",j)
 
 
 

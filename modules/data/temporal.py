@@ -28,7 +28,23 @@ def chunk_sequence(sequence, chunk_size):
 
     return chunks
 
+# where each sequence is some tensor
+def compute_trajectory_features(sequence):
+    min, _ = torch.min(sequence, dim=0)
+    max, _ = torch.min(sequence, dim=0)
+    final = sequence[-1]
+    approx_area_normalized = torch.mean(sequence, dim=0) # think of an approximate area under the curve but divided by the number of slices you've taken. 
+    # print(min)
+    # print(max)
+    # print(final.size())
+    # print(approx_area_normalized)
+    return torch.cat((min, max, final, approx_area_normalized))
 
+def get_all_trajectory_features(sequences):
+    feats = []
+    for seq in sequences:
+        feats.append(compute_trajectory_features(seq))
+    return feats
 
 # Cytotoxic CD8+ T Cells, Cancer, Exhausted CD8+ T Cells, Dead Cancer Cells, Ignore, Ignore, TAMs, Ignore, Ignore
 class TemporalDataset(Dataset):
@@ -160,9 +176,6 @@ class TemporalChunkedDataset(Dataset):
         self.rates = chunked_rates
         self.outputs = chunked_outputs
 
-
-
-
     def __len__(self):
         # Return the total number of samples in your dataset
         return len(self.rates) # len(rates) == len(output_graphs)
@@ -178,7 +191,6 @@ class TemporalChunkedDataset(Dataset):
         else: 
             return self.rates[index], self.outputs[index][:-self.steps_into_future].unsqueeze(dim=1), self.outputs[index][self.steps_into_future:].unsqueeze(dim=1)
 
-
 def generate_static_dataset(dataset : TemporalDataset, t):
     rates = dataset.rates 
     output = []
@@ -187,6 +199,10 @@ def generate_static_dataset(dataset : TemporalDataset, t):
 
     return StaticDataset(rates, output)
 
+def generate_static_with_temporal_features_dataset(dataset: TemporalDataset):
+    rates = dataset.rates 
+    output = get_all_trajectory_features(dataset.outputs) 
+    return StaticDataset(rates, output)
 
 def combine_temporal_pickles(file1, file2, save=True, path=""):
     data1 = None

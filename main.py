@@ -58,12 +58,12 @@ if __name__ == '__main__':
     batch_size = get_batch_size()
     # we do small cross validation to reduce time for nonlinear 6 protein system.
     if cross:
-        kf = KFold(n_splits=3, shuffle=True, random_state=42) # seed it, shuffle it again, and n splits it.
+        kf = KFold(n_splits=5, shuffle=True, random_state=42) # seed it, shuffle it again, and n splits it.
         print(kf)
         depths_to_search = [2,4,6]
         hidden_sizes_to_search = [32,64,128] # just go up to some reasonable number I guess.
         epochs_to_search = [50, 100, 150] # number of epochs to search and train for
-        batch_sizes = [None] 
+        batch_sizes = [batch_size, int(batch_size / 2), int(2*batch_size)] 
         best_val_mse = np.Inf
         for batch in batch_sizes:
             for d_len in depths_to_search:
@@ -75,7 +75,7 @@ if __name__ == '__main__':
                             k_train = tc.utils.data.Subset(train_dataset, train_index)
                             k_test = tc.utils.data.Subset(train_dataset, test_index)
                             if model_type == 'res_nn':
-                                ABMNet = train_res_nn(k_train, input_size=input_len, hidden_size=h_size, depth=d_len, output_size=output_len, nEpochs=epochs, use_gpu=using_GPU)
+                                ABMNet = train_res_nn(k_train, input_size=input_len, hidden_size=h_size, depth=d_len, output_size=output_len, nEpochs=epochs, use_gpu=using_GPU, batch_size=batch)
                             else: 
                                 ABMNet = train_nn(k_train, input_size=input_len, hidden_size=h_size, depth=d_len, output_size=output_len, nEpochs=epochs, use_gpu=using_GPU, batch_size=batch)
                             mse, time_to_run, predictions, tested = evaluate(ABMNet, k_test, use_gpu=using_GPU, batch_size=batch)
