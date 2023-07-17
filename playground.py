@@ -187,8 +187,8 @@ def evaluate_pso_estimate(estimate, surrogate, y, dataset, standardize=True, nor
 # Get the actual experimental data vectors
 # full_seq_dataset = TemporalDataset("data/time_series/indrani_zeta_ca_no_zeroes.pickle", min_max_scale=True)
 full_seq_dataset = TemporalDataset("data/time_series/indrani_zeta_ca_h_no_zeroes_3704.pickle", standardize_inputs=False, min_max_scale=False)
-triangle_data = generate_static_with_temporal_features_dataset(full_seq_dataset)
-triangle_data.write_to_csv("data/static/indrani_triangle_features.csv")
+# triangle_data = generate_static_with_temporal_features_dataset(full_seq_dataset)
+# triangle_data.write_to_csv("data/static/indrani_triangle_features.csv")
 
 data_46L_50F_53V_85k = np.loadtxt("data/John_Indrani_data/zeta_Ca_signal/test_data_experiments/46L_50F_53V_85k.dat")
 data_46L_50F_100k = np.loadtxt("data/John_Indrani_data/zeta_Ca_signal/test_data_experiments/46L_50F_100k.dat")
@@ -212,10 +212,10 @@ actual_times = full_seq_dataset.times[time_pts]
 print("--- Times: -----")
 print(actual_times)
 surrogates = []
-prefix = "model/ixr3k_zeta_ca_t"
-suffix = "_res_batch_full.pt"
+prefix = "model/ixr3k_zeta_ca_h_t"
+suffix = "_res_batch.pt"
 
-dataset_prefix = "data/static/indrani/indrani_zeta_ca_t"
+dataset_prefix = "data/static/indrani/indrani_zeta_ca_h_t"
 dataset_suffix = ".csv"
 datasets = []
 for t in time_pts: 
@@ -251,18 +251,18 @@ C2 = 1.28873#random.uniform(1,10)
 # C2 = random.uniform(1,10)
 g= 0.0032684#random.uniform(1e-4,1e-2)
 # between k1 and k2 
-N = 10000
+N = 1000000
 surr_input = np.zeros((N,5))
 labels = ["k1", "k2", "C1", "C2", "g"]
 indraniTruth = np.array([kon, koff, C1, C2, g])
-for i in range(N):
-    # surr_input[i] = np.array([random.uniform(1e-7,1e-2),random.uniform(1,10), C1, C2, g])
-    # surr_input[i] = np.array([kon,koff, random.uniform(5e3,1e4), random.uniform(1,10), g])
-    # surr_input[i] = indraniTruth
-    randomVector = np.array([random.uniform(1e-7,1e-2), random.uniform(1,10), random.uniform(5e3,1e4), random.uniform(1,10), random.uniform(1e-4,1e-2)])
-    # surr_input[i,varyingX] = randomVector[varyingX]
-    # surr_input[i, varyingY] = randomVector[varyingY]
-    surr_input[i] = randomVector
+# for i in range(N):
+#     # surr_input[i] = np.array([random.uniform(1e-7,1e-2),random.uniform(1,10), C1, C2, g])
+#     # surr_input[i] = np.array([kon,koff, random.uniform(5e3,1e4), random.uniform(1,10), g])
+#     # surr_input[i] = indraniTruth
+#     randomVector = np.array([random.uniform(1e-7,1e-2), random.uniform(1,10), random.uniform(5e3,1e4), random.uniform(1,10), random.uniform(1e-4,1e-2)])
+#     # surr_input[i,varyingX] = randomVector[varyingX]
+#     # surr_input[i, varyingY] = randomVector[varyingY]
+#     surr_input[i] = randomVector
     
 
 ys = get_corresponding_y(Y_dict["CD3z_46L"], actual_times)
@@ -297,29 +297,44 @@ ys = get_corresponding_y(Y_dict["CD3z_46L"], actual_times)
 # plt.savefig("surr_eval_full_t250.png")
 
 
-# minEstimates = []
-# minCosts = []
-# quad_costs = []
-# for e in range(1):
-#     for i in range(N):
-#         randomVector = np.array([random.uniform(1e-7,1e-2), random.uniform(1,10), random.uniform(5e3,1e4), random.uniform(1,10), random.uniform(1e-4,1e-2)])
-#         surr_input[i] = randomVector
-#     quad_costs = multi_indrani_cost_fxn(surr_input, surrogates=surrogates, ys=ys, datasets=datasets)
-#     minCosts.append(quad_costs.min())
-#     minEstimates.append(surr_input[np.argmin(quad_costs)])
-#     print("Found New Min Cost:")
-#     print(minCosts[e])
-#     print("Estimate:")
-#     print(minEstimates[e])
+minEstimates = []
+minCosts = []
+quad_costs = []
+varyingX = 0
+varyingY = 1
+for e in range(1):
+    for i in range(N):
+        randomVector = np.array([random.uniform(1e-7,1e-2), random.uniform(1,10), random.uniform(5e3,1e4), random.uniform(1,10), random.uniform(1e-4,1e-2)])
+        surr_input[i] = randomVector
+        
+    quad_costs = multi_indrani_cost_fxn(surr_input, surrogates=surrogates, ys=ys, datasets=datasets)
+    heat = np.log(quad_costs)
+    
+    minCosts.append(quad_costs.min())
+    minEstimates.append(surr_input[np.argmin(quad_costs)])
+    plt.title("Cost Space Across Time")
+    plt.xlabel(labels[varyingX])
+    plt.ylabel(labels[varyingY])
+    plt.scatter(surr_input[:,varyingX], surr_input[:,varyingY] , c=heat, s=4)
+    colorbar = plt.colorbar()
+    colorbar.set_ticks([heat.min(), heat.max() / 2 ,heat.max()])  # Tick positions
+    colorbar.set_ticklabels([str(int(heat.min())),"log(square error)", str(int(heat.max()))])  # Tick labels
+    plt.legend()
+    plt.savefig("Surrogates_cost_contour.png")
+    plt.close()
+    print("Found New Min Cost:")
+    print(minCosts[e])
+    print("Estimate:")
+    print(minEstimates[e])
 
-# minCosts = np.array(minCosts)
-# minEstimates = np.array(minEstimates)
+minCosts = np.array(minCosts)
+minEstimates = np.array(minEstimates)
 
-# print(minEstimates.shape)
-# print("Final Min Cost:")
-# print(minCosts.min())
-# print("Final Min Estimate:")
-# print(minEstimates[np.argmin(minCosts)])
+print(minEstimates.shape)
+print("Final Min Cost:")
+print(minCosts.min())
+print("Final Min Estimate:")
+print(minEstimates[np.argmin(minCosts)])
 
 
 # 3.50749103e-04 3.81711042e+00 6.22638543e+03 2.45842800e+00
@@ -336,35 +351,35 @@ ys = get_corresponding_y(Y_dict["CD3z_46L"], actual_times)
 # plt.savefig("ixr_Surrogate_MultiCost.png")
 
 # load in and rescale indrani's estimates
-indrani_estimates = np.loadtxt("CD3z_46L_indrani_estimates.dat")
-print(indrani_estimates.shape)
-indrani_estimates = np.power(10, indrani_estimates[:15,:-1])
-print(indrani_estimates.shape)
-print(indrani_estimates.max())
-print(indrani_estimates.min())
-predictions = [] # get all the predictions and plot them across time
-for i in range(len(surrogates)):
-    predictions.append(evaluate_MLP_surrogate(indrani_estimates,surrogate=surrogates[i],dataset=datasets[i], standardize=True, normalize=True)[:,1])
-predictions = np.array(predictions)
-print(predictions[:,:5])
-print(predictions.shape)
-plt.figure()
-true = plt.plot(actual_times, ys, label="Observed Data",c="b", linewidth=10, alpha=0.5)
-for i in range(predictions.shape[1]):
-    plt.scatter(actual_times, predictions[:,i])
-plt.legend()
-plt.savefig("IndraniEstSurr.png")
-plot_confidence_intervals(predictions.transpose(), title="Indrani_CI_EstSurr")
+# indrani_estimates = np.loadtxt("CD3z_46L_indrani_estimates.dat")
+# print(indrani_estimates.shape)
+# indrani_estimates = np.power(10, indrani_estimates[:15,:-1])
+# print(indrani_estimates.shape)
+# print(indrani_estimates.max())
+# print(indrani_estimates.min())
+# predictions = [] # get all the predictions and plot them across time
+# for i in range(len(surrogates)):
+#     predictions.append(evaluate_MLP_surrogate(indrani_estimates,surrogate=surrogates[i],dataset=datasets[i], standardize=True, normalize=True)[:,1])
+# predictions = np.array(predictions)
+# print(predictions[:,:5])
+# print(predictions.shape)
+# plt.figure()
+# true = plt.plot(actual_times, ys, label="Observed Data",c="b", linewidth=10, alpha=0.5)
+# for i in range(predictions.shape[1]):
+#     plt.scatter(actual_times, predictions[:,i])
+# plt.legend()
+# plt.savefig("IndraniEstSurr.png")
+# plot_confidence_intervals(predictions.transpose(), title="Indrani_CI_EstSurr")
 
-# check if anything in the dataset is outta bounds!
-for i in range(indrani_estimates.shape[0]):
-    for j in range(indrani_estimates.shape[1]):
-        if indrani_estimates[i,j] > upper_bound[j]:
-            print("TOO LARGE")
-            print("i:",i,"+","j:",j)
-        if indrani_estimates[i,j] < lower_bound[j]:
-            print("TOO SMALL")
-            print("i:",i,"+","j:",j)
+# # check if anything in the dataset is outta bounds!
+# for i in range(indrani_estimates.shape[0]):
+#     for j in range(indrani_estimates.shape[1]):
+#         if indrani_estimates[i,j] > upper_bound[j]:
+#             print("TOO LARGE")
+#             print("i:",i,"+","j:",j)
+#         if indrani_estimates[i,j] < lower_bound[j]:
+#             print("TOO SMALL")
+#             print("i:",i,"+","j:",j)
 
 
 

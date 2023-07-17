@@ -1,0 +1,7 @@
+Job Statistics for 3839059:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3839059   rsjxw007 2023-07-17T12:12:16 2023-07-17T12:12:57   00:00:41             00:39.170  COMPLETED  0:0   r1pl-hpcf-n21        billing=5,cpu=5,mem=37275M,node=1 
+   3839059.batch            2023-07-17T12:12:16 2023-07-17T12:12:57   00:00:41    129.48M  00:39.166  COMPLETED  0:0   r1pl-hpcf-n21                                          
+  3839059.extern            2023-07-17T12:12:16 2023-07-17T12:12:57   00:00:41      0.09M  00:00.004  COMPLETED  0:0   r1pl-hpcf-n21                                          
+CPU Efficiency: 19.02% of 00:03:25 core-walltime

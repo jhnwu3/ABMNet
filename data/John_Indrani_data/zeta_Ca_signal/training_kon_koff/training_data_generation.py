@@ -96,12 +96,23 @@ def param_generate(p):
         # C1 = 7.22032779e+03 
         # C2 = 2.77281935e+00
         # g= 4.45680870e-03
+        # kon= 1.39011725e-04 
+        # koff = 7.30651197e+00 
+        # C1= 7.74884329e+03 
+        # C2= 2.04480886e+00
+        # g= 2.96575691e-03
+        kon = 1.86481484e-03 
+        koff = 8.30188140e+00
+        C1 = 6.62553815e+03
+        C2 = 1.97917742e+00
+        g =6.07438758e-03
         
-        kon=random.uniform(1e-7,1e-2)
-        koff=random.uniform(1,10)
-        C1=random.uniform(5e3,1e4)
-        C2=random.uniform(1,10)
-        g=random.uniform(1e-4,1e-2)
+        
+        # kon=random.uniform(1e-7,1e-2)
+        # koff=random.uniform(1,10)
+        # C1=random.uniform(5e3,1e4)
+        # C2=random.uniform(1,10)
+        # g=random.uniform(1e-4,1e-2)
         
         
         param.append((kon,koff,C1,C2,g))
@@ -139,7 +150,7 @@ def pZAP_signal(K1,K2):
 def main():
    
     #*****************John you can change
-    p=5000 #the number of the parameter sets of [kon,koff,C1,C2,g]
+    p=1 #the number of the parameter sets of [kon,koff,C1,C2,g]
     
     
     #actual experimental data
@@ -160,7 +171,7 @@ def main():
     
     #Number of (kon,koff) exists, printing in the files
     for i in range(len(param)) :
-        f = f"train{i}_set0.txt"  # Generate file name (e.g., output1.txt)
+        f = f"estimate2{i}_ca_h.txt"  # Generate file name (e.g., output1.txt)
         
         #load each set of (kon, koff,C1,C2,g)
         kon=param[i,0]
