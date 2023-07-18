@@ -112,6 +112,13 @@ class TemporalDataset(Dataset):
         # need to convert to sets of sequences
         return self.rates[index], self.outputs[index][:-self.steps_into_future], self.outputs[index][self.steps_into_future:]
 
+    def save_to_pickle(self, output_path):
+        data = {}
+        data["outputs"] = self.outputs  # N x L tensors
+        data["rates"] = self.rates 
+        data["time_points"] = self.times 
+        with open(output_path, 'wb') as handle:
+            pickle.dump(data, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 
 class TemporalChunkedDataset(Dataset):
