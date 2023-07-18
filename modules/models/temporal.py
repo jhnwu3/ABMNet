@@ -95,4 +95,5 @@ class DumbTransformerSurrogate(nn.Module):
         
         x = self.transformer(x, self.sequence_layer(shifted_sequence))
         x = self.out_layer(x)
+        return x
         
