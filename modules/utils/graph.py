@@ -132,7 +132,7 @@ def bins_list(min, max, step_size):
 # Neutral: #808080 (Gray)
 
 
-def plot_scatter(true, predictions, output='data/graphs/out', nSpecies=None):
+def plot_scatter(true, predictions, output='data/graphs/out', nSpecies=None, show=False):
     plt.figure()
     fig, axes = plt.subplots(figsize=(8, 8))
     x123 = np.arange(np.min(true), np.max(true))
@@ -179,6 +179,8 @@ def plot_scatter(true, predictions, output='data/graphs/out', nSpecies=None):
     axes.set_title("R^2=" + str(r_sq))
     axes.legend()
     plt.savefig(output + '_scatter.png')  
+    if show: 
+        plt.show()
     plt.close()
 
 def visualize_graph(G, color, path="data/spatial/graph.png"):
