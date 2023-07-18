@@ -279,7 +279,7 @@ def train_res_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_si
 
 
 def train_temporal_transformer(dataset, n_rates, hidden_dim, output_dim, nEpochs, batch_size=None):
-    model = DumbTransformerSurrogate(parameter_dim=n_rates, hidden_dim=hidden_dim, out_dim=output_dim)
+    model = DumbTransformerSurrogate(n_rates=n_rates, hidden_dim=hidden_dim, out_dim=output_dim)
     optimizer = optim.AdamW(model.parameters())
     criterion = nn.MSELoss()
     
