@@ -5,12 +5,12 @@ import torch
 import pickle
 import shutil
 # from modules.data.spatial import *
-def write_array_to_csv(array, column_labels, file_path):
-    # Create a DataFrame from the array and column labels
-    df = pd.DataFrame(data=array, columns=column_labels)
+# def write_array_to_csv(array, column_labels, file_path):
+#     # Create a DataFrame from the array and column labels
+#     df = pd.DataFrame(data=array, columns=column_labels)
 
-    # Write the DataFrame to a CSV file
-    df.to_csv(file_path, index=False)
+#     # Write the DataFrame to a CSV file
+#     df.to_csv(file_path, index=False)
 
 def get_data_inhomogenous(filename):
     # filename = 'your_file.txt'
@@ -45,7 +45,6 @@ print(parameter_dirs)
 
 rates = []
 output = []
-# keep one vector of the time steps too just in case.
 times = []
 
 for dir in parameter_dirs:
@@ -80,11 +79,11 @@ with open(output_path, 'wb') as handle:
     pickle.dump(tosave, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 
-rates = np.array(rates)
-output = np.array(output)
-# now let us create a dictionary for the dataset where each entity in the list is some time-series evolution 
-print(rates.shape)
-print(output.shape)
+# rates = np.array(rates)
+# output = np.array(output)
+# # now let us create a dictionary for the dataset where each entity in the list is some time-series evolution 
+# print(rates.shape)
+# print(output.shape)
 
 # # for simplicity, we'll just do counts for now, and save into a specific dataset
 # output_file = "data/static/indrani_t400.csv"

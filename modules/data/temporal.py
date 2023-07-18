@@ -65,6 +65,7 @@ class TemporalDataset(Dataset):
         self.input_mean = None
         self.input_std = None
         if len(self.outputs[0].size()) > 1:
+            print("Dimensions of Trajectory:")
             print(self.outputs[0].size())
             self.input_size = self.outputs[0].size()[1]
             

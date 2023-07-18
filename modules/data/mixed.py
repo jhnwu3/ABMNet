@@ -6,7 +6,7 @@ from modules.utils.gmm import *
 
 
 class ABMDataset(Dataset):
-    def __init__(self, csv_file, root_dir, standardize=False, norm_out = False):
+    def __init__(self, csv_file, root_dir=None, standardize=False, norm_out = False):
         self.dframe = pd.read_csv(csv_file)
         self.root = root_dir 
         columns = self.dframe.columns 
@@ -21,9 +21,10 @@ class ABMDataset(Dataset):
         self.output_maxes = []
         self.input_means = []
         self.input_stds = []
-        
+        self.input_dim = self.final_input_idx 
         # just to see what happens in gdags data by normalizing parameters
         allData = self.dframe.to_numpy()
+        self.out_dim = allData.shape[1] - self.final_input_idx 
         if standardize:
             inputs = allData[:, :self.final_input_idx].copy()
             self.input_means = inputs.mean(axis=0)
