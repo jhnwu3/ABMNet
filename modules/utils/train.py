@@ -303,7 +303,7 @@ def train_temporal_transformer(dataset, n_rates, hidden_dim, output_dim, nEpochs
         for rates, in_seq, out_seq in loader:
             optimizer.zero_grad()
             prediction = model.forward(rates.unsqueeze(dim=0).to(device), in_seq.to(device))
-            loss = criterion(prediction.squeeze(), out_seq.to(device))
+            loss = criterion(prediction.squeeze(), out_seq.to(device).squeeze())
             loss_this_epoch += loss.item() 
             loss.backward()
             optimizer.step()
