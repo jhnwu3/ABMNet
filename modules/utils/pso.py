@@ -25,8 +25,8 @@ def rpoint(og_pos, seed=3, epsi=0.02, nan=0.02, hone =28):
 
     return new_pos
 
-def indrani_cost(x, surrogate, y, wt, dataset, standardize=True, normalize=True, batch=True):
-    costs = []
+def indrani_cost(x, surrogate, y, dataset, standardize=True, normalize=True):
+   
     if len(x.shape) < 2:
         thetaCopy = x
     else:
@@ -34,14 +34,12 @@ def indrani_cost(x, surrogate, y, wt, dataset, standardize=True, normalize=True,
 
     if standardize:
         thetaCopy = (thetaCopy - dataset.input_means) / dataset.input_stds
-
+    surrogate.eval()
     input = tc.from_numpy(thetaCopy)
     if next(surrogate.parameters()).is_cuda:
         input = input.to(tc.device("cuda"))
 
-    if batch:
-        input = input.unsqueeze(dim=0)
-
+    output = None
     with tc.no_grad():
         output = surrogate(input).squeeze().cpu().numpy()
 
@@ -49,10 +47,9 @@ def indrani_cost(x, surrogate, y, wt, dataset, standardize=True, normalize=True,
         scale_factor = dataset.output_maxes - dataset.output_mins
         output = (output * scale_factor) + dataset.output_mins
 
-    cost = np.matmul(output[:, 1] - y, (output[:, 1] - y).transpose())
-    costs.append(cost)
-
-    return np.array(costs)
+    cost = (output[:, 1] - y) * (output[:, 1] - y)
+    
+    return cost
 
 def gmm_cost(x, surrogate, y, wt, dataset=None, standardize=False, normalize=False, batch=True):
     costs = []

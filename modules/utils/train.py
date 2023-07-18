@@ -145,8 +145,6 @@ def train_temporal_model(data, input_size : int, n_rates : int, hidden_size : in
     # train_size = int(0.1 * len(data))
     # test_size = len(data) - train_size
     # train_data, test_data = torch.utils.data.random_split(data, [train_size, test_size])
-    best_training_loss = 30
-    counter = 0
     if batch_size is None:
         dataloader = torch.utils.data.DataLoader(data, batch_size=None, shuffle=True) 
         epoch_start = time.time()
@@ -188,13 +186,7 @@ def train_temporal_model(data, input_size : int, n_rates : int, hidden_size : in
             if(epoch % 5 == 0):
                 print("Epoch:", epoch, " loss:", loss_per_epoch, " in Time:", time.time() - epoch_start)
                 epoch_start = time.time()
-                counter += 1
-            if loss_per_epoch < best_training_loss:
-                best_training_loss = loss_per_epoch
-                counter = 0
-                
-            if counter > 5: 
-                break
+      
                 
 
     if len(path) > 0:
@@ -273,11 +265,44 @@ def train_res_nn(dataset : ABMDataset, input_size, hidden_size, depth, output_si
         for input, output in loader:
             optimizer.zero_grad()
             loss = 0
-            # sample = dataset[ex]
-            # input = sample[0] # no more keys, justt values input is first index, output is second
-            # output = sample[1] 
             prediction = model.forward(input.to(device))
             loss += criterion(prediction.squeeze(), output.squeeze().to(device))
+            loss_this_epoch += loss.item() 
+            loss.backward()
+            optimizer.step()
+            
+        if epoch % 10 == 0:
+            print(repr(f"Finished epoch {epoch} with loss {loss_this_epoch} in time {time.time() - epoch_start}"))
+            epoch_start = time.time()
+            
+    return model  
+
+
+def train_temporal_transformer(dataset, n_rates, hidden_dim, output_dim, nEpochs, batch_size=None):
+    model = DumbTransformerSurrogate(parameter_dim=n_rates, hidden_dim=hidden_dim, out_dim=output_dim)
+    optimizer = optim.AdamW(model.parameters())
+    criterion = nn.MSELoss()
+    
+    if tc.cuda.is_available():
+        device = tc.device("cuda")
+        model = model.cuda()
+        criterion = criterion.cuda()
+        using_gpu = True
+    else:
+        device = tc.device("cpu")
+        using_gpu = False
+
+    print(f"Using GPU: {using_gpu}")
+    print("Batch Size:", batch_size)
+    model.train()
+    epoch_start = time.time()
+    loader = tc.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True)
+    for epoch in range(nEpochs):
+        loss_this_epoch = 0
+        for rates, in_seq, out_seq in loader:
+            optimizer.zero_grad()
+            prediction = model.forward(rates.to(device), in_seq)
+            loss = criterion(prediction.squeeze(), out_seq.squeeze().to(device))
             loss_this_epoch += loss.item() 
             loss.backward()
             optimizer.step()

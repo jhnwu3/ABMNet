@@ -58,7 +58,7 @@ class TemporalDataset(Dataset):
         self.rates = data["rates"]
         self.times = data["time_points"]
         self.n_rates = self.rates[0].size()[0]
-        self.input_size = 1
+        self.input_size = self.outputs[0].size()[0]
         self.steps_into_future = steps
         self.min = None 
         self.max = None

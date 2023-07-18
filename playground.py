@@ -28,7 +28,7 @@ import matplotlib.colors as mcolors
 
 
 
-def indrani_costss(x, surrogate, y, dataset, standardize=True, normalize=True, batch=False):
+def indrani_costss(x, surrogate, y, dataset, standardize=True, normalize=True):
     # costs = []
     if len(x.shape) < 2:
         thetaCopy = x
@@ -43,8 +43,8 @@ def indrani_costss(x, surrogate, y, dataset, standardize=True, normalize=True, b
     if next(surrogate.parameters()).is_cuda:
         input = input.to(tc.device("cuda"))
 
-    if batch:
-        input = input.unsqueeze(dim=0)
+    # if batch:
+    #     input = input.unsqueeze(dim=0)
     # print(" IM ALIVE")
     output = None
     with tc.no_grad():

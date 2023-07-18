@@ -119,9 +119,9 @@ class GCNComplex(torch.nn.Module):
 
 
 #MLP heads for ViTs
-class MLP(nn.Module):
+class MLPHead(nn.Module):
     def __init__(self, input_dim, hidden_dim, output_dim):
-        super(MLP, self).__init__()
+        super(MLPHead, self).__init__()
         self.fc1 = nn.Linear(input_dim, hidden_dim)
         self.fc2 = nn.Linear(hidden_dim, output_dim)
 
@@ -156,7 +156,7 @@ class ViT(nn.Module):
             for _ in range(depth)
         ])
         self.class_token = nn.Parameter(torch.zeros(1, 1, embed_dim))
-        self.mlp_head = MLP(embed_dim, mlp_dim, num_classes)
+        self.mlp_head = MLPHead(embed_dim, mlp_dim, num_classes)
 
     def forward(self, x):
         x = self.patch_embedding(x)
