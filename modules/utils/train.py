@@ -283,7 +283,7 @@ def train_temporal_transformer(dataset, n_rates, hidden_dim, output_dim, nEpochs
     model = model.double()
     optimizer = optim.AdamW(model.parameters())
     criterion = nn.MSELoss()
-    
+    device = ""
     if tc.cuda.is_available():
         device = tc.device("cuda")
         model = model.cuda()
@@ -302,7 +302,7 @@ def train_temporal_transformer(dataset, n_rates, hidden_dim, output_dim, nEpochs
         loss_this_epoch = 0
         for rates, in_seq, out_seq in loader:
             optimizer.zero_grad()
-            prediction = model.forward(rates.to(device), in_seq)
+            prediction = model.forward(rates.to(device), in_seq.to(device))
             loss = criterion(prediction.squeeze(), out_seq.squeeze().to(device))
             loss_this_epoch += loss.item() 
             loss.backward()
