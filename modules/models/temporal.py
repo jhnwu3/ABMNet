@@ -84,6 +84,7 @@ class DumbTransformerSurrogate(nn.Module):
     def __init__(self, n_rates, hidden_dim, out_dim):
         super(DumbTransformerSurrogate, self).__init__()
         self.in_layer = nn.Linear(n_rates, hidden_dim)
+        self.sequence_layer = nn.Linear(out_dim, hidden_dim)
         self.transformer = nn.Transformer(d_model=hidden_dim, batch_first=True)
         self.out_layer = nn.Linear(hidden_dim, out_dim)
         
@@ -91,6 +92,7 @@ class DumbTransformerSurrogate(nn.Module):
     def forward(self, x, shifted_sequence):
         x = self.in_layer(x)
         # feed the encoder x and the decoder the shifted sequence
-        x = self.transformer(x, shifted_sequence)
+        
+        x = self.transformer(x, self.sequence_layer(shifted_sequence))
         x = self.out_layer(x)
         
