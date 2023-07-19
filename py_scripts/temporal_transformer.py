@@ -1,5 +1,5 @@
-import sys
-sys.path.append('../') # important to adjust what path the libraries are loaded from
+# import sys
+# sys.path.append('../') # important to adjust what path the libraries are loaded from
 from modules.data.temporal import *
 from modules.models.temporal import *
 from modules.utils.train import *
