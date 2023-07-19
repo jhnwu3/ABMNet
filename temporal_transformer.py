@@ -11,4 +11,4 @@ dataset = TemporalDataset("data/time_series/indrani_zeta_ca_h_std_norm.pickle",
 # dataset.save_to_pickle("data/time_series/indrani_zeta_ca_h_std_norm.pickle")
 # output dimension is the same as input dimension (I believe)
 train_temporal_transformer(dataset=dataset, n_rates = dataset.n_rates, hidden_dim=128, 
-                           output_dim= dataset.input_size, nEpochs=5)
+                           output_dim= dataset.input_size, nEpochs=5, batch_size=500)
