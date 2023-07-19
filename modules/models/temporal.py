@@ -85,7 +85,7 @@ class DumbTransformerSurrogate(nn.Module):
         super(DumbTransformerSurrogate, self).__init__()
         self.in_layer = nn.Linear(n_rates, hidden_dim)
         self.sequence_layer = nn.Linear(out_dim, hidden_dim)
-        self.transformer = nn.Transformer(d_model=hidden_dim, batch_first=True)
+        self.transformer = nn.Transformer(nhead=4, num_decoder_layers=2, num_encoder_layers=2, d_model=hidden_dim, batch_first=True)
         self.out_layer = nn.Linear(hidden_dim, out_dim)
         
         # x is the set of rates
