@@ -7,6 +7,6 @@
 #SBATCH --cpus-per-task=16
 #SBATCH --gres=gpu
 
-python3 py_scripts/temporal_transformer.py
+python3 temporal_transformer.py
 # mprof plot
 # python3 -m memory_profiler spatial.py
