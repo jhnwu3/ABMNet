@@ -304,6 +304,8 @@ def train_temporal_transformer(dataset, n_rates, hidden_dim, output_dim, nEpochs
             optimizer.zero_grad()
             print(rates.size())
             print(in_seq.size())
+            if batch_size is not None: 
+                rates = rates.unsqueeze(dim=1)
             prediction = model.forward(rates.unsqueeze(dim=0).to(device), in_seq.to(device))
             loss = criterion(prediction.squeeze(), out_seq.to(device).squeeze())
             loss_this_epoch += loss.item() 
