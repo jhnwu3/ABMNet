@@ -41,6 +41,7 @@ def evaluate(model, dataset, use_gpu = False, batch_size=None):
     return loss.cpu().detach().numpy() / len(dataset), time.time() - start_time, np.array(predicted), np.array(tested)
 
 
+# as in evaluate an RNN
 def evaluate_temporal(data, model : TemporalComplexModel, criterion, device, batch_size=None):
     predicted = []
     truth = []
@@ -67,3 +68,23 @@ def evaluate_temporal(data, model : TemporalComplexModel, criterion, device, bat
     # print(truth)
     return test_loss, np.concatenate(truth, axis=0), np.concatenate(predicted, axis=0)
     
+# evaluates a transformer model on indrani's model.
+def evaluate_temporal_transformer(data, model, criterion, device, batch_size=None):
+    predicted = []
+    truth = []
+    test_dataloader = torch.utils.data.DataLoader(data, batch_size=batch_size, shuffle=False, drop_last=False)
+    avg_loss = 0
+    model.eval()
+    start_time = time.time()
+    with torch.no_grad():
+
+        for rates, input, output in test_dataloader:
+            if len(input.size()) > 3:
+                input = input.squeeze()
+                output = output.squeeze()
+            out = model(rates.to(device).float(), input.to(device).float())
+            avg_loss += criterion(out, output.to(device)).cpu().item() / len(data) # get average
+            predicted.append(out.squeeze().cpu().numpy())
+            truth.append(output.squeeze().cpu().numpy())
+    # Now stack each of the numpy arrays if truth and predicted along the correct dimension
+    return avg_loss, np.concatenate(truth, axis=0), np.concatenate(predicted, axis=0), start_time - time.time()

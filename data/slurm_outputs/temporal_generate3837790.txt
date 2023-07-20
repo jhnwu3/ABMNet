@@ -1,8 +1,0 @@
-slurmstepd: error: *** JOB 3837790 ON r1pl-hpcf-n21 CANCELLED AT 2023-07-17T04:47:42 DUE TO TIME LIMIT ***
-Job Statistics for 3837790:
-           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
----------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
-         3837790   rsjxw007 2023-07-14T16:37:22 2023-07-17T04:47:42 2-12:10:20            2-10:18:33    TIMEOUT  0:0   r1pl-hpcf-n21        billing=5,cpu=5,mem=37275M,node=1 
-   3837790.batch            2023-07-14T16:37:22 2023-07-17T04:47:43 2-12:10:21    273.28M 2-10:18:33  CANCELLED 0:15   r1pl-hpcf-n21                                          
-  3837790.extern            2023-07-14T16:37:22 2023-07-17T04:47:42 2-12:10:20      0.09M  00:00.003  COMPLETED  0:0   r1pl-hpcf-n21                                          
-CPU Efficiency: 19.38% of 12-12:51:40 core-walltime
