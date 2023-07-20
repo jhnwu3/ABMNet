@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/py_scripts/temporal_transformer.py", line 3, in <module>
+    from modules.data.temporal import *
+ModuleNotFoundError: No module named 'modules'
+Job Statistics for 3840470:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3840470   rsjxw007 2023-07-19T17:06:18 2023-07-19T17:06:18   00:00:00             00:00.044     FAILED  1:0   r1pl-hpcf-g01 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3840470.batch            2023-07-19T17:06:18 2023-07-19T17:06:18   00:00:00          0  00:00.042     FAILED  1:0   r1pl-hpcf-g01                                          
+  3840470.extern            2023-07-19T17:06:18 2023-07-19T17:06:18   00:00:00          0  00:00.002  COMPLETED  0:0   r1pl-hpcf-g01                                          
+CPU Efficiency: 0.00% of 00:00:00 core-walltime

@@ -1,0 +1,21 @@
+Dimensions of Trajectory:
+torch.Size([2000, 3])
+Using GPU: True
+Batch Size: 10
+'Finished epoch 0 with loss 11.134520578653 in time 88.56744718551636'
+'Finished epoch 10 with loss 0.035980357349905887 in time 882.5161330699921'
+'Finished epoch 20 with loss 0.004032576132986022 in time 882.6763219833374'
+'Finished epoch 30 with loss 0.0015879349174450846 in time 882.6043658256531'
+'Finished epoch 40 with loss 0.0011029034639452133 in time 882.4502055644989'
+'Finished epoch 50 with loss 0.013212930618526313 in time 882.4497971534729'
+'Finished epoch 60 with loss 0.0004097499971932163 in time 882.4672360420227'
+'Finished epoch 70 with loss 0.00017818357880474518 in time 882.4712176322937'
+'Finished epoch 80 with loss 0.0006552345656590014 in time 882.5168490409851'
+'Finished epoch 90 with loss 0.0006980424755164273 in time 882.5296795368195'
+Job Statistics for 3840473:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3840473   rsjxw007 2023-07-19T17:11:15 2023-07-19T19:38:29   02:27:14              02:26:56  COMPLETED  0:0   r1pl-hpcf-g01 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3840473.batch            2023-07-19T17:11:15 2023-07-19T19:38:29   02:27:14   1861.18M   02:26:56  COMPLETED  0:0   r1pl-hpcf-g01                                          
+  3840473.extern            2023-07-19T17:11:15 2023-07-19T19:38:29   02:27:14      0.09M  00:00.002  COMPLETED  0:0   r1pl-hpcf-g01                                          
+CPU Efficiency: 6.24% of 1-15:15:44 core-walltime
