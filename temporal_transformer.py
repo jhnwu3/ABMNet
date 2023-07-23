@@ -23,7 +23,7 @@ train_dataset, test_dataset = tc.utils.data.random_split(dataset, [train_size, t
 # output dimension is the same as input dimension (I believe)
 model = train_temporal_transformer(dataset=train_dataset, n_rates = dataset.n_rates, hidden_dim=128, 
                            output_dim=dataset.input_size, nEpochs=50, batch_size=10)
-tc.save(model, 'model/indrani_transformer_' + str(int(fs)) '.pt')
+tc.save(model, 'model/indrani_transformer_' + str(int(fs)) + '.pt')
 # model = tc.load("model/indrani_transformer.pt")
 criterion = torch.nn.MSELoss() 
 device = tc.device("cpu")
