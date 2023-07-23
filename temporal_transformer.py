@@ -65,7 +65,7 @@ firstTrajectory = dataset.outputs[0]
 pseudoRates = torch.zeros(1,5).double()
 prediction = model(pseudoRates.to(device), firstTrajectory.to(device))
 plt.figure()
-plt.plot(prediction.detach().cpu()numpy(), c='orange', label="Prediction With Zero")
+plt.plot(prediction.detach().cpu().numpy(), c='orange', label="Prediction With Zero")
 plt.plot(firstTrajectory.detach().cpu().numpy(), c='blue', label="Ground Truth")
 plt.savefig("TransformerSanityCheck.png")
 # perform parameter estimation, this should fail if the rates have no value. 
