@@ -42,6 +42,7 @@ if tc.cuda.is_available():
 
 # get indrani's estimates 
 data_CD3z_46L_50k = np.loadtxt("data/John_Indrani_data/zeta_Ca_signal/test_data_experiments/CD3z_46L_50k.dat")
+# convert trajectory into tensor
 indrani_estimates = TemporalDataset("data/time_series/ixr_est_copies.pickle", min_max_scale=True, standardize_inputs=True)
 # torch.utils.data.DataLoader(indrani_estimates, batch_size=5, shuffle=False, drop_last=False)
 fig, axes = plt.subplots(6, 5, figsize=(15, 15))
@@ -56,5 +57,14 @@ for r in range(6):
         i+=1
 plt.savefig("Transformer_validation_ixr_est.png")
 
+# good sanity check, run random wildly different parameter sets with the same set of trajectories, what do we get? Ideally, should be a different output of parameter sets.
+
+# other sanity check, run same parameter sets, different trajectories
+firstTrajectory = dataset.outputs[0][:-1]
+pseudoRates = torch.zeros(1,5)
+prediction = model(pseudoRates.to(device), firstTrajectory)
+plt.figure()
+plt.plot(prediction, c='orange', label="Prediction With Zero")
+plt.plot(firstTrajectory, c='blue', label="Ground Truth")
 
 # perform parameter estimation, this should fail if the rates have no value. 
