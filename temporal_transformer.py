@@ -9,7 +9,7 @@ from sklearn.model_selection import KFold
 import torch
 
 dataset = TemporalDataset("data/time_series/indrani_zeta_ca_h_std_norm.pickle", 
-                                   standardize_inputs=False, min_max_scale=False, steps=50)
+                                   standardize_inputs=False, min_max_scale=False, steps=400)
 
 # train, test split.
 train_size = int(0.85 * len(dataset))
