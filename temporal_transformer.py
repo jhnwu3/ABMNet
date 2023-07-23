@@ -42,11 +42,11 @@ if tc.cuda.is_available():
 
 # get indrani's estimates 
 data_CD3z_46L_50k = np.loadtxt("data/John_Indrani_data/zeta_Ca_signal/test_data_experiments/CD3z_46L_50k.dat")
-indrani_estimates = TemporalDataset("data/time_series/ixr_est_copies.pickle",min_max_scale=True, standardize_inputs=True)
-
+indrani_estimates = TemporalDataset("data/time_series/ixr_est_copies.pickle", min_max_scale=True, standardize_inputs=True)
+# torch.utils.data.DataLoader(indrani_estimates, batch_size=5, shuffle=False, drop_last=False)
 for i in range(30):
     rates, inputs, outputs = indrani_estimates[i]
-    rates = rates.unsqueeze(dim=1).unsqueeze(dim=1)
+    rates = torch.transpose(rates.unsqueeze(dim=1))
     predictions = model(rates.to(device), inputs.to(device))
     plt.plot(indrani_estimates.times, predictions.cpu().numpy())
     plt.plot(indrani_estimates.times, outputs.cpu().numpy())
