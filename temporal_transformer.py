@@ -60,11 +60,11 @@ plt.savefig("Transformer_validation_ixr_est.png")
 # good sanity check, run random wildly different parameter sets with the same set of trajectories, what do we get? Ideally, should be a different output of parameter sets.
 
 # other sanity check, run same parameter sets, different trajectories
-firstTrajectory = dataset.outputs[0][:-1]
+firstTrajectory = dataset.outputs[0]
 pseudoRates = torch.zeros(1,5)
 prediction = model(pseudoRates.to(device), firstTrajectory)
 plt.figure()
 plt.plot(prediction, c='orange', label="Prediction With Zero")
 plt.plot(firstTrajectory, c='blue', label="Ground Truth")
-
+plt.savefig("TransformerSanityCheck.png")
 # perform parameter estimation, this should fail if the rates have no value. 
