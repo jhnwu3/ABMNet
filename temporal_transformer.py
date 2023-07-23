@@ -55,3 +55,6 @@ for r in range(6):
         axes[r,c].plot(indrani_estimates.times[1:], outputs.cpu().detach().numpy(), c='blue')
         i+=1
 plt.savefig("Transformer_validation_ixr_est.png")
+
+
+# perform parameter estimation, this should fail if the rates have no value. 
