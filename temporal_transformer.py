@@ -61,7 +61,7 @@ plt.savefig("Transformer_validation_ixr_est.png")
 # good sanity check, run random wildly different parameter sets with the same set of trajectories, what do we get? Ideally, should be a different output of parameter sets.
 
 # other sanity check, run same parameter sets, different trajectories
-firstTrajectory = dataset.outputs[0].double()
+firstTrajectory = dataset.outputs[0]
 pseudoRates = torch.zeros(1,5).double()
 prediction = model(pseudoRates.to(device), firstTrajectory.to(device))
 plt.figure()
