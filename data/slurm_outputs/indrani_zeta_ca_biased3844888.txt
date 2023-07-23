@@ -1,0 +1,74 @@
+Standardization to Input Parameters Applied
+Original Mean Inputs: [3.55799851e-01 5.18435420e+00 6.65579367e+03 4.65728479e+00
+ 4.75500563e-03]
+Original Stds: [2.66797649e+00 2.66375683e+00 2.52040102e+03 2.98310015e+00
+ 2.68282009e-03]
+New Average Input Value: [ 6.90228069e-16 -3.36486184e-15  6.65128866e-16 -2.12715741e-15
+  3.13112551e-15]
+New Std Input Value: [1. 1. 1. 1. 1.]
+max: 10000.0
+Normalization of Outputs
+New Max: 1.0
+New Min: 0.0
+Outputting: ixr_biased
+Dataset: data/static/ixr_biased_t333.csv
+Length of Training: 7700
+Length of Test: 1359
+Input Dimension: 5
+Output Dimension: 3
+Model Type: res_nn
+----- Hyperparameters used for final training -----
+Depth of NN: 4
+Hidden Neurons: 256
+# Epochs Used: 100
+input 5
+hidden 256
+Using GPU: True
+Batch Size: 500
+'Finished epoch 0 with loss 2.307233446318373 in time 0.9229373931884766'
+'Finished epoch 10 with loss 0.14237424918940073 in time 5.119590997695923'
+'Finished epoch 20 with loss 0.12536850363024662 in time 5.027441501617432'
+'Finished epoch 30 with loss 0.12189314405748278 in time 5.0013511180877686'
+'Finished epoch 40 with loss 0.12320034116527048 in time 5.112298965454102'
+'Finished epoch 50 with loss 0.11857836338638976 in time 5.102003574371338'
+'Finished epoch 60 with loss 0.11959172283256383 in time 5.0003342628479'
+'Finished epoch 70 with loss 0.11659807321592794 in time 5.02524471282959'
+'Finished epoch 80 with loss 0.11427814724445488 in time 5.140803098678589'
+'Finished epoch 90 with loss 0.11651794398060727 in time 5.0321996212005615'
+Using GPU: True
+Final MSE On Test Dataset: 0.009359972054905148 , Time For Inference: 1.046262264251709
+Unnormalized Max: 117977.60737165077
+Unnormalized Min: 2.192333426817388e-10
+Final Average Unnormalized MSE: 3001.964307034655
+Perfect Line Plotting With X and Y respectively:
+[2.19233343e-10 1.00000000e+00 2.00000000e+00 ... 1.17975000e+05
+ 1.17976000e+05 1.17977000e+05]
+[2.19233343e-10 1.00000000e+00 2.00000000e+00 ... 1.17975000e+05
+ 1.17976000e+05 1.17977000e+05]
+Perfect Line Plotting With X and Y respectively:
+[0.00000000e+00 4.18386594e-13 1.00000000e+00]
+[0.00000000e+00 4.18386594e-13 1.00000000e+00]
+Using GPU: True
+Batch Size: 500
+'Finished epoch 0 with loss 15.539238250762084 in time 0.8135261535644531'
+'Finished epoch 10 with loss 2.1657981830390565 in time 5.773652076721191'
+'Finished epoch 20 with loss 0.736417277622091 in time 5.8759729862213135'
+'Finished epoch 30 with loss 0.35280049854523066 in time 5.77305793762207'
+'Finished epoch 40 with loss 0.3355874939985072 in time 5.770599603652954'
+'Finished epoch 50 with loss 0.28019025188506724 in time 5.888240337371826'
+'Finished epoch 60 with loss 0.2562143623515895 in time 5.915065050125122'
+'Finished epoch 70 with loss 0.22840168484668832 in time 5.79663872718811'
+'Finished epoch 80 with loss 0.32577762605403027 in time 5.796900749206543'
+'Finished epoch 90 with loss 0.22749955018789206 in time 5.9032487869262695'
+Using GPU: True
+Final Average MSE On Whole Dataset: 0.009356335865917073 , Time For Inference: 5.665568113327026
+Perfect Line Plotting With X and Y respectively:
+[0. 0. 1.]
+[0. 0. 1.]
+Job Statistics for 3844888:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3844888   rsjxw007 2023-07-21T15:42:25 2023-07-21T15:44:35   00:02:10             02:03.955  COMPLETED  0:0   r1pl-hpcf-g02 billing=5,cpu=5,gres/gpu=1,mem=37275M,n+ 
+   3844888.batch            2023-07-21T15:42:25 2023-07-21T15:44:35   00:02:10   1542.35M  02:03.952  COMPLETED  0:0   r1pl-hpcf-g02                                          
+  3844888.extern            2023-07-21T15:42:25 2023-07-21T15:44:35   00:02:10      0.09M  00:00.002  COMPLETED  0:0   r1pl-hpcf-g02                                          
+CPU Efficiency: 19.08% of 00:10:50 core-walltime

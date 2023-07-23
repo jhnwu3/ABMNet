@@ -1,0 +1,35 @@
+Dimensions of Trajectory:
+torch.Size([2000, 3])
+Using GPU: True
+Batch Size: 10
+'Finished epoch 0 with loss 10.803746597690806 in time 75.42258930206299'
+'Finished epoch 10 with loss 0.023988613639757676 in time 749.5477705001831'
+'Finished epoch 20 with loss 0.006842727626274185 in time 749.4934279918671'
+'Finished epoch 30 with loss 0.0023267090393554284 in time 749.5310170650482'
+'Finished epoch 40 with loss 0.0013075568045042383 in time 749.4851882457733'
+'Finished epoch 50 with loss 0.0018749184784873872 in time 749.4833106994629'
+'Finished epoch 60 with loss 0.0019739259961902753 in time 749.501140832901'
+'Finished epoch 70 with loss 0.00492866264660316 in time 749.4937694072723'
+'Finished epoch 80 with loss 0.000543857854586186 in time 749.4873266220093'
+'Finished epoch 90 with loss 0.0001174365797366736 in time 749.4669072628021'
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/temporal_transformer.py", line 34, in <module>
+    avg_test_mse, truth, predictions, time = evaluate_temporal_transformer(test_dataset, model, criterion, device)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/evaluate.py", line 85, in evaluate_temporal_transformer
+    out = model(rates.to(device).float(), input.to(device).float())
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/models/temporal.py", line 93, in forward
+    x = self.in_layer(x)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/linear.py", line 114, in forward
+    return F.linear(input, self.weight, self.bias)
+RuntimeError: expected scalar type Float but found Double
+Job Statistics for 3844581:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3844581   rsjxw007 2023-07-20T16:34:58 2023-07-20T18:40:05   02:05:07              02:04:43     FAILED  1:0   r1pl-hpcf-g02 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3844581.batch            2023-07-20T16:34:58 2023-07-20T18:40:05   02:05:07   1865.70M   02:04:43     FAILED  1:0   r1pl-hpcf-g02                                          
+  3844581.extern            2023-07-20T16:34:58 2023-07-20T18:40:05   02:05:07      0.09M  00:00.002  COMPLETED  0:0   r1pl-hpcf-g02                                          
+CPU Efficiency: 6.23% of 1-09:21:52 core-walltime

@@ -1,0 +1,8 @@
+slurmstepd: error: *** JOB 3844580 ON r1pl-hpcf-g01 CANCELLED AT 2023-07-20T16:34:52 ***
+Job Statistics for 3844580:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3844580   rsjxw007 2023-07-20T16:34:27 2023-07-20T16:34:52   00:00:25             00:06.019 CANCELLED+  0:0   r1pl-hpcf-g01 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3844580.batch            2023-07-20T16:34:27 2023-07-20T16:34:53   00:00:26    836.23M  00:06.016  CANCELLED 0:15   r1pl-hpcf-g01                                          
+  3844580.extern            2023-07-20T16:34:27 2023-07-20T16:34:52   00:00:25          0  00:00.002  COMPLETED  0:0   r1pl-hpcf-g01                                          
+CPU Efficiency: 1.50% of 00:06:40 core-walltime

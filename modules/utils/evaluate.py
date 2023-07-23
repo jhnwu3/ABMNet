@@ -82,9 +82,11 @@ def evaluate_temporal_transformer(data, model, criterion, device, batch_size=Non
             if len(input.size()) > 3:
                 input = input.squeeze()
                 output = output.squeeze()
-            out = model(rates.to(device).float(), input.to(device).float())
+            if batch_size is not None: 
+                rates = rates.unsqueeze(dim=1)
+            out = model(rates.to(device), input.to(device))
             avg_loss += criterion(out, output.to(device)).cpu().item() / len(data) # get average
             predicted.append(out.squeeze().cpu().numpy())
             truth.append(output.squeeze().cpu().numpy())
     # Now stack each of the numpy arrays if truth and predicted along the correct dimension
-    return avg_loss, np.concatenate(truth, axis=0), np.concatenate(predicted, axis=0), start_time - time.time()
+    return avg_loss, np.concatenate(truth, axis=0), np.concatenate(predicted, axis=0), time.time() - start_time

@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/training_data_generation.py", line 221, in <module>
+    main()
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/training_data_generation.py", line 171, in main
+    param=param_generate(p)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/training_data_generation.py", line 44, in param_generate
+    indrani_estimates = np.loadtxt("John_Indrani_data/zeta_Ca_signal/CD3z_46L_indrani_estimates.dat")
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/numpy/lib/npyio.py", line 1356, in loadtxt
+    arr = _read(fname, dtype=dtype, comment=comment, delimiter=delimiter,
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/numpy/lib/npyio.py", line 975, in _read
+    fh = np.lib._datasource.open(fname, 'rt', encoding=encoding)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/numpy/lib/_datasource.py", line 193, in open
+    return ds.open(path, mode, encoding=encoding, newline=newline)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/numpy/lib/_datasource.py", line 533, in open
+    raise FileNotFoundError(f"{path} not found.")
+FileNotFoundError: John_Indrani_data/zeta_Ca_signal/CD3z_46L_indrani_estimates.dat not found.
+Job Statistics for 3844645:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3844645   rsjxw007 2023-07-21T10:36:34 2023-07-21T10:36:43   00:00:09             00:03.154     FAILED  1:0   r1pl-hpcf-n21        billing=5,cpu=5,mem=37275M,node=1 
+   3844645.batch            2023-07-21T10:36:34 2023-07-21T10:36:43   00:00:09          0  00:03.151     FAILED  1:0   r1pl-hpcf-n21                                          
+  3844645.extern            2023-07-21T10:36:34 2023-07-21T10:36:43   00:00:09          0  00:00.003  COMPLETED  0:0   r1pl-hpcf-n21                                          
+CPU Efficiency: 6.67% of 00:00:45 core-walltime

@@ -78,8 +78,8 @@ def plot_histograms_subplots(test_dataset, predictions, output='data/graphs/out'
         if binwidth == 0:
             binwidth = 1
 
-        ax.hist(true[:, i], bins=bins_list(true[:, i].min(), true[:, i].max(), binwidth), label='Ground Truth')
-        ax.hist(predictions[:, i], bins=bins_list(true[:, i].min(), true[:, i].max(), binwidth), alpha=0.5, label='Surrogate Model')
+        ax.hist(true[:, i], bins=bins_list(true[:, i].min(), true[:, i].max(), binwidth),histtype='step',label='Ground Truth')
+        ax.hist(predictions[:, i], bins=bins_list(true[:, i].min(), true[:, i].max(), binwidth), alpha=0.5, histtype='step', label='Surrogate Model')
         ax.legend(loc='upper right')
         ax.set_xlabel("Value of Model Output")
         ax.set_ylabel("Number of Parameter Sets")

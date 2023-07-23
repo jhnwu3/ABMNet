@@ -37,8 +37,8 @@ def get_data_inhomogenous(filename):
     print(data.shape) 
     return data   
 
-parent_dir = "data/John_Indrani_data/zeta_Ca_signal/training_ca_pzap_h"
-output_path = "data/time_series/indrani_zeta_ca_h_no_zeroes_3704.pickle"
+parent_dir = "data/John_Indrani_data/zeta_Ca_signal/indrani_estimates"
+output_path = "data/time_series/indrani_estimates_evaluated.pickle"
 # parent_dir = "data/John_Indrani_data/zeta/training_kon_koff"
 parameter_dirs = [os.path.join(parent_dir,x) for x in os.listdir(parent_dir)]
 print(parameter_dirs)

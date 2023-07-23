@@ -1,0 +1,67 @@
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/ca_ODE.py:40: RuntimeWarning: overflow encountered in scalar power
+  dhdt=(C2*PZAP)*((s/(s+ca ** 2))-h)
+Job Statistics for 3844658:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3844658   rsjxw007 2023-07-21T10:51:26 2023-07-21T11:02:58   00:11:32             11:06.380  COMPLETED  0:0   r1pl-hpcf-n21        billing=5,cpu=5,mem=37275M,node=1 
+   3844658.batch            2023-07-21T10:51:26 2023-07-21T11:02:58   00:11:32    271.16M  11:06.375  COMPLETED  0:0   r1pl-hpcf-n21                                          
+  3844658.extern            2023-07-21T10:51:26 2023-07-21T11:02:58   00:11:32      0.09M  00:00.004  COMPLETED  0:0   r1pl-hpcf-n21                                          
+CPU Efficiency: 19.25% of 00:57:40 core-walltime

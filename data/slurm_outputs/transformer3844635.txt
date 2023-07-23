@@ -1,0 +1,44 @@
+Dimensions of Trajectory:
+torch.Size([2000, 3])
+Using GPU: True
+Batch Size: 10
+'Finished epoch 0 with loss 9.894446343259894 in time 75.4745192527771'
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/temporal_transformer.py", line 34, in <module>
+    avg_test_mse, truth, predictions, time = evaluate_temporal_transformer(test_dataset, model, criterion, device)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/utils/evaluate.py", line 85, in evaluate_temporal_transformer
+    out = model(rates.to(device), input.to(device))
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/modules/models/temporal.py", line 96, in forward
+    x = self.transformer(x, self.sequence_layer(shifted_sequence))
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/transformer.py", line 145, in forward
+    memory = self.encoder(src, mask=src_mask, src_key_padding_mask=src_key_padding_mask)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/transformer.py", line 315, in forward
+    output = mod(output, src_mask=mask, is_causal=is_causal, src_key_padding_mask=src_key_padding_mask_for_layers)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/transformer.py", line 591, in forward
+    x = self.norm1(x + self._sa_block(x, src_mask, src_key_padding_mask, is_causal=is_causal))
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/transformer.py", line 599, in _sa_block
+    x = self.self_attn(x, x, x,
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/modules/activation.py", line 1205, in forward
+    attn_output, attn_output_weights = F.multi_head_attention_forward(
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/functional.py", line 5150, in multi_head_attention_forward
+    is_batched = _mha_shape_check(query, key, value, key_padding_mask, attn_mask, num_heads)
+  File "/home/gddaslab/rsjxw007/.local/lib/python3.10/site-packages/torch/nn/functional.py", line 4977, in _mha_shape_check
+    raise AssertionError(
+AssertionError: query should be unbatched 2D or batched 3D tensor but received 1-D query tensor
+Job Statistics for 3844635:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3844635   rsjxw007 2023-07-21T10:21:21 2023-07-21T10:27:54   00:06:33             06:23.945     FAILED  1:0   r1pl-hpcf-g01 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3844635.batch            2023-07-21T10:21:21 2023-07-21T10:27:54   00:06:33   1852.77M  06:23.942     FAILED  1:0   r1pl-hpcf-g01                                          
+  3844635.extern            2023-07-21T10:21:21 2023-07-21T10:27:54   00:06:33      0.09M  00:00.002  COMPLETED  0:0   r1pl-hpcf-g01                                          
+CPU Efficiency: 6.11% of 01:44:48 core-walltime

@@ -1,0 +1,8 @@
+slurmstepd: error: *** JOB 3844907 ON r1pl-hpcf-g02 CANCELLED AT 2023-07-21T16:03:46 ***
+Job Statistics for 3844907:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3844907   rsjxw007 2023-07-21T16:02:56 2023-07-21T16:03:46   00:00:50             00:43.019 CANCELLED+  0:0   r1pl-hpcf-g02 billing=5,cpu=5,gres/gpu=1,mem=37275M,n+ 
+   3844907.batch            2023-07-21T16:02:56 2023-07-21T16:03:47   00:00:51   1485.93M  00:43.015  CANCELLED 0:15   r1pl-hpcf-g02                                          
+  3844907.extern            2023-07-21T16:02:56 2023-07-21T16:03:46   00:00:50      0.09M  00:00.003  COMPLETED  0:0   r1pl-hpcf-g02                                          
+CPU Efficiency: 17.20% of 00:04:10 core-walltime

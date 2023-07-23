@@ -41,7 +41,10 @@ def param_generate(p):
     #g range [1E-4, 1E-2]
     
     param=[]
-    
+    indrani_estimates = np.loadtxt("CD3z_46L_indrani_estimates.dat")
+    p = indrani_estimates.shape[0]
+    indrani_estimates = np.power(10, indrani_estimates)
+    # load indrani estimates
     for i in range(p):
         # kon = 0.00601 
         # koff = 4.71749
@@ -101,11 +104,11 @@ def param_generate(p):
         # C1= 7.74884329e+03 
         # C2= 2.04480886e+00
         # g= 2.96575691e-03
-        kon = 1.86481484e-03 
-        koff = 8.30188140e+00
-        C1 = 6.62553815e+03
-        C2 = 1.97917742e+00
-        g =6.07438758e-03
+        # kon = 1.86481484e-03 
+        # koff = 8.30188140e+00
+        # C1 = 6.62553815e+03
+        # C2 = 1.97917742e+00
+        # g =6.07438758e-03
         
         
         # kon=random.uniform(1e-7,1e-2)
@@ -114,8 +117,8 @@ def param_generate(p):
         # C2=random.uniform(1,10)
         # g=random.uniform(1e-4,1e-2)
         
-        
-        param.append((kon,koff,C1,C2,g))
+        # param.append((kon,koff,C1,C2,g))
+        param.append(indrani_estimates[i,:-1])
         
     return param
 
@@ -150,7 +153,7 @@ def pZAP_signal(K1,K2):
 def main():
    
     #*****************John you can change
-    p=1 #the number of the parameter sets of [kon,koff,C1,C2,g]
+    p=30 #the number of the parameter sets of [kon,koff,C1,C2,g]
     
     
     #actual experimental data
@@ -171,7 +174,7 @@ def main():
     
     #Number of (kon,koff) exists, printing in the files
     for i in range(len(param)) :
-        f = f"estimate2{i}_ca_h.txt"  # Generate file name (e.g., output1.txt)
+        f = f"../indrani_estimates/train{i}_ca_h.txt"  # Generate file name (e.g., output1.txt)
         
         #load each set of (kon, koff,C1,C2,g)
         kon=param[i,0]

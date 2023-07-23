@@ -1,0 +1,114 @@
+Standardization to Input Parameters Applied
+Original Mean Inputs: [3.55799851e-01 5.18435420e+00 6.65579367e+03 4.65728479e+00
+ 4.75500563e-03]
+Original Stds: [2.66797649e+00 2.66375683e+00 2.52040102e+03 2.98310015e+00
+ 2.68282009e-03]
+New Average Input Value: [ 6.90228069e-16 -3.36486184e-15  6.65128866e-16 -2.12715741e-15
+  3.13112551e-15]
+New Std Input Value: [1. 1. 1. 1. 1.]
+max: 10000.0
+Normalization of Outputs
+New Max: 1.0
+New Min: 0.0
+Outputting: ixr_biased
+Dataset: data/static/ixr_biased_t333.csv
+Length of Training: 7700
+Length of Test: 1359
+Input Dimension: 5
+Output Dimension: 3
+Model Type: res_nn
+----- Hyperparameters used for final training -----
+Depth of NN: 10
+Hidden Neurons: 512
+# Epochs Used: 300
+input 5
+hidden 512
+Using GPU: True
+Batch Size: 500
+'Finished epoch 0 with loss 109.60429480445954 in time 6.184390544891357'
+'Finished epoch 10 with loss 0.15318688164157704 in time 6.22496485710144'
+'Finished epoch 20 with loss 0.13663662135986063 in time 5.628106355667114'
+'Finished epoch 30 with loss 0.14429086070604719 in time 5.7539963722229'
+'Finished epoch 40 with loss 0.12609272847387284 in time 5.632282018661499'
+'Finished epoch 50 with loss 0.12091117568969803 in time 5.616227865219116'
+'Finished epoch 60 with loss 0.11307716474684648 in time 5.760388612747192'
+'Finished epoch 70 with loss 0.11226448061680307 in time 5.73543381690979'
+'Finished epoch 80 with loss 0.11236895887140753 in time 5.622867822647095'
+'Finished epoch 90 with loss 0.11071943812406719 in time 5.629430532455444'
+'Finished epoch 100 with loss 0.11246686673081976 in time 5.751924991607666'
+'Finished epoch 110 with loss 0.11176146636005072 in time 5.611571550369263'
+'Finished epoch 120 with loss 0.10960026925307848 in time 5.737590074539185'
+'Finished epoch 130 with loss 0.1050969056208135 in time 5.622365713119507'
+'Finished epoch 140 with loss 0.1101196658735111 in time 5.622177362442017'
+'Finished epoch 150 with loss 0.11199478143319712 in time 5.742963075637817'
+'Finished epoch 160 with loss 0.11026376083802233 in time 5.754900693893433'
+'Finished epoch 170 with loss 0.1052557447073463 in time 5.614245176315308'
+'Finished epoch 180 with loss 0.10406244556439267 in time 5.613866090774536'
+'Finished epoch 190 with loss 0.10717217576377133 in time 5.734920263290405'
+'Finished epoch 200 with loss 0.10475882532084305 in time 5.623738050460815'
+'Finished epoch 210 with loss 0.10354486821823997 in time 5.741136312484741'
+'Finished epoch 220 with loss 0.10246936873623612 in time 5.6290671825408936'
+'Finished epoch 230 with loss 0.10560800762040307 in time 5.620939493179321'
+'Finished epoch 240 with loss 0.09956493864122193 in time 5.757807731628418'
+'Finished epoch 250 with loss 0.10358262828371337 in time 5.735860824584961'
+'Finished epoch 260 with loss 0.10092742291154468 in time 5.621577262878418'
+'Finished epoch 270 with loss 0.09638066030621466 in time 5.620713710784912'
+'Finished epoch 280 with loss 0.09396182043432755 in time 5.733279705047607'
+'Finished epoch 290 with loss 0.094424863797603 in time 5.613970994949341'
+Using GPU: True
+Final MSE On Test Dataset: 0.009164824202090234 , Time For Inference: 1.6116001605987549
+Unnormalized Max: 126914.49099235312
+Unnormalized Min: 2.362466064088054e-10
+Final Average Unnormalized MSE: 3949.9745673183625
+Perfect Line Plotting With X and Y respectively:
+[2.36246606e-10 1.00000000e+00 2.00000000e+00 ... 1.26912000e+05
+ 1.26913000e+05 1.26914000e+05]
+[2.36246606e-10 1.00000000e+00 2.00000000e+00 ... 1.26912000e+05
+ 1.26913000e+05 1.26914000e+05]
+Perfect Line Plotting With X and Y respectively:
+[0.00000000e+00 2.23404172e-12 1.00000000e+00]
+[0.00000000e+00 2.23404172e-12 1.00000000e+00]
+Using GPU: True
+Batch Size: 500
+'Finished epoch 0 with loss 11.107532662439429 in time 0.5978913307189941'
+'Finished epoch 10 with loss 1.1349851136692544 in time 5.9168381690979'
+'Finished epoch 20 with loss 0.34856633610843507 in time 5.924110412597656'
+'Finished epoch 30 with loss 0.23294164367964462 in time 6.1427507400512695'
+'Finished epoch 40 with loss 0.21125501982191594 in time 6.1496806144714355'
+'Finished epoch 50 with loss 0.2041767941139519 in time 5.9419333934783936'
+'Finished epoch 60 with loss 0.1757667304049792 in time 5.944183588027954'
+'Finished epoch 70 with loss 0.19503426603200077 in time 6.147978067398071'
+'Finished epoch 80 with loss 0.16293591065022212 in time 6.147394418716431'
+'Finished epoch 90 with loss 0.17112942352163873 in time 5.925576686859131'
+'Finished epoch 100 with loss 0.14272023751000038 in time 5.928615093231201'
+'Finished epoch 110 with loss 0.16236353309434154 in time 6.160251140594482'
+'Finished epoch 120 with loss 0.3051013325123794 in time 6.14094352722168'
+'Finished epoch 130 with loss 0.22656444723729108 in time 5.923743963241577'
+'Finished epoch 140 with loss 0.16650623957836796 in time 5.923401832580566'
+'Finished epoch 150 with loss 0.1632476409955526 in time 6.138550281524658'
+'Finished epoch 160 with loss 0.15773940123606248 in time 6.146290063858032'
+'Finished epoch 170 with loss 0.24017677555585573 in time 5.944430112838745'
+'Finished epoch 180 with loss 0.1548666082249999 in time 5.933804988861084'
+'Finished epoch 190 with loss 0.1547815080498047 in time 6.151371717453003'
+'Finished epoch 200 with loss 0.14421154712905193 in time 6.164791107177734'
+'Finished epoch 210 with loss 0.15072284186552637 in time 5.9318742752075195'
+'Finished epoch 220 with loss 0.17121886063607672 in time 5.937519788742065'
+'Finished epoch 230 with loss 0.1427973923812786 in time 6.146685838699341'
+'Finished epoch 240 with loss 0.16357521914669784 in time 6.14698338508606'
+'Finished epoch 250 with loss 0.14044755247291263 in time 5.937111854553223'
+'Finished epoch 260 with loss 0.1430167060886559 in time 5.93355131149292'
+'Finished epoch 270 with loss 0.14282838739443568 in time 6.148315906524658'
+'Finished epoch 280 with loss 0.17843765911498258 in time 6.177657842636108'
+'Finished epoch 290 with loss 0.13603054594243108 in time 5.934506177902222'
+Using GPU: True
+Final Average MSE On Whole Dataset: 0.008204089112925183 , Time For Inference: 8.726453304290771
+Perfect Line Plotting With X and Y respectively:
+[0. 0. 1.]
+[0. 0. 1.]
+Job Statistics for 3844908:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3844908   rsjxw007 2023-07-21T16:03:48 2023-07-21T16:10:49   00:07:01             06:18.330  COMPLETED  0:0   r1pl-hpcf-g03 billing=5,cpu=5,gres/gpu=1,mem=37275M,n+ 
+   3844908.batch            2023-07-21T16:03:48 2023-07-21T16:10:49   00:07:01   2453.51M  06:18.326  COMPLETED  0:0   r1pl-hpcf-g03                                          
+  3844908.extern            2023-07-21T16:03:48 2023-07-21T16:10:49   00:07:01      0.09M  00:00.004  COMPLETED  0:0   r1pl-hpcf-g03                                          
+CPU Efficiency: 17.96% of 00:35:05 core-walltime

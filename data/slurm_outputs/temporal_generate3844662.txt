@@ -1,0 +1,9 @@
+/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/training_data_generation.py:46: RuntimeWarning: overflow encountered in power
+  indrani_estimates = np.power(10, indrani_estimates)
+Job Statistics for 3844662:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3844662   rsjxw007 2023-07-21T11:07:39 2023-07-21T11:35:19   00:27:40             26:55.449  COMPLETED  0:0   r1pl-hpcf-n21        billing=5,cpu=5,mem=37275M,node=1 
+   3844662.batch            2023-07-21T11:07:39 2023-07-21T11:35:19   00:27:40    271.87M  26:55.445  COMPLETED  0:0   r1pl-hpcf-n21                                          
+  3844662.extern            2023-07-21T11:07:39 2023-07-21T11:35:19   00:27:40      0.09M  00:00.004  COMPLETED  0:0   r1pl-hpcf-n21                                          
+CPU Efficiency: 19.46% of 02:18:20 core-walltime
