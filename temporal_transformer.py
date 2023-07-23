@@ -8,8 +8,10 @@ from modules.utils.graph import *
 from sklearn.model_selection import KFold
 import torch
 
+
+fs = 400
 dataset = TemporalDataset("data/time_series/indrani_zeta_ca_h_std_norm.pickle", 
-                                   standardize_inputs=False, min_max_scale=False, steps=400)
+                                   standardize_inputs=False, min_max_scale=False, steps=fs)
 
 # train, test split.
 train_size = int(0.85 * len(dataset))
@@ -21,7 +23,7 @@ train_dataset, test_dataset = tc.utils.data.random_split(dataset, [train_size, t
 # output dimension is the same as input dimension (I believe)
 model = train_temporal_transformer(dataset=train_dataset, n_rates = dataset.n_rates, hidden_dim=128, 
                            output_dim=dataset.input_size, nEpochs=50, batch_size=10)
-tc.save(model, 'model/indrani_transformer.pt')
+tc.save(model, 'model/indrani_transformer_' + str(int(fs)) '.pt')
 # model = tc.load("model/indrani_transformer.pt")
 criterion = torch.nn.MSELoss() 
 device = tc.device("cpu")
