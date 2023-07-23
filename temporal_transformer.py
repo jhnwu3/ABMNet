@@ -31,11 +31,11 @@ if tc.cuda.is_available():
     criterion = criterion.cuda()
     using_gpu = True
 
-avg_test_mse, truth, predictions, runtime = evaluate_temporal_transformer(dataset, model, criterion, device, batch_size=20)
-print("Finished Evaluating "+ str(len(dataset)) + " in time (s):" + str(runtime))
-print("With AVG MSE:", avg_test_mse)
+# avg_test_mse, truth, predictions, runtime = evaluate_temporal_transformer(dataset, model, criterion, device, batch_size=20)
+# print("Finished Evaluating "+ str(len(dataset)) + " in time (s):" + str(runtime))
+# print("With AVG MSE:", avg_test_mse)
 
-plot_scatter(truth, predictions, output="transformer_full_dataset")
+# plot_scatter(truth, predictions, output="transformer_full_dataset")
 
 # evaluate with indrani's estimates, and observed dataset's trajectories. 
 # let's see what we get out. 
