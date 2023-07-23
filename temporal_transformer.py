@@ -62,7 +62,7 @@ plt.savefig("Transformer_validation_ixr_est.png")
 # other sanity check, run same parameter sets, different trajectories
 firstTrajectory = dataset.outputs[0]
 pseudoRates = torch.zeros(1,5)
-prediction = model(pseudoRates.to(device), firstTrajectory)
+prediction = model(pseudoRates.to(device), firstTrajectory.to(device))
 plt.figure()
 plt.plot(prediction, c='orange', label="Prediction With Zero")
 plt.plot(firstTrajectory, c='blue', label="Ground Truth")
