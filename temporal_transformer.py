@@ -49,6 +49,6 @@ for i in range(30):
     rates = rates.unsqueeze(dim=1)
     predictions = model(rates.to(device), inputs.to(device))
     plt.plot(indrani_estimates.times, predictions.cpu().numpy())
-    plt.plot(indrani_estimates, outputs.cpu().numpy())
+    plt.plot(indrani_estimates.times, outputs.cpu().numpy())
 
 plt.savefig("Transformer_validation_ixr_est.png")
