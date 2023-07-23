@@ -46,7 +46,7 @@ indrani_estimates = TemporalDataset("data/time_series/ixr_est_copies.pickle",min
 
 for i in range(30):
     rates, inputs, outputs = indrani_estimates[i]
-    rates = rates.unsqueeze(dim=1)
+    rates = rates.unsqueeze(dim=1).unsqueeze(dim=1)
     predictions = model(rates.to(device), inputs.to(device))
     plt.plot(indrani_estimates.times, predictions.cpu().numpy())
     plt.plot(indrani_estimates.times, outputs.cpu().numpy())
