@@ -44,11 +44,14 @@ if tc.cuda.is_available():
 data_CD3z_46L_50k = np.loadtxt("data/John_Indrani_data/zeta_Ca_signal/test_data_experiments/CD3z_46L_50k.dat")
 indrani_estimates = TemporalDataset("data/time_series/ixr_est_copies.pickle", min_max_scale=True, standardize_inputs=True)
 # torch.utils.data.DataLoader(indrani_estimates, batch_size=5, shuffle=False, drop_last=False)
-for i in range(30):
-    rates, inputs, outputs = indrani_estimates[i]
-    rates = rates.unsqueeze(dim=1).t()
-    predictions = model(rates.to(device), inputs.to(device))
-    plt.plot(indrani_estimates.times[1:], predictions.cpu().detach().numpy(), c='orange', alpha=0.5)
-    plt.plot(indrani_estimates.times[1:], outputs.cpu().detach().numpy(), c='blue')
-
+fig, axes = plt.subplots(6, 5, figsize=(15, 15))
+i = 0
+for r in range(6):
+    for c in range(5):
+        rates, inputs, outputs = indrani_estimates[i]
+        rates = rates.unsqueeze(dim=1).t()
+        predictions = model(rates.to(device), inputs.to(device))
+        axes[r,c].plot(indrani_estimates.times[1:], predictions.cpu().detach().numpy(), c='orange')
+        axes[r,c].plot(indrani_estimates.times[1:], outputs.cpu().detach().numpy(), c='blue')
+        i+=1
 plt.savefig("Transformer_validation_ixr_est.png")
