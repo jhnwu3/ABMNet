@@ -79,7 +79,7 @@ class TemporalComplexModel(nn.Module):
         # print("out size:", out.size())
         return out, hidden
 
-# I want to do something dumb
+# I want to do something dumb, turns out it's dumb. 
 class DumbTransformerSurrogate(nn.Module):
     def __init__(self, n_rates, hidden_dim, out_dim):
         super(DumbTransformerSurrogate, self).__init__()
@@ -96,4 +96,9 @@ class DumbTransformerSurrogate(nn.Module):
         x = self.transformer(x, self.sequence_layer(shifted_sequence))
         x = self.out_layer(x)
         return x
-        
+
+
+#todo - ixr
+# I want to do chunked temporal dataset for dumb transformers and see what happens.
+
+# I want to simply train an encoder than can map inputs (with attention) to output sequences.

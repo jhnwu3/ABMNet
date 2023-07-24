@@ -195,7 +195,7 @@ class TemporalChunkedDataset(Dataset):
         # returns a 1D tensor of rates, one input sequence, one output sequence
         # need to convert to sets of sequences
         if self.batch_size is None:
-            return self.rates[index], self.outputs[index][:-1], self.outputs[index][1:]
+            return self.rates[index], self.outputs[index][:-self.steps_into_future], self.outputs[index][self.steps_into_future:]
         else: 
             return self.rates[index], self.outputs[index][:-self.steps_into_future].unsqueeze(dim=1), self.outputs[index][self.steps_into_future:].unsqueeze(dim=1)
 
