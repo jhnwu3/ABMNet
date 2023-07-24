@@ -59,7 +59,7 @@ for r in range(6):
         axes[r,c].plot(indrani_estimates.times[1:], predictions.cpu().detach().numpy(), c='orange')
         axes[r,c].plot(indrani_estimates.times[1:], outputs.cpu().detach().numpy(), c='blue')
         i+=1
-plt.savefig("Transformer_validation_ixr_est.png")
+plt.savefig("transformer_validation_ixr_est_"+ str(fs) + ".png")
 
 # good sanity check, run random wildly different parameter sets with the same set of trajectories, what do we get? Ideally, should be a different output of parameter sets.
 

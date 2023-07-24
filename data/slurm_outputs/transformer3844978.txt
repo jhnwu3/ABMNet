@@ -1,0 +1,11 @@
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/temporal_transformer.py", line 26
+    tc.save(model, 'model/indrani_transformer_' + str(int(fs)) '.pt')
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+Job Statistics for 3844978:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3844978   rsjxw007 2023-07-23T14:49:30 2023-07-23T14:49:30   00:00:00             00:00.085     FAILED  1:0   r1pl-hpcf-g03 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3844978.batch            2023-07-23T14:49:30 2023-07-23T14:49:30   00:00:00          0  00:00.081     FAILED  1:0   r1pl-hpcf-g03                                          
+  3844978.extern            2023-07-23T14:49:30 2023-07-23T14:49:30   00:00:00          0  00:00.004  COMPLETED  0:0   r1pl-hpcf-g03                                          
+CPU Efficiency: 0.00% of 00:00:00 core-walltime

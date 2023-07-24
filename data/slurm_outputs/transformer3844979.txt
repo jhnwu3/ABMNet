@@ -1,0 +1,31 @@
+Dimensions of Trajectory:
+torch.Size([2000, 3])
+Using GPU: True
+Batch Size: 10
+'Finished epoch 0 with loss 8.889729631762506 in time 31.306103229522705'
+'Finished epoch 10 with loss 0.1417005721765805 in time 267.04204177856445'
+'Finished epoch 20 with loss 0.051661899739044684 in time 267.65055084228516'
+'Finished epoch 30 with loss 0.022906218817691327 in time 268.3637762069702'
+'Finished epoch 40 with loss 0.031792055741577015 in time 273.33608055114746'
+Finished Evaluating 7559 in time (s):9.297466278076172
+With AVG MSE: 7.969447613541339e-07
+Perfect Line Plotting With X and Y respectively:
+[0. 0. 1.]
+[0. 0. 1.]
+Dimensions of Trajectory:
+torch.Size([2000, 3])
+Min Maxed Applied
+Found Minimums: [3.44186047e-03 2.84267660e+04 3.12999796e-10]
+Found Max: [3.41359922e-01 5.73847974e+04 1.00000000e+01]
+Standardization to Input Parameters Applied
+Found Mean Rates: [2.12345832e+00 3.81559359e+00 2.39214422e+03 6.82577944e-01
+ 3.35970576e-03]
+With Std: [6.26449246e+00 2.58783732e+00 2.45512620e+03 7.32929704e-01
+ 1.05489510e-04]
+Job Statistics for 3844979:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3844979   rsjxw007 2023-07-23T14:50:37 2023-07-23T15:17:03   00:26:26             26:15.692  COMPLETED  0:0   r1pl-hpcf-g03 billing=16,cpu=16,gres/gpu=1,mem=119280+ 
+   3844979.batch            2023-07-23T14:50:37 2023-07-23T15:17:03   00:26:26   8709.16M  26:15.688  COMPLETED  0:0   r1pl-hpcf-g03                                          
+  3844979.extern            2023-07-23T14:50:37 2023-07-23T15:17:03   00:26:26      0.09M  00:00.004  COMPLETED  0:0   r1pl-hpcf-g03                                          
+CPU Efficiency: 6.21% of 07:02:56 core-walltime
