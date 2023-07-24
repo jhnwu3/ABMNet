@@ -9,7 +9,7 @@ from sklearn.model_selection import KFold
 import torch
 
 
-fs = 400
+fs = 800
 dataset = TemporalDataset("data/time_series/indrani_zeta_ca_h_std_norm.pickle", 
                                    standardize_inputs=False, min_max_scale=False, steps=fs)
 
@@ -59,7 +59,7 @@ for r in range(6):
         axes[r,c].plot(indrani_estimates.times[1:], predictions.cpu().detach().numpy(), c='orange')
         axes[r,c].plot(indrani_estimates.times[1:], outputs.cpu().detach().numpy(), c='blue')
         i+=1
-plt.savefig("Transformer_validation_ixr_est.png")
+plt.savefig("transformer_validation_ixr_est" + str(fs) + ".png")
 
 # good sanity check, run random wildly different parameter sets with the same set of trajectories, what do we get? Ideally, should be a different output of parameter sets.
 
@@ -71,7 +71,7 @@ prediction = model(pseudoRates.to(device), firstTrajectory.to(device))
 plt.figure()
 plt.plot(prediction.detach().cpu().numpy(), c='orange', label="Prediction With Zero")
 plt.plot(firstTrajectory.detach().cpu().numpy(), c='blue', label="Ground Truth")
-plt.savefig("TransformerSanityCheck.png")
+plt.savefig("TransformerSanityCheck" +str(fs) + ".png")
 
 
 # perform parameter estimation, this should fail if the rates have no value. 
