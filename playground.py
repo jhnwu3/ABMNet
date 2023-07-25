@@ -360,7 +360,7 @@ print(indrani_estimates.max())
 print(indrani_estimates.min())
 predictions = [] # get all the predictions and plot them across time
 for i in range(2,3):
-    predictions.append(evaluate_MLP_surrogate(indrani_estimates,surrogate=soi,dataset=datasets[i], standardize=True, normalize=True)[:,1])
+    predictions.append(evaluate_MLP_surrogate(indrani_estimates,surrogate=soi,dataset=datasets[2], standardize=True, normalize=True)[:,1])
 
 predictions = np.array(predictions)
 print(predictions[:,:5])
