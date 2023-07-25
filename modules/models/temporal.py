@@ -101,4 +101,6 @@ class DumbTransformerSurrogate(nn.Module):
 #todo - ixr
 # I want to do chunked temporal dataset for dumb transformers and see what happens.
 
+
+
 # I want to simply train an encoder than can map inputs (with attention) to output sequences.

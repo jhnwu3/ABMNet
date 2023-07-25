@@ -21,10 +21,10 @@ test_size = len(dataset) - train_size
 train_dataset, test_dataset = tc.utils.data.random_split(dataset, [train_size, test_size])
 
 # output dimension is the same as input dimension (I believe)
-model = train_temporal_transformer(dataset=train_dataset, n_rates = dataset.n_rates, hidden_dim=128, 
-                           output_dim=dataset.input_size, nEpochs=50, batch_size=10)
-tc.save(model, 'model/indrani_transformer_' + str(int(fs)) + '.pt')
-# model = tc.load("model/indrani_transformer.pt")
+# model = train_temporal_transformer(dataset=train_dataset, n_rates = dataset.n_rates, hidden_dim=128, 
+                        #    output_dim=dataset.input_size, nEpochs=50, batch_size=10)
+# tc.save(model, 'model/indrani_transformer_' + str(int(fs)) + '.pt')
+model = tc.load("model/indrani_transformer_" +str(int(fs)) + ".pt")
 criterion = torch.nn.MSELoss() 
 device = tc.device("cpu")
 if tc.cuda.is_available():
@@ -38,7 +38,7 @@ avg_test_mse, truth, predictions, runtime = evaluate_temporal_transformer(datase
 print("Finished Evaluating "+ str(len(dataset)) + " in time (s):" + str(runtime))
 print("With AVG MSE:", avg_test_mse)
 
-plot_scatter(truth, predictions, output="transformer")
+plot_scatter(truth, predictions, output="transformer" + str(fs))
 
 # evaluate with indrani's estimates, and observed dataset's trajectories. 
 # let's see what we get out. 

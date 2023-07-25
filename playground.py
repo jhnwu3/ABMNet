@@ -251,7 +251,7 @@ C2 = 1.28873#random.uniform(1,10)
 # C2 = random.uniform(1,10)
 g= 0.0032684#random.uniform(1e-4,1e-2)
 # between k1 and k2 
-N = 1000000
+N = 100000
 surr_input = np.zeros((N,5))
 labels = ["k1", "k2", "C1", "C2", "g"]
 indraniTruth = np.array([kon, koff, C1, C2, g])
@@ -302,12 +302,13 @@ minCosts = []
 quad_costs = []
 varyingX = 0
 varyingY = 1
+soi = tc.load("model/ixr_biased_c20_ib_t750.pt")
 for e in range(1):
     for i in range(N):
         randomVector = np.array([random.uniform(1e-7,1e-2), random.uniform(1,10), random.uniform(5e3,1e4), random.uniform(1,10), random.uniform(1e-4,1e-2)])
         surr_input[i] = randomVector
         
-    quad_costs = multi_indrani_cost_fxn(surr_input, surrogates=surrogates, ys=ys, datasets=datasets)
+    quad_costs = indrani_costss(surr_input, surrogate=soi, y=ys[2], dataset=datasets[2])#multi_indrani_cost_fxn(surr_input, surrogates=surrogates, ys=ys, datasets=datasets)
     heat = np.log(quad_costs)
     
     minCosts.append(quad_costs.min())
