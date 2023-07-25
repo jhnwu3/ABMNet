@@ -42,7 +42,6 @@ plot_scatter(truth, predictions, output="transformer" + str(fs))
 
 # evaluate with indrani's estimates, and observed dataset's trajectories. 
 # let's see what we get out. 
-# THIS SHOULD FAIL D:
 # get indrani's estimates 
 data_CD3z_46L_50k = np.loadtxt("data/John_Indrani_data/zeta_Ca_signal/test_data_experiments/CD3z_46L_50k.dat")
 # convert trajectory into tensor
