@@ -90,3 +90,24 @@ def evaluate_temporal_transformer(data, model, criterion, device, batch_size=Non
             truth.append(output.squeeze().cpu().numpy())
     # Now stack each of the numpy arrays if truth and predicted along the correct dimension
     return avg_loss, np.concatenate(truth, axis=0), np.concatenate(predicted, axis=0), time.time() - start_time
+
+
+def evaluate_transformer_encoder(data, model, criterion, device, batch_size=None):
+    predicted = []
+    truth = []
+    test_dataloader = torch.utils.data.DataLoader(data, batch_size=batch_size, shuffle=False, drop_last=False)
+    avg_loss = 0
+    model.eval()
+    start_time = time.time()
+    with torch.no_grad():
+        for rates, output in test_dataloader:
+            if len(input.size()) > 3:
+                output = output.squeeze()
+            if batch_size is not None: 
+                rates = rates.unsqueeze(dim=1)
+            out = model(rates.to(device))
+            avg_loss += criterion(out, output.to(device)).cpu().item() / len(data) # get average
+            predicted.append(out.squeeze().cpu().numpy())
+            truth.append(output.squeeze().cpu().numpy())
+    # Now stack each of the numpy arrays if truth and predicted along the correct dimension
+    return avg_loss, np.concatenate(truth, axis=0), np.concatenate(predicted, axis=0), time.time() - start_time
