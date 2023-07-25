@@ -319,6 +319,45 @@ def train_temporal_transformer(dataset, n_rates, hidden_dim, output_dim, nEpochs
     return model  
 
 
+def train_transformer_encoder(dataset, n_rates, hidden_dim, output_dim, nEpochs, batch_size=None):
+    model = TransformerEncoderModel(input_dim=n_rates, hidden_dim=hidden_dim, output_dim=output_dim)
+    model = model.double()
+    optimizer = optim.AdamW(model.parameters())
+    criterion = nn.MSELoss()
+    device = ""
+    if tc.cuda.is_available():
+        device = tc.device("cuda")
+        model = model.cuda()
+        criterion = criterion.cuda()
+        using_gpu = True
+    else:
+        device = tc.device("cpu")
+        using_gpu = False
+
+    print(f"Using GPU: {using_gpu}")
+    print("Batch Size:", batch_size)
+    model.train()
+    epoch_start = time.time()
+    loader = tc.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True)
+    for epoch in range(nEpochs):
+        loss_this_epoch = 0
+        for rates, seq in loader:
+            optimizer.zero_grad()
+            if batch_size is not None: 
+                rates = rates.unsqueeze(dim=1)
+            # print(rates.size())
+            # print(in_seq.size())
+            prediction = model.forward(rates.to(device))
+            loss = criterion(prediction.squeeze(), seq.to(device).squeeze())
+            loss_this_epoch += loss.item() 
+            loss.backward()
+            optimizer.step()
+            
+        if epoch % 10 == 0:
+            print(repr(f"Finished epoch {epoch} with loss {loss_this_epoch} in time {time.time() - epoch_start}"))
+            epoch_start = time.time()
+            
+    return model  
 # def train_rnn(dataset : ABMDataset, input_size, hidden_size, depth, output_size, nEpochs, use_gpu = False):
 #     model = RecurrentNN(input_size, hidden_size, depth, output_size).double()
 #     optimizer = optim.AdamW(model.parameters())

@@ -98,6 +98,32 @@ class DumbTransformerSurrogate(nn.Module):
         return x
 
 
+
+# now let's ask ourselves, can we go directly from rate constants to entire sequence.
+class TransformerEncoderModel(nn.Module):
+    def __init__(self, input_dim, hidden_dim, output_dim, num_layers = 2, num_heads=4, dropout=0.0):
+        super(TransformerEncoderModel, self).__init__()
+
+        self.embedding = nn.Linear(input_dim, hidden_dim)
+        self.transformer_encoder = nn.TransformerEncoder(
+            nn.TransformerEncoderLayer(d_model=hidden_dim, nhead=num_heads, dropout=dropout, batch_first=True),
+            num_layers=num_layers
+        )
+        self.fc = nn.Linear(hidden_dim, output_dim)
+
+    def forward(self, fixed_input_seq):
+        # fixed_input_seq: (sequence_length, batch_size)
+        embedded = self.embedding(fixed_input_seq)
+        # embedded: (sequence_length, batch_size, hidden_dim)
+
+        transformer_output = self.transformer_encoder(embedded)
+        # transformer_output: (batch_size, sequence_length, hidden_dim)
+
+        output = self.fc(transformer_output)
+        # output: (batch_size, sequence_length, output_dim)
+
+        return output
+
 #todo - ixr
 # I want to do chunked temporal dataset for dumb transformers and see what happens.
 

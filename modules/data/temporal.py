@@ -199,6 +199,82 @@ class TemporalChunkedDataset(Dataset):
         else: 
             return self.rates[index], self.outputs[index][:-self.steps_into_future].unsqueeze(dim=1), self.outputs[index][self.steps_into_future:].unsqueeze(dim=1)
 
+
+
+class TemporalDatasetEncoder(Dataset):
+    # path to a pickle file that contains a dictionary of the following variables shown below
+    # [] is a list of indices of features to keep in the input and output graphs
+    def __init__(self, path, min_max_scale = True, standardize_inputs = True, steps=1):
+        # Initialize your dataset here
+        # Store the necessary data or file paths
+        data = pickle.load(open(path, "rb"))
+        self.outputs = data["outputs"] # N x L tensors
+        self.rates = data["rates"]
+        self.times = data["time_points"]
+        self.n_rates = self.rates[0].size()[0]
+        self.input_size = self.outputs[0].size()[0]
+        self.steps_into_future = steps
+        self.min = None 
+        self.max = None
+        self.input_mean = None
+        self.input_std = None
+        if len(self.outputs[0].size()) > 1:
+            print("Dimensions of Trajectory:")
+            print(self.outputs[0].size())
+            self.input_size = self.outputs[0].size()[1]
+            
+        if min_max_scale:
+            print("Min Maxed Applied")
+            # mins and maxes in the most roundabout way possible, haha ;(
+            # convert back to numpy to get them mins and maxes 
+            arr = []
+            for output in self.outputs:
+                arr.append(output.numpy())
+            arr = np.array(arr)
+            self.min = arr.min(axis=0).min(axis=0)
+            print("Found Minimums:", self.min)
+            self.max = arr.max(axis=0).max(axis=0)
+            print("Found Max:", self.max)
+            # now to do the ugly min maxing, Don't DO THIS KIDS
+            for i in range(len(self.outputs)):
+                self.outputs[i] = self.outputs[i].squeeze() - arr.min(axis=0).min(axis=0)
+                self.outputs[i] /= (arr.max(axis=0).max(axis=0) - arr.min(axis=0).min(axis=0))
+                
+        # standard
+        if standardize_inputs:
+            print("Standardization to Input Parameters Applied")
+            arr = []
+            for rate in self.rates:
+                arr.append(rate.numpy())
+            arr = np.array(arr)
+            self.input_mean = arr.mean(axis=0)
+            self.input_std = arr.std(axis=0)
+            print("Found Mean Rates:", self.input_mean)
+            print("With Std:", self.input_std)
+            for i in range(len(self.rates)):
+                self.rates[i] = (self.rates[i] - arr.mean(axis=0)) / arr.std(axis=0)  
+            
+    def __len__(self):
+        # Return the total number of samples in your dataset
+        return len(self.rates) # len(rates) == len(output_graphs)
+    
+    def __getitem__(self, index):
+        # Retrieve a single item from the dataset based on the given index
+        # Return a tuple (input, target) or dictionary {'input': input, 'target': target}
+        # The input and target can be tensors, NumPy arrays, or other data types
+        # returns a 1D tensor of rates, one input sequence, one output sequence
+        # need to convert to sets of sequences
+        return self.rates[index], self.outputs[index]
+
+    def save_to_pickle(self, output_path):
+        data = {}
+        data["outputs"] = self.outputs  # N x L tensors
+        data["rates"] = self.rates 
+        data["time_points"] = self.times 
+        with open(output_path, 'wb') as handle:
+            pickle.dump(data, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+
 def generate_static_dataset(dataset : TemporalDataset, t):
     rates = dataset.rates 
     output = []
