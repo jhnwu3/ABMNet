@@ -369,7 +369,7 @@ plt.figure()
 true = plt.plot(actual_times[2], ys[2], label="Observed Data",c="b", linewidth=10, alpha=0.5)
 # plt.scatter(actual_times[2], predictions[2,])
 for i in range(predictions.shape[1]):
-    plt.scatter(actual_times[2], predictions[2,i])
+    plt.scatter(actual_times[2], predictions[:,i])
 plt.legend()
 plt.savefig("IndraniEstSurr.png")
 plot_confidence_intervals(predictions.transpose(), title="Indrani_CI_EstSurr")
