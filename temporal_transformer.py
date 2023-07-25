@@ -9,7 +9,7 @@ from sklearn.model_selection import KFold
 import torch
 
 
-fs = 800
+fs = 1950
 dataset = TemporalDataset("data/time_series/indrani_zeta_ca_h_std_norm.pickle", 
                                    standardize_inputs=False, min_max_scale=False, steps=fs)
 

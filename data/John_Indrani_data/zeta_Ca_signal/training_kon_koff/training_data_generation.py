@@ -46,12 +46,7 @@ def param_generate(p):
     # indrani_estimates = np.power(10, indrani_estimates)
     # load indrani estimates
     for i in range(p):
-        # kon = 0.00601 
-        # koff = 4.71749
-        # C1 = 14187.77794
-        # C2 = 15.40922
-        # g = 0.00411
-        
+    
         # 350k
         # kon = 3.50749103e-04
         # koff = 3.81711042e+00
@@ -94,33 +89,31 @@ def param_generate(p):
         # C2 = 1.60359680e+00
         # g = 5.49390322e-03
         
-        # kon = 7.76045809e-03
-        # koff = 5.67900096e+00 
-        # C1 = 7.22032779e+03 
-        # C2 = 2.77281935e+00
-        # g= 4.45680870e-03
-        # kon= 1.39011725e-04 
-        # koff = 7.30651197e+00 
-        # C1= 7.74884329e+03 
-        # C2= 2.04480886e+00
-        # g= 2.96575691e-03
-        # kon = 1.86481484e-03 
-        # koff = 8.30188140e+00
-        # C1 = 6.62553815e+03
-        # C2 = 1.97917742e+00
-        # g =6.07438758e-03
+      
+        kon = 0.00026 
+        koff = 9.23214
+        C1 =  4499.434614189878
+        C2 = 1.2887
+        g = 0.003268352949
         
-        
+        kon += 0.5 * random.uniform(-1e-5, 1e-5) # offset by some amount
+        koff += 0.5 * random.uniform(-1,1)
+        C1 += 0.5 * random.uniform(-100, 100)
+        C2 += 0.5 * random.uniform(-0.1, 0.1)
+        g += 0.5 * random.uniform(-1e-4, 1e-4)
         # kon=random.uniform(1e-7,1e-2)
         # koff=random.uniform(1,10)
         # C1=random.uniform(5e3,1e4)
         # C2=random.uniform(1,10)
         # g=random.uniform(1e-4,1e-2)
-        kon = 3.58220915e-03 
-        koff = 6.16259226e+00
-        C1 = 9.36331580e+03 
-        C2 =1.66294341e+00
-        g = 6.80434035e-03
+        
+        
+        
+        # kon = 3.58220915e-03 
+        # koff = 6.16259226e+00
+        # C1 = 9.36331580e+03 
+        # C2 =1.66294341e+00
+        # g = 6.80434035e-03
         param.append((kon,koff,C1,C2,g))
         # param.append(indrani_estimates[i,:-1])
         
@@ -157,7 +150,7 @@ def pZAP_signal(K1,K2):
 def main():
    
     #*****************John you can change
-    p=1 #the number of the parameter sets of [kon,koff,C1,C2,g]
+    p=1000 #the number of the parameter sets of [kon,koff,C1,C2,g]
     
     
     #actual experimental data
@@ -178,7 +171,7 @@ def main():
     
     #Number of (kon,koff) exists, printing in the files
     for i in range(len(param)) :
-        f = f"../pso_estimates/train{i}_ca_h.txt"  # Generate file name (e.g., output1.txt)
+        f = f"../sanity_check/train{i}_ca_h.txt"  # Generate file name (e.g., output1.txt)
         
         #load each set of (kon, koff,C1,C2,g)
         kon=param[i,0]
