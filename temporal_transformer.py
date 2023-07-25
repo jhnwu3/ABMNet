@@ -9,7 +9,7 @@ from sklearn.model_selection import KFold
 import torch
 
 
-fs = 950
+fs = 800
 dataset = TemporalDataset("data/time_series/indrani_zeta_ca_h_std_norm.pickle", 
                                    standardize_inputs=False, min_max_scale=False, steps=fs)
 
@@ -21,10 +21,10 @@ test_size = len(dataset) - train_size
 train_dataset, test_dataset = tc.utils.data.random_split(dataset, [train_size, test_size])
 
 # output dimension is the same as input dimension (I believe)
-model = train_temporal_transformer(dataset=train_dataset, n_rates = dataset.n_rates, hidden_dim=128, 
-                           output_dim=dataset.input_size, nEpochs=50, batch_size=10)
-tc.save(model, 'model/indrani_transformer_' + str(int(fs)) + '.pt')
-# model = tc.load("model/indrani_transformer_" +str(int(fs)) + ".pt")
+# model = train_temporal_transformer(dataset=train_dataset, n_rates = dataset.n_rates, hidden_dim=128, 
+#                            output_dim=dataset.input_size, nEpochs=50, batch_size=10)
+# tc.save(model, 'model/indrani_transformer_' + str(int(fs)) + '.pt')
+model = tc.load("model/indrani_transformer_" +str(int(fs)) + ".pt")
 
 criterion = torch.nn.MSELoss() 
 device = tc.device("cpu")
@@ -64,7 +64,7 @@ plt.savefig("transformer_validation_ixr_est_"+ str(fs) + ".png")
 # good sanity check, run random wildly different parameter sets with the same set of trajectories, what do we get? Ideally, should be a different output of parameter sets.
 
 # other sanity check, run same parameter sets, different trajectories
-firstTrajectory = dataset.outputs[0]
+firstTrajectory = dataset.outputs[0][:-fs]
 pseudoRates = torch.zeros(1,5).double()
 # pseudoRates -= torch.ones(1,5).double()
 prediction = model(pseudoRates.to(device), firstTrajectory.to(device))
