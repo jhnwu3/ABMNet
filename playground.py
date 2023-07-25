@@ -352,7 +352,7 @@ print(minEstimates[np.argmin(minCosts)])
 # plt.savefig("ixr_Surrogate_MultiCost.png")
 
 # load in and rescale indrani's estimates
-indrani_estimates = np.loadtxt("CD3z_46L_indrani_estimates.dat")
+indrani_estimates = np.loadtxt("data/John_Indrani_data/zeta_Ca_signal/indrani_estimates/CD3z_46L_indrani_estimates.dat")
 print(indrani_estimates.shape)
 indrani_estimates = np.power(10, indrani_estimates[:15,:-1])
 print(indrani_estimates.shape)
