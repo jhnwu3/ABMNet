@@ -352,35 +352,36 @@ print(minEstimates[np.argmin(minCosts)])
 # plt.savefig("ixr_Surrogate_MultiCost.png")
 
 # load in and rescale indrani's estimates
-# indrani_estimates = np.loadtxt("CD3z_46L_indrani_estimates.dat")
-# print(indrani_estimates.shape)
-# indrani_estimates = np.power(10, indrani_estimates[:15,:-1])
-# print(indrani_estimates.shape)
-# print(indrani_estimates.max())
-# print(indrani_estimates.min())
-# predictions = [] # get all the predictions and plot them across time
-# for i in range(len(surrogates)):
-#     predictions.append(evaluate_MLP_surrogate(indrani_estimates,surrogate=surrogates[i],dataset=datasets[i], standardize=True, normalize=True)[:,1])
-# predictions = np.array(predictions)
-# print(predictions[:,:5])
-# print(predictions.shape)
-# plt.figure()
-# true = plt.plot(actual_times, ys, label="Observed Data",c="b", linewidth=10, alpha=0.5)
-# for i in range(predictions.shape[1]):
-#     plt.scatter(actual_times, predictions[:,i])
-# plt.legend()
-# plt.savefig("IndraniEstSurr.png")
-# plot_confidence_intervals(predictions.transpose(), title="Indrani_CI_EstSurr")
+indrani_estimates = np.loadtxt("CD3z_46L_indrani_estimates.dat")
+print(indrani_estimates.shape)
+indrani_estimates = np.power(10, indrani_estimates[:15,:-1])
+print(indrani_estimates.shape)
+print(indrani_estimates.max())
+print(indrani_estimates.min())
+predictions = [] # get all the predictions and plot them across time
+for i in range(2,3):
+    predictions.append(evaluate_MLP_surrogate(indrani_estimates,surrogate=soi,dataset=datasets[i], standardize=True, normalize=True)[:,1])
 
-# # check if anything in the dataset is outta bounds!
-# for i in range(indrani_estimates.shape[0]):
-#     for j in range(indrani_estimates.shape[1]):
-#         if indrani_estimates[i,j] > upper_bound[j]:
-#             print("TOO LARGE")
-#             print("i:",i,"+","j:",j)
-#         if indrani_estimates[i,j] < lower_bound[j]:
-#             print("TOO SMALL")
-#             print("i:",i,"+","j:",j)
+predictions = np.array(predictions)
+print(predictions[:,:5])
+print(predictions.shape)
+plt.figure()
+true = plt.plot(actual_times, ys[2], label="Observed Data",c="b", linewidth=10, alpha=0.5)
+for i in range(predictions.shape[1]):
+    plt.scatter(actual_times, predictions[:,i])
+plt.legend()
+plt.savefig("IndraniEstSurr.png")
+plot_confidence_intervals(predictions.transpose(), title="Indrani_CI_EstSurr")
+
+# check if anything in the dataset is outta bounds!
+for i in range(indrani_estimates.shape[0]):
+    for j in range(indrani_estimates.shape[1]):
+        if indrani_estimates[i,j] > upper_bound[j]:
+            print("TOO LARGE")
+            print("i:",i,"+","j:",j)
+        if indrani_estimates[i,j] < lower_bound[j]:
+            print("TOO SMALL")
+            print("i:",i,"+","j:",j)
 
 
 
