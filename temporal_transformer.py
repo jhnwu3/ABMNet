@@ -39,7 +39,7 @@ avg_test_mse, truth, predictions, runtime = evaluate_temporal_transformer(datase
 print("Finished Evaluating "+ str(len(dataset)) + " in time (s):" + str(runtime))
 print("With AVG MSE:", avg_test_mse)
 
-plot_scatter(truth, predictions, output="transformer" + str(fs))
+# plot_scatter(truth, predictions, output="transformer" + str(fs))
 
 # evaluate with indrani's estimates, and observed dataset's trajectories. 
 # let's see what we get out. 
