@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/training_data_generation.py", line 219, in <module>
+    main()
+  File "/gpfs0/home1/gddaslab/rsjxw007/ABMNet/data/John_Indrani_data/zeta_Ca_signal/training_kon_koff/training_data_generation.py", line 209, in main
+    with open(f, 'w') as file:
+FileNotFoundError: [Errno 2] No such file or directory: '../sanity_check/train0_ca_h.txt'
+Job Statistics for 3865764:
+           JobID       User               Start                 End    Elapsed     MaxRSS   TotalCPU      State Exit        NodeList                                  ReqTRES 
+---------------- ---------- ------------------- ------------------- ---------- ---------- ---------- ---------- ---- --------------- ---------------------------------------- 
+         3865764   rsjxw007 2023-07-25T15:50:22 2023-07-25T15:51:12   00:00:50             00:34.429     FAILED  1:0   r1pl-hpcf-n20        billing=5,cpu=5,mem=37275M,node=1 
+   3865764.batch            2023-07-25T15:50:22 2023-07-25T15:51:12   00:00:50    237.16M  00:34.426     FAILED  1:0   r1pl-hpcf-n20                                          
+  3865764.extern            2023-07-25T15:50:22 2023-07-25T15:51:12   00:00:50      0.09M  00:00.002  COMPLETED  0:0   r1pl-hpcf-n20                                          
+CPU Efficiency: 13.60% of 00:04:10 core-walltime
