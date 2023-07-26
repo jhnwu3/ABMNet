@@ -223,7 +223,7 @@ for t in time_pts:
     datasets.append(ABMDataset(dataset_prefix + str(t) + dataset_suffix, root_dir="data/",standardize=True, norm_out=True))
 # perform PSO across multiple time points (i.e each datasets y's) and surrogates.
 
-
+datasets[2] = ABMDataset("data/static/ixr_sanity_check_t750.csv",standardize=True, norm_out=True)
 # Define the bounds for a 5-dimensional problem
 ixr_data = ABMDataset("data/static/indrani/indrani_zeta_ca_t750.csv", root_dir="data/", standardize=True, norm_out=True)
 lower_bound = np.zeros(5)  # Lower bound array with all zeros
@@ -302,10 +302,25 @@ minCosts = []
 quad_costs = []
 varyingX = 0
 varyingY = 1
-soi = tc.load("model/ixr_biased_c20_ib_t750.pt")
-for e in range(1):
+soi = tc.load("model/ixr_sanity_check.pt")#tc.load("model/ixr_biased_c20_ib_t750.pt")
+for e in range(10):
     for i in range(N):
         randomVector = np.array([random.uniform(1e-7,1e-2), random.uniform(1,10), random.uniform(5e3,1e4), random.uniform(1,10), random.uniform(1e-4,1e-2)])
+        # kon = 0.00026 
+        # koff = 9.23214
+        # C1 =  4499.434614189878
+        # C2 = 1.2887
+        # g = 0.003268352949
+        
+        # kon += 0.5 * random.uniform(-1e-5, 1e-5) # offset by some amount
+        # koff += 0.5 * random.uniform(-1,1)
+        # C1 += 0.5 * random.uniform(-100, 100)
+        # C2 += 0.5 * random.uniform(-0.1, 0.1)
+        # g += 0.5 * random.uniform(-1e-4, 1e-4)
+        
+        randomVector = np.array([kon, koff, C1, C2, g])
+        
+        
         surr_input[i] = randomVector
         
     quad_costs = indrani_costss(surr_input, surrogate=soi, y=ys[2], dataset=datasets[2])#multi_indrani_cost_fxn(surr_input, surrogates=surrogates, ys=ys, datasets=datasets)

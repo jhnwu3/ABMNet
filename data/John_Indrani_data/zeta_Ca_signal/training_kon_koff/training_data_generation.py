@@ -45,6 +45,8 @@ def param_generate(p):
     # p = indrani_estimates.shape[0]
     # indrani_estimates = np.power(10, indrani_estimates)
     # load indrani estimates
+    kon = 0
+    koff = 0
     for i in range(p):
     
         # 350k
@@ -90,17 +92,21 @@ def param_generate(p):
         # g = 5.49390322e-03
         
       
-        kon = 0.00026 
-        koff = 9.23214
+        # kon = 0.00026 
+        # koff = 9.23214
         C1 =  4499.434614189878
         C2 = 1.2887
         g = 0.003268352949
         
-        kon += 0.5 * random.uniform(-1e-5, 1e-5) # offset by some amount
-        koff += 0.5 * random.uniform(-1,1)
-        C1 += 0.5 * random.uniform(-100, 100)
-        C2 += 0.5 * random.uniform(-0.1, 0.1)
-        g += 0.5 * random.uniform(-1e-4, 1e-4)
+        
+        kon += 0.001 * (i / float(p))
+        koff += 10 * (i / float(p))
+        # kon += 0.5 * random.uniform(-1e-5, 1e-5) # offset by some amount
+        # koff += 0.5 * random.uniform(-1,1)
+        # C1 += 0.5 * random.uniform(-100, 100)
+        # C2 += 0.5 * random.uniform(-0.1, 0.1)
+        # g += 0.5 * random.uniform(-1e-4, 1e-4)
+        
         # kon=random.uniform(1e-7,1e-2)
         # koff=random.uniform(1,10)
         # C1=random.uniform(5e3,1e4)
@@ -114,6 +120,22 @@ def param_generate(p):
         # C1 = 9.36331580e+03 
         # C2 =1.66294341e+00
         # g = 6.80434035e-03
+        
+        # when standardizing with the standard space sanity check model estimates
+        # kon = 9.69399302e-03 
+        # koff = 8.52310271e+00 
+        # C1 = 9.42838024e+03 
+        # C2 = 9.25670780e+00
+        # g = 4.31914380e-04
+        
+        # when standardizing with the sanity check data and keeping sampling bounded within
+        
+        # kon = 2.6000000e-05 
+        # koff = 9.2321500e+00 
+        # C1 = 4.4994346e+03 
+        # C2 = 1.2887300e+00
+        # g = 3.2684000e-03
+        
         param.append((kon,koff,C1,C2,g))
         # param.append(indrani_estimates[i,:-1])
         
@@ -171,7 +193,7 @@ def main():
     
     #Number of (kon,koff) exists, printing in the files
     for i in range(len(param)) :
-        f = f"../sanity_check/train{i}_ca_h.txt"  # Generate file name (e.g., output1.txt)
+        f = f"../contour_line/train{i}_ca_h.txt"  # Generate file name (e.g., output1.txt)
         
         #load each set of (kon, koff,C1,C2,g)
         kon=param[i,0]
