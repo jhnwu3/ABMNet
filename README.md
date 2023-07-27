@@ -85,9 +85,10 @@ A way to mitigate these issues is to simply perform min-max scaling (or standard
 ![nl6better](graphs/nl6/readme/nl6_scaled_scatter.png)
 ![gdagbetter](graphs/gdag/readme/gdag_default_test_norm_out_scatter.png)
 
-However, as one can see in the scatter plots, this still doesn't truly fully resolve all difficulties of fitting. There is still quite a bit of error surrounding the perfect fit line. While I haven't yet validated the nonlinear 6 protein reaction network's predictions with the actual model (as its fit isn't too bad), looking at the spatial ABM's fit 
+However, as one can see in the scatter plots, this still doesn't truly fully resolve all difficulties of fitting. There is still quite a bit of error surrounding the perfect fit line. While I haven't yet validated the nonlinear 6 protein reaction network's predictions with the actual model (as its fit isn't too bad), looking at the spatial ABM's fit, and one can reasonably assume it would have large approximation errors of the actual model and therefore be unsuitable for parameter estimation.  
 
-### 
+### Building More Complex Surrogate Models
+
 
 
 ### Shortcut Learning
