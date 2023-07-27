@@ -26,20 +26,18 @@ def evaluate(model, dataset, use_gpu = False, batch_size=None):
     start_time = time.time()
     predicted = []
     tested = []
-    for ex in range(len(dataset)):
-        sample = dataset[ex]
-        input = sample[0].squeeze()
-        output = sample[1].squeeze()
-        if batch_size is not None: 
-            input = input.unsqueeze(dim=0)
-            output = output.unsqueeze(dim=0)
-        prediction = model.forward(input.to(device))
-        loss += criterion(prediction, output.to(device))
-        tested.append(output.squeeze().cpu().detach().numpy())
-        predicted.append(prediction.squeeze().cpu().detach().numpy())
+    with torch.no_grad():
+        test_dataloader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=False, drop_last=False)
+        for input, output in test_dataloader:
+            if batch_size is None: 
+                input = input.squeeze()
+                output = output.squeeze()
+            prediction = model.forward(input.to(device))
+            loss += criterion(prediction, output.to(device))
+            tested.append(output.squeeze().cpu().detach().numpy())
+            predicted.append(prediction.squeeze().cpu().detach().numpy())
         
-    return loss.cpu().detach().numpy() / len(dataset), time.time() - start_time, np.array(predicted), np.array(tested)
-
+    return loss.cpu().detach().numpy() / len(dataset), time.time() - start_time, np.concatenate(predicted, axis=0), np.concatenate(tested, axis=0)
 
 # as in evaluate an RNN
 def evaluate_temporal(data, model : TemporalComplexModel, criterion, device, batch_size=None):
