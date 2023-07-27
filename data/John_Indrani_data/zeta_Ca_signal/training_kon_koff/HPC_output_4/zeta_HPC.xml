@@ -9,9 +9,9 @@
       <Parameter id="f" type="Constant" value="602.3" expr="602.3"/>
       <Parameter id="kon" type="Constant" value="0.78" expr="3.9E-2/Ve"/>
       <Parameter id="koff" type="Constant" value="0.01" expr="0.01"/>
-      <Parameter id="Kab" type="Constant" value="0.01044" expr="0.01044"/>
-      <Parameter id="KB" type="Constant" value="0.0004176" expr="Kab/A"/>
-      <Parameter id="KU" type="Constant" value="104.4" expr="104.4"/>
+      <Parameter id="Kab" type="Constant" value="0.163306" expr="0.16330600000000003"/>
+      <Parameter id="KB" type="Constant" value="0.00653224" expr="Kab/A"/>
+      <Parameter id="KU" type="Constant" value="1633.06" expr="1633.0600000000002"/>
       <Parameter id="kp" type="Constant" value="0.0006" expr="0.015/A"/>
       <Parameter id="kd" type="Constant" value="0.001" expr="0.001"/>
       <Parameter id="ksbPP" type="Constant" value="1.66e-5" expr="4.15E-4/Vc"/>
