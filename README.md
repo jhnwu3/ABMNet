@@ -1,4 +1,4 @@
-# ABMNet (title needs some work)
+# ABMNet - Speeding Up Mechanistic Simulations with Surrogate Models
 
 Training a neural network to act as a surrogate model for Agent Based Models to speed up the simulation of mechanistic models used in the Das Lab.
 
