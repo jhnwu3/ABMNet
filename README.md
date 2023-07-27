@@ -41,20 +41,44 @@ And, so, when training the surrogate model on some 8,500 sets of parameter sets 
 
 Note: One should in principle do cross validation MSE loss (or some other metric) to get a better idea of how the surrogate model is truly performing (on average), but in this case, even with cross-validation, negligible generalization performance gains were seen (probably because the dataset contained a large number of parameter sets were sampled from some uniform distribution and thus were evenly spread out).
 
-However, these plots while a useful litmus test, are not perfect. A better validation test is performing a parameter estimation task where one attempts to fit the surrogate model (and the actual model) to synthetically generated data with ground truth (as one would with real data).
+However, these plots while a useful litmus test, are not perfect. A better validation test is performing a parameter estimation task where one attempts to fit the surrogate model (and the actual model) to synthetically generated data with ground truth (as one would with real data). In this toy problem, we used particle swarm optimization to fit some synthetic observed data and we get the following parameter estimates. 
+
+![L3PEst](figs/L3PSurrogateEstimates.png)
+
+Furthermore, when creating cost contour plots where all thetas (or k's) are held constant at the simulated ground truth except for theta 4 and theta 5, one can observe that the mechanistic model's cost space is actually being well approximated by the surrogate. 
+
+![L3PCostContours](figs/l3p_tru_v_surr_cost_contours.png)
+
+Please note that because running the true model is often more computationally expensive than the surrogate model, the cost contour of the true model is lower resolution. On the other hand, the surrogate contour cost space is much higher resolution due to its fast speed of computation. However, even so, the shapes of the cost contour functions within the parameter space of theta 4 vs. theta 5 are of similar shape. Furthermore, the darker shaded regions indicating lower cost surround the ground truth parameters. 
 
 
+## Is there a good rule of thumb for hyperparameters to use and what about dataset size?
+I had a highschooler do some experiments with different combinations of numbers of hidden neurons and layers in the deep surrogate models we've used for the linear 3 protein model. The results can be found [here](https://docs.google.com/presentation/d/1CTc9d6LX_MZa7NdIOZF8-M5sWEWQQNsOcqwZRSXIG6Q/edit?usp=sharing) (Thanks Soham!). Unfortunately, the only general advice I can give is that larger neural networks are required for more complex mechanistic models where nonlinearity is often present. The exact numbers of layers, neurons, and even architecture is heavily problem specific. 
 
-## When does it fail? 
-As it turns out and this has been a subject well-studied in modeling neural networks after deterministic systems (link [here](https://arxiv.org/abs/2201.05624) for some related work), there is difficulty in neural networks learning from unbounded spaces. 
+Similarly, dataset size is also equally problem specific. Depending on the behavior and parameter sensitivity in the mechanistic model, the amount of data required can vary dramatically. For instance, in this simple toy linear 3 protein case, increasing the amount of data may not necessarily lead to drastically improved parameter estimates (or reduced generalization error). Take a look at the pairwise parameter cost contour figure below. 
+
+![L3PCostContoursTrainingSize](figs/TrainingSetSizeL3P.png)
 
 ## Does a successful surrogate model's weights have any meaning? 
 
+I also had another highschooler (thanks Nityha!) investigate the weights of the trained deep surrogate models [here](https://docs.google.com/presentation/d/1VL2rcyGV5Rm35uWFStSB32m23w6q21PiF-u83gbDfnY/edit?usp=sharing). Considering most weights are centered around zero, there is a lot of work (and use of other interpretability methods) that needs to be done in understanding what is being learned within these black boxes.
 
-## Is there a good rule of thumb for hyperparameters to use?
+
+## When does it fail? 
+
+### Unbounded data where mechanistic output and input features vary across many orders of magnitude. 
+As it turns out, difficulties in modeling neural networks after mechanistic models is well-known within the scientific machine learning community (link [here](https://arxiv.org/abs/2201.05624) for a review of related work). One such well-documented difficulty is in modeling unbounded systems where parameters and their corresponding model outputs differ across various orders of magnitude, which is often missing in conventional vision and NLP supervised learning tasks. Applying this surrogate deep learning approach to two stochastic (i.e gillespie) nonlinear models, one a spatial agent based model and the other a non-spatial nonlinear 6 protein reaction network, naively applying a neural network without any feature transformations (i.e standardization, min-max scaling, etc.) leads to very some remarkably poor results. Here are some early results of what the surrogate fits looked like for the two nonlinear models.
 
 
-## How to use the code written in this repository?
+
+A way to mitigate these issues is to simply perform min-max scaling (or standardization) on the output feature vectors such that t. 
+
+
+However, as one can see, this still doesn't truly fully resolve all difficulties of fitting. 
+
+
+
+## How to use the code written in this repository (more for Das lab members than anyone else)?
 
 To those in the Das lab that might be taking up the flag in developing this project further, for a quickstart, one can simply look in the /tutorials/tutorial_for_indrani.pynb notebook for a quick rundown on how one might use the pieces of code written. There's also a cli interface that I've provided with main.py, please look in the slurm_scripts/ folder for a plethora of shell scripts used to run the code on the cluster. The flow chart below provides a general workflow of the surrogate modeling done in this repository.
 
@@ -62,7 +86,7 @@ To those in the Das lab that might be taking up the flag in developing this proj
 
 Please look in the modules/ folder for relevant pieces of code.
 
-## Potential future directions (that I wish there was time for), taking inspiration from the scientific machine learning community. 
+## Potential future directions (that I wish I had taken the time for), taking inspiration from the general machine learning communities. 
 
 
 
