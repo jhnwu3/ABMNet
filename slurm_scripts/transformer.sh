@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --time=0-80:10:00 
+#SBATCH --time=0-10:10:00 
 #SBATCH --job-name=TransformerTest
 #SBATCH --partition=general,das,himem
 #SBATCH --nodes=1

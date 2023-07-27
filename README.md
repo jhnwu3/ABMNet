@@ -85,13 +85,29 @@ A way to mitigate these issues is to simply perform min-max scaling (or standard
 ![nl6better](graphs/nl6/readme/nl6_scaled_scatter.png)
 ![gdagbetter](graphs/gdag/readme/gdag_default_test_norm_out_scatter.png)
 
-However, as one can see in the scatter plots, this still doesn't truly fully resolve all difficulties of fitting. There is still quite a bit of error surrounding the perfect fit line. While I haven't yet validated the nonlinear 6 protein reaction network's predictions with the actual model (as its fit isn't too bad), looking at the spatial ABM's fit, and one can reasonably assume it would have large approximation errors of the actual model and therefore be unsuitable for parameter estimation.  
+However, as one can see in the scatter plots, this still doesn't truly fully resolve all difficulties of fitting. There is still quite a bit of error surrounding the perfect fit line. While I haven't yet validated the nonlinear 6 protein reaction network's predictions with the actual model (as its fit isn't too bad), looking at the spatial ABM's fit, and one can reasonably assume it would have large approximation errors of the actual model and therefore be unsuitable for predictive purposes (and parameter estimation).  
 
-### Building More Complex Surrogate Models
+### Building More Complex Surrogate Models (and Failing)
+The arguably simplest method of building a direct mapping of parameters to some mechanistic outputs may not fully encompass the complex stochastic behaviors of certain models, especially when one considers biochemical reactions to be of time-series rather than simply just a snapshot in time and many models to have a spatial component. Such is the case with the spatial ABM depicted above. Unfortunately, I never had the time to truly explore all of the different conventional machine learning models (nor the time to use regularization methods such as dropout, L2 loss with the weights being a regularizer, etc.), here's a quick and dirty list of my naive attempts at using different neural network architectures for different mechanistic models and some statements on some things that I've noticed but never had the time to make graphicals for. 
+
+#### GCNs and GATs
+Exploring graph convolutional neural networks and graph attention networks used to act as a surrogate model for Giuseppe's model has shown that naive guesses are often just that, naive guesses. In particular, in a spatial ABM (or gillespie), a specific pixel (or position on a grid) has a variety of ways to update based on its neighboring pixels, and therefore in a way, it acts like a node on a graph. As such, one can (naively) imagine, that using graph neural networks where nodes are updated through some forwarding method and also nonlinearly transformed by some sets of weights (and their corresponding nonlinear activation functions), would do a reasonable job in acting as a surrogate for a spatial agent based model. The following architecture attempted with the surrogate model and their corresponding fits are shown below.
+
+Architecture for GCN and GAT (note that the GCN unit is interchangeable with the GAT).
+![gnnArch](figs/GNNSurrogate.drawio.png)
+
+Their corresponding GCN and GAT fits respectively.
+![gnnFits](figs/GATvsGCN.png)
+
+##### Possible Future Directions
+Here's the confusing part 
+
+#### LSTMs (Indrani's Network Free pZap and Ca Model)
 
 
+#### Transformer Models (Indrani's Network Free pZap and Ca Model)
 
-### Shortcut Learning
+##### Shortcut Learning
 
 
 ## How to use the code written in this repository (more for Das lab members than anyone else)?
@@ -102,9 +118,23 @@ To those in the Das lab that might be taking up the flag in developing this proj
 
 Please look in the modules/ folder for relevant pieces of code.
 
-## Potential future directions (that I wish I had taken the time for), taking inspiration from the general machine learning communities. 
+## Other potential future directions (that I wish I had taken the time for), taking inspiration from the general machine learning communities. 
+
+### Feature Engineering 
+
+### Generative Adversarial Networks
+
+### Reinforcement Learning
+
+### Larger Neural Network Architectures
+
+### Ensemble Neural Network Methods
+
+### Papers from related fields that attempt to do something similar to what we're doing
+
+### Transfer Learning
+Since it is now the era of fine-tuning and "pre-training" in the NLP and vision fields, it's interesting that it hasn't heavily spread into the domain of scientific machine learning. There could be various reasons for this, but ultimately, if one could in principle take a pre-trained surrogate model and fine-tune it to properly surrogate another similar related mechanistic model, one could in principle speed up training by 100x. It's interesting to note that people are already attempting to do this for deterministic mechanistic models as seen with the physics-inspired neural networks. 
 
 
-
-
-
+### AutoML
+I've tried this with no luck in actually getting some of their packages to run, and I figured at the time, it wasn't worth further exploring. But, if you can simply blackbox the training approach, and it works, I don't see why not giving it a [shot](https://www.automl.org/automl/).
