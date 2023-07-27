@@ -45,8 +45,8 @@ def param_generate(p):
     # p = indrani_estimates.shape[0]
     # indrani_estimates = np.power(10, indrani_estimates)
     # load indrani estimates
-    kon = 0
-    koff = 0
+    # kon = 0
+    # koff = 0
     for i in range(p):
     
         # 350k
@@ -99,8 +99,8 @@ def param_generate(p):
         g = 0.003268352949
         
         
-        kon += 0.001 * (i / float(p))
-        koff += 10 * (i / float(p))
+        kon = 0.001 * (i / float(p))
+        koff = 10 * (i / float(p))
         # kon += 0.5 * random.uniform(-1e-5, 1e-5) # offset by some amount
         # koff += 0.5 * random.uniform(-1,1)
         # C1 += 0.5 * random.uniform(-100, 100)

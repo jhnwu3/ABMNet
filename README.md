@@ -41,7 +41,10 @@ And, so, when training the surrogate model on some 8,500 sets of parameter sets 
 
 Note: One should in principle do cross validation MSE loss (or some other metric) to get a better idea of how the surrogate model is truly performing (on average), but in this case, even with cross-validation, negligible generalization performance gains were seen (probably because the dataset contained a large number of parameter sets were sampled from some uniform distribution and thus were evenly spread out).
 
-However, this while a useful litmus test . 
+However, these plots while a useful litmus test, are not perfect. A better validation test is performing a parameter estimation task where one attempts to fit the surrogate model (and the actual model) to synthetically generated data with ground truth (as one would with real data).
+
+
+
 ## When does it fail? 
 As it turns out and this has been a subject well-studied in modeling neural networks after deterministic systems (link [here](https://arxiv.org/abs/2201.05624) for some related work), there is difficulty in neural networks learning from unbounded spaces. 
 
