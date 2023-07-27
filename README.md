@@ -70,12 +70,24 @@ I also had another highschooler (thanks Nityha!) investigate the weights of the 
 As it turns out, difficulties in modeling neural networks after mechanistic models is well-known within the scientific machine learning community (link [here](https://arxiv.org/abs/2201.05624) for a review of related work). One such well-documented difficulty is in modeling unbounded systems where parameters and their corresponding model outputs differ across various orders of magnitude, which is often missing in conventional vision and NLP supervised learning tasks. Applying this surrogate deep learning approach to two stochastic (i.e gillespie) nonlinear models, one a spatial agent based model and the other a non-spatial nonlinear 6 protein reaction network, naively applying a neural network without any feature transformations (i.e standardization, min-max scaling, etc.) leads to very some remarkably poor results. Here are some early results of what the surrogate fits looked like for the two nonlinear models.
 
 
+Nonlinear 6 Protein Reaction Network Surrogate Fit
+![nl6fail](graphs/nl6/readme/nl6_unscaled_full_scatter_some_failure.png)
 
-A way to mitigate these issues is to simply perform min-max scaling (or standardization) on the output feature vectors such that t. 
+
+Spatial ABM (Giuseppe's Model Fit)
+![gdagfail](graphs/gdag/readme/gdag_default_test_scatter.png)
+
+A way to mitigate these issues is to simply perform min-max scaling (or standardization) on the output feature vectors such that the feature space across all parts of the vector are bounded near 0. In the same order, we have the following improved fits
+
+![nl6better](graphs/nl6/readme/nl6_scaled_scatter.png)
+![gdagbetter](graphs/gdag/readme/gdag_default_test_norm_out_scatter.png)
+
+However, as one can see in the scatter plots, this still doesn't truly fully resolve all difficulties of fitting. There is still quite a bit of error surrounding the perfect fit line. 
+
+### 
 
 
-However, as one can see, this still doesn't truly fully resolve all difficulties of fitting. 
-
+### Shortcut Learning
 
 
 ## How to use the code written in this repository (more for Das lab members than anyone else)?

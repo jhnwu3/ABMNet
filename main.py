@@ -144,10 +144,10 @@ if __name__ == '__main__':
     plot_histograms_subplots(tested, predictions, output='graphs/histograms/' + output_name)
     
     nSpecies = get_n_species()
+    nSpecies = int(nSpecies)
     if nSpecies < 1:
         nSpecies = None
-    else:
-        nSpecies = int(nSpecies)    
+        
     plot_scatter(tested, predictions, output='graphs/scatter/' + output_name, nSpecies=nSpecies)
 
 # full train on entire dataset and evaluate for "maximal" performance on actual parameter estimation task
