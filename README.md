@@ -98,9 +98,10 @@ Architecture for GCN and GAT (note that the GCN unit is interchangeable with the
 
 Their corresponding GCN and GAT fits respectively.
 ![gnnFits](figs/GATvsGCN.png)
-
+Here's what it looks like when you color code them by their moment type.
+![gatfit](graphs/gdag/gnn/all_gat_moms_scatter.png)
 ##### Possible Future Directions
-Here's the confusing part 
+Please note that the dots size may mislead you to believe that the "test" fits are 
 
 #### LSTMs (Indrani's Network Free pZap and Ca Model)
 
