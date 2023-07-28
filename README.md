@@ -65,13 +65,13 @@ Similarly, dataset size is also equally problem specific. Depending on the behav
 
 ## Does a successful surrogate model's weights have any meaning? 
 
-I also had another highschooler (thanks Nityha!) investigate the weights of the trained deep surrogate models [here](https://docs.google.com/presentation/d/1VL2rcyGV5Rm35uWFStSB32m23w6q21PiF-u83gbDfnY/edit?usp=sharing). Considering most weights are centered around zero, there is a lot of work (and use of other interpretability methods) that needs to be done in understanding what is being learned within these black boxes.
+I also had another highschooler (thanks Nityha!) investigate the weights of the trained deep surrogate models [here](https://docs.google.com/presentation/d/1VL2rcyGV5Rm35uWFStSB32m23w6q21PiF-u83gbDfnY/edit?usp=sharing). Considering most weights are centered around zero, there is a lot of work (and use of other interpretability methods) that needs to be done in understanding what is actually being learned within these black boxes.
 
 
 ## When does it fail? 
 
 ### Unbounded data where mechanistic output and input features vary across many orders of magnitude. 
-As it turns out, difficulties in modeling neural networks after mechanistic models is well-known within the scientific machine learning community (link [here](https://arxiv.org/abs/2201.05624) for a review of related work). One such well-documented difficulty is in modeling unbounded systems where parameters and their corresponding model outputs differ across various orders of magnitude, which is often missing in conventional vision and NLP supervised learning tasks. Applying this surrogate deep learning approach to two stochastic (i.e gillespie) nonlinear models, one a spatial agent based model and the other a non-spatial nonlinear 6 protein reaction network, naively applying a neural network without any feature transformations (i.e standardization, min-max scaling, etc.) leads to very some remarkably poor results. Here are some early results of what the surrogate fits looked like for the two nonlinear models.
+As it turns out, difficulties in modeling neural networks after mechanistic models is well-known within the scientific machine learning community (link [here](https://arxiv.org/abs/2201.05624) for a review of related work). One such well-documented difficulty is in modeling unbounded systems where parameters and their corresponding model outputs differ across various orders of magnitude, which is often missing in conventional supervised learning tasks. Applying this surrogate deep learning approach to two stochastic (i.e gillespie) nonlinear models, one a spatial agent based model and the other a non-spatial nonlinear 6 protein reaction network, naively applying a neural network without any feature transformations (i.e standardization, min-max scaling, etc.) leads to very some remarkably poor results. Here are some early results of what the surrogate fits looked like for the two nonlinear models.
 
 
 Schematics for Both Nonlinear Models.
@@ -102,6 +102,17 @@ Here are some "decent fits". Note that I'm only showing one fit here at one time
 But, when validated against the true model using previous estimates that are supposed to fit some curve, we get horrible results. Note that each color corresponds to a unique parameter set.
 ![indrani_bad_validation](figs/Indrani_Validation.png)
 
+Furthermore, when looking at the cost spaces (confined by the training set's parameter bounds) with some observed data, you get some very wacky results. Comparing it to the true cost space (red line, we only evaluated a diagonal slice on the mechanistic model to save computational time as it's very expensive), we get the following plots. 
+
+(Note that lighter colors in the contour plot indicate higher cost.)
+
+![indrani cost contours](figs/indrnai_cost_contours.png)
+
+#### Dumb Possible Thoughts Why It's Hard to Take This Conventional Approach onto Indrani's Mechanistic Model
+- Unbounded parameter space where parameters vary across many orders of magnitude (i.e C1 ~ 10^3 vs. k1 ~ 10^-7)
+- Multiple Combinations of Parameters That Have the Exact Same Outputs (Maybe The Result of Unobserved Information from a Massive Model That has 1000's of RXNs)
+- Irregular Cost Space (one needs to actually run the simulations to check, maybe highly sensitive? requiring more data)
+- Since it's unbounded, possibly the training set doesn't contain a set of parameters that fit the observed data (initial experiments show that if you zoom in and create a training set of parameters around a set of parameters that fit the observed data with the actual mechanistic model, the surrogate can work on the inverse problem and return a set of valid parameters)
 
 
 ### Building More Complex Surrogate Models (and Failing)
@@ -126,17 +137,52 @@ While this may seem like a slight improvement over the original multilayer perce
 - Try different types of graphs (i.e different definitions of nodes and edges). I had designed a massive graph where every pixel out of the (100 x 100) grid was a node and its nearest neighbors had edges connected to it. Such a graph might be too big and honestly naively might have many empty or insufficient edges that are useless in the final prediction. Other issues include the scale of the time where cancer can often traverse multiple pixels, meaning there might be a need for a global set of edges.
 
 #### LSTMs (Indrani's Network Free pZap and Ca Model)
-At some point, it felt worthwhile exploring time-series prediction models to maybe better incorporate temporal information within its parameter to output mapping. However, increasing the complexity of the datasets ran into complications as you'll soon see. Below we have the schematic of the surrogate model (and note the modules/model/temporal should contain the actual surrogate models).
+At some point, it felt worthwhile exploring time-series prediction models to maybe better incorporate temporal information within its parameter to output mapping. However, increasing the complexity of the datasets ran into complications as you'll soon see. Below we have the schematic of the surrogate model (and note the modules/model/temporal should contain the actual surrogate models). Furthermore, this input length determines how accurate 
 
 ![figure of lstm](figs/LSTM_SurrogateSchematic.png)
 
+There's a trade-off between accuracy and the amount of observed time points you define as part of your input to the surrogate. While the figure above only shows one initial observed time point of your sequence, in principle, the sequence length that one feeds into the RNN or LSTM is variable. This can have varying effects on performance, especially should one naively choose to train the LSTM to predict only one time point into the future (where the input sequence is the entire trajectory missing the last time point and the output sequence missing the first time point). 
+
+Here is an example of fits evaluating on an input sequence length of 50. 
+
+![fits lstm length 50](figs/InputLength50LSTM.png)
+
+Here is an example of better fits evaluating on an input sequence length of 300.  Note that a sequence of length 300 is only half the time points (i.e time 150 not the 300 on the plot shown). 
+
+![fits lstm length 300](figs/InputLength300LSTM.png)
+
+This leads to the next question of how one should train LSTMs to better predict the future time points, which brings into the question of chunking where instead of feeding the LSTM entire sequences, we feed it chunks of that sequence. Here we see a fit using a chunk size of 20 and attempting to predict 5 time points into the future, which dramatically improves the time-series predictions.
+
+![fits chunked](figs/ChunkedTrainingLSTM.png)
+
+
 #### Transformer Models (Indrani's Network Free pZap and Ca Model) (With a Possible Application to Giuseppe's Model)
+However, this type of fit in time-series predictions can be deceiving, as our goal isn't to predict the so-called observed future of the original mechanistic model given some input sequence, but rather the prediction of a trajectory given a set of changeable parameters. A good analogy is skydiving, a newbie skydiver can probably easily predict where he's falling to, but it's a different story if one wants to actually fly in the direction he's decided. Jumping into transformer models (taking inspiration from the NLP community), one might expect to see something like the following fits across all parameter sets in the test set. Furthermore, the dataset evaluated contains multiple features (pZap, Ca, h) changing across time rather than just the one (pZap) we've been exploring above with LSTMs. Below, we have some diagram of a transformer model and their inputs / outputs that I've taken and modified from google images to quickly showcase the off-the-shelf architecture, and then its corresponding fits to time-series data on an R^2 plot. 
+
+![transformer model](figs/QuickDirtyTransformerFigure.png)
+
+Here's the original starting attempt in just predicting one time point into the future, which unsurprisingly gives you a perfect fit in the R^2 plot.
+
+![transformer perfect fit](figs/transformer_perfect_Fit.png)
 
 
-##### Shortcut Learning
+Here's the R^2 plot when attempting to predict 800 time points into the future, which is still surprisingly pretty good considering how little information it has from the original sequence. 
+
+![transformer still good fit](figs/transformer_not_so_perfect_predict800.png)
 
 
-## How to use the code written in this repository (more for Das lab members than anyone else)?
+##### Shortcut Learning - And Why Validation is Key.
+However, as earlier discussed, these plots are deceiving, especially when one considers the utility of these surrogate models is to map interpretable mechanistic model parameters to mechanistic model outputs and not just black box predictions. As such, suppose I fed in a set of 0 parameters (i.e no reactions, nothing is happened in the mechanistic model) to the transformer surrogate model that should in principle predict "0" or flat trajectories as nothing is supposed to be happening. Inputting this zero parameter set with some input sequence, we get surrogate predicted trajectories (orange) that perfectly fit trajectories that have non-zero parameter sets (blue). 
+
+![transformer sanity check](figs/TransformerSanityCheck.png)
+
+In other words, the parameter set inputs to the transformer surrogate model had zero effect on the time-series prediction, meaning it had learned to predict future sequences only from the input sequence.  
+
+## How to use the code written in this repository (Das Members Here)?
+
+Please look at requirements.txt for all of the used Python libraries. To install, simply do
+
+    pip install -r requirements.txt
 
 To those in the Das lab that might be taking up the flag in developing this project further, for a quickstart, one can simply look in the /tutorials/tutorial_for_indrani.pynb notebook for a quick rundown on how one might use the pieces of code written. There's also a cli interface that I've provided with main.py, please look in the slurm_scripts/ folder for a plethora of shell scripts used to run the code on the cluster. The flow chart below provides a general workflow of the surrogate modeling done in this repository (cross validation in principle should be used, but there's a tradeoff in computational time vs. generalization error to be had when using cross validation).
 
@@ -147,39 +193,31 @@ Please look in the modules/ folder for relevant pieces of code.
 ## Other potential future directions (that I wish I had taken the time for), taking inspiration from the general machine learning communities. 
 
 ### Feature Engineering 
-
-### Generative Adversarial Networks
-
-### Reinforcement Learning
-
-### Larger Neural Network Architectures
+Dr. Das, I think someone should pursue the idea of treating sequences as shapes (like a triangle) rather than anything else really interesting. I wish I could've properly pursued this idea further.
 
 ### Ensemble Neural Network Methods
+- Dr. Stewart brought up the idea of using hundreds of surrogate models since smaller models can be in principle faster to train, and much faster to evaluate than the original model. Funnily enough, someone's attempted this with partial differential equations [here](https://arxiv.org/pdf/2302.13143.pdf) (even if our problem is different because we are tackling stochastic models rather than deterministic).
 
 ### Papers from related fields that attempt to do something similar to what we're doing, but I haven't had the time to read thoroughly and truly understand the major ideas (and why they might work and not work).
 
 - [Synthetic Data Generation for Molecular Time-Series Data](https://www.frontiersin.org/articles/10.3389/fsysb.2023.1188009/full)
 - [Using CNNs for Surrogate Modeling for Connectivity Prediction for Work Layouts](https://arxiv.org/pdf/1912.12616.pdf)
+- [GNN Surrogates for Unstructured Ocean Simulations](https://arxiv.org/abs/2202.08956) <- Understanding this might be key to improving our spatial surrogate models.
 
 ### Transfer Learning
 Since it is now the era of fine-tuning and "pre-training" in the NLP and vision fields, it's interesting that it hasn't heavily spread into the domain of scientific machine learning. There could be various reasons for this, but ultimately, if one could in principle take a pre-trained surrogate model and fine-tune it to properly surrogate another similar related mechanistic model, one could in principle speed up training by 100x. It's interesting to note that people are already attempting to do this for deterministic mechanistic models as seen with the physics-inspired neural networks community. 
-
 
 ### AutoML
 I've tried this with no luck in actually getting some of their packages to run, and I figured at the time, it wasn't worth further exploring. But, if you can simply blackbox the training approach, and it works, I don't see why not giving it a [shot](https://www.automl.org/automl/).
 
 
 
-
-
-
-
 ## Statement of Gratitude 
 
-Thank you to Dr. Stewart, Dr. Jay, and Dr. Das for basically acting as 3 senior research mentors to essentially just an undergrad. I recognize how lucky I am to have been able to take up the valuable time. I think it's funny that I didn't realize until I had Darren point it out to me, that I basically had the firepower of 3 PI's giving me advice on my one project. I think I would've been much more lost had I not had this level of support that has shaped my thinking in this amazing world of open research. 
+Thank you Dr. Stewart, Dr. Jay, and Dr. Das for basically acting as 3 senior research mentors to essentially just an undergrad. I recognize how lucky I am to have been able to take up the valuable time. I think it's funny that I didn't realize until I had Darren point it out to me, that I basically had the firepower of 3 PI's giving me advice on my one project. I think I would've been much more lost had I not had this level of support that has shaped my thinking in this amazing world of open research. 
 
-Thank you to Darren and Giuseppe, the awesome PhD students within the lab, for giving me advice, shaping my belief and desire to do a PhD, and honestly just providing company on the days I came into the office. It's often nice to have people who are willing to listen your research woes and talk about stuff outside of research.
+Thank you Darren and Giuseppe, the awesome PhD students within the lab, for giving me advice, shaping my belief and desire to do a PhD, and honestly just providing company on the days I came into the office. It's often nice to have people who are willing to listen your research woes and talk about stuff outside of research.
 
-Thank you to Mahesh for being my walk-home buddy as well as also providing valuable advice and insights in aiding with my research. I hope you figure out the nuances of neural turing machines. 
+Thank you Mahesh for being my walk-home buddy as well as also providing valuable advice and insights in aiding with my research. I hope you figure out the nuances of neural turing machines. Funnily enough, I read somewhere, they might be part of the next steps towards general ai.
 
-Thank you to Indrani, Debanghana, and everyone else in the Das lab (that I might've forgotten about) for helping me understand their research and taking the time to explain it to a dummy like me.
+Thank you Indrani, Debanghana, and everyone else in the Das lab (that I might've forgotten about) for helping me understand their research and taking the time to explain it to a dummy like me.
