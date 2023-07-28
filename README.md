@@ -199,7 +199,7 @@ Dr. Das, I think someone should pursue the idea of treating sequences as shapes 
 ### Ensemble Neural Network Methods
 - Dr. Stewart brought up the idea of using hundreds of surrogate models since smaller models can be in principle faster to train, and much faster to evaluate than the original model. Funnily enough, someone's attempted this with partial differential equations [here](https://arxiv.org/pdf/2302.13143.pdf) (even if our problem is different because we are tackling stochastic models rather than deterministic).
 
-### Papers from related fields that attempt to do something similar to what we're doing, but I haven't had the time to read thoroughly and truly understand the major ideas (and why they might work and not work).
+### Papers from related fields that attempt to do something similar to what we're doing, but I haven't had the time to read thoroughly and truly understand the major ideas (and why they might work and not work for our case).
 
 - [Synthetic Data Generation for Molecular Time-Series Data](https://www.frontiersin.org/articles/10.3389/fsysb.2023.1188009/full)
 - [Using CNNs for Surrogate Modeling for Connectivity Prediction for Work Layouts](https://arxiv.org/pdf/1912.12616.pdf)
