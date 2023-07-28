@@ -204,9 +204,12 @@ Dr. Das, I think someone should pursue the idea of treating sequences as shapes 
 - [Synthetic Data Generation for Molecular Time-Series Data](https://www.frontiersin.org/articles/10.3389/fsysb.2023.1188009/full)
 - [Using CNNs for Surrogate Modeling for Connectivity Prediction for Work Layouts](https://arxiv.org/pdf/1912.12616.pdf)
 - [GNN Surrogates for Unstructured Ocean Simulations](https://arxiv.org/abs/2202.08956) <- Understanding this might be key to improving our spatial surrogate models.
+- [Review of Surrogate Models and Their Application to Groundwater Modeling](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2015WR016967)
+- [A review on design of experiments and surrogate models in aircraft real-time and many-query aerodynamic analyses](https://www.sciencedirect.com/science/article/pii/S0376042117300611)
+
 
 ### Transfer Learning
-Since it is now the era of fine-tuning and "pre-training" in the NLP and vision fields, it's interesting that it hasn't heavily spread into the domain of scientific machine learning. There could be various reasons for this, but ultimately, if one could in principle take a pre-trained surrogate model and fine-tune it to properly surrogate another similar related mechanistic model, one could in principle speed up training by 100x. It's interesting to note that people are already attempting to do this for deterministic mechanistic models as seen with the physics-inspired neural networks community. 
+Since it is now the era of fine-tuning and "pre-training" in the NLP and vision fields, it's interesting that it hasn't heavily spread into the domain of scientific machine learning. There could be various reasons for this, but ultimately, if one could in principle take a pre-trained surrogate model and fine-tune it to properly surrogate another similar related mechanistic model, one could in principle speed up training by 100x. If we could get a useful surrogate model off the ground, this would be a solid research direction. It's interesting to note that people are already attempting to do this for deterministic mechanistic models as seen with the physics-inspired neural networks community. 
 
 ### AutoML
 I've tried this with no luck in actually getting some of their packages to run, and I figured at the time, it wasn't worth further exploring. But, if you can simply blackbox the training approach, and it works, I don't see why not giving it a [shot](https://www.automl.org/automl/).
