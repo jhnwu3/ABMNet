@@ -17,7 +17,7 @@ However, there exists many other approaches where some are more suitable than ot
 
 
 ## Why Surrogate Modeling?
-The big question one might ask is why create another model that models a model? While this seems like a very unnecessary roundabout step, especially when one considers the extra error in predictions resulting from adding an additional layer of abstraction, its speed benefits can not be neglected. See below for a quick example on the computational time needed to perform numerous simulations given a biochemical model and its surrogate model.
+The big question one might ask is why create another model that models a model? While this seems like a very unnecessary roundabout step, especially when one considers the extra error in predictions resulting from adding an additional layer of abstraction, its speed benefits can not be neglected. See below for a quick example on the computational time needed to perform numerous simulations given a biochemical reaction model and its surrogate model.
 
 |                       | Nonlinear 6 Protein Model | Surrogate Model |
 |-----------------------|---------------------------|-----------------|
