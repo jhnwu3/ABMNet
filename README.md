@@ -2,6 +2,10 @@
 
 Training a neural network to act as a surrogate model for Agent Based Models to speed up the simulation of mechanistic models used in the Das Lab.
 
+Here's a very quickly put together set of [slides](https://docs.google.com/presentation/d/1Ily1s84B1tNGIBIyEjjR2qYwbNrpVrGm2xmwj-ZMMmk/edit?usp=sharing) that provides some background and that generally summarizes the work being attempted.
+
+Here's a compilation of [slides](https://docs.google.com/presentation/d/1UpoZpoDkvHOOQrDB1tKJ-NfGD3dquNDG66kprV1EAMc/edit?usp=sharing) that contain figures that are related but also poorly organized.
+
 ## What is Surrogate Modeling?
 Simply put, surrogate modeling is when one designs a "surrogate" model, usually with some black-box method, that sufficiently approximates the behavior of a pre-existing model. Generally, speaking, surrogate models approximate models with some "mechanistic" or interpretable behavior such that its fast computations are of something meaningful. In this repository, we explore various different deep learning architectures for surrogate modeling. In particular, we take inspiration from the following paper [here](https://www.sciencedirect.com/science/article/pii/S016926072100153X) where a mapping is formed between cellular automata model parameters and its corresponding outputs. 
 
@@ -87,10 +91,23 @@ A way to mitigate these issues is to simply perform min-max scaling (or standard
 
 However, as one can see in the scatter plots, this still doesn't truly fully resolve all difficulties of fitting. There is still quite a bit of error surrounding the perfect fit line. While I haven't yet validated the nonlinear 6 protein reaction network's predictions with the actual model (as its fit isn't too bad), looking at the spatial ABM's fit, and one can reasonably assume it would have large approximation errors of the actual model and therefore be unsuitable for predictive purposes (and parameter estimation).  
 
-### Building More Complex Surrogate Models (and Failing)
-The arguably simplest method of building a direct mapping of parameters to some mechanistic outputs may not fully encompass the complex stochastic behaviors of certain models, especially when one considers biochemical reactions to be of time-series rather than simply just a snapshot in time and many models to have a spatial component. Such is the case with the spatial ABM depicted above. Unfortunately, I never had the time to truly explore all of the different conventional machine learning models (nor the time to use regularization methods such as dropout, L2 loss with the weights being a regularizer, etc.), here's a quick and dirty list of my naive attempts at using different neural network architectures for different mechanistic models and some statements on some things that I've noticed but never had the time to make graphicals for. 
+Furthermore, this type of error is further explored with Indrani's NFSim model below. (Apologies Indrani, I'm still too uneducated too understand what is going on with all of these crazy binding reactions.)
 
-#### GCNs and GATs
+![indrani_model](figs/IndraniModelSchematic.png)
+
+Here are some "decent fits". Note that I'm only showing one fit here at one time slice for one surrogate model (since the majority of the fits of these time slices are fairly similar). This was actually an attempt at doing parameter estimation with 4 surrogate models at 4 different time points, which is what is evaluated in the validation plot below. 
+
+![indrani_decent_fits](figs/indrani_fit_t750.png)
+
+But, when validated against the true model using previous estimates that are supposed to fit some curve, we get horrible results. Note that each color corresponds to a unique parameter set.
+![indrani_bad_validation](figs/Indrani_Validation.png)
+
+
+
+### Building More Complex Surrogate Models (and Failing)
+The arguably simplest method of building a direct mapping of parameters to some mechanistic outputs may not fully encompass the complex stochastic behaviors of certain models, especially when one considers biochemical reactions to be of time-series rather than simply just a snapshot in time and many models to have a spatial component. Such is the case with the spatial ABM depicted above. Unfortunately, I never had the time to truly explore all of the different conventional machine learning models (nor the time to use regularization methods such as dropout, L2 loss with the weights being a regularizer, etc.), here's a quick and dirty list of my naive attempts at using different neural network architectures for different mechanistic models and some statements on some things that I've noticed but never had the time to make graphical plots for. 
+
+#### GCNs and GATs (Giuseppe's ABM)
 Exploring graph convolutional neural networks and graph attention networks used to act as a surrogate model for Giuseppe's model has shown that naive guesses are often just that, naive guesses. In particular, in a spatial ABM (or gillespie), a specific pixel (or position on a grid) has a variety of ways to update based on its neighboring pixels, and therefore in a way, it acts like a node on a graph. As such, one can (naively) imagine, that using graph neural networks where nodes are updated through some forwarding method and also nonlinearly transformed by some sets of weights (and their corresponding nonlinear activation functions), would do a reasonable job in acting as a surrogate for a spatial agent based model. The following architecture attempted with the surrogate model and their corresponding fits are shown below.
 
 Architecture for GCN and GAT (note that the GCN unit is interchangeable with the GAT).
@@ -100,20 +117,28 @@ Their corresponding GCN and GAT fits respectively.
 ![gnnFits](figs/GATvsGCN.png)
 Here's what it looks like when you color code them by their moment type.
 ![gatfit](graphs/gdag/gnn/all_gat_moms_scatter.png)
+
 ##### Possible Future Directions
-Please note that the dots size may mislead you to believe that the "test" fits are 
+While this may seem like a slight improvement over the original multilayer perceptron surrogate model (and actually a lower R^2 value), there's potentially even more gains to be had. Here are the following things that I've never gotten to explore, but wish that I had the time for:
+
+- Generate More Data
+- Generate a dataset with outputs based on an earlier time point. (This simulation was simulating interactions between immune cells and cancer cells for a duration of two weeks). Less time points might mean less intrinsic noise within the dataset and less dramatic changes across the grid.
+- Try different types of graphs (i.e different definitions of nodes and edges). I had designed a massive graph where every pixel out of the (100 x 100) grid was a node and its nearest neighbors had edges connected to it. Such a graph might be too big and honestly naively might have many empty or insufficient edges that are useless in the final prediction. Other issues include the scale of the time where cancer can often traverse multiple pixels, meaning there might be a need for a global set of edges.
 
 #### LSTMs (Indrani's Network Free pZap and Ca Model)
+At some point, it felt worthwhile exploring time-series prediction models to maybe better incorporate temporal information within its parameter to output mapping. However, increasing the complexity of the datasets ran into complications as you'll soon see. Below we have the schematic of the surrogate model (and note the modules/model/temporal should contain the actual surrogate models).
 
+![figure of lstm](figs/LSTM_SurrogateSchematic.png)
 
-#### Transformer Models (Indrani's Network Free pZap and Ca Model)
+#### Transformer Models (Indrani's Network Free pZap and Ca Model) (With a Possible Application to Giuseppe's Model)
+
 
 ##### Shortcut Learning
 
 
 ## How to use the code written in this repository (more for Das lab members than anyone else)?
 
-To those in the Das lab that might be taking up the flag in developing this project further, for a quickstart, one can simply look in the /tutorials/tutorial_for_indrani.pynb notebook for a quick rundown on how one might use the pieces of code written. There's also a cli interface that I've provided with main.py, please look in the slurm_scripts/ folder for a plethora of shell scripts used to run the code on the cluster. The flow chart below provides a general workflow of the surrogate modeling done in this repository.
+To those in the Das lab that might be taking up the flag in developing this project further, for a quickstart, one can simply look in the /tutorials/tutorial_for_indrani.pynb notebook for a quick rundown on how one might use the pieces of code written. There's also a cli interface that I've provided with main.py, please look in the slurm_scripts/ folder for a plethora of shell scripts used to run the code on the cluster. The flow chart below provides a general workflow of the surrogate modeling done in this repository (cross validation in principle should be used, but there's a tradeoff in computational time vs. generalization error to be had when using cross validation).
 
 ![Surrogate Flowchart](figs/SurrogateFlowchart.drawio.png)
 
@@ -131,11 +156,30 @@ Please look in the modules/ folder for relevant pieces of code.
 
 ### Ensemble Neural Network Methods
 
-### Papers from related fields that attempt to do something similar to what we're doing
+### Papers from related fields that attempt to do something similar to what we're doing, but I haven't had the time to read thoroughly and truly understand the major ideas (and why they might work and not work).
+
+- [Synthetic Data Generation for Molecular Time-Series Data](https://www.frontiersin.org/articles/10.3389/fsysb.2023.1188009/full)
+- [Using CNNs for Surrogate Modeling for Connectivity Prediction for Work Layouts](https://arxiv.org/pdf/1912.12616.pdf)
 
 ### Transfer Learning
-Since it is now the era of fine-tuning and "pre-training" in the NLP and vision fields, it's interesting that it hasn't heavily spread into the domain of scientific machine learning. There could be various reasons for this, but ultimately, if one could in principle take a pre-trained surrogate model and fine-tune it to properly surrogate another similar related mechanistic model, one could in principle speed up training by 100x. It's interesting to note that people are already attempting to do this for deterministic mechanistic models as seen with the physics-inspired neural networks. 
+Since it is now the era of fine-tuning and "pre-training" in the NLP and vision fields, it's interesting that it hasn't heavily spread into the domain of scientific machine learning. There could be various reasons for this, but ultimately, if one could in principle take a pre-trained surrogate model and fine-tune it to properly surrogate another similar related mechanistic model, one could in principle speed up training by 100x. It's interesting to note that people are already attempting to do this for deterministic mechanistic models as seen with the physics-inspired neural networks community. 
 
 
 ### AutoML
 I've tried this with no luck in actually getting some of their packages to run, and I figured at the time, it wasn't worth further exploring. But, if you can simply blackbox the training approach, and it works, I don't see why not giving it a [shot](https://www.automl.org/automl/).
+
+
+
+
+
+
+
+## Statement of Gratitude 
+
+Thank you to Dr. Stewart, Dr. Jay, and Dr. Das for basically acting as 3 senior research mentors to essentially just an undergrad. I recognize how lucky I am to have been able to take up the valuable time. I think it's funny that I didn't realize until I had Darren point it out to me, that I basically had the firepower of 3 PI's giving me advice on my one project. I think I would've been much more lost had I not had this level of support that has shaped my thinking in this amazing world of open research. 
+
+Thank you to Darren and Giuseppe, the awesome PhD students within the lab, for giving me advice, shaping my belief and desire to do a PhD, and honestly just providing company on the days I came into the office. It's often nice to have people who are willing to listen your research woes and talk about stuff outside of research.
+
+Thank you to Mahesh for being my walk-home buddy as well as also providing valuable advice and insights in aiding with my research. I hope you figure out the nuances of neural turing machines. 
+
+Thank you to Indrani, Debanghana, and everyone else in the Das lab (that I might've forgotten about) for helping me understand their research and taking the time to explain it to a dummy like me.

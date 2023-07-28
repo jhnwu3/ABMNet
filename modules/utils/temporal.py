@@ -98,18 +98,30 @@ def generate_time_series(path, model, device, criterion, t_observed, out, fs=1):
     plot_scatter(truth, predicted, output=out + str(t_observed))
 
 
-path = "data/time_series/indrani_gamma_no_zeroes.pickle"
-device = ""
-if torch.cuda.is_available():
-    device = torch.device("cuda")
-    using_gpu = True
-else:
-    device = torch.device("cpu")
-    using_gpu = False
+def find_closest_index(arr, value):
+    closest_index = np.abs(arr - value).argmin()
+    return closest_index
 
-criterion = torch.nn.MSELoss().to(device)
-model = torch.load("model/indrani_gamma_nzero_chunked_fs4.pt", map_location=torch.device('cpu'))
-print(model)
-model = model.to(device)
-output_path = "graphs/temporal/gamma_chunked_fs4"
-generate_time_series(path, model, device, criterion, t_observed=20, out = output_path, fs=4)
+# observed data is in the format of  (t,y), where chosen_times are the indices
+def get_corresponding_y(observed_data, chosen_time_indices):
+    y = []
+    for t in chosen_time_indices:
+        tdx = find_closest_index(observed_data[:,0], t)
+        y.append(observed_data[tdx, 1])
+    return y 
+
+# path = "data/time_series/indrani_gamma_no_zeroes.pickle"
+# device = ""
+# if torch.cuda.is_available():
+#     device = torch.device("cuda")
+#     using_gpu = True
+# else:
+#     device = torch.device("cpu")
+#     using_gpu = False
+
+# criterion = torch.nn.MSELoss().to(device)
+# model = torch.load("model/indrani_gamma_nzero_chunked_fs4.pt", map_location=torch.device('cpu'))
+# print(model)
+# model = model.to(device)
+# output_path = "graphs/temporal/gamma_chunked_fs4"
+# generate_time_series(path, model, device, criterion, t_observed=20, out = output_path, fs=4)
