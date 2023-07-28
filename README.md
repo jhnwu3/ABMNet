@@ -177,7 +177,7 @@ However, as earlier discussed, these plots are deceiving, especially when one co
 
 ![transformer sanity check](figs/TransformerSanityCheck.png)
 
-In other words, the parameter set inputs to the transformer surrogate model had zero effect on the time-series prediction, meaning it had learned to predict future sequences only from the input sequence.  
+In other words, the parameter set inputs to the transformer surrogate model had zero effect on the time-series prediction, meaning it had learned to predict future sequences only from the input sequence. This is something of a phenomenon in deep learning called [shortcut learning](https://arxiv.org/abs/2004.07780).
 
 ## How to use the code written in this repository (Das Members Here)?
 
