@@ -113,7 +113,8 @@ Furthermore, when looking at the cost spaces (confined by the training set's par
 - Multiple Combinations of Parameters That Have the Exact Same Outputs (Maybe The Result of Unobserved Information from a Massive Model That has 1000's of RXNs)
 - Irregular Cost Space (one needs to actually run the simulations to check, maybe highly sensitive? requiring more data)
 - Since it's unbounded, possibly the training set doesn't contain a set of parameters that fit the observed data (initial experiments show that if you zoom in and create a training set of parameters around a set of parameters that fit the observed data with the actual mechanistic model, the surrogate can work on the inverse problem and return a set of valid parameters)
-
+- Some future directions might be to build a larger training set around one of the estimates, and see if one can in principle get a valid surrogate model.
+- Furthermore, there's a lot of information across time that isn't being used in these surrogate models, which may improve parameter estimation with surrogate models.
 
 ### Building More Complex Surrogate Models (and Failing)
 The arguably simplest method of building a direct mapping of parameters to some mechanistic outputs may not fully encompass the complex stochastic behaviors of certain models, especially when one considers biochemical reactions to be of time-series rather than simply just a snapshot in time and many models to have a spatial component. Such is the case with the spatial ABM depicted above. Unfortunately, I never had the time to truly explore all of the different conventional machine learning models (nor the time to use regularization methods such as dropout, L2 loss with the weights being a regularizer, etc.), here's a quick and dirty list of my naive attempts at using different neural network architectures for different mechanistic models and some statements on some things that I've noticed but never had the time to make graphical plots for. 
