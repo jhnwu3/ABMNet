@@ -191,7 +191,7 @@ To those in the Das lab that might be taking up the flag in developing this proj
 
 Please look in the modules/ folder for relevant pieces of code.
 
-## Other potential future directions (that I wish I had taken the time for), taking inspiration from the general machine learning communities. 
+## Other potential future directions (that I wish I had the time for), taking inspiration from the general machine learning communities. 
 
 ### Feature Engineering 
 Dr. Das, I think someone should pursue the idea of treating sequences as shapes (like a triangle) rather than anything else really interesting. I wish I could've properly pursued this idea further.
